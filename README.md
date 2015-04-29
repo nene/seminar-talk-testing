@@ -60,3 +60,5 @@ code itself might be is unneccessary, like:
 
 - default parameter values that could be left out.
 - overly defensive coding.
+
+Our mutation success rate is 55.9%

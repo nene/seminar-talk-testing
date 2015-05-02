@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":41,"ignored":11,"untested":0,"survived":1}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>41</strong> of which <strong>1</strong> survived,&nbsp;
+        <strong>11</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>97.6%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/index.html'">tree</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/node/index.html'">node</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/node/FlatGroupNode.js.html'">FlatGroupNode.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_13_62_68">"xr/_"</span>);</li><li>    var lang = require(<span class="code killed mutation_15_94_103">"xr/lang"</span>);</li><li>    var TreeNode = require(<span class="code killed mutation_17_133_156">"xr/tree/node/TreeNode"</span>);</li><li></li><li>    /**</li><li>     * A container for flattened/collapsed nodes.</li><li>     * @constructor</li><li>     * @param {Object} cfg Config options:</li><li>     * @param {Number} cfg.id ID of the node that follows the flattened group.</li><li>     * We need a unique identifier for the flattened group, so we can keep</li><li>     * track of the expanded/collapsed state of it.  As each flattened</li><li>     * group leads to one unique non-flat stackTrace node, we use the ID of</li><li>     * that to identify the flattened group.</li><li>     * @param {TreeNode[]} children The flattened child nodes</li><li>     */</li><li>    <span class="code killed mutation_10_701_860">function FlatGroupNode(cfg, children) {</span></li><li><span class="code killed mutation_10_701_860">        <span class="code killed mutation_24_749_778"><span class="code killed mutation_19_749_779">TreeNode.call(<span class="code killed mutation_22_763_767">this</span>, <span class="code killed mutation_23_769_777">children</span>)</span>;</span></span></li><li><span class="code killed mutation_10_701_860"></li><li>        <span class="code killed mutation_20_789_813">this.type = <span class="code killed mutation_25_801_812">"flatGroup"</span>;</span></span></li><li><span class="code killed mutation_10_701_860">        <span class="code killed mutation_21_822_854">this.id = cfg.id<span class="code killed mutation_26_838_841"> + </span><span class="code killed mutation_27_841_853">"-flatGroup"</span>;</span></span></li><li><span class="code killed mutation_10_701_860">    }</span></li><li>    <span class="code killed mutation_42_865_881"><span class="code killed mutation_30_865_1223"><span class="code killed mutation_11_865_1224">_(<span class="code killed mutation_41_867_880">FlatGroupNode</span>)</span>.extendClass(<span class="code killed mutation_28_894_902">TreeNode</span>, <span class="code killed mutation_29_904_1222">{</span></span></span></li><li><span class="code killed mutation_30_865_1223"><span class="code killed mutation_29_904_1222"><span class="code killed mutation_11_865_1224">        <span class="code killed mutation_31_914_1156">getTemplateData: function() {</span></span></span></span></li><li><span class="code killed mutation_31_914_1156"><span class="code killed mutation_30_865_1223"><span class="code killed mutation_29_904_1222"><span class="code killed mutation_11_865_1224">            <span class="code killed mutation_33_956_1077">return {</span></span></span></span></span></li><li><span class="code killed mutation_33_956_1077"><span class="code killed mutation_31_914_1156"><span class="code killed mutation_30_865_1223"><span class="code killed mutation_29_904_1222"><span class="code killed mutation_11_865_1224">                <span class="code killed mutation_34_981_1062">childrenCount: <span class="code killed mutation_38_996_1062">lang.pluralize(<span class="code survived mutation_35_1011_1024">"% collapsed"</span>, <span class="code killed mutation_36_1026_1039">"% collapsed"</span>, <span class="code killed mutation_37_1041_1061">this.children.length</span>)</span></span></span></span></span></span></span></li><li><span class="code killed mutation_33_956_1077"><span class="code killed mutation_31_914_1156"><span class="code killed mutation_30_865_1223"><span class="code killed mutation_29_904_1222"><span class="code killed mutation_11_865_1224">            };</span></span></span></span></span></li><li><span class="code killed mutation_31_914_1156"><span class="code killed mutation_30_865_1223"><span class="code killed mutation_29_904_1222"><span class="code killed mutation_11_865_1224">        },</span></span></span></span></li><li><span class="code killed mutation_31_914_1156"><span class="code killed mutation_30_865_1223"><span class="code killed mutation_29_904_1222"><span class="code killed mutation_11_865_1224"></li><li>        // Flattened child nodes are collapsed by default</span></span></span></span></li><li><span class="code killed mutation_31_914_1156"><span class="code killed mutation_30_865_1223"><span class="code killed mutation_29_904_1222"><span class="code killed mutation_11_865_1224">        </span><span class="code killed mutation_32_1156_1216">isExpanded: function() {</span></span></span></span></li><li><span class="code killed mutation_32_1156_1216"><span class="code killed mutation_30_865_1223"><span class="code killed mutation_29_904_1222"><span class="code killed mutation_11_865_1224">            <span class="code killed mutation_39_1193_1206">return <span class="code killed mutation_40_1200_1205">false</span>;</span></span></span></span></span></li><li><span class="code killed mutation_32_1156_1216"><span class="code killed mutation_30_865_1223"><span class="code killed mutation_29_904_1222"><span class="code killed mutation_11_865_1224">        }</span></span></span></span></li><li><span class="code killed mutation_30_865_1223"><span class="code killed mutation_29_904_1222"><span class="code killed mutation_11_865_1224">    }</span>)</span>;</span></li><li></li><li>    <span class="code killed mutation_12_1230_1251">return FlatGroupNode;</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_13_62_68" class="killed">resources/xr/tree/node/FlatGroupNode.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_94_103" class="killed">resources/xr/tree/node/FlatGroupNode.js:5:24 Replaced &quot;xr/lang&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_133_156" class="killed">resources/xr/tree/node/FlatGroupNode.js:6:28 Replaced &quot;xr/tree/node/TreeNode&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_10_701_860" class="killed">resources/xr/tree/node/FlatGroupNode.js:19:5 Removed function FlatGroupNode(cfg, children) { TreeNode.call(this, children); this.type = &quot;flatGroup&quot;; this.id = cfg.id + &quot;-flatGroup&quot;; } -&gt; KILLED</div><div id="mutation_19_749_779" class="killed">resources/xr/tree/node/FlatGroupNode.js:20:9 Removed TreeNode.call(this, children); -&gt; KILLED</div><div id="mutation_22_763_767" class="killed">resources/xr/tree/node/FlatGroupNode.js:20:23 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_23_769_777" class="killed">resources/xr/tree/node/FlatGroupNode.js:20:29 Replaced children with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_24_749_778" class="killed">resources/xr/tree/node/FlatGroupNode.js:20:9 Replaced TreeNode.call(this, children) with TreeNode -&gt; KILLED</div><div id="mutation_20_789_813" class="killed">resources/xr/tree/node/FlatGroupNode.js:22:9 Removed this.type = &quot;flatGroup&quot;; -&gt; KILLED</div><div id="mutation_25_801_812" class="killed">resources/xr/tree/node/FlatGroupNode.js:22:21 Replaced &quot;flatGroup&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_27_841_853" class="killed">resources/xr/tree/node/FlatGroupNode.js:23:28 Replaced &quot;-flatGroup&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_26_838_841" class="killed">resources/xr/tree/node/FlatGroupNode.js:23:25 Replaced  +  with - -&gt; KILLED</div><div id="mutation_21_822_854" class="killed">resources/xr/tree/node/FlatGroupNode.js:23:9 Removed this.id = cfg.id + &quot;-flatGroup&quot;; -&gt; KILLED</div><div id="mutation_42_865_881" class="killed">resources/xr/tree/node/FlatGroupNode.js:25:5 Replaced _(FlatGroupNode) with FlatGroupNode -&gt; KILLED</div><div id="mutation_41_867_880" class="killed">resources/xr/tree/node/FlatGroupNode.js:25:7 Replaced FlatGroupNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_11_865_1224" class="killed">resources/xr/tree/node/FlatGroupNode.js:25:5 Removed _(FlatGroupNode).extendClass(TreeNode, { getTemplateData: function() { return { childrenCount: lang.pluralize(&quot;% collapsed&quot;, &quot;% collapsed&quot;, this.children.length) }; }, // Flattened child nodes are collapsed by default isExpanded: function() { return false; } }); -&gt; KILLED</div><div id="mutation_29_904_1222" class="killed">resources/xr/tree/node/FlatGroupNode.js:25:44 Replaced { getTemplateData: function() { return { childrenCount: lang.pluralize(&quot;% collapsed&quot;, &quot;% collapsed&quot;, this.children.length) }; }, // Flattened child nodes are collapsed by default isExpanded: function() { return false; } } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_30_865_1223" class="killed">resources/xr/tree/node/FlatGroupNode.js:25:5 Replaced _(FlatGroupNode).extendClass(TreeNode, { getTemplateData: function() { return { childrenCount: lang.pluralize(&quot;% collapsed&quot;, &quot;% collapsed&quot;, this.children.length) }; }, // Flattened child nodes are collapsed by default isExpanded: function() { return false; } }) with _(FlatGroupNode) -&gt; KILLED</div><div id="mutation_28_894_902" class="killed">resources/xr/tree/node/FlatGroupNode.js:25:34 Replaced TreeNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_31_914_1156" class="killed">resources/xr/tree/node/FlatGroupNode.js:26:9 Removed getTemplateData: function() { return { childrenCount: lang.pluralize(&quot;% collapsed&quot;, &quot;% collapsed&quot;, this.children.length) }; }, // Flattened child nodes are collapsed by default  -&gt; KILLED</div><div id="mutation_33_956_1077" class="killed">resources/xr/tree/node/FlatGroupNode.js:27:13 Removed return { childrenCount: lang.pluralize(&quot;% collapsed&quot;, &quot;% collapsed&quot;, this.children.length) }; -&gt; KILLED</div><div id="mutation_34_981_1062" class="killed">resources/xr/tree/node/FlatGroupNode.js:28:17 Removed childrenCount: lang.pluralize(&quot;% collapsed&quot;, &quot;% collapsed&quot;, this.children.length) -&gt; KILLED</div><div id="mutation_35_1011_1024" class="survived">resources/xr/tree/node/FlatGroupNode.js:28:47 Replaced &quot;% collapsed&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_36_1026_1039" class="killed">resources/xr/tree/node/FlatGroupNode.js:28:62 Replaced &quot;% collapsed&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_38_996_1062" class="killed">resources/xr/tree/node/FlatGroupNode.js:28:32 Replaced lang.pluralize(&quot;% collapsed&quot;, &quot;% collapsed&quot;, this.children.length) with lang -&gt; KILLED</div><div id="mutation_37_1041_1061" class="killed">resources/xr/tree/node/FlatGroupNode.js:28:77 Replaced this.children.length with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_32_1156_1216" class="killed">resources/xr/tree/node/FlatGroupNode.js:33:9 Removed isExpanded: function() { return false; } -&gt; KILLED</div><div id="mutation_39_1193_1206" class="killed">resources/xr/tree/node/FlatGroupNode.js:34:13 Removed return false; -&gt; KILLED</div><div id="mutation_40_1200_1205" class="killed">resources/xr/tree/node/FlatGroupNode.js:34:20 Replaced false with true -&gt; KILLED</div><div id="mutation_12_1230_1251" class="killed">resources/xr/tree/node/FlatGroupNode.js:38:5 Removed return FlatGroupNode; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

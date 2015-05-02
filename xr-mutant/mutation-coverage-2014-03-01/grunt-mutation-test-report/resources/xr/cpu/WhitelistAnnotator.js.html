@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":51,"ignored":14,"untested":0,"survived":6}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>51</strong> of which <strong>6</strong> survived,&nbsp;
+        <strong>14</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>88.2%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/cpu/index.html'">cpu</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/cpu/WhitelistAnnotator.js.html'">WhitelistAnnotator.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_13_62_68">"xr/_"</span>);</li><li>    var TraceName = require(<span class="code killed mutation_15_99_118">"xr/tree/TraceName"</span>);</li><li>    var settings = require(<span class="code killed mutation_17_148_161">"xr/settings"</span>);</li><li></li><li>    /**</li><li>     * Annotates stack trace nodes that match a pattern in whitelist.</li><li>     *</li><li>     * @constructor</li><li>     * @param {Object} deps Dependencies</li><li>     *   @param {RegExpList} deps.whitelist</li><li>     */</li><li>    function WhitelistAnnotator(deps) {</li><li>        <span class="code killed mutation_28_411_418">_(<span class="code killed mutation_27_413_417">this</span>)</span>.inject(<span class="code killed mutation_20_426_430">deps</span>, <span class="code survived mutation_21_432_623">function() {</span></li><li><span class="code survived mutation_21_432_623">            // By default initialize with whitelist from settings</span></li><li><span class="code survived mutation_21_432_623">            <span class="code survived mutation_23_523_613">return {</span></span></li><li><span class="code survived mutation_23_523_613"><span class="code survived mutation_21_432_623">                <span class="code survived mutation_24_548_598">whitelist: <span class="code survived mutation_26_559_582"><span class="code survived mutation_25_559_598">settings.getWhitelist()</span>.getRegExpList()</span></span></span></span></li><li><span class="code survived mutation_23_523_613"><span class="code survived mutation_21_432_623">            };</span></span></li><li><span class="code survived mutation_21_432_623">        }</span>);</li><li>    }</li><li>    <span class="code killed mutation_11_636_1323">WhitelistAnnotator.prototype = {</span></li><li><span class="code killed mutation_11_636_1323">        /**</span></li><li><span class="code killed mutation_11_636_1323">         * Adds "whitelisted" properties to passed in traces objects</span></li><li><span class="code killed mutation_11_636_1323">         * when they match the whitelist.</span></li><li><span class="code killed mutation_11_636_1323">         *</span></li><li><span class="code killed mutation_11_636_1323">         * @param {Object[]} traces</span></li><li><span class="code killed mutation_11_636_1323">         * @return {Object[]}</span></li><li><span class="code killed mutation_11_636_1323">         */</span></li><li><span class="code killed mutation_11_636_1323">        <span class="code killed mutation_29_889_1194">annotate: function(traces) {</span></span></li><li><span class="code killed mutation_29_889_1194"><span class="code killed mutation_11_636_1323">            <span class="code survived mutation_47_930_939"><span class="code killed mutation_35_930_1144"><span class="code killed mutation_31_930_1145">_(<span class="code killed mutation_46_932_938">traces</span>)</span>.forEach(<span class="code killed mutation_33_948_1137">function(trace){</span></span></span></span></span></li><li><span class="code killed mutation_35_930_1144"><span class="code killed mutation_33_948_1137"><span class="code killed mutation_31_930_1145"><span class="code killed mutation_29_889_1194"><span class="code killed mutation_11_636_1323">                <span class="code killed mutation_36_981_1077">if (<span class="code killed mutation_40_985_1010"><span class="code killed mutation_39_985_1010">this.isWhitelisted(<span class="code killed mutation_38_1004_1009">trace</span>)</span></span>) {</span></span></span></span></span></span></li><li><span class="code killed mutation_36_981_1077"><span class="code killed mutation_35_930_1144"><span class="code killed mutation_33_948_1137"><span class="code killed mutation_31_930_1145"><span class="code killed mutation_29_889_1194"><span class="code killed mutation_11_636_1323">                    <span class="code killed mutation_41_1034_1059">trace.whitelisted = <span class="code killed mutation_42_1054_1058">true</span>;</span></span></span></span></span></span></span></li><li><span class="code killed mutation_36_981_1077"><span class="code killed mutation_35_930_1144"><span class="code killed mutation_33_948_1137"><span class="code killed mutation_31_930_1145"><span class="code killed mutation_29_889_1194"><span class="code killed mutation_11_636_1323">                }</span></span></span></span></span></span></li><li><span class="code killed mutation_35_930_1144"><span class="code killed mutation_33_948_1137"><span class="code killed mutation_31_930_1145"><span class="code killed mutation_29_889_1194"><span class="code killed mutation_11_636_1323"></li><li>                <span class="code killed mutation_45_1095_1122"><span class="code killed mutation_44_1095_1122"><span class="code killed mutation_37_1095_1123">this.annotate(<span class="code killed mutation_43_1109_1121">trace.traces</span>)</span></span>;</span></span></span></span></span></span></li><li><span class="code killed mutation_35_930_1144"><span class="code killed mutation_33_948_1137"><span class="code killed mutation_31_930_1145"><span class="code killed mutation_29_889_1194"><span class="code killed mutation_11_636_1323">            }</span>, <span class="code killed mutation_34_1139_1143">this</span>)</span>;</span></span></span></li><li><span class="code killed mutation_29_889_1194"><span class="code killed mutation_11_636_1323"></li><li>            <span class="code killed mutation_32_1159_1173">return traces;</span></span></span></li><li><span class="code killed mutation_29_889_1194"><span class="code killed mutation_11_636_1323">        },</span></span></li><li><span class="code killed mutation_29_889_1194"><span class="code killed mutation_11_636_1323"></li><li>        </span><span class="code killed mutation_30_1194_1316">isWhitelisted: function(trace) {</span></span></li><li><span class="code killed mutation_30_1194_1316"><span class="code killed mutation_11_636_1323">            <span class="code killed mutation_48_1239_1306">return <span class="code killed mutation_51_1246_1305"><span class="code killed mutation_50_1246_1305">this.whitelist.matches(<span class="code killed mutation_52_1269_1304"><span class="code killed mutation_49_1269_1304">new TraceName(trace).getFullClass()</span></span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_30_1194_1316"><span class="code killed mutation_11_636_1323">        }</span></span></li><li><span class="code killed mutation_11_636_1323">    };</span></li><li></li><li>    <span class="code killed mutation_12_1329_1355">return WhitelistAnnotator;</span></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_13_62_68" class="killed">resources/xr/cpu/WhitelistAnnotator.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_99_118" class="killed">resources/xr/cpu/WhitelistAnnotator.js:5:29 Replaced &quot;xr/tree/TraceName&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_148_161" class="killed">resources/xr/cpu/WhitelistAnnotator.js:6:28 Replaced &quot;xr/settings&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_426_430" class="killed">resources/xr/cpu/WhitelistAnnotator.js:16:24 Replaced deps with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_21_432_623" class="survived">resources/xr/cpu/WhitelistAnnotator.js:16:30 Replaced function() { // By default initialize with whitelist from settings return { whitelist: settings.getWhitelist().getRegExpList() }; } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_27_413_417" class="killed">resources/xr/cpu/WhitelistAnnotator.js:16:11 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_28_411_418" class="killed">resources/xr/cpu/WhitelistAnnotator.js:16:9 Replaced _(this) with this -&gt; KILLED</div><div id="mutation_23_523_613" class="survived">resources/xr/cpu/WhitelistAnnotator.js:18:13 Removed return { whitelist: settings.getWhitelist().getRegExpList() }; -&gt; SURVIVED</div><div id="mutation_26_559_582" class="survived">resources/xr/cpu/WhitelistAnnotator.js:19:28 Replaced settings.getWhitelist() with settings -&gt; SURVIVED</div><div id="mutation_24_548_598" class="survived">resources/xr/cpu/WhitelistAnnotator.js:19:17 Removed whitelist: settings.getWhitelist().getRegExpList() -&gt; SURVIVED</div><div id="mutation_25_559_598" class="survived">resources/xr/cpu/WhitelistAnnotator.js:19:28 Replaced settings.getWhitelist().getRegExpList() with settings.getWhitelist() -&gt; SURVIVED</div><div id="mutation_11_636_1323" class="killed">resources/xr/cpu/WhitelistAnnotator.js:23:5 Removed WhitelistAnnotator.prototype = { /** * Adds &quot;whitelisted&quot; properties to passed in traces objects * when they match the whitelist. * * @param {Object[]} traces * @return {Object[]} */ annotate: function(traces) { _(traces).forEach(function(trace){ if (this.isWhitelisted(trace)) { trace.whitelisted = true; } this.annotate(trace.traces); }, this); return traces; }, isWhitelisted: function(trace) { return this.whitelist.matches(new TraceName(trace).getFullClass()); } }; -&gt; KILLED</div><div id="mutation_29_889_1194" class="killed">resources/xr/cpu/WhitelistAnnotator.js:31:9 Removed annotate: function(traces) { _(traces).forEach(function(trace){ if (this.isWhitelisted(trace)) { trace.whitelisted = true; } this.annotate(trace.traces); }, this); return traces; },  -&gt; KILLED</div><div id="mutation_47_930_939" class="survived">resources/xr/cpu/WhitelistAnnotator.js:32:13 Replaced _(traces) with traces -&gt; SURVIVED</div><div id="mutation_31_930_1145" class="killed">resources/xr/cpu/WhitelistAnnotator.js:32:13 Removed _(traces).forEach(function(trace){ if (this.isWhitelisted(trace)) { trace.whitelisted = true; } this.annotate(trace.traces); }, this); -&gt; KILLED</div><div id="mutation_46_932_938" class="killed">resources/xr/cpu/WhitelistAnnotator.js:32:15 Replaced traces with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_33_948_1137" class="killed">resources/xr/cpu/WhitelistAnnotator.js:32:31 Replaced function(trace){ if (this.isWhitelisted(trace)) { trace.whitelisted = true; } this.annotate(trace.traces); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_35_930_1144" class="killed">resources/xr/cpu/WhitelistAnnotator.js:32:13 Replaced _(traces).forEach(function(trace){ if (this.isWhitelisted(trace)) { trace.whitelisted = true; } this.annotate(trace.traces); }, this) with _(traces) -&gt; KILLED</div><div id="mutation_36_981_1077" class="killed">resources/xr/cpu/WhitelistAnnotator.js:33:17 Removed if (this.isWhitelisted(trace)) { trace.whitelisted = true; } -&gt; KILLED</div><div id="mutation_38_1004_1009" class="killed">resources/xr/cpu/WhitelistAnnotator.js:33:40 Replaced trace with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_39_985_1010" class="killed">resources/xr/cpu/WhitelistAnnotator.js:33:21 Replaced this.isWhitelisted(trace) with trace -&gt; KILLED</div><div id="mutation_40_985_1010" class="killed">resources/xr/cpu/WhitelistAnnotator.js:33:21 Replaced this.isWhitelisted(trace) with this -&gt; KILLED</div><div id="mutation_41_1034_1059" class="killed">resources/xr/cpu/WhitelistAnnotator.js:34:21 Removed trace.whitelisted = true; -&gt; KILLED</div><div id="mutation_42_1054_1058" class="killed">resources/xr/cpu/WhitelistAnnotator.js:34:41 Replaced true with false -&gt; KILLED</div><div id="mutation_45_1095_1122" class="killed">resources/xr/cpu/WhitelistAnnotator.js:37:17 Replaced this.annotate(trace.traces) with this -&gt; KILLED</div><div id="mutation_37_1095_1123" class="killed">resources/xr/cpu/WhitelistAnnotator.js:37:17 Removed this.annotate(trace.traces); -&gt; KILLED</div><div id="mutation_43_1109_1121" class="killed">resources/xr/cpu/WhitelistAnnotator.js:37:31 Replaced trace.traces with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_44_1095_1122" class="killed">resources/xr/cpu/WhitelistAnnotator.js:37:17 Replaced this.annotate(trace.traces) with trace.traces -&gt; KILLED</div><div id="mutation_34_1139_1143" class="killed">resources/xr/cpu/WhitelistAnnotator.js:38:16 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_32_1159_1173" class="killed">resources/xr/cpu/WhitelistAnnotator.js:40:13 Removed return traces; -&gt; KILLED</div><div id="mutation_30_1194_1316" class="killed">resources/xr/cpu/WhitelistAnnotator.js:43:9 Removed isWhitelisted: function(trace) { return this.whitelist.matches(new TraceName(trace).getFullClass()); } -&gt; KILLED</div><div id="mutation_48_1239_1306" class="killed">resources/xr/cpu/WhitelistAnnotator.js:44:13 Removed return this.whitelist.matches(new TraceName(trace).getFullClass()); -&gt; KILLED</div><div id="mutation_49_1269_1304" class="killed">resources/xr/cpu/WhitelistAnnotator.js:44:43 Replaced new TraceName(trace).getFullClass() with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_50_1246_1305" class="killed">resources/xr/cpu/WhitelistAnnotator.js:44:20 Replaced this.whitelist.matches(new TraceName(trace).getFullClass()) with new TraceName(trace).getFullClass() -&gt; KILLED</div><div id="mutation_51_1246_1305" class="killed">resources/xr/cpu/WhitelistAnnotator.js:44:20 Replaced this.whitelist.matches(new TraceName(trace).getFullClass()) with this.whitelist -&gt; KILLED</div><div id="mutation_52_1269_1304" class="killed">resources/xr/cpu/WhitelistAnnotator.js:44:43 Replaced new TraceName(trace).getFullClass() with new TraceName(trace) -&gt; KILLED</div><div id="mutation_12_1329_1355" class="killed">resources/xr/cpu/WhitelistAnnotator.js:48:5 Removed return WhitelistAnnotator; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

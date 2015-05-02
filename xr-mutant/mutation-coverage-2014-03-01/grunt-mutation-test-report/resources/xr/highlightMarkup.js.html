@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":78,"ignored":7,"untested":0,"survived":67}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>78</strong> of which <strong>67</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>14.1%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/highlightMarkup.js.html'">highlightMarkup.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_13_62_68">"xr/_"</span>);</li><li></li><li>    <span class="code survived mutation_8_76_194">return {</span></li><li><span class="code survived mutation_8_76_194">        <span class="code survived mutation_15_93_117">toHtml: toHtml,</span></span></li><li><span class="code survived mutation_15_93_117"><span class="code survived mutation_8_76_194">        </span><span class="code survived mutation_16_117_175">toHtmlWithMarkPositions: toHtmlWithMarkPositions,</span></span></li><li><span class="code survived mutation_16_117_175"><span class="code survived mutation_8_76_194">        </span><span class="code survived mutation_17_175_187">strip: strip</span></span></li><li><span class="code survived mutation_8_76_194">    };</span></li><li></li><li>    /**</li><li>     * Replaces {mark} placeholders with <mark> tags and ensures all other HTML special characters are escaped.</li><li>     * @param {String} text</li><li>     * @return {String}</li><li>     */</li><li>    <span class="code killed mutation_9_380_559">function toHtml(text) {</span></li><li><span class="code killed mutation_9_380_559">        <span class="code survived mutation_18_412_459">if (<span class="code survived mutation_21_416_417">!</span>text) {</span></span></li><li><span class="code survived mutation_18_412_459"><span class="code killed mutation_9_380_559">            <span class="code survived mutation_22_437_449">return text;</span></span></span></li><li><span class="code survived mutation_18_412_459"><span class="code killed mutation_9_380_559">        }</span></span></li><li><span class="code killed mutation_9_380_559"></li><li>        <span class="code survived mutation_19_469_497">text = <span class="code survived mutation_24_476_496">ensureEscaping(<span class="code survived mutation_23_491_495">text</span>)</span>;</span></span></li><li><span class="code killed mutation_9_380_559"></li><li>        <span class="code survived mutation_20_507_553">return <span class="code survived mutation_27_514_552">text.replace(<span class="code survived mutation_25_527_543">/\{(\/?mark)\}/g</span>, <span class="code survived mutation_26_545_551">"<$1>"</span>)</span>;</span></span></li><li><span class="code killed mutation_9_380_559">    }</span></li><li></li><li>    /**</li><li>     * Don't escape already escaped HTML entities</li><li>     * @param {String} text</li><li>     * @returns {String}</li><li>     */</li><li>    <span class="code survived mutation_10_684_770">function ensureEscaping(text) {</span></li><li><span class="code survived mutation_10_684_770">      <span class="code survived mutation_28_722_764">return <span class="code survived mutation_31_729_763"><span class="code survived mutation_30_729_763">_.escapeHTML(<span class="code survived mutation_34_742_762"><span class="code survived mutation_33_742_762"><span class="code survived mutation_29_742_762">_.unescapeHTML(<span class="code survived mutation_32_757_761">text</span>)</span></span></span>)</span></span>;</span></span></li><li><span class="code survived mutation_10_684_770">    }</span></li><li></li><li>    /**</li><li>     * Adds <mark> tags according to positions and ensures all other HTML special characters are escaped.</li><li>     * If mark positions are not given, falls back to toHtml()</li><li>     * @param {String} text</li><li>     * @return {String}</li><li>     */</li><li>    <span class="code killed mutation_11_1013_1530">function toHtmlWithMarkPositions(text, markStart, markEnd) {</span></li><li><span class="code killed mutation_11_1013_1530">      <span class="code survived mutation_35_1080_1121">if (<span class="code survived mutation_41_1084_1085">!</span>text) {</span></span></li><li><span class="code survived mutation_35_1080_1121"><span class="code killed mutation_11_1013_1530">        <span class="code survived mutation_42_1101_1113">return text;</span></span></span></li><li><span class="code survived mutation_35_1080_1121"><span class="code killed mutation_11_1013_1530">      }</span></span></li><li><span class="code killed mutation_11_1013_1530"></li><li>      <span class="code survived mutation_36_1129_1232">if(<span class="code survived mutation_46_1132_1133">!</span>markStart<span class="code survived mutation_45_1142_1146"> || </span>markStart<span class="code survived mutation_47_1155_1160"> === </span><span class="code survived mutation_48_1160_1161">-</span>1<span class="code survived mutation_44_1162_1166"> || </span><span class="code survived mutation_49_1166_1167">!</span>markEnd<span class="code survived mutation_43_1174_1178"> || </span>markEnd<span class="code survived mutation_50_1185_1190"> === </span><span class="code survived mutation_51_1190_1191">-</span>1) {</span></span></li><li><span class="code survived mutation_36_1129_1232"><span class="code killed mutation_11_1013_1530">        <span class="code survived mutation_52_1204_1224">return <span class="code survived mutation_54_1211_1223">toHtml(<span class="code survived mutation_53_1218_1222">text</span>)</span>;</span></span></span></li><li><span class="code survived mutation_36_1129_1232"><span class="code killed mutation_11_1013_1530">      }</span></span></li><li><span class="code killed mutation_11_1013_1530"></li><li>      <span class="code survived mutation_37_1240_1286">var beforeMark = <span class="code survived mutation_57_1257_1285">text.substring(<span class="code survived mutation_55_1272_1273">0</span>, <span class="code survived mutation_56_1275_1284">markStart</span>)</span>;</span></span></li><li><span class="code killed mutation_11_1013_1530">      <span class="code survived mutation_38_1293_1347">var betweenMarks = <span class="code survived mutation_60_1312_1346">text.substring(<span class="code survived mutation_58_1327_1336">markStart</span>, <span class="code survived mutation_59_1338_1345">markEnd</span>)</span>;</span></span></li><li><span class="code killed mutation_11_1013_1530">      <span class="code survived mutation_39_1354_1397">var afterMarkEnd = <span class="code survived mutation_63_1373_1396"><span class="code survived mutation_62_1373_1396">text.substring(<span class="code survived mutation_61_1388_1395">markEnd</span>)</span></span>;</span></span></li><li><span class="code killed mutation_11_1013_1530"></li><li>      <span class="code survived mutation_40_1405_1524">return <span class="code survived mutation_69_1412_1438">ensureEscaping(<span class="code survived mutation_68_1427_1437">beforeMark</span>)</span><span class="code survived mutation_67_1438_1441"> + </span><span class="code survived mutation_70_1441_1449">"<mark>"</span><span class="code survived mutation_66_1449_1452"> + </span><span class="code survived mutation_72_1452_1480">ensureEscaping(<span class="code survived mutation_71_1467_1479">betweenMarks</span>)</span><span class="code survived mutation_65_1480_1483"> + </span><span class="code survived mutation_73_1483_1492">"</mark>"</span><span class="code survived mutation_64_1492_1495"> + </span><span class="code survived mutation_75_1495_1523">ensureEscaping(<span class="code survived mutation_74_1510_1522">afterMarkEnd</span>)</span>;</span></span></li><li><span class="code killed mutation_11_1013_1530">    }</span></li><li></li><li>    /**</li><li>     * Removes {mark}...{/mark} placeholders from text.</li><li>     * @param {String} text</li><li>     * @return {String}</li><li>     */</li><li>    <span class="code killed mutation_12_1660_1737">function strip(text) {</span></li><li><span class="code killed mutation_12_1660_1737">        <span class="code survived mutation_76_1691_1731">return <span class="code survived mutation_79_1698_1730">text.replace(<span class="code survived mutation_77_1711_1725">/\{\/?mark\}/g</span>, <span class="code survived mutation_78_1727_1729">""</span>)</span>;</span></span></li><li><span class="code killed mutation_12_1660_1737">    }</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_13_62_68" class="killed">resources/xr/highlightMarkup.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_76_194" class="survived">resources/xr/highlightMarkup.js:6:5 Removed return { toHtml: toHtml, toHtmlWithMarkPositions: toHtmlWithMarkPositions, strip: strip }; -&gt; SURVIVED</div><div id="mutation_15_93_117" class="survived">resources/xr/highlightMarkup.js:7:9 Removed toHtml: toHtml,  -&gt; SURVIVED</div><div id="mutation_16_117_175" class="survived">resources/xr/highlightMarkup.js:8:9 Removed toHtmlWithMarkPositions: toHtmlWithMarkPositions,  -&gt; SURVIVED</div><div id="mutation_17_175_187" class="survived">resources/xr/highlightMarkup.js:9:9 Removed strip: strip -&gt; SURVIVED</div><div id="mutation_9_380_559" class="killed">resources/xr/highlightMarkup.js:17:5 Removed function toHtml(text) { if (!text) { return text; } text = ensureEscaping(text); return text.replace(/\{(\/?mark)\}/g, &quot;&lt;$1&gt;&quot;); } -&gt; KILLED</div><div id="mutation_18_412_459" class="survived">resources/xr/highlightMarkup.js:18:9 Removed if (!text) { return text; } -&gt; SURVIVED</div><div id="mutation_21_416_417" class="survived">resources/xr/highlightMarkup.js:18:18 Removed ! -&gt; SURVIVED</div><div id="mutation_22_437_449" class="survived">resources/xr/highlightMarkup.js:19:13 Removed return text; -&gt; SURVIVED</div><div id="mutation_23_491_495" class="survived">resources/xr/highlightMarkup.js:22:31 Replaced text with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_24_476_496" class="survived">resources/xr/highlightMarkup.js:22:16 Replaced ensureEscaping(text) with text -&gt; SURVIVED</div><div id="mutation_19_469_497" class="survived">resources/xr/highlightMarkup.js:22:9 Removed text = ensureEscaping(text); -&gt; SURVIVED</div><div id="mutation_20_507_553" class="survived">resources/xr/highlightMarkup.js:24:9 Removed return text.replace(/\{(\/?mark)\}/g, &quot;&lt;$1&gt;&quot;); -&gt; SURVIVED</div><div id="mutation_26_545_551" class="survived">resources/xr/highlightMarkup.js:24:47 Replaced &quot;&lt;$1&gt;&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_27_514_552" class="survived">resources/xr/highlightMarkup.js:24:16 Replaced text.replace(/\{(\/?mark)\}/g, &quot;&lt;$1&gt;&quot;) with text -&gt; SURVIVED</div><div id="mutation_25_527_543" class="survived">resources/xr/highlightMarkup.js:24:29 Replaced /\{(\/?mark)\}/g with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_10_684_770" class="survived">resources/xr/highlightMarkup.js:32:5 Removed function ensureEscaping(text) { return _.escapeHTML(_.unescapeHTML(text)); } -&gt; SURVIVED</div><div id="mutation_28_722_764" class="survived">resources/xr/highlightMarkup.js:33:7 Removed return _.escapeHTML(_.unescapeHTML(text)); -&gt; SURVIVED</div><div id="mutation_29_742_762" class="survived">resources/xr/highlightMarkup.js:33:27 Replaced _.unescapeHTML(text) with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_30_729_763" class="survived">resources/xr/highlightMarkup.js:33:14 Replaced _.escapeHTML(_.unescapeHTML(text)) with _.unescapeHTML(text) -&gt; SURVIVED</div><div id="mutation_31_729_763" class="survived">resources/xr/highlightMarkup.js:33:14 Replaced _.escapeHTML(_.unescapeHTML(text)) with _ -&gt; SURVIVED</div><div id="mutation_32_757_761" class="survived">resources/xr/highlightMarkup.js:33:42 Replaced text with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_33_742_762" class="survived">resources/xr/highlightMarkup.js:33:27 Replaced _.unescapeHTML(text) with text -&gt; SURVIVED</div><div id="mutation_34_742_762" class="survived">resources/xr/highlightMarkup.js:33:27 Replaced _.unescapeHTML(text) with _ -&gt; SURVIVED</div><div id="mutation_11_1013_1530" class="killed">resources/xr/highlightMarkup.js:42:5 Removed function toHtmlWithMarkPositions(text, markStart, markEnd) { if (!text) { return text; } if(!markStart || markStart === -1 || !markEnd || markEnd === -1) { return toHtml(text); } var beforeMark = text.substring(0, markStart); var betweenMarks = text.substring(markStart, markEnd); var afterMarkEnd = text.substring(markEnd); return ensureEscaping(beforeMark) + &quot;&lt;mark&gt;&quot; + ensureEscaping(betweenMarks) + &quot;&lt;/mark&gt;&quot; + ensureEscaping(afterMarkEnd); } -&gt; KILLED</div><div id="mutation_35_1080_1121" class="survived">resources/xr/highlightMarkup.js:43:7 Removed if (!text) { return text; } -&gt; SURVIVED</div><div id="mutation_41_1084_1085" class="survived">resources/xr/highlightMarkup.js:43:16 Removed ! -&gt; SURVIVED</div><div id="mutation_42_1101_1113" class="survived">resources/xr/highlightMarkup.js:44:9 Removed return text; -&gt; SURVIVED</div><div id="mutation_50_1185_1190" class="survived">resources/xr/highlightMarkup.js:47:63 Replaced  ===  with !== -&gt; SURVIVED</div><div id="mutation_49_1166_1167" class="survived">resources/xr/highlightMarkup.js:47:52 Removed ! -&gt; SURVIVED</div><div id="mutation_48_1160_1161" class="survived">resources/xr/highlightMarkup.js:47:40 Removed - -&gt; SURVIVED</div><div id="mutation_47_1155_1160" class="survived">resources/xr/highlightMarkup.js:47:33 Replaced  ===  with !== -&gt; SURVIVED</div><div id="mutation_44_1162_1166" class="survived">resources/xr/highlightMarkup.js:47:40 Replaced  ||  with &amp;&amp; -&gt; SURVIVED</div><div id="mutation_51_1190_1191" class="survived">resources/xr/highlightMarkup.js:47:70 Removed - -&gt; SURVIVED</div><div id="mutation_43_1174_1178" class="survived">resources/xr/highlightMarkup.js:47:52 Replaced  ||  with &amp;&amp; -&gt; SURVIVED</div><div id="mutation_36_1129_1232" class="survived">resources/xr/highlightMarkup.js:47:7 Removed if(!markStart || markStart === -1 || !markEnd || markEnd === -1) { return toHtml(text); } -&gt; SURVIVED</div><div id="mutation_45_1142_1146" class="survived">resources/xr/highlightMarkup.js:47:20 Replaced  ||  with &amp;&amp; -&gt; SURVIVED</div><div id="mutation_46_1132_1133" class="survived">resources/xr/highlightMarkup.js:47:20 Removed ! -&gt; SURVIVED</div><div id="mutation_52_1204_1224" class="survived">resources/xr/highlightMarkup.js:48:9 Removed return toHtml(text); -&gt; SURVIVED</div><div id="mutation_53_1218_1222" class="survived">resources/xr/highlightMarkup.js:48:23 Replaced text with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_54_1211_1223" class="survived">resources/xr/highlightMarkup.js:48:16 Replaced toHtml(text) with text -&gt; SURVIVED</div><div id="mutation_55_1272_1273" class="survived">resources/xr/highlightMarkup.js:51:39 Replaced 0 with 1 -&gt; SURVIVED</div><div id="mutation_56_1275_1284" class="survived">resources/xr/highlightMarkup.js:51:42 Replaced markStart with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_37_1240_1286" class="survived">resources/xr/highlightMarkup.js:51:7 Removed var beforeMark = text.substring(0, markStart); -&gt; SURVIVED</div><div id="mutation_57_1257_1285" class="survived">resources/xr/highlightMarkup.js:51:24 Replaced text.substring(0, markStart) with text -&gt; SURVIVED</div><div id="mutation_38_1293_1347" class="survived">resources/xr/highlightMarkup.js:52:7 Removed var betweenMarks = text.substring(markStart, markEnd); -&gt; SURVIVED</div><div id="mutation_58_1327_1336" class="survived">resources/xr/highlightMarkup.js:52:41 Replaced markStart with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_59_1338_1345" class="survived">resources/xr/highlightMarkup.js:52:52 Replaced markEnd with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_60_1312_1346" class="survived">resources/xr/highlightMarkup.js:52:26 Replaced text.substring(markStart, markEnd) with text -&gt; SURVIVED</div><div id="mutation_63_1373_1396" class="survived">resources/xr/highlightMarkup.js:53:26 Replaced text.substring(markEnd) with text -&gt; SURVIVED</div><div id="mutation_61_1388_1395" class="survived">resources/xr/highlightMarkup.js:53:41 Replaced markEnd with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_62_1373_1396" class="survived">resources/xr/highlightMarkup.js:53:26 Replaced text.substring(markEnd) with markEnd -&gt; SURVIVED</div><div id="mutation_39_1354_1397" class="survived">resources/xr/highlightMarkup.js:53:7 Removed var afterMarkEnd = text.substring(markEnd); -&gt; SURVIVED</div><div id="mutation_40_1405_1524" class="survived">resources/xr/highlightMarkup.js:55:7 Removed return ensureEscaping(beforeMark) + &quot;&lt;mark&gt;&quot; + ensureEscaping(betweenMarks) + &quot;&lt;/mark&gt;&quot; + ensureEscaping(afterMarkEnd); -&gt; SURVIVED</div><div id="mutation_75_1495_1523" class="survived">resources/xr/highlightMarkup.js:55:97 Replaced ensureEscaping(afterMarkEnd) with afterMarkEnd -&gt; SURVIVED</div><div id="mutation_64_1492_1495" class="survived">resources/xr/highlightMarkup.js:55:94 Replaced  +  with - -&gt; SURVIVED</div><div id="mutation_65_1480_1483" class="survived">resources/xr/highlightMarkup.js:55:82 Replaced  +  with - -&gt; SURVIVED</div><div id="mutation_66_1449_1452" class="survived">resources/xr/highlightMarkup.js:55:51 Replaced  +  with - -&gt; SURVIVED</div><div id="mutation_67_1438_1441" class="survived">resources/xr/highlightMarkup.js:55:40 Replaced  +  with - -&gt; SURVIVED</div><div id="mutation_68_1427_1437" class="survived">resources/xr/highlightMarkup.js:55:29 Replaced beforeMark with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_69_1412_1438" class="survived">resources/xr/highlightMarkup.js:55:14 Replaced ensureEscaping(beforeMark) with beforeMark -&gt; SURVIVED</div><div id="mutation_70_1441_1449" class="survived">resources/xr/highlightMarkup.js:55:43 Replaced &quot;&lt;mark&gt;&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_71_1467_1479" class="survived">resources/xr/highlightMarkup.js:55:69 Replaced betweenMarks with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_72_1452_1480" class="survived">resources/xr/highlightMarkup.js:55:54 Replaced ensureEscaping(betweenMarks) with betweenMarks -&gt; SURVIVED</div><div id="mutation_73_1483_1492" class="survived">resources/xr/highlightMarkup.js:55:85 Replaced &quot;&lt;/mark&gt;&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_74_1510_1522" class="survived">resources/xr/highlightMarkup.js:55:112 Replaced afterMarkEnd with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_12_1660_1737" class="killed">resources/xr/highlightMarkup.js:63:5 Removed function strip(text) { return text.replace(/\{\/?mark\}/g, &quot;&quot;); } -&gt; KILLED</div><div id="mutation_76_1691_1731" class="survived">resources/xr/highlightMarkup.js:64:9 Removed return text.replace(/\{\/?mark\}/g, &quot;&quot;); -&gt; SURVIVED</div><div id="mutation_77_1711_1725" class="survived">resources/xr/highlightMarkup.js:64:29 Replaced /\{\/?mark\}/g with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_78_1727_1729" class="survived">resources/xr/highlightMarkup.js:64:45 Replaced &quot;&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_79_1698_1730" class="survived">resources/xr/highlightMarkup.js:64:16 Replaced text.replace(/\{\/?mark\}/g, &quot;&quot;) with text -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

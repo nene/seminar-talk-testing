@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":22,"ignored":11,"untested":0,"survived":8}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>22</strong> of which <strong>8</strong> survived,&nbsp;
+        <strong>11</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>63.6%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/cpu/index.html'">cpu</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/cpu/cpuTreeFactory.js.html'">cpuTreeFactory.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var treeFactory = require(<span class="code killed mutation_11_72_93">"xr/tree/treeFactory"</span>);</li><li>    var TreeBuilder = require(<span class="code killed mutation_13_126_146">"xr/cpu/TreeBuilder"</span>);</li><li>    var DummyFlattener = require(<span class="code killed mutation_15_182_205">"xr/cpu/DummyFlattener"</span>);</li><li></li><li>    <span class="code survived mutation_10_213_883">return {</span></li><li><span class="code survived mutation_10_213_883">        /**</span></li><li><span class="code survived mutation_10_213_883">         * Builds CPU traces TreeView.</span></li><li><span class="code survived mutation_10_213_883">         *</span></li><li><span class="code survived mutation_10_213_883">         * Like Tree.create(), but uses cpu/TreeBuilder instead.</span></li><li><span class="code survived mutation_10_213_883">         *</span></li><li><span class="code survived mutation_10_213_883">         * @param {Object} cfg</span></li><li><span class="code survived mutation_10_213_883">         *   @param {jQuery} cfg.container Container element.</span></li><li><span class="code survived mutation_10_213_883">         *   @param {Object[]} cfg.requests The requests data.</span></li><li><span class="code survived mutation_10_213_883">         *   @param {Object} cfg.treeState Expanded/collapsed state of tree nodes.</span></li><li><span class="code survived mutation_10_213_883">         *   @param {Object} cfg.sortConfig Sorting configuration.</span></li><li><span class="code survived mutation_10_213_883">         */</span></li><li><span class="code survived mutation_10_213_883">        <span class="code survived mutation_17_686_876">create: function(cfg) {</span></span></li><li><span class="code survived mutation_17_686_876"><span class="code survived mutation_10_213_883">            <span class="code survived mutation_18_722_866">return <span class="code survived mutation_21_729_865">treeFactory.create(<span class="code survived mutation_19_748_751">cfg</span>, <span class="code survived mutation_20_753_864">{</span></span></span></span></span></li><li><span class="code survived mutation_21_729_865"><span class="code survived mutation_20_753_864"><span class="code survived mutation_18_722_866"><span class="code survived mutation_17_686_876"><span class="code survived mutation_10_213_883">                <span class="code survived mutation_22_771_819">treeBuilder: new TreeBuilder(),</span></span></span></span></span></span></li><li><span class="code survived mutation_22_771_819"><span class="code survived mutation_21_729_865"><span class="code survived mutation_20_753_864"><span class="code survived mutation_18_722_866"><span class="code survived mutation_17_686_876"><span class="code survived mutation_10_213_883">                </span><span class="code survived mutation_23_819_850">flattener: new DummyFlattener()</span></span></span></span></span></span></li><li><span class="code survived mutation_21_729_865"><span class="code survived mutation_20_753_864"><span class="code survived mutation_18_722_866"><span class="code survived mutation_17_686_876"><span class="code survived mutation_10_213_883">            }</span>)</span>;</span></span></span></li><li><span class="code survived mutation_17_686_876"><span class="code survived mutation_10_213_883">        }</span></span></li><li><span class="code survived mutation_10_213_883">    };</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_11_72_93" class="killed">resources/xr/cpu/cpuTreeFactory.js:4:31 Replaced &quot;xr/tree/treeFactory&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_13_126_146" class="killed">resources/xr/cpu/cpuTreeFactory.js:5:31 Replaced &quot;xr/cpu/TreeBuilder&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_182_205" class="killed">resources/xr/cpu/cpuTreeFactory.js:6:34 Replaced &quot;xr/cpu/DummyFlattener&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_10_213_883" class="survived">resources/xr/cpu/cpuTreeFactory.js:8:5 Removed return { /** * Builds CPU traces TreeView. * * Like Tree.create(), but uses cpu/TreeBuilder instead. * * @param {Object} cfg * @param {jQuery} cfg.container Container element. * @param {Object[]} cfg.requests The requests data. * @param {Object} cfg.treeState Expanded/collapsed state of tree nodes. * @param {Object} cfg.sortConfig Sorting configuration. */ create: function(cfg) { return treeFactory.create(cfg, { treeBuilder: new TreeBuilder(), flattener: new DummyFlattener() }); } }; -&gt; SURVIVED</div><div id="mutation_17_686_876" class="survived">resources/xr/cpu/cpuTreeFactory.js:20:9 Removed create: function(cfg) { return treeFactory.create(cfg, { treeBuilder: new TreeBuilder(), flattener: new DummyFlattener() }); } -&gt; SURVIVED</div><div id="mutation_18_722_866" class="survived">resources/xr/cpu/cpuTreeFactory.js:21:13 Removed return treeFactory.create(cfg, { treeBuilder: new TreeBuilder(), flattener: new DummyFlattener() }); -&gt; SURVIVED</div><div id="mutation_19_748_751" class="survived">resources/xr/cpu/cpuTreeFactory.js:21:39 Replaced cfg with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_20_753_864" class="survived">resources/xr/cpu/cpuTreeFactory.js:21:44 Replaced { treeBuilder: new TreeBuilder(), flattener: new DummyFlattener() } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_21_729_865" class="survived">resources/xr/cpu/cpuTreeFactory.js:21:20 Replaced treeFactory.create(cfg, { treeBuilder: new TreeBuilder(), flattener: new DummyFlattener() }) with treeFactory -&gt; SURVIVED</div><div id="mutation_22_771_819" class="survived">resources/xr/cpu/cpuTreeFactory.js:22:17 Removed treeBuilder: new TreeBuilder(),  -&gt; SURVIVED</div><div id="mutation_23_819_850" class="survived">resources/xr/cpu/cpuTreeFactory.js:23:17 Removed flattener: new DummyFlattener() -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

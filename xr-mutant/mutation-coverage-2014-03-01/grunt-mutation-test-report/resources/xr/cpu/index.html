@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#successRate {
+    padding: 2px;
+    border: none;
+}
+#files {
+    margin-left: 30px;
+}
+#files .perc {
+    width: 25%;
+    text-align: right;
+}
+.link {
+    cursor: pointer;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript"></script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>637</strong> of which <strong>65</strong> survived,&nbsp;
+        <strong>130</strong> ignored and <strong>0</strong> untested</p>
+    <span id="successRate" class="killed">Mutation success rate: <strong>89.8%</strong></span>
+</div>
+<h2></h2>
+<table id='files'><tr><td><span class="link killed" onclick="location.href='CpuView.js.html'">CpuView.js.html</span></td><td class="perc">85.7%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='DummyFlattener.js.html'">DummyFlattener.js.html</span></td><td class="perc">40.0%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='FilterChain.js.html'">FilterChain.js.html</span></td><td class="perc">84.9%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='ToolbarUpdater.js.html'">ToolbarUpdater.js.html</span></td><td class="perc">94.6%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='TreeBuilder.js.html'">TreeBuilder.js.html</span></td><td class="perc">97.3%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='WhitelistAnnotator.js.html'">WhitelistAnnotator.js.html</span></td><td class="perc">88.2%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='applyPackageBoundaries.js.html'">applyPackageBoundaries.js.html</span></td><td class="perc">97.1%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='collapseLowCpuBranches.js.html'">collapseLowCpuBranches.js.html</span></td><td class="perc">100.0%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='cpuTreeFactory.js.html'">cpuTreeFactory.js.html</span></td><td class="perc">63.6%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='generateIds.js.html'">generateIds.js.html</span></td><td class="perc">100.0%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='sortByCumulativeTime.js.html'">sortByCumulativeTime.js.html</span></td><td class="perc">100.0%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='stripHidden.js.html'">stripHidden.js.html</span></td><td class="perc">92.6%</td></tr>
+</table>
+</body>
+</html>

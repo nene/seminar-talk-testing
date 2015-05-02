@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":52,"ignored":14,"untested":0,"survived":3}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>52</strong> of which <strong>3</strong> survived,&nbsp;
+        <strong>14</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>94.2%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/filter/index.html'">filter</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/filter/StackTraceFilter.js.html'">StackTraceFilter.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_13_62_68">"xr/_"</span>);</li><li>    var isOrmQuery = require(<span class="code killed mutation_15_100_115">"xr/isOrmQuery"</span>);</li><li>    var BlacklistWhitelistMatcher = require(<span class="code killed mutation_17_162_192">"xr/BlacklistWhitelistMatcher"</span>);</li><li></li><li>    /**</li><li>     * Filters stack trace elements based on whitelist and blacklist,</li><li>     * which it accesses through BlacklistWhitelistMatcher from settings.</li><li>     *</li><li>     * @constructor</li><li>     * @param {Object} deps Dependencies:</li><li>     *   @param {BlacklistWhitelistMatcher} deps.matcher</li><li>     */</li><li>    function StackTraceFilter(deps) {</li><li>        <span class="code killed mutation_26_528_535">_(<span class="code killed mutation_25_530_534">this</span>)</span>.inject(<span class="code killed mutation_20_543_547">deps</span>, <span class="code survived mutation_21_549_663">function(){</span></li><li><span class="code survived mutation_21_549_663">            <span class="code survived mutation_23_573_653">return {</span></span></li><li><span class="code survived mutation_23_573_653"><span class="code survived mutation_21_549_663">                <span class="code survived mutation_24_598_638">matcher: new BlacklistWhitelistMatcher()</span></span></span></li><li><span class="code survived mutation_23_573_653"><span class="code survived mutation_21_549_663">            };</span></span></li><li><span class="code survived mutation_21_549_663">        }</span>);</li><li>    }</li><li></li><li>    <span class="code killed mutation_11_677_1631">StackTraceFilter.prototype = {</span></li><li><span class="code killed mutation_11_677_1631">        /**</span></li><li><span class="code killed mutation_11_677_1631">         * Filters stack traces inside request objects.</span></li><li><span class="code killed mutation_11_677_1631">         * Saves result of filtering 'stackTrace' property into 'stack' property.</span></li><li><span class="code killed mutation_11_677_1631">         * @param {Object[]} requests</span></li><li><span class="code killed mutation_11_677_1631">         * @return {Object[]} Returns the in-place modified requests.</span></li><li><span class="code killed mutation_11_677_1631">         */</span></li><li><span class="code killed mutation_11_677_1631">        <span class="code killed mutation_27_986_1435">filterInRequests: function(requests) {</span></span></li><li><span class="code killed mutation_27_986_1435"><span class="code killed mutation_11_677_1631">            <span class="code killed mutation_33_1037_1233"><span class="code killed mutation_29_1037_1234">requests.forEach(<span class="code killed mutation_31_1054_1226">function(req){</span></span></span></span></span></li><li><span class="code killed mutation_33_1037_1233"><span class="code killed mutation_31_1054_1226"><span class="code killed mutation_29_1037_1234"><span class="code killed mutation_27_986_1435"><span class="code killed mutation_11_677_1631">                <span class="code killed mutation_37_1085_1211"><span class="code killed mutation_34_1085_1212">req.queries.forEach(<span class="code killed mutation_35_1105_1204">function(query){</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_37_1085_1211"><span class="code killed mutation_35_1105_1204"><span class="code killed mutation_34_1085_1212"><span class="code killed mutation_33_1037_1233"><span class="code killed mutation_31_1054_1226"><span class="code killed mutation_29_1037_1234"><span class="code killed mutation_27_986_1435"><span class="code killed mutation_11_677_1631">                    <span class="code killed mutation_38_1142_1186">query.stack = <span class="code killed mutation_41_1156_1185"><span class="code killed mutation_40_1156_1185">this.filter(<span class="code killed mutation_39_1168_1184">query.stackTrace</span>)</span></span>;</span></span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_37_1085_1211"><span class="code killed mutation_35_1105_1204"><span class="code killed mutation_34_1085_1212"><span class="code killed mutation_33_1037_1233"><span class="code killed mutation_31_1054_1226"><span class="code killed mutation_29_1037_1234"><span class="code killed mutation_27_986_1435"><span class="code killed mutation_11_677_1631">                }</span>, <span class="code killed mutation_36_1206_1210">this</span>)</span>;</span></span></span></span></span></span></li><li><span class="code killed mutation_33_1037_1233"><span class="code killed mutation_31_1054_1226"><span class="code killed mutation_29_1037_1234"><span class="code killed mutation_27_986_1435"><span class="code killed mutation_11_677_1631">            }</span>, <span class="code killed mutation_32_1228_1232">this</span>)</span>;</span></span></span></li><li><span class="code killed mutation_27_986_1435"><span class="code killed mutation_11_677_1631">            <span class="code killed mutation_30_1247_1263">return requests;</span></span></span></li><li><span class="code killed mutation_27_986_1435"><span class="code killed mutation_11_677_1631">        },</span></span></li><li><span class="code killed mutation_27_986_1435"><span class="code killed mutation_11_677_1631"></li><li>        /**</span></span></li><li><span class="code killed mutation_27_986_1435"><span class="code killed mutation_11_677_1631">         * Filters a simple array of stacktrace objects.</span></span></li><li><span class="code killed mutation_27_986_1435"><span class="code killed mutation_11_677_1631">         * @param {Object[]} stackTrace</span></span></li><li><span class="code killed mutation_27_986_1435"><span class="code killed mutation_11_677_1631">         * @return {Object[]}</span></span></li><li><span class="code killed mutation_27_986_1435"><span class="code killed mutation_11_677_1631">         */</span></span></li><li><span class="code killed mutation_27_986_1435"><span class="code killed mutation_11_677_1631">        </span><span class="code killed mutation_28_1435_1624">filter: function(stackTrace) {</span></span></li><li><span class="code killed mutation_28_1435_1624"><span class="code killed mutation_11_677_1631">            <span class="code killed mutation_42_1478_1614">return <span class="code killed mutation_45_1485_1613">stackTrace.filter(<span class="code killed mutation_43_1503_1606">function(el){</span></span></span></span></span></li><li><span class="code killed mutation_45_1485_1613"><span class="code killed mutation_43_1503_1606"><span class="code killed mutation_42_1478_1614"><span class="code killed mutation_28_1435_1624"><span class="code killed mutation_11_677_1631">                <span class="code killed mutation_46_1533_1592">return <span class="code killed mutation_49_1540_1554">isOrmQuery(<span class="code killed mutation_48_1551_1553">el</span>)</span><span class="code killed mutation_47_1554_1558"> || </span><span class="code killed mutation_52_1558_1591"><span class="code killed mutation_51_1558_1591">this.matcher.matches(<span class="code killed mutation_50_1579_1590">el[<span class="code killed mutation_53_1582_1589">"class"</span>]</span>)</span></span>;</span></span></span></span></span></span></li><li><span class="code killed mutation_45_1485_1613"><span class="code killed mutation_43_1503_1606"><span class="code killed mutation_42_1478_1614"><span class="code killed mutation_28_1435_1624"><span class="code killed mutation_11_677_1631">            }</span>, <span class="code killed mutation_44_1608_1612">this</span>)</span>;</span></span></span></li><li><span class="code killed mutation_28_1435_1624"><span class="code killed mutation_11_677_1631">        }</span></span></li><li><span class="code killed mutation_11_677_1631">    };</span></li><li></li><li>    <span class="code killed mutation_12_1637_1661">return StackTraceFilter;</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_13_62_68" class="killed">resources/xr/filter/StackTraceFilter.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_100_115" class="killed">resources/xr/filter/StackTraceFilter.js:5:30 Replaced &quot;xr/isOrmQuery&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_162_192" class="killed">resources/xr/filter/StackTraceFilter.js:6:45 Replaced &quot;xr/BlacklistWhitelistMatcher&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_543_547" class="killed">resources/xr/filter/StackTraceFilter.js:17:24 Replaced deps with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_21_549_663" class="survived">resources/xr/filter/StackTraceFilter.js:17:30 Replaced function(){ return { matcher: new BlacklistWhitelistMatcher() }; } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_25_530_534" class="killed">resources/xr/filter/StackTraceFilter.js:17:11 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_26_528_535" class="killed">resources/xr/filter/StackTraceFilter.js:17:9 Replaced _(this) with this -&gt; KILLED</div><div id="mutation_23_573_653" class="survived">resources/xr/filter/StackTraceFilter.js:18:13 Removed return { matcher: new BlacklistWhitelistMatcher() }; -&gt; SURVIVED</div><div id="mutation_24_598_638" class="survived">resources/xr/filter/StackTraceFilter.js:19:17 Removed matcher: new BlacklistWhitelistMatcher() -&gt; SURVIVED</div><div id="mutation_11_677_1631" class="killed">resources/xr/filter/StackTraceFilter.js:24:5 Removed StackTraceFilter.prototype = { /** * Filters stack traces inside request objects. * Saves result of filtering &#x27;stackTrace&#x27; property into &#x27;stack&#x27; property. * @param {Object[]} requests * @return {Object[]} Returns the in-place modified requests. */ filterInRequests: function(requests) { requests.forEach(function(req){ req.queries.forEach(function(query){ query.stack = this.filter(query.stackTrace); }, this); }, this); return requests; }, /** * Filters a simple array of stacktrace objects. * @param {Object[]} stackTrace * @return {Object[]} */ filter: function(stackTrace) { return stackTrace.filter(function(el){ return isOrmQuery(el) || this.matcher.matches(el[&quot;class&quot;]); }, this); } }; -&gt; KILLED</div><div id="mutation_27_986_1435" class="killed">resources/xr/filter/StackTraceFilter.js:31:9 Removed filterInRequests: function(requests) { requests.forEach(function(req){ req.queries.forEach(function(query){ query.stack = this.filter(query.stackTrace); }, this); }, this); return requests; }, /** * Filters a simple array of stacktrace objects. * @param {Object[]} stackTrace * @return {Object[]} */  -&gt; KILLED</div><div id="mutation_29_1037_1234" class="killed">resources/xr/filter/StackTraceFilter.js:32:13 Removed requests.forEach(function(req){ req.queries.forEach(function(query){ query.stack = this.filter(query.stackTrace); }, this); }, this); -&gt; KILLED</div><div id="mutation_31_1054_1226" class="killed">resources/xr/filter/StackTraceFilter.js:32:30 Replaced function(req){ req.queries.forEach(function(query){ query.stack = this.filter(query.stackTrace); }, this); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_33_1037_1233" class="killed">resources/xr/filter/StackTraceFilter.js:32:13 Replaced requests.forEach(function(req){ req.queries.forEach(function(query){ query.stack = this.filter(query.stackTrace); }, this); }, this) with requests -&gt; KILLED</div><div id="mutation_34_1085_1212" class="killed">resources/xr/filter/StackTraceFilter.js:33:17 Removed req.queries.forEach(function(query){ query.stack = this.filter(query.stackTrace); }, this); -&gt; KILLED</div><div id="mutation_37_1085_1211" class="killed">resources/xr/filter/StackTraceFilter.js:33:17 Replaced req.queries.forEach(function(query){ query.stack = this.filter(query.stackTrace); }, this) with req.queries -&gt; KILLED</div><div id="mutation_35_1105_1204" class="killed">resources/xr/filter/StackTraceFilter.js:33:37 Replaced function(query){ query.stack = this.filter(query.stackTrace); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_38_1142_1186" class="killed">resources/xr/filter/StackTraceFilter.js:34:21 Removed query.stack = this.filter(query.stackTrace); -&gt; KILLED</div><div id="mutation_39_1168_1184" class="killed">resources/xr/filter/StackTraceFilter.js:34:47 Replaced query.stackTrace with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_40_1156_1185" class="killed">resources/xr/filter/StackTraceFilter.js:34:35 Replaced this.filter(query.stackTrace) with query.stackTrace -&gt; KILLED</div><div id="mutation_41_1156_1185" class="killed">resources/xr/filter/StackTraceFilter.js:34:35 Replaced this.filter(query.stackTrace) with this -&gt; KILLED</div><div id="mutation_36_1206_1210" class="killed">resources/xr/filter/StackTraceFilter.js:35:20 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_32_1228_1232" class="killed">resources/xr/filter/StackTraceFilter.js:36:16 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_30_1247_1263" class="killed">resources/xr/filter/StackTraceFilter.js:37:13 Removed return requests; -&gt; KILLED</div><div id="mutation_28_1435_1624" class="killed">resources/xr/filter/StackTraceFilter.js:45:9 Removed filter: function(stackTrace) { return stackTrace.filter(function(el){ return isOrmQuery(el) || this.matcher.matches(el[&quot;class&quot;]); }, this); } -&gt; KILLED</div><div id="mutation_45_1485_1613" class="killed">resources/xr/filter/StackTraceFilter.js:46:20 Replaced stackTrace.filter(function(el){ return isOrmQuery(el) || this.matcher.matches(el[&quot;class&quot;]); }, this) with stackTrace -&gt; KILLED</div><div id="mutation_42_1478_1614" class="killed">resources/xr/filter/StackTraceFilter.js:46:13 Removed return stackTrace.filter(function(el){ return isOrmQuery(el) || this.matcher.matches(el[&quot;class&quot;]); }, this); -&gt; KILLED</div><div id="mutation_43_1503_1606" class="killed">resources/xr/filter/StackTraceFilter.js:46:38 Replaced function(el){ return isOrmQuery(el) || this.matcher.matches(el[&quot;class&quot;]); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_46_1533_1592" class="killed">resources/xr/filter/StackTraceFilter.js:47:17 Removed return isOrmQuery(el) || this.matcher.matches(el[&quot;class&quot;]); -&gt; KILLED</div><div id="mutation_47_1554_1558" class="killed">resources/xr/filter/StackTraceFilter.js:47:38 Replaced  ||  with &amp;&amp; -&gt; KILLED</div><div id="mutation_48_1551_1553" class="killed">resources/xr/filter/StackTraceFilter.js:47:35 Replaced el with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_49_1540_1554" class="killed">resources/xr/filter/StackTraceFilter.js:47:24 Replaced isOrmQuery(el) with el -&gt; KILLED</div><div id="mutation_50_1579_1590" class="killed">resources/xr/filter/StackTraceFilter.js:47:63 Replaced el[&quot;class&quot;] with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_51_1558_1591" class="killed">resources/xr/filter/StackTraceFilter.js:47:42 Replaced this.matcher.matches(el[&quot;class&quot;]) with el[&quot;class&quot;] -&gt; KILLED</div><div id="mutation_52_1558_1591" class="killed">resources/xr/filter/StackTraceFilter.js:47:42 Replaced this.matcher.matches(el[&quot;class&quot;]) with this.matcher -&gt; KILLED</div><div id="mutation_53_1582_1589" class="killed">resources/xr/filter/StackTraceFilter.js:47:66 Replaced &quot;class&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_44_1608_1612" class="killed">resources/xr/filter/StackTraceFilter.js:48:16 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_12_1637_1661" class="killed">resources/xr/filter/StackTraceFilter.js:52:5 Removed return StackTraceFilter; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

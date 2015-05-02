@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#successRate {
+    padding: 2px;
+    border: none;
+}
+#files {
+    margin-left: 30px;
+}
+#files .perc {
+    width: 25%;
+    text-align: right;
+}
+.link {
+    cursor: pointer;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript"></script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>859</strong> of which <strong>63</strong> survived,&nbsp;
+        <strong>126</strong> ignored and <strong>0</strong> untested</p>
+    <span id="successRate" class="killed">Mutation success rate: <strong>92.7%</strong></span>
+</div>
+<h2></h2>
+<table id='files'><tr><td><span class="link killed" onclick="location.href='CpuTraceNode.js.html'">CpuTraceNode.js.html</span></td><td class="perc">97.2%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='FlatGroupNode.js.html'">FlatGroupNode.js.html</span></td><td class="perc">97.6%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='FlatTraceNode.js.html'">FlatTraceNode.js.html</span></td><td class="perc">100.0%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='HttpQueryNode.js.html'">HttpQueryNode.js.html</span></td><td class="perc">79.2%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='IoTraceNode.js.html'">IoTraceNode.js.html</span></td><td class="perc">95.8%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='MongoQueryNode.js.html'">MongoQueryNode.js.html</span></td><td class="perc">91.4%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='OrmNode.js.html'">OrmNode.js.html</span></td><td class="perc">94.1%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='QueryGroupNode.js.html'">QueryGroupNode.js.html</span></td><td class="perc">96.0%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='RequestGroupNode.js.html'">RequestGroupNode.js.html</span></td><td class="perc">95.9%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='RequestNode.js.html'">RequestNode.js.html</span></td><td class="perc">92.2%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='RootNode.js.html'">RootNode.js.html</span></td><td class="perc">100.0%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='TreeNode.js.html'">TreeNode.js.html</span></td><td class="perc">81.3%</td></tr>
+</table>
+</body>
+</html>

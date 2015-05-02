@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":39,"ignored":7,"untested":0,"survived":1}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>39</strong> of which <strong>1</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>97.4%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/whitelistParser.js.html'">whitelistParser.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_11_62_68">"xr/_"</span>);</li><li></li><li>    <span class="code killed mutation_8_76_420">return {</span></li><li><span class="code killed mutation_8_76_420">        /**</span></li><li><span class="code killed mutation_8_76_420">         * Returns valid packages.</span></li><li><span class="code killed mutation_8_76_420">         * @param {String} editorText Source text from which the packages are rendered</span></li><li><span class="code killed mutation_8_76_420">         * @return {String[]} Array of package patterns</span></li><li><span class="code killed mutation_8_76_420">         */</span></li><li><span class="code killed mutation_8_76_420">        <span class="code killed mutation_13_295_413">parse : function(editorText) {</span></span></li><li><span class="code killed mutation_13_295_413"><span class="code killed mutation_8_76_420">            <span class="code killed mutation_14_338_403">return <span class="code survived mutation_20_345_372"><span class="code killed mutation_18_345_394"><span class="code killed mutation_17_345_394"><span class="code killed mutation_15_345_402">_(<span class="code killed mutation_22_347_371"><span class="code killed mutation_19_347_371">splitToLines(<span class="code killed mutation_21_360_370">editorText</span>)</span></span>)</span>.filter(<span class="code killed mutation_16_380_393">isPackageLine</span>)</span></span>.value()</span>;</span></span></span></li><li><span class="code killed mutation_13_295_413"><span class="code killed mutation_8_76_420">        }</span></span></li><li><span class="code killed mutation_8_76_420">    };</span></li><li></li><li>    /**</li><li>     * Returns an array of cleaned lines from a source text</li><li>     * @return {Array}</li><li>     */</li><li>    <span class="code killed mutation_9_525_623">function splitToLines(editorText) {</span></li><li><span class="code killed mutation_9_525_623">        <span class="code killed mutation_23_569_617">return <span class="code killed mutation_28_576_601"><span class="code killed mutation_26_576_616"><span class="code killed mutation_25_576_616">_(<span class="code killed mutation_31_578_600"><span class="code killed mutation_30_578_600"><span class="code killed mutation_27_578_600">editorText.split(<span class="code killed mutation_29_595_599">"\n"</span>)</span></span></span>)</span>.invoke(<span class="code killed mutation_24_609_615">"trim"</span>)</span></span>;</span></span></li><li><span class="code killed mutation_9_525_623">    }</span></li><li></li><li>    /**</li><li>     * Whether a line is a package line (as opposed to an</li><li>     * empty string or comment)</li><li>     * @param  {String}  line A line from an editor</li><li>     * @return {Boolean}</li><li>     */</li><li>    <span class="code killed mutation_10_812_902">function isPackageLine(line) {</span></li><li><span class="code killed mutation_10_812_902">        <span class="code killed mutation_32_851_896">return line<span class="code killed mutation_34_862_867"> !== </span><span class="code killed mutation_35_867_869">""</span><span class="code killed mutation_33_869_873"> && </span><span class="code killed mutation_39_873_887"><span class="code killed mutation_38_873_887">line.charAt(<span class="code killed mutation_37_885_886">0</span>)</span></span><span class="code killed mutation_36_887_892"> !== </span><span class="code killed mutation_40_892_895">"#"</span>;</span></span></li><li><span class="code killed mutation_10_812_902">    }</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_11_62_68" class="killed">resources/xr/whitelistParser.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_76_420" class="killed">resources/xr/whitelistParser.js:6:5 Removed return { /** * Returns valid packages. * @param {String} editorText Source text from which the packages are rendered * @return {String[]} Array of package patterns */ parse : function(editorText) { return _(splitToLines(editorText)).filter(isPackageLine).value(); } }; -&gt; KILLED</div><div id="mutation_13_295_413" class="killed">resources/xr/whitelistParser.js:12:9 Removed parse : function(editorText) { return _(splitToLines(editorText)).filter(isPackageLine).value(); } -&gt; KILLED</div><div id="mutation_14_338_403" class="killed">resources/xr/whitelistParser.js:13:13 Removed return _(splitToLines(editorText)).filter(isPackageLine).value(); -&gt; KILLED</div><div id="mutation_15_345_402" class="killed">resources/xr/whitelistParser.js:13:20 Replaced _(splitToLines(editorText)).filter(isPackageLine).value() with _(splitToLines(editorText)).filter(isPackageLine) -&gt; KILLED</div><div id="mutation_16_380_393" class="killed">resources/xr/whitelistParser.js:13:55 Replaced isPackageLine with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_345_394" class="killed">resources/xr/whitelistParser.js:13:20 Replaced _(splitToLines(editorText)).filter(isPackageLine) with isPackageLine -&gt; KILLED</div><div id="mutation_18_345_394" class="killed">resources/xr/whitelistParser.js:13:20 Replaced _(splitToLines(editorText)).filter(isPackageLine) with _(splitToLines(editorText)) -&gt; KILLED</div><div id="mutation_19_347_371" class="killed">resources/xr/whitelistParser.js:13:22 Replaced splitToLines(editorText) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_345_372" class="survived">resources/xr/whitelistParser.js:13:20 Replaced _(splitToLines(editorText)) with splitToLines(editorText) -&gt; SURVIVED</div><div id="mutation_21_360_370" class="killed">resources/xr/whitelistParser.js:13:35 Replaced editorText with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_347_371" class="killed">resources/xr/whitelistParser.js:13:22 Replaced splitToLines(editorText) with editorText -&gt; KILLED</div><div id="mutation_9_525_623" class="killed">resources/xr/whitelistParser.js:21:5 Removed function splitToLines(editorText) { return _(editorText.split(&quot;\n&quot;)).invoke(&quot;trim&quot;); } -&gt; KILLED</div><div id="mutation_25_576_616" class="killed">resources/xr/whitelistParser.js:22:16 Replaced _(editorText.split(&quot;\n&quot;)).invoke(&quot;trim&quot;) with &quot;trim&quot; -&gt; KILLED</div><div id="mutation_23_569_617" class="killed">resources/xr/whitelistParser.js:22:9 Removed return _(editorText.split(&quot;\n&quot;)).invoke(&quot;trim&quot;); -&gt; KILLED</div><div id="mutation_24_609_615" class="killed">resources/xr/whitelistParser.js:22:49 Replaced &quot;trim&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_31_578_600" class="killed">resources/xr/whitelistParser.js:22:18 Replaced editorText.split(&quot;\n&quot;) with editorText -&gt; KILLED</div><div id="mutation_26_576_616" class="killed">resources/xr/whitelistParser.js:22:16 Replaced _(editorText.split(&quot;\n&quot;)).invoke(&quot;trim&quot;) with _(editorText.split(&quot;\n&quot;)) -&gt; KILLED</div><div id="mutation_27_578_600" class="killed">resources/xr/whitelistParser.js:22:18 Replaced editorText.split(&quot;\n&quot;) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_28_576_601" class="killed">resources/xr/whitelistParser.js:22:16 Replaced _(editorText.split(&quot;\n&quot;)) with editorText.split(&quot;\n&quot;) -&gt; KILLED</div><div id="mutation_29_595_599" class="killed">resources/xr/whitelistParser.js:22:35 Replaced &quot;\n&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_30_578_600" class="killed">resources/xr/whitelistParser.js:22:18 Replaced editorText.split(&quot;\n&quot;) with &quot;\n&quot; -&gt; KILLED</div><div id="mutation_10_812_902" class="killed">resources/xr/whitelistParser.js:31:5 Removed function isPackageLine(line) { return line !== &quot;&quot; &amp;&amp; line.charAt(0) !== &quot;#&quot;; } -&gt; KILLED</div><div id="mutation_32_851_896" class="killed">resources/xr/whitelistParser.js:32:9 Removed return line !== &quot;&quot; &amp;&amp; line.charAt(0) !== &quot;#&quot;; -&gt; KILLED</div><div id="mutation_33_869_873" class="killed">resources/xr/whitelistParser.js:32:27 Replaced  &amp;&amp;  with || -&gt; KILLED</div><div id="mutation_34_862_867" class="killed">resources/xr/whitelistParser.js:32:20 Replaced  !==  with === -&gt; KILLED</div><div id="mutation_35_867_869" class="killed">resources/xr/whitelistParser.js:32:25 Replaced &quot;&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_36_887_892" class="killed">resources/xr/whitelistParser.js:32:45 Replaced  !==  with === -&gt; KILLED</div><div id="mutation_37_885_886" class="killed">resources/xr/whitelistParser.js:32:43 Replaced 0 with 1 -&gt; KILLED</div><div id="mutation_38_873_887" class="killed">resources/xr/whitelistParser.js:32:31 Replaced line.charAt(0) with 0 -&gt; KILLED</div><div id="mutation_39_873_887" class="killed">resources/xr/whitelistParser.js:32:31 Replaced line.charAt(0) with line -&gt; KILLED</div><div id="mutation_40_892_895" class="killed">resources/xr/whitelistParser.js:32:50 Replaced &quot;#&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

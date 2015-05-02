@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":44,"ignored":7,"untested":0,"survived":1}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>44</strong> of which <strong>1</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>97.7%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/io/index.html'">io</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/io/counter.js.html'">counter.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function (require) {</li><li>    var _ = require(<span class="code killed mutation_11_63_69">"xr/_"</span>);</li><li></li><li>    <span class="code killed mutation_8_77_165">return {</span></li><li><span class="code killed mutation_8_77_165">        <span class="code killed mutation_13_94_136">countAllQueries: countAllQueries,</span></span></li><li><span class="code killed mutation_13_94_136"><span class="code killed mutation_8_77_165">        </span><span class="code killed mutation_14_136_158">countQuery: countQuery</span></span></li><li><span class="code killed mutation_8_77_165">    };</span></li><li></li><li>    /**</li><li>     * Counts queries under a request hierarchially.</li><li>     * Query can have child queries, which need to be counted too.</li><li>     * In such case the parent query is not counted, as the children make up the whole</li><li>     * @returns {Number}</li><li>     */</li><li>    <span class="code killed mutation_9_419_601">function countAllQueries(requests) {</span></li><li><span class="code killed mutation_9_419_601">        <span class="code killed mutation_15_464_595">return <span class="code killed mutation_31_471_482"><span class="code killed mutation_29_471_499"><span class="code killed mutation_28_471_499"><span class="code killed mutation_19_471_588"><span class="code killed mutation_18_471_588"><span class="code killed mutation_16_471_594">_(<span class="code killed mutation_30_473_481">requests</span>)</span>.pluck(<span class="code killed mutation_27_489_498">"queries"</span>)</span></span>.map(<span class="code killed mutation_17_504_587">function (queries) {</span></span></span></span></span></span></li><li><span class="code killed mutation_19_471_588"><span class="code killed mutation_18_471_588"><span class="code killed mutation_17_504_587"><span class="code killed mutation_16_471_594"><span class="code killed mutation_15_464_595"><span class="code killed mutation_9_419_601">            <span class="code killed mutation_20_537_577">return <span class="code killed mutation_26_544_554"><span class="code killed mutation_24_544_570"><span class="code killed mutation_23_544_570"><span class="code killed mutation_21_544_576">_(<span class="code killed mutation_25_546_553">queries</span>)</span>.map(<span class="code killed mutation_22_559_569">countQuery</span>)</span></span>.sum()</span>;</span></span></span></span></span></span></span></li><li><span class="code killed mutation_19_471_588"><span class="code killed mutation_18_471_588"><span class="code killed mutation_17_504_587"><span class="code killed mutation_16_471_594"><span class="code killed mutation_15_464_595"><span class="code killed mutation_9_419_601">        }</span>)</span></span>.sum()</span>;</span></span></li><li><span class="code killed mutation_9_419_601">    }</span></li><li></li><li>    /**</li><li>     * Returns the number of queries this query contains.</li><li>     * Returns 1 if it has no children. Otherwise returns the number of children, not counting itself</li><li>     * @returns {Number}</li><li>     */</li><li>    <span class="code killed mutation_10_808_1018">function countQuery(query) {</span></li><li><span class="code killed mutation_10_808_1018">        <span class="code killed mutation_32_845_1012">if (query.children<span class="code killed mutation_33_863_867"> && </span>query.children.length<span class="code killed mutation_35_888_891"><span class="code killed mutation_34_888_891"> > </span></span><span class="code survived mutation_36_891_892">0</span>) {</span></span></li><li><span class="code killed mutation_32_845_1012"><span class="code killed mutation_10_808_1018">            <span class="code killed mutation_37_908_955">return <span class="code killed mutation_43_915_932"><span class="code killed mutation_41_915_948"><span class="code killed mutation_40_915_948"><span class="code killed mutation_38_915_954">_(<span class="code killed mutation_42_917_931">query.children</span>)</span>.map(<span class="code killed mutation_39_937_947">countQuery</span>)</span></span>.sum()</span>;</span></span></span></li><li><span class="code killed mutation_32_845_1012"><span class="code killed mutation_10_808_1018">        }</span></span></li><li><span class="code killed mutation_32_845_1012"><span class="code killed mutation_10_808_1018">        else {</span></span></li><li><span class="code killed mutation_32_845_1012"><span class="code killed mutation_10_808_1018">            <span class="code killed mutation_44_993_1002">return <span class="code killed mutation_45_1000_1001">1</span>;</span></span></span></li><li><span class="code killed mutation_32_845_1012"><span class="code killed mutation_10_808_1018">        }</span></span></li><li><span class="code killed mutation_10_808_1018">    }</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_11_63_69" class="killed">resources/xr/io/counter.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_77_165" class="killed">resources/xr/io/counter.js:6:5 Removed return { countAllQueries: countAllQueries, countQuery: countQuery }; -&gt; KILLED</div><div id="mutation_13_94_136" class="killed">resources/xr/io/counter.js:7:9 Removed countAllQueries: countAllQueries,  -&gt; KILLED</div><div id="mutation_14_136_158" class="killed">resources/xr/io/counter.js:8:9 Removed countQuery: countQuery -&gt; KILLED</div><div id="mutation_9_419_601" class="killed">resources/xr/io/counter.js:17:5 Removed function countAllQueries(requests) { return _(requests).pluck(&quot;queries&quot;).map(function (queries) { return _(queries).map(countQuery).sum(); }).sum(); } -&gt; KILLED</div><div id="mutation_27_489_498" class="killed">resources/xr/io/counter.js:18:34 Replaced &quot;queries&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_464_595" class="killed">resources/xr/io/counter.js:18:9 Removed return _(requests).pluck(&quot;queries&quot;).map(function (queries) { return _(queries).map(countQuery).sum(); }).sum(); -&gt; KILLED</div><div id="mutation_16_471_594" class="killed">resources/xr/io/counter.js:18:16 Replaced _(requests).pluck(&quot;queries&quot;).map(function (queries) { return _(queries).map(countQuery).sum(); }).sum() with _(requests).pluck(&quot;queries&quot;).map(function (queries) { return _(queries).map(countQuery).sum(); }) -&gt; KILLED</div><div id="mutation_17_504_587" class="killed">resources/xr/io/counter.js:18:49 Replaced function (queries) { return _(queries).map(countQuery).sum(); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_18_471_588" class="killed">resources/xr/io/counter.js:18:16 Replaced _(requests).pluck(&quot;queries&quot;).map(function (queries) { return _(queries).map(countQuery).sum(); }) with function (queries) { return _(queries).map(countQuery).sum(); } -&gt; KILLED</div><div id="mutation_19_471_588" class="killed">resources/xr/io/counter.js:18:16 Replaced _(requests).pluck(&quot;queries&quot;).map(function (queries) { return _(queries).map(countQuery).sum(); }) with _(requests).pluck(&quot;queries&quot;) -&gt; KILLED</div><div id="mutation_30_473_481" class="killed">resources/xr/io/counter.js:18:18 Replaced requests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_29_471_499" class="killed">resources/xr/io/counter.js:18:16 Replaced _(requests).pluck(&quot;queries&quot;) with _(requests) -&gt; KILLED</div><div id="mutation_28_471_499" class="killed">resources/xr/io/counter.js:18:16 Replaced _(requests).pluck(&quot;queries&quot;) with &quot;queries&quot; -&gt; KILLED</div><div id="mutation_31_471_482" class="killed">resources/xr/io/counter.js:18:16 Replaced _(requests) with requests -&gt; KILLED</div><div id="mutation_24_544_570" class="killed">resources/xr/io/counter.js:19:20 Replaced _(queries).map(countQuery) with _(queries) -&gt; KILLED</div><div id="mutation_26_544_554" class="killed">resources/xr/io/counter.js:19:20 Replaced _(queries) with queries -&gt; KILLED</div><div id="mutation_23_544_570" class="killed">resources/xr/io/counter.js:19:20 Replaced _(queries).map(countQuery) with countQuery -&gt; KILLED</div><div id="mutation_22_559_569" class="killed">resources/xr/io/counter.js:19:35 Replaced countQuery with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_21_544_576" class="killed">resources/xr/io/counter.js:19:20 Replaced _(queries).map(countQuery).sum() with _(queries).map(countQuery) -&gt; KILLED</div><div id="mutation_20_537_577" class="killed">resources/xr/io/counter.js:19:13 Removed return _(queries).map(countQuery).sum(); -&gt; KILLED</div><div id="mutation_25_546_553" class="killed">resources/xr/io/counter.js:19:22 Replaced queries with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_10_808_1018" class="killed">resources/xr/io/counter.js:28:5 Removed function countQuery(query) { if (query.children &amp;&amp; query.children.length &gt; 0) { return _(query.children).map(countQuery).sum(); } else { return 1; } } -&gt; KILLED</div><div id="mutation_32_845_1012" class="killed">resources/xr/io/counter.js:29:9 Removed if (query.children &amp;&amp; query.children.length &gt; 0) { return _(query.children).map(countQuery).sum(); } else { return 1; } -&gt; KILLED</div><div id="mutation_33_863_867" class="killed">resources/xr/io/counter.js:29:27 Replaced  &amp;&amp;  with || -&gt; KILLED</div><div id="mutation_34_888_891" class="killed">resources/xr/io/counter.js:29:52 Replaced  &gt;  with &gt;= -&gt; KILLED</div><div id="mutation_35_888_891" class="killed">resources/xr/io/counter.js:29:52 Replaced  &gt;  with &lt;= -&gt; KILLED</div><div id="mutation_36_891_892" class="survived">resources/xr/io/counter.js:29:55 Replaced 0 with 1 -&gt; SURVIVED</div><div id="mutation_37_908_955" class="killed">resources/xr/io/counter.js:30:13 Removed return _(query.children).map(countQuery).sum(); -&gt; KILLED</div><div id="mutation_38_915_954" class="killed">resources/xr/io/counter.js:30:20 Replaced _(query.children).map(countQuery).sum() with _(query.children).map(countQuery) -&gt; KILLED</div><div id="mutation_39_937_947" class="killed">resources/xr/io/counter.js:30:42 Replaced countQuery with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_40_915_948" class="killed">resources/xr/io/counter.js:30:20 Replaced _(query.children).map(countQuery) with countQuery -&gt; KILLED</div><div id="mutation_41_915_948" class="killed">resources/xr/io/counter.js:30:20 Replaced _(query.children).map(countQuery) with _(query.children) -&gt; KILLED</div><div id="mutation_42_917_931" class="killed">resources/xr/io/counter.js:30:22 Replaced query.children with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_43_915_932" class="killed">resources/xr/io/counter.js:30:20 Replaced _(query.children) with query.children -&gt; KILLED</div><div id="mutation_44_993_1002" class="killed">resources/xr/io/counter.js:33:13 Removed return 1; -&gt; KILLED</div><div id="mutation_45_1000_1001" class="killed">resources/xr/io/counter.js:33:20 Replaced 1 with 2 -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

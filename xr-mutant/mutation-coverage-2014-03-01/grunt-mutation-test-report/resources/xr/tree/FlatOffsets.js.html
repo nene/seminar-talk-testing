@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":17,"ignored":2,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>17</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>2</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/index.html'">tree</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/FlatOffsets.js.html'">FlatOffsets.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li><span class="code killed mutation_6_15_629"><span class="code killed mutation_3_15_630">define(<span class="code killed mutation_5_22_628">function() {</span></span></span></li><li><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630"></li><li>    /**</span></span></span></li><li><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">     * Calculates left-side indent offsets for flattened nodes.</span></span></span></li><li><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">     *</span></span></span></li><li><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">     * @constructor</span></span></span></li><li><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">     * @param {Number} nodeCount Number of flat nodes</span></span></span></li><li><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">     * @param {Number} width Width of area (in pixels) within to place the nodes.</span></span></span></li><li><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">     */</span></span></span></li><li><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">    <span class="code killed mutation_7_283_374">function FlatOffsets(nodeCount, width) {</span></span></span></span></li><li><span class="code killed mutation_7_283_374"><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">        <span class="code killed mutation_10_332_368">this.step = width<span class="code killed mutation_11_349_352"> / </span>(nodeCount<span class="code killed mutation_12_362_365"> + </span><span class="code killed mutation_13_365_366">1</span>);</span></span></span></span></span></li><li><span class="code killed mutation_7_283_374"><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">    }</span></span></span></span></li><li><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">    <span class="code killed mutation_8_379_601">FlatOffsets.prototype = {</span></span></span></span></li><li><span class="code killed mutation_8_379_601"><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">        /**</span></span></span></span></li><li><span class="code killed mutation_8_379_601"><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">         * Returns offset for node at given index.</span></span></span></span></li><li><span class="code killed mutation_8_379_601"><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">         * @return {Number} In pixels</span></span></span></span></li><li><span class="code killed mutation_8_379_601"><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">         */</span></span></span></span></li><li><span class="code killed mutation_8_379_601"><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">        <span class="code killed mutation_14_526_594">get: function(i) {</span></span></span></span></span></li><li><span class="code killed mutation_14_526_594"><span class="code killed mutation_8_379_601"><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">            <span class="code killed mutation_15_557_584">return (i<span class="code killed mutation_17_566_569"> + </span><span class="code killed mutation_18_569_570">1</span><span class="code killed mutation_16_570_574">) * </span>this.step;</span></span></span></span></span></span></li><li><span class="code killed mutation_14_526_594"><span class="code killed mutation_8_379_601"><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">        }</span></span></span></span></span></li><li><span class="code killed mutation_8_379_601"><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">    };</span></span></span></span></li><li><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630"></li><li>    <span class="code killed mutation_9_607_626">return FlatOffsets;</span></span></span></span></li><li><span class="code killed mutation_6_15_629"><span class="code killed mutation_5_22_628"><span class="code killed mutation_3_15_630">}</span>)</span>;</span></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_3_15_630" class="killed">resources/xr/tree/FlatOffsets.js:3:1 Removed define(function() { /** * Calculates left-side indent offsets for flattened nodes. * * @constructor * @param {Number} nodeCount Number of flat nodes * @param {Number} width Width of area (in pixels) within to place the nodes. */ function FlatOffsets(nodeCount, width) { this.step = width / (nodeCount + 1); } FlatOffsets.prototype = { /** * Returns offset for node at given index. * @return {Number} In pixels */ get: function(i) { return (i + 1) * this.step; } }; return FlatOffsets; }); -&gt; KILLED</div><div id="mutation_6_15_629" class="killed">resources/xr/tree/FlatOffsets.js:3:1 Replaced define(function() { /** * Calculates left-side indent offsets for flattened nodes. * * @constructor * @param {Number} nodeCount Number of flat nodes * @param {Number} width Width of area (in pixels) within to place the nodes. */ function FlatOffsets(nodeCount, width) { this.step = width / (nodeCount + 1); } FlatOffsets.prototype = { /** * Returns offset for node at given index. * @return {Number} In pixels */ get: function(i) { return (i + 1) * this.step; } }; return FlatOffsets; }) with function() { /** * Calculates left-side indent offsets for flattened nodes. * * @constructor * @param {Number} nodeCount Number of flat nodes * @param {Number} width Width of area (in pixels) within to place the nodes. */ function FlatOffsets(nodeCount, width) { this.step = width / (nodeCount + 1); } FlatOffsets.prototype = { /** * Returns offset for node at given index. * @return {Number} In pixels */ get: function(i) { return (i + 1) * this.step; } }; return FlatOffsets; } -&gt; KILLED</div><div id="mutation_5_22_628" class="killed">resources/xr/tree/FlatOffsets.js:3:8 Replaced function() { /** * Calculates left-side indent offsets for flattened nodes. * * @constructor * @param {Number} nodeCount Number of flat nodes * @param {Number} width Width of area (in pixels) within to place the nodes. */ function FlatOffsets(nodeCount, width) { this.step = width / (nodeCount + 1); } FlatOffsets.prototype = { /** * Returns offset for node at given index. * @return {Number} In pixels */ get: function(i) { return (i + 1) * this.step; } }; return FlatOffsets; } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_7_283_374" class="killed">resources/xr/tree/FlatOffsets.js:12:5 Removed function FlatOffsets(nodeCount, width) { this.step = width / (nodeCount + 1); } -&gt; KILLED</div><div id="mutation_13_365_366" class="killed">resources/xr/tree/FlatOffsets.js:13:42 Replaced 1 with 2 -&gt; KILLED</div><div id="mutation_12_362_365" class="killed">resources/xr/tree/FlatOffsets.js:13:39 Replaced  +  with - -&gt; KILLED</div><div id="mutation_10_332_368" class="killed">resources/xr/tree/FlatOffsets.js:13:9 Removed this.step = width / (nodeCount + 1); -&gt; KILLED</div><div id="mutation_11_349_352" class="killed">resources/xr/tree/FlatOffsets.js:13:26 Replaced  /  with * -&gt; KILLED</div><div id="mutation_8_379_601" class="killed">resources/xr/tree/FlatOffsets.js:15:5 Removed FlatOffsets.prototype = { /** * Returns offset for node at given index. * @return {Number} In pixels */ get: function(i) { return (i + 1) * this.step; } }; -&gt; KILLED</div><div id="mutation_14_526_594" class="killed">resources/xr/tree/FlatOffsets.js:20:9 Removed get: function(i) { return (i + 1) * this.step; } -&gt; KILLED</div><div id="mutation_15_557_584" class="killed">resources/xr/tree/FlatOffsets.js:21:13 Removed return (i + 1) * this.step; -&gt; KILLED</div><div id="mutation_16_570_574" class="killed">resources/xr/tree/FlatOffsets.js:21:26 Replaced ) *  with / -&gt; KILLED</div><div id="mutation_17_566_569" class="killed">resources/xr/tree/FlatOffsets.js:21:22 Replaced  +  with - -&gt; KILLED</div><div id="mutation_18_569_570" class="killed">resources/xr/tree/FlatOffsets.js:21:25 Replaced 1 with 2 -&gt; KILLED</div><div id="mutation_9_607_626" class="killed">resources/xr/tree/FlatOffsets.js:25:5 Removed return FlatOffsets; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

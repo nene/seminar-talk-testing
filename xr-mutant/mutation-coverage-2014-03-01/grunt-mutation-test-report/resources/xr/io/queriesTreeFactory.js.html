@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":30,"ignored":13,"untested":0,"survived":13}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>30</strong> of which <strong>13</strong> survived,&nbsp;
+        <strong>13</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>56.7%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/io/index.html'">io</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/io/queriesTreeFactory.js.html'">queriesTreeFactory.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var treeFactory = require(<span class="code killed mutation_12_72_93">"xr/tree/treeFactory"</span>);</li><li>    var QuerySorter = require(<span class="code killed mutation_14_126_145">"xr/io/QuerySorter"</span>);</li><li>    var TreeBuilder = require(<span class="code killed mutation_16_178_197">"xr/io/TreeBuilder"</span>);</li><li>    var TreeFlattener = require(<span class="code killed mutation_18_232_253">"xr/io/TreeFlattener"</span>);</li><li></li><li>    <span class="code survived mutation_11_261_1025">return {</span></li><li><span class="code survived mutation_11_261_1025">        /**</span></li><li><span class="code survived mutation_11_261_1025">         * Builds IO Queries TreeView.</span></li><li><span class="code survived mutation_11_261_1025">         *</span></li><li><span class="code survived mutation_11_261_1025">         * @param {Object} cfg</span></li><li><span class="code survived mutation_11_261_1025">         *   @param {jQuery} cfg.container Container element.</span></li><li><span class="code survived mutation_11_261_1025">         *   @param {Object[]} cfg.requests The requests data.</span></li><li><span class="code survived mutation_11_261_1025">         *   @param {Object} cfg.treeState Expanded/collapsed state of tree nodes.</span></li><li><span class="code survived mutation_11_261_1025">         *   @param {Object} cfg.sortConfig Sorting configuration.</span></li><li><span class="code survived mutation_11_261_1025">         */</span></li><li><span class="code survived mutation_11_261_1025">        <span class="code survived mutation_20_658_1018">create: function(cfg) {</span></span></li><li><span class="code survived mutation_20_658_1018"><span class="code survived mutation_11_261_1025">            <span class="code survived mutation_21_694_1008">return <span class="code survived mutation_24_701_1007">treeFactory.create(<span class="code survived mutation_22_720_723">cfg</span>, <span class="code survived mutation_23_725_1006">{</span></span></span></span></span></li><li><span class="code survived mutation_24_701_1007"><span class="code survived mutation_23_725_1006"><span class="code survived mutation_21_694_1008"><span class="code survived mutation_20_658_1018"><span class="code survived mutation_11_261_1025">                <span class="code survived mutation_25_743_900">treeBuilder: new TreeBuilder({</span></span></span></span></span></span></li><li><span class="code survived mutation_25_743_900"><span class="code survived mutation_24_701_1007"><span class="code survived mutation_23_725_1006"><span class="code survived mutation_21_694_1008"><span class="code survived mutation_20_658_1018"><span class="code survived mutation_11_261_1025">                    <span class="code survived mutation_28_794_843">stackTracePosition: <span class="code survived mutation_30_814_821">"query"</span>,</span></span></span></span></span></span></span></li><li><span class="code survived mutation_28_794_843"><span class="code survived mutation_25_743_900"><span class="code survived mutation_24_701_1007"><span class="code survived mutation_23_725_1006"><span class="code survived mutation_21_694_1008"><span class="code survived mutation_20_658_1018"><span class="code survived mutation_11_261_1025">                    </span><span class="code survived mutation_29_843_863">showAllColumns: <span class="code survived mutation_31_859_863">true</span></span></span></span></span></span></span></span></li><li><span class="code survived mutation_25_743_900"><span class="code survived mutation_24_701_1007"><span class="code survived mutation_23_725_1006"><span class="code survived mutation_21_694_1008"><span class="code survived mutation_20_658_1018"><span class="code survived mutation_11_261_1025">                }),</span></span></span></span></span></span></li><li><span class="code survived mutation_25_743_900"><span class="code survived mutation_24_701_1007"><span class="code survived mutation_23_725_1006"><span class="code survived mutation_21_694_1008"><span class="code survived mutation_20_658_1018"><span class="code survived mutation_11_261_1025">                </span><span class="code survived mutation_26_900_948">flattener: new TreeFlattener(),</span></span></span></span></span></span></li><li><span class="code survived mutation_26_900_948"><span class="code survived mutation_24_701_1007"><span class="code survived mutation_23_725_1006"><span class="code survived mutation_21_694_1008"><span class="code survived mutation_20_658_1018"><span class="code survived mutation_11_261_1025">                </span><span class="code survived mutation_27_948_992">querySorter: new QuerySorter(cfg.sortConfig)</span></span></span></span></span></span></li><li><span class="code survived mutation_24_701_1007"><span class="code survived mutation_23_725_1006"><span class="code survived mutation_21_694_1008"><span class="code survived mutation_20_658_1018"><span class="code survived mutation_11_261_1025">            }</span>)</span>;</span></span></span></li><li><span class="code survived mutation_20_658_1018"><span class="code survived mutation_11_261_1025">        }</span></span></li><li><span class="code survived mutation_11_261_1025">    };</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_12_72_93" class="killed">resources/xr/io/queriesTreeFactory.js:4:31 Replaced &quot;xr/tree/treeFactory&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_14_126_145" class="killed">resources/xr/io/queriesTreeFactory.js:5:31 Replaced &quot;xr/io/QuerySorter&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_16_178_197" class="killed">resources/xr/io/queriesTreeFactory.js:6:31 Replaced &quot;xr/io/TreeBuilder&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_18_232_253" class="killed">resources/xr/io/queriesTreeFactory.js:7:33 Replaced &quot;xr/io/TreeFlattener&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_11_261_1025" class="survived">resources/xr/io/queriesTreeFactory.js:9:5 Removed return { /** * Builds IO Queries TreeView. * * @param {Object} cfg * @param {jQuery} cfg.container Container element. * @param {Object[]} cfg.requests The requests data. * @param {Object} cfg.treeState Expanded/collapsed state of tree nodes. * @param {Object} cfg.sortConfig Sorting configuration. */ create: function(cfg) { return treeFactory.create(cfg, { treeBuilder: new TreeBuilder({ stackTracePosition: &quot;query&quot;, showAllColumns: true }), flattener: new TreeFlattener(), querySorter: new QuerySorter(cfg.sortConfig) }); } }; -&gt; SURVIVED</div><div id="mutation_20_658_1018" class="survived">resources/xr/io/queriesTreeFactory.js:19:9 Removed create: function(cfg) { return treeFactory.create(cfg, { treeBuilder: new TreeBuilder({ stackTracePosition: &quot;query&quot;, showAllColumns: true }), flattener: new TreeFlattener(), querySorter: new QuerySorter(cfg.sortConfig) }); } -&gt; SURVIVED</div><div id="mutation_21_694_1008" class="survived">resources/xr/io/queriesTreeFactory.js:20:13 Removed return treeFactory.create(cfg, { treeBuilder: new TreeBuilder({ stackTracePosition: &quot;query&quot;, showAllColumns: true }), flattener: new TreeFlattener(), querySorter: new QuerySorter(cfg.sortConfig) }); -&gt; SURVIVED</div><div id="mutation_22_720_723" class="survived">resources/xr/io/queriesTreeFactory.js:20:39 Replaced cfg with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_23_725_1006" class="survived">resources/xr/io/queriesTreeFactory.js:20:44 Replaced { treeBuilder: new TreeBuilder({ stackTracePosition: &quot;query&quot;, showAllColumns: true }), flattener: new TreeFlattener(), querySorter: new QuerySorter(cfg.sortConfig) } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_24_701_1007" class="survived">resources/xr/io/queriesTreeFactory.js:20:20 Replaced treeFactory.create(cfg, { treeBuilder: new TreeBuilder({ stackTracePosition: &quot;query&quot;, showAllColumns: true }), flattener: new TreeFlattener(), querySorter: new QuerySorter(cfg.sortConfig) }) with treeFactory -&gt; SURVIVED</div><div id="mutation_25_743_900" class="survived">resources/xr/io/queriesTreeFactory.js:21:17 Removed treeBuilder: new TreeBuilder({ stackTracePosition: &quot;query&quot;, showAllColumns: true }),  -&gt; SURVIVED</div><div id="mutation_28_794_843" class="survived">resources/xr/io/queriesTreeFactory.js:22:21 Removed stackTracePosition: &quot;query&quot;,  -&gt; SURVIVED</div><div id="mutation_30_814_821" class="survived">resources/xr/io/queriesTreeFactory.js:22:41 Replaced &quot;query&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_29_843_863" class="survived">resources/xr/io/queriesTreeFactory.js:23:21 Removed showAllColumns: true -&gt; SURVIVED</div><div id="mutation_31_859_863" class="survived">resources/xr/io/queriesTreeFactory.js:23:37 Replaced true with false -&gt; SURVIVED</div><div id="mutation_26_900_948" class="survived">resources/xr/io/queriesTreeFactory.js:25:17 Removed flattener: new TreeFlattener(),  -&gt; SURVIVED</div><div id="mutation_27_948_992" class="survived">resources/xr/io/queriesTreeFactory.js:26:17 Removed querySorter: new QuerySorter(cfg.sortConfig) -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

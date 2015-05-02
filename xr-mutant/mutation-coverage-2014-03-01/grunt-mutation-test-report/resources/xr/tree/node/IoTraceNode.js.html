@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":48,"ignored":11,"untested":0,"survived":2}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>48</strong> of which <strong>2</strong> survived,&nbsp;
+        <strong>11</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>95.8%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/index.html'">tree</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/node/index.html'">node</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/node/IoTraceNode.js.html'">IoTraceNode.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_13_62_68">"xr/_"</span>);</li><li>    var TreeNode = require(<span class="code killed mutation_15_98_121">"xr/tree/node/TreeNode"</span>);</li><li>    var TraceName = require(<span class="code killed mutation_17_152_171">"xr/tree/TraceName"</span>);</li><li></li><li>    <span class="code killed mutation_10_179_449">function IoTraceNode(stackEl, children) {</span></li><li><span class="code killed mutation_10_179_449">        <span class="code killed mutation_27_229_258"><span class="code killed mutation_19_229_259">TreeNode.call(<span class="code killed mutation_25_243_247">this</span>, <span class="code killed mutation_26_249_257">children</span>)</span>;</span></span></li><li><span class="code killed mutation_10_179_449"></li><li>        <span class="code killed mutation_20_269_294">this.type = <span class="code killed mutation_28_281_293">"stackTrace"</span>;</span></span></li><li><span class="code killed mutation_10_179_449"></li><li>        <span class="code killed mutation_21_304_322">this.el = stackEl;</span></span></li><li><span class="code killed mutation_10_179_449">        <span class="code killed mutation_22_331_369">this.name = <span class="code killed mutation_31_343_368"><span class="code killed mutation_30_343_368">TraceName.fromIo(<span class="code killed mutation_29_360_367">stackEl</span>)</span></span>;</span></span></li><li><span class="code killed mutation_10_179_449"></li><li>        <span class="code killed mutation_23_379_412">this.title = <span class="code killed mutation_32_392_411">this.name.getFull()</span>;</span></span></li><li><span class="code killed mutation_10_179_449"></li><li>        <span class="code killed mutation_24_422_443">this.id = stackEl.id;</span></span></li><li><span class="code killed mutation_10_179_449">    }</span></li><li>    <span class="code killed mutation_49_454_468"><span class="code killed mutation_35_454_968"><span class="code killed mutation_11_454_969">_(<span class="code killed mutation_48_456_467">IoTraceNode</span>)</span>.extendClass(<span class="code killed mutation_33_481_489">TreeNode</span>, <span class="code killed mutation_34_491_967">{</span></span></span></li><li><span class="code killed mutation_35_454_968"><span class="code killed mutation_34_491_967"><span class="code killed mutation_11_454_969">        <span class="code survived mutation_36_501_555">template: <span class="code survived mutation_39_511_544">"templates/tree/IoTraceNode.html"</span>,</span></span></span></span></li><li><span class="code survived mutation_36_501_555"><span class="code killed mutation_35_454_968"><span class="code killed mutation_34_491_967"><span class="code killed mutation_11_454_969"></li><li>        </span><span class="code killed mutation_37_555_902">getTemplateData: function() {</span></span></span></span></li><li><span class="code killed mutation_37_555_902"><span class="code killed mutation_35_454_968"><span class="code killed mutation_34_491_967"><span class="code killed mutation_11_454_969">            <span class="code killed mutation_40_597_765">return {</span></span></span></span></span></li><li><span class="code killed mutation_40_597_765"><span class="code killed mutation_37_555_902"><span class="code killed mutation_35_454_968"><span class="code killed mutation_34_491_967"><span class="code killed mutation_11_454_969">                <span class="code killed mutation_41_622_673">summaryLine: <span class="code killed mutation_44_635_655">this.name.getShort()</span>,</span></span></span></span></span></span></li><li><span class="code killed mutation_41_622_673"><span class="code killed mutation_40_597_765"><span class="code killed mutation_37_555_902"><span class="code killed mutation_35_454_968"><span class="code killed mutation_34_491_967"><span class="code killed mutation_11_454_969">                </span><span class="code killed mutation_42_673_713">count: <span class="code killed mutation_45_680_695">this.getCount()</span>,</span></span></span></span></span></span></li><li><span class="code killed mutation_42_673_713"><span class="code killed mutation_40_597_765"><span class="code killed mutation_37_555_902"><span class="code killed mutation_35_454_968"><span class="code killed mutation_34_491_967"><span class="code killed mutation_11_454_969">                </span><span class="code killed mutation_43_713_750">duration: <span class="code killed mutation_46_723_750">this.getFormattedDuration()</span></span></span></span></span></span></span></li><li><span class="code killed mutation_40_597_765"><span class="code killed mutation_37_555_902"><span class="code killed mutation_35_454_968"><span class="code killed mutation_34_491_967"><span class="code killed mutation_11_454_969">            };</span></span></span></span></span></li><li><span class="code killed mutation_37_555_902"><span class="code killed mutation_35_454_968"><span class="code killed mutation_34_491_967"><span class="code killed mutation_11_454_969">        },</span></span></span></span></li><li><span class="code killed mutation_37_555_902"><span class="code killed mutation_35_454_968"><span class="code killed mutation_34_491_967"><span class="code killed mutation_11_454_969"></li><li>        /**</span></span></span></span></li><li><span class="code killed mutation_37_555_902"><span class="code killed mutation_35_454_968"><span class="code killed mutation_34_491_967"><span class="code killed mutation_11_454_969">         * Provides access to the internal raw stackTrace data.</span></span></span></span></li><li><span class="code killed mutation_37_555_902"><span class="code killed mutation_35_454_968"><span class="code killed mutation_34_491_967"><span class="code killed mutation_11_454_969">         * @return {Object}</span></span></span></span></li><li><span class="code killed mutation_37_555_902"><span class="code killed mutation_35_454_968"><span class="code killed mutation_34_491_967"><span class="code killed mutation_11_454_969">         */</span></span></span></span></li><li><span class="code killed mutation_37_555_902"><span class="code killed mutation_35_454_968"><span class="code killed mutation_34_491_967"><span class="code killed mutation_11_454_969">        </span><span class="code killed mutation_38_902_961">getData: function() {</span></span></span></span></li><li><span class="code killed mutation_38_902_961"><span class="code killed mutation_35_454_968"><span class="code killed mutation_34_491_967"><span class="code killed mutation_11_454_969">            <span class="code killed mutation_47_936_951">return this.el;</span></span></span></span></span></li><li><span class="code killed mutation_38_902_961"><span class="code killed mutation_35_454_968"><span class="code killed mutation_34_491_967"><span class="code killed mutation_11_454_969">        }</span></span></span></span></li><li><span class="code killed mutation_35_454_968"><span class="code killed mutation_34_491_967"><span class="code killed mutation_11_454_969">    }</span>)</span>;</span></li><li></li><li>    <span class="code killed mutation_12_975_994">return IoTraceNode;</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_13_62_68" class="killed">resources/xr/tree/node/IoTraceNode.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_98_121" class="killed">resources/xr/tree/node/IoTraceNode.js:5:28 Replaced &quot;xr/tree/node/TreeNode&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_152_171" class="killed">resources/xr/tree/node/IoTraceNode.js:6:29 Replaced &quot;xr/tree/TraceName&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_10_179_449" class="killed">resources/xr/tree/node/IoTraceNode.js:8:5 Removed function IoTraceNode(stackEl, children) { TreeNode.call(this, children); this.type = &quot;stackTrace&quot;; this.el = stackEl; this.name = TraceName.fromIo(stackEl); this.title = this.name.getFull(); this.id = stackEl.id; } -&gt; KILLED</div><div id="mutation_19_229_259" class="killed">resources/xr/tree/node/IoTraceNode.js:9:9 Removed TreeNode.call(this, children); -&gt; KILLED</div><div id="mutation_27_229_258" class="killed">resources/xr/tree/node/IoTraceNode.js:9:9 Replaced TreeNode.call(this, children) with TreeNode -&gt; KILLED</div><div id="mutation_26_249_257" class="killed">resources/xr/tree/node/IoTraceNode.js:9:29 Replaced children with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_25_243_247" class="killed">resources/xr/tree/node/IoTraceNode.js:9:23 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_28_281_293" class="killed">resources/xr/tree/node/IoTraceNode.js:11:21 Replaced &quot;stackTrace&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_269_294" class="killed">resources/xr/tree/node/IoTraceNode.js:11:9 Removed this.type = &quot;stackTrace&quot;; -&gt; KILLED</div><div id="mutation_21_304_322" class="killed">resources/xr/tree/node/IoTraceNode.js:13:9 Removed this.el = stackEl; -&gt; KILLED</div><div id="mutation_31_343_368" class="killed">resources/xr/tree/node/IoTraceNode.js:14:21 Replaced TraceName.fromIo(stackEl) with TraceName -&gt; KILLED</div><div id="mutation_30_343_368" class="killed">resources/xr/tree/node/IoTraceNode.js:14:21 Replaced TraceName.fromIo(stackEl) with stackEl -&gt; KILLED</div><div id="mutation_22_331_369" class="killed">resources/xr/tree/node/IoTraceNode.js:14:9 Removed this.name = TraceName.fromIo(stackEl); -&gt; KILLED</div><div id="mutation_29_360_367" class="killed">resources/xr/tree/node/IoTraceNode.js:14:38 Replaced stackEl with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_32_392_411" class="killed">resources/xr/tree/node/IoTraceNode.js:16:22 Replaced this.name.getFull() with this.name -&gt; KILLED</div><div id="mutation_23_379_412" class="killed">resources/xr/tree/node/IoTraceNode.js:16:9 Removed this.title = this.name.getFull(); -&gt; KILLED</div><div id="mutation_24_422_443" class="killed">resources/xr/tree/node/IoTraceNode.js:18:9 Removed this.id = stackEl.id; -&gt; KILLED</div><div id="mutation_11_454_969" class="killed">resources/xr/tree/node/IoTraceNode.js:20:5 Removed _(IoTraceNode).extendClass(TreeNode, { template: &quot;templates/tree/IoTraceNode.html&quot;, getTemplateData: function() { return { summaryLine: this.name.getShort(), count: this.getCount(), duration: this.getFormattedDuration() }; }, /** * Provides access to the internal raw stackTrace data. * @return {Object} */ getData: function() { return this.el; } }); -&gt; KILLED</div><div id="mutation_49_454_468" class="killed">resources/xr/tree/node/IoTraceNode.js:20:5 Replaced _(IoTraceNode) with IoTraceNode -&gt; KILLED</div><div id="mutation_33_481_489" class="killed">resources/xr/tree/node/IoTraceNode.js:20:32 Replaced TreeNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_34_491_967" class="killed">resources/xr/tree/node/IoTraceNode.js:20:42 Replaced { template: &quot;templates/tree/IoTraceNode.html&quot;, getTemplateData: function() { return { summaryLine: this.name.getShort(), count: this.getCount(), duration: this.getFormattedDuration() }; }, /** * Provides access to the internal raw stackTrace data. * @return {Object} */ getData: function() { return this.el; } } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_35_454_968" class="killed">resources/xr/tree/node/IoTraceNode.js:20:5 Replaced _(IoTraceNode).extendClass(TreeNode, { template: &quot;templates/tree/IoTraceNode.html&quot;, getTemplateData: function() { return { summaryLine: this.name.getShort(), count: this.getCount(), duration: this.getFormattedDuration() }; }, /** * Provides access to the internal raw stackTrace data. * @return {Object} */ getData: function() { return this.el; } }) with _(IoTraceNode) -&gt; KILLED</div><div id="mutation_48_456_467" class="killed">resources/xr/tree/node/IoTraceNode.js:20:7 Replaced IoTraceNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_39_511_544" class="survived">resources/xr/tree/node/IoTraceNode.js:21:19 Replaced &quot;templates/tree/IoTraceNode.html&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_36_501_555" class="survived">resources/xr/tree/node/IoTraceNode.js:21:9 Removed template: &quot;templates/tree/IoTraceNode.html&quot;,  -&gt; SURVIVED</div><div id="mutation_37_555_902" class="killed">resources/xr/tree/node/IoTraceNode.js:23:9 Removed getTemplateData: function() { return { summaryLine: this.name.getShort(), count: this.getCount(), duration: this.getFormattedDuration() }; }, /** * Provides access to the internal raw stackTrace data. * @return {Object} */  -&gt; KILLED</div><div id="mutation_40_597_765" class="killed">resources/xr/tree/node/IoTraceNode.js:24:13 Removed return { summaryLine: this.name.getShort(), count: this.getCount(), duration: this.getFormattedDuration() }; -&gt; KILLED</div><div id="mutation_41_622_673" class="killed">resources/xr/tree/node/IoTraceNode.js:25:17 Removed summaryLine: this.name.getShort(),  -&gt; KILLED</div><div id="mutation_44_635_655" class="killed">resources/xr/tree/node/IoTraceNode.js:25:30 Replaced this.name.getShort() with this.name -&gt; KILLED</div><div id="mutation_42_673_713" class="killed">resources/xr/tree/node/IoTraceNode.js:26:17 Removed count: this.getCount(),  -&gt; KILLED</div><div id="mutation_45_680_695" class="killed">resources/xr/tree/node/IoTraceNode.js:26:24 Replaced this.getCount() with this -&gt; KILLED</div><div id="mutation_46_723_750" class="killed">resources/xr/tree/node/IoTraceNode.js:27:27 Replaced this.getFormattedDuration() with this -&gt; KILLED</div><div id="mutation_43_713_750" class="killed">resources/xr/tree/node/IoTraceNode.js:27:17 Removed duration: this.getFormattedDuration() -&gt; KILLED</div><div id="mutation_38_902_961" class="killed">resources/xr/tree/node/IoTraceNode.js:35:9 Removed getData: function() { return this.el; } -&gt; KILLED</div><div id="mutation_47_936_951" class="killed">resources/xr/tree/node/IoTraceNode.js:36:13 Removed return this.el; -&gt; KILLED</div><div id="mutation_12_975_994" class="killed">resources/xr/tree/node/IoTraceNode.js:40:5 Removed return IoTraceNode; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

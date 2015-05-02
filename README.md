@@ -61,4 +61,6 @@ code itself might be is unneccessary, like:
 - default parameter values that could be left out.
 - overly defensive coding.
 
-Our mutation success rate is 55.9%
+Our mutation success rate is 52.3%
+
+It does take quite a bit of time: 1h 30min to test our whole code base.

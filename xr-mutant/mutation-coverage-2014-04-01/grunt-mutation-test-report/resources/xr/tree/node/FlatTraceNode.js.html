@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":38,"ignored":9,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>38</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>9</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/index.html'">tree</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/node/index.html'">node</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/node/FlatTraceNode.js.html'">FlatTraceNode.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_12_62_68">"xr/_"</span>);</li><li>    var TreeNode = require(<span class="code killed mutation_14_98_121">"xr/tree/node/TreeNode"</span>);</li><li></li><li>    /**</li><li>     * A flattened stack trace node inside FlatGroupNode.</li><li>     *</li><li>     * @param {Object} cfg Config options:</li><li>     * @param {Number} cfg.id</li><li>     * @param {TraceName} cfg.name</li><li>     * @param {Number} cfg.leftOffset Positioning offset in pixels.</li><li>     * @param {TreeNode[]} [children] Optional child nodes,</li><li>     * supported to satisfy superclass behavior.</li><li>     */</li><li>    <span class="code killed mutation_9_495_642">function FlatTraceNode(cfg, children) {</span></li><li><span class="code killed mutation_9_495_642">        <span class="code killed mutation_21_543_572"><span class="code killed mutation_16_543_573">TreeNode.call(<span class="code killed mutation_19_557_561">this</span>, <span class="code killed mutation_20_563_571">children</span>)</span>;</span></span></li><li><span class="code killed mutation_9_495_642">        <span class="code killed mutation_26_582_589"><span class="code killed mutation_24_582_601"><span class="code killed mutation_23_582_601"><span class="code killed mutation_17_582_602">_(<span class="code killed mutation_25_584_588">this</span>)</span>.assign(<span class="code killed mutation_22_597_600">cfg</span>)</span></span>;</span></span></li><li><span class="code killed mutation_9_495_642"></li><li>        <span class="code killed mutation_18_612_636">this.type = <span class="code killed mutation_27_624_635">"flatTrace"</span>;</span></span></li><li><span class="code killed mutation_9_495_642">    }</span></li><li></li><li>    <span class="code killed mutation_39_648_664"><span class="code killed mutation_30_648_918"><span class="code killed mutation_10_648_919">_(<span class="code killed mutation_38_650_663">FlatTraceNode</span>)</span>.extendClass(<span class="code killed mutation_28_677_685">TreeNode</span>, <span class="code killed mutation_29_687_917">{</span></span></span></li><li><span class="code killed mutation_30_648_918"><span class="code killed mutation_29_687_917"><span class="code killed mutation_10_648_919">        <span class="code killed mutation_31_697_911">getTemplateData: function() {</span></span></span></span></li><li><span class="code killed mutation_31_697_911"><span class="code killed mutation_30_648_918"><span class="code killed mutation_29_687_917"><span class="code killed mutation_10_648_919">            <span class="code killed mutation_32_739_901">return {</span></span></span></span></span></li><li><span class="code killed mutation_32_739_901"><span class="code killed mutation_31_697_911"><span class="code killed mutation_30_648_918"><span class="code killed mutation_29_687_917"><span class="code killed mutation_10_648_919">                <span class="code killed mutation_33_764_815">summaryLine: <span class="code killed mutation_36_777_797">this.name.getShort()</span>,</span></span></span></span></span></span></li><li><span class="code killed mutation_33_764_815"><span class="code killed mutation_32_739_901"><span class="code killed mutation_31_697_911"><span class="code killed mutation_30_648_918"><span class="code killed mutation_29_687_917"><span class="code killed mutation_10_648_919">                </span><span class="code killed mutation_34_815_859">title: <span class="code killed mutation_37_822_841">this.name.getFull()</span>,</span></span></span></span></span></span></li><li><span class="code killed mutation_34_815_859"><span class="code killed mutation_32_739_901"><span class="code killed mutation_31_697_911"><span class="code killed mutation_30_648_918"><span class="code killed mutation_29_687_917"><span class="code killed mutation_10_648_919">                </span><span class="code killed mutation_35_859_886">leftOffset: this.leftOffset</span></span></span></span></span></span></li><li><span class="code killed mutation_32_739_901"><span class="code killed mutation_31_697_911"><span class="code killed mutation_30_648_918"><span class="code killed mutation_29_687_917"><span class="code killed mutation_10_648_919">            };</span></span></span></span></span></li><li><span class="code killed mutation_31_697_911"><span class="code killed mutation_30_648_918"><span class="code killed mutation_29_687_917"><span class="code killed mutation_10_648_919">        }</span></span></span></span></li><li><span class="code killed mutation_30_648_918"><span class="code killed mutation_29_687_917"><span class="code killed mutation_10_648_919">    }</span>)</span>;</span></li><li></li><li>    <span class="code killed mutation_11_925_946">return FlatTraceNode;</span></li><li></li><li>});</li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_12_62_68" class="killed">resources/xr/tree/node/FlatTraceNode.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_14_98_121" class="killed">resources/xr/tree/node/FlatTraceNode.js:5:28 Replaced &quot;xr/tree/node/TreeNode&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_9_495_642" class="killed">resources/xr/tree/node/FlatTraceNode.js:17:5 Removed function FlatTraceNode(cfg, children) { TreeNode.call(this, children); _(this).assign(cfg); this.type = &quot;flatTrace&quot;; } -&gt; KILLED</div><div id="mutation_16_543_573" class="killed">resources/xr/tree/node/FlatTraceNode.js:18:9 Removed TreeNode.call(this, children); -&gt; KILLED</div><div id="mutation_19_557_561" class="killed">resources/xr/tree/node/FlatTraceNode.js:18:23 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_563_571" class="killed">resources/xr/tree/node/FlatTraceNode.js:18:29 Replaced children with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_21_543_572" class="killed">resources/xr/tree/node/FlatTraceNode.js:18:9 Replaced TreeNode.call(this, children) with TreeNode -&gt; KILLED</div><div id="mutation_24_582_601" class="killed">resources/xr/tree/node/FlatTraceNode.js:19:9 Replaced _(this).assign(cfg) with _(this) -&gt; KILLED</div><div id="mutation_26_582_589" class="killed">resources/xr/tree/node/FlatTraceNode.js:19:9 Replaced _(this) with this -&gt; KILLED</div><div id="mutation_25_584_588" class="killed">resources/xr/tree/node/FlatTraceNode.js:19:11 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_582_602" class="killed">resources/xr/tree/node/FlatTraceNode.js:19:9 Removed _(this).assign(cfg); -&gt; KILLED</div><div id="mutation_22_597_600" class="killed">resources/xr/tree/node/FlatTraceNode.js:19:24 Replaced cfg with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_23_582_601" class="killed">resources/xr/tree/node/FlatTraceNode.js:19:9 Replaced _(this).assign(cfg) with cfg -&gt; KILLED</div><div id="mutation_18_612_636" class="killed">resources/xr/tree/node/FlatTraceNode.js:21:9 Removed this.type = &quot;flatTrace&quot;; -&gt; KILLED</div><div id="mutation_27_624_635" class="killed">resources/xr/tree/node/FlatTraceNode.js:21:21 Replaced &quot;flatTrace&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_38_650_663" class="killed">resources/xr/tree/node/FlatTraceNode.js:24:7 Replaced FlatTraceNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_39_648_664" class="killed">resources/xr/tree/node/FlatTraceNode.js:24:5 Replaced _(FlatTraceNode) with FlatTraceNode -&gt; KILLED</div><div id="mutation_28_677_685" class="killed">resources/xr/tree/node/FlatTraceNode.js:24:34 Replaced TreeNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_29_687_917" class="killed">resources/xr/tree/node/FlatTraceNode.js:24:44 Replaced { getTemplateData: function() { return { summaryLine: this.name.getShort(), title: this.name.getFull(), leftOffset: this.leftOffset }; } } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_30_648_918" class="killed">resources/xr/tree/node/FlatTraceNode.js:24:5 Replaced _(FlatTraceNode).extendClass(TreeNode, { getTemplateData: function() { return { summaryLine: this.name.getShort(), title: this.name.getFull(), leftOffset: this.leftOffset }; } }) with _(FlatTraceNode) -&gt; KILLED</div><div id="mutation_10_648_919" class="killed">resources/xr/tree/node/FlatTraceNode.js:24:5 Removed _(FlatTraceNode).extendClass(TreeNode, { getTemplateData: function() { return { summaryLine: this.name.getShort(), title: this.name.getFull(), leftOffset: this.leftOffset }; } }); -&gt; KILLED</div><div id="mutation_31_697_911" class="killed">resources/xr/tree/node/FlatTraceNode.js:25:9 Removed getTemplateData: function() { return { summaryLine: this.name.getShort(), title: this.name.getFull(), leftOffset: this.leftOffset }; } -&gt; KILLED</div><div id="mutation_32_739_901" class="killed">resources/xr/tree/node/FlatTraceNode.js:26:13 Removed return { summaryLine: this.name.getShort(), title: this.name.getFull(), leftOffset: this.leftOffset }; -&gt; KILLED</div><div id="mutation_33_764_815" class="killed">resources/xr/tree/node/FlatTraceNode.js:27:17 Removed summaryLine: this.name.getShort(),  -&gt; KILLED</div><div id="mutation_36_777_797" class="killed">resources/xr/tree/node/FlatTraceNode.js:27:30 Replaced this.name.getShort() with this.name -&gt; KILLED</div><div id="mutation_34_815_859" class="killed">resources/xr/tree/node/FlatTraceNode.js:28:17 Removed title: this.name.getFull(),  -&gt; KILLED</div><div id="mutation_37_822_841" class="killed">resources/xr/tree/node/FlatTraceNode.js:28:24 Replaced this.name.getFull() with this.name -&gt; KILLED</div><div id="mutation_35_859_886" class="killed">resources/xr/tree/node/FlatTraceNode.js:29:17 Removed leftOffset: this.leftOffset -&gt; KILLED</div><div id="mutation_11_925_946" class="killed">resources/xr/tree/node/FlatTraceNode.js:34:5 Removed return FlatTraceNode; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

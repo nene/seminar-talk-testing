@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":71,"ignored":14,"untested":0,"survived":3}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>71</strong> of which <strong>3</strong> survived,&nbsp;
+        <strong>14</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>95.8%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/exceptions/index.html'">exceptions</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/exceptions/ExceptionsTreeBuilder.js.html'">ExceptionsTreeBuilder.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_13_62_68">"xr/_"</span>);</li><li>    var nodeFactory = require(<span class="code killed mutation_15_101_122">"xr/tree/nodeFactory"</span>);</li><li>    var groupRequests = require(<span class="code killed mutation_17_157_180">"xr/tree/groupRequests"</span>);</li><li></li><li>    /**</li><li>     * Builds non-hierarchial exceptions tree from filtered requests data.</li><li>     * Exception nodes will be located directly below request nodes with</li><li>     * no additional grouping (tree will group adjacent request nodes though).</li><li>     *</li><li>     * @constructor</li><li>     * @param {Object} deps Dependencies.</li><li>     *   @param {Object} deps.factory A factory for creating tree nodes.</li><li>     *   @param {Object} deps.groupRequests</li><li>     */</li><li>    function ExceptionsTreeBuilder(deps) {</li><li>        <span class="code killed mutation_26_664_671">_(<span class="code killed mutation_25_666_670">this</span>)</span>.inject(<span class="code killed mutation_20_679_683">deps</span>, <span class="code survived mutation_21_685_771">{</span></li><li><span class="code survived mutation_21_685_771">            <span class="code survived mutation_23_699_733">factory: nodeFactory,</span></span></li><li><span class="code survived mutation_23_699_733"><span class="code survived mutation_21_685_771">            </span><span class="code survived mutation_24_733_761">groupRequests: groupRequests</span></span></li><li><span class="code survived mutation_21_685_771">        }</span>);</li><li>    }</li><li></li><li>    <span class="code killed mutation_11_785_1722">ExceptionsTreeBuilder.prototype = {</span></li><li><span class="code killed mutation_11_785_1722">        /**</span></li><li><span class="code killed mutation_11_785_1722">         * Builds hierarchical tree.</span></li><li><span class="code killed mutation_11_785_1722">         * @param {Object[]} requests</span></li><li><span class="code killed mutation_11_785_1722">         * @return {RootNode} The full tree, starting with RootNode.</span></li><li><span class="code killed mutation_11_785_1722">         */</span></li><li><span class="code killed mutation_11_785_1722">        <span class="code killed mutation_27_997_1233">buildTree: function(requests) {</span></span></li><li><span class="code killed mutation_27_997_1233"><span class="code killed mutation_11_785_1722">            <span class="code killed mutation_30_1041_1114">var requestNodes = <span class="code killed mutation_37_1060_1071"><span class="code killed mutation_35_1060_1105"><span class="code killed mutation_32_1060_1113">_(<span class="code killed mutation_36_1062_1070">requests</span>)</span>.map(<span class="code killed mutation_33_1076_1098">this.createRequestNode</span>, <span class="code killed mutation_34_1100_1104">this</span>)</span>.value()</span>;</span></span></span></li><li><span class="code killed mutation_27_997_1233"><span class="code killed mutation_11_785_1722">            <span class="code killed mutation_31_1127_1212">return <span class="code killed mutation_40_1134_1211"><span class="code killed mutation_39_1134_1211">this.factory.root(<span class="code killed mutation_43_1152_1210"><span class="code killed mutation_38_1152_1210">this.groupRequests(<span class="code killed mutation_41_1171_1183">requestNodes</span>, <span class="code killed mutation_42_1185_1209">{<span class="code killed mutation_44_1186_1208">hideIgnoreButton: <span class="code killed mutation_45_1204_1208">true</span></span>}</span>)</span></span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_27_997_1233"><span class="code killed mutation_11_785_1722">        },</span></span></li><li><span class="code killed mutation_27_997_1233"><span class="code killed mutation_11_785_1722"></li><li>        </span><span class="code killed mutation_28_1233_1530">createRequestNode: function(request) {</span></span></li><li><span class="code killed mutation_28_1233_1530"><span class="code killed mutation_11_785_1722">            <span class="code killed mutation_46_1284_1509">return <span class="code killed mutation_50_1291_1508">this.factory.request(</span></span></span></span></li><li><span class="code killed mutation_50_1291_1508"><span class="code killed mutation_46_1284_1509"><span class="code killed mutation_28_1233_1530"><span class="code killed mutation_11_785_1722">                <span class="code killed mutation_47_1329_1336">request</span>,</span></span></span></span></li><li><span class="code killed mutation_50_1291_1508"><span class="code killed mutation_46_1284_1509"><span class="code killed mutation_28_1233_1530"><span class="code killed mutation_11_785_1722">                <span class="code killed mutation_53_1354_1399"><span class="code killed mutation_52_1354_1399"><span class="code killed mutation_48_1354_1399">this.createExceptionNodes(<span class="code killed mutation_51_1380_1398">request.exceptions</span>)</span></span></span>,</span></span></span></span></li><li><span class="code killed mutation_50_1291_1508"><span class="code killed mutation_46_1284_1509"><span class="code killed mutation_28_1233_1530"><span class="code killed mutation_11_785_1722">                <span class="code killed mutation_49_1417_1494">{<span class="code killed mutation_54_1418_1435">hideStats: <span class="code killed mutation_58_1429_1433">true</span>, </span><span class="code killed mutation_55_1435_1455">hideDuration: <span class="code killed mutation_59_1449_1453">true</span>, </span><span class="code killed mutation_56_1455_1479">hideIgnoreButton: <span class="code killed mutation_60_1473_1477">true</span>, </span><span class="code killed mutation_57_1479_1493">expanded: <span class="code killed mutation_61_1489_1493">true</span></span>}</span></span></span></span></span></li><li><span class="code killed mutation_50_1291_1508"><span class="code killed mutation_46_1284_1509"><span class="code killed mutation_28_1233_1530"><span class="code killed mutation_11_785_1722">            )</span>;</span></span></span></li><li><span class="code killed mutation_28_1233_1530"><span class="code killed mutation_11_785_1722">        },</span></span></li><li><span class="code killed mutation_28_1233_1530"><span class="code killed mutation_11_785_1722"></li><li>        </span><span class="code killed mutation_29_1530_1715">createExceptionNodes: function(exceptions) {</span></span></li><li><span class="code killed mutation_29_1530_1715"><span class="code killed mutation_11_785_1722">            <span class="code killed mutation_62_1587_1705">return <span class="code killed mutation_72_1594_1607"><span class="code killed mutation_66_1594_1696"><span class="code killed mutation_63_1594_1704">_(<span class="code killed mutation_71_1596_1606">exceptions</span>)</span>.map(<span class="code killed mutation_64_1612_1689">function(ex){</span></span></span></span></span></span></li><li><span class="code killed mutation_66_1594_1696"><span class="code killed mutation_64_1612_1689"><span class="code killed mutation_63_1594_1704"><span class="code killed mutation_62_1587_1705"><span class="code killed mutation_29_1530_1715"><span class="code killed mutation_11_785_1722">               <span class="code killed mutation_67_1641_1675">return <span class="code killed mutation_70_1648_1674"><span class="code killed mutation_69_1648_1674">this.factory.exception(<span class="code killed mutation_68_1671_1673">ex</span>)</span></span>;</span></span></span></span></span></span></span></li><li><span class="code killed mutation_66_1594_1696"><span class="code killed mutation_64_1612_1689"><span class="code killed mutation_63_1594_1704"><span class="code killed mutation_62_1587_1705"><span class="code killed mutation_29_1530_1715"><span class="code killed mutation_11_785_1722">            }</span>, <span class="code killed mutation_65_1691_1695">this</span>)</span>.value()</span>;</span></span></span></li><li><span class="code killed mutation_29_1530_1715"><span class="code killed mutation_11_785_1722">        }</span></span></li><li><span class="code killed mutation_11_785_1722">    };</span></li><li></li><li>    <span class="code killed mutation_12_1728_1757">return ExceptionsTreeBuilder;</span></li><li></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_13_62_68" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_101_122" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:5:31 Replaced &quot;xr/tree/nodeFactory&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_157_180" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:6:33 Replaced &quot;xr/tree/groupRequests&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_26_664_671" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:19:9 Replaced _(this) with this -&gt; KILLED</div><div id="mutation_20_679_683" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:19:24 Replaced deps with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_21_685_771" class="survived">resources/xr/exceptions/ExceptionsTreeBuilder.js:19:30 Replaced { factory: nodeFactory, groupRequests: groupRequests } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_25_666_670" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:19:11 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_23_699_733" class="survived">resources/xr/exceptions/ExceptionsTreeBuilder.js:20:13 Removed factory: nodeFactory,  -&gt; SURVIVED</div><div id="mutation_24_733_761" class="survived">resources/xr/exceptions/ExceptionsTreeBuilder.js:21:13 Removed groupRequests: groupRequests -&gt; SURVIVED</div><div id="mutation_11_785_1722" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:25:5 Removed ExceptionsTreeBuilder.prototype = { /** * Builds hierarchical tree. * @param {Object[]} requests * @return {RootNode} The full tree, starting with RootNode. */ buildTree: function(requests) { var requestNodes = _(requests).map(this.createRequestNode, this).value(); return this.factory.root(this.groupRequests(requestNodes, {hideIgnoreButton: true})); }, createRequestNode: function(request) { return this.factory.request( request, this.createExceptionNodes(request.exceptions), {hideStats: true, hideDuration: true, hideIgnoreButton: true, expanded: true} ); }, createExceptionNodes: function(exceptions) { return _(exceptions).map(function(ex){ return this.factory.exception(ex); }, this).value(); } }; -&gt; KILLED</div><div id="mutation_27_997_1233" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:31:9 Removed buildTree: function(requests) { var requestNodes = _(requests).map(this.createRequestNode, this).value(); return this.factory.root(this.groupRequests(requestNodes, {hideIgnoreButton: true})); },  -&gt; KILLED</div><div id="mutation_30_1041_1114" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:32:13 Removed var requestNodes = _(requests).map(this.createRequestNode, this).value(); -&gt; KILLED</div><div id="mutation_32_1060_1113" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:32:32 Replaced _(requests).map(this.createRequestNode, this).value() with _(requests).map(this.createRequestNode, this) -&gt; KILLED</div><div id="mutation_33_1076_1098" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:32:48 Replaced this.createRequestNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_34_1100_1104" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:32:72 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_35_1060_1105" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:32:32 Replaced _(requests).map(this.createRequestNode, this) with _(requests) -&gt; KILLED</div><div id="mutation_36_1062_1070" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:32:34 Replaced requests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_37_1060_1071" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:32:32 Replaced _(requests) with requests -&gt; KILLED</div><div id="mutation_44_1186_1208" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:33:72 Removed hideIgnoreButton: true -&gt; KILLED</div><div id="mutation_31_1127_1212" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:33:13 Removed return this.factory.root(this.groupRequests(requestNodes, {hideIgnoreButton: true})); -&gt; KILLED</div><div id="mutation_45_1204_1208" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:33:90 Replaced true with false -&gt; KILLED</div><div id="mutation_43_1152_1210" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:33:38 Replaced this.groupRequests(requestNodes, {hideIgnoreButton: true}) with this -&gt; KILLED</div><div id="mutation_38_1152_1210" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:33:38 Replaced this.groupRequests(requestNodes, {hideIgnoreButton: true}) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_39_1134_1211" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:33:20 Replaced this.factory.root(this.groupRequests(requestNodes, {hideIgnoreButton: true})) with this.groupRequests(requestNodes, {hideIgnoreButton: true}) -&gt; KILLED</div><div id="mutation_40_1134_1211" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:33:20 Replaced this.factory.root(this.groupRequests(requestNodes, {hideIgnoreButton: true})) with this.factory -&gt; KILLED</div><div id="mutation_41_1171_1183" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:33:57 Replaced requestNodes with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_42_1185_1209" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:33:71 Replaced {hideIgnoreButton: true} with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_28_1233_1530" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:36:9 Removed createRequestNode: function(request) { return this.factory.request( request, this.createExceptionNodes(request.exceptions), {hideStats: true, hideDuration: true, hideIgnoreButton: true, expanded: true} ); },  -&gt; KILLED</div><div id="mutation_46_1284_1509" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:37:13 Removed return this.factory.request( request, this.createExceptionNodes(request.exceptions), {hideStats: true, hideDuration: true, hideIgnoreButton: true, expanded: true} ); -&gt; KILLED</div><div id="mutation_50_1291_1508" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:37:20 Replaced this.factory.request( request, this.createExceptionNodes(request.exceptions), {hideStats: true, hideDuration: true, hideIgnoreButton: true, expanded: true} ) with this.factory -&gt; KILLED</div><div id="mutation_47_1329_1336" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:38:17 Replaced request with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_52_1354_1399" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:39:17 Replaced this.createExceptionNodes(request.exceptions) with request.exceptions -&gt; KILLED</div><div id="mutation_48_1354_1399" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:39:17 Replaced this.createExceptionNodes(request.exceptions) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_51_1380_1398" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:39:43 Replaced request.exceptions with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_53_1354_1399" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:39:17 Replaced this.createExceptionNodes(request.exceptions) with this -&gt; KILLED</div><div id="mutation_58_1429_1433" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:40:29 Replaced true with false -&gt; KILLED</div><div id="mutation_49_1417_1494" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:40:17 Replaced {hideStats: true, hideDuration: true, hideIgnoreButton: true, expanded: true} with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_54_1418_1435" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:40:18 Removed hideStats: true,  -&gt; KILLED</div><div id="mutation_55_1435_1455" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:40:35 Removed hideDuration: true,  -&gt; KILLED</div><div id="mutation_56_1455_1479" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:40:55 Removed hideIgnoreButton: true,  -&gt; KILLED</div><div id="mutation_57_1479_1493" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:40:79 Removed expanded: true -&gt; KILLED</div><div id="mutation_61_1489_1493" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:40:89 Replaced true with false -&gt; KILLED</div><div id="mutation_59_1449_1453" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:40:49 Replaced true with false -&gt; KILLED</div><div id="mutation_60_1473_1477" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:40:73 Replaced true with false -&gt; KILLED</div><div id="mutation_29_1530_1715" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:44:9 Removed createExceptionNodes: function(exceptions) { return _(exceptions).map(function(ex){ return this.factory.exception(ex); }, this).value(); } -&gt; KILLED</div><div id="mutation_72_1594_1607" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:45:20 Replaced _(exceptions) with exceptions -&gt; KILLED</div><div id="mutation_63_1594_1704" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:45:20 Replaced _(exceptions).map(function(ex){ return this.factory.exception(ex); }, this).value() with _(exceptions).map(function(ex){ return this.factory.exception(ex); }, this) -&gt; KILLED</div><div id="mutation_64_1612_1689" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:45:38 Replaced function(ex){ return this.factory.exception(ex); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_71_1596_1606" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:45:22 Replaced exceptions with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_66_1594_1696" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:45:20 Replaced _(exceptions).map(function(ex){ return this.factory.exception(ex); }, this) with _(exceptions) -&gt; KILLED</div><div id="mutation_62_1587_1705" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:45:13 Removed return _(exceptions).map(function(ex){ return this.factory.exception(ex); }, this).value(); -&gt; KILLED</div><div id="mutation_67_1641_1675" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:46:16 Removed return this.factory.exception(ex); -&gt; KILLED</div><div id="mutation_68_1671_1673" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:46:46 Replaced ex with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_69_1648_1674" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:46:23 Replaced this.factory.exception(ex) with ex -&gt; KILLED</div><div id="mutation_70_1648_1674" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:46:23 Replaced this.factory.exception(ex) with this.factory -&gt; KILLED</div><div id="mutation_65_1691_1695" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:47:16 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_12_1728_1757" class="killed">resources/xr/exceptions/ExceptionsTreeBuilder.js:51:5 Removed return ExceptionsTreeBuilder; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

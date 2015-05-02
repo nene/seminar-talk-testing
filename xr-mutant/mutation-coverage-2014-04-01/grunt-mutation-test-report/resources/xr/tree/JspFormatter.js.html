@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":69,"ignored":7,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>69</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/index.html'">tree</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/JspFormatter.js.html'">JspFormatter.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_11_62_68">"xr/_"</span>);</li><li></li><li>    /**</li><li>     * Formats JSP data.</li><li>     *</li><li>     * @param {Object} jsp Raw JSP data from CPU stackTrace data object.</li><li>     */</li><li>    <span class="code killed mutation_8_197_255">function JspFormatter(jsp) {</span></li><li><span class="code killed mutation_8_197_255">        <span class="code killed mutation_13_234_249">this.jsp = jsp;</span></span></li><li><span class="code killed mutation_8_197_255">    }</span></li><li>    <span class="code killed mutation_9_260_1291">JspFormatter.prototype = {</span></li><li><span class="code killed mutation_9_260_1291">        /**</span></li><li><span class="code killed mutation_9_260_1291">         * Returns summary text for JSP nodes.</span></li><li><span class="code killed mutation_9_260_1291">         * @return {string}</span></li><li><span class="code killed mutation_9_260_1291">         */</span></li><li><span class="code killed mutation_9_260_1291">        <span class="code killed mutation_14_394_645">summary: function() {</span></span></li><li><span class="code killed mutation_14_394_645"><span class="code killed mutation_9_260_1291">            <span class="code killed mutation_18_428_521">return this.jsp.filename<span class="code killed mutation_19_452_455"> + </span>(this.jsp.tagName ? <span class="code killed mutation_21_475_478">" "</span><span class="code killed mutation_20_478_481"> + </span><span class="code killed mutation_24_481_514"><span class="code killed mutation_23_481_514">this.formatCode(<span class="code killed mutation_22_497_513">this.jsp.tagName</span>)</span></span> : <span class="code killed mutation_25_517_519">""</span>);</span></span></span></li><li><span class="code killed mutation_14_394_645"><span class="code killed mutation_9_260_1291">        },</span></span></li><li><span class="code killed mutation_14_394_645"><span class="code killed mutation_9_260_1291"></li><li>        /**</span></span></li><li><span class="code killed mutation_14_394_645"><span class="code killed mutation_9_260_1291">         * Returns the formatted code for JSP tag.</span></span></li><li><span class="code killed mutation_14_394_645"><span class="code killed mutation_9_260_1291">         * @return {string}</span></span></li><li><span class="code killed mutation_14_394_645"><span class="code killed mutation_9_260_1291">         */</span></span></li><li><span class="code killed mutation_14_394_645"><span class="code killed mutation_9_260_1291">        </span><span class="code killed mutation_15_645_762">code: function() {</span></span></li><li><span class="code killed mutation_15_645_762"><span class="code killed mutation_9_260_1291">            <span class="code killed mutation_26_676_741">return <span class="code killed mutation_29_683_740">this.formatCode(<span class="code killed mutation_27_699_715">this.jsp.tagName</span>, <span class="code killed mutation_28_717_739">this.jsp.tagAttributes</span>)</span>;</span></span></span></li><li><span class="code killed mutation_15_645_762"><span class="code killed mutation_9_260_1291">        },</span></span></li><li><span class="code killed mutation_15_645_762"><span class="code killed mutation_9_260_1291"></li><li>        </span><span class="code killed mutation_16_762_978">formatCode: function(tagName, tagAttributes) {</span></span></li><li><span class="code killed mutation_16_762_978"><span class="code killed mutation_9_260_1291">            <span class="code killed mutation_30_821_877">if (<span class="code killed mutation_32_825_826">!</span>tagName) {</span></span></span></li><li><span class="code killed mutation_30_821_877"><span class="code killed mutation_16_762_978"><span class="code killed mutation_9_260_1291">                <span class="code killed mutation_33_853_863">return <span class="code killed mutation_34_860_862">""</span>;</span></span></span></span></li><li><span class="code killed mutation_30_821_877"><span class="code killed mutation_16_762_978"><span class="code killed mutation_9_260_1291">            }</span></span></span></li><li><span class="code killed mutation_16_762_978"><span class="code killed mutation_9_260_1291"></li><li>            <span class="code killed mutation_31_891_957">return <span class="code killed mutation_38_898_901">"<"</span><span class="code killed mutation_37_901_904"> + </span>tagName<span class="code killed mutation_36_911_914"> + </span><span class="code killed mutation_41_914_950"><span class="code killed mutation_40_914_950">this.formatAttributes(<span class="code killed mutation_39_936_949">tagAttributes</span>)</span></span><span class="code killed mutation_35_950_953"> + </span><span class="code killed mutation_42_953_956">">"</span>;</span></span></span></li><li><span class="code killed mutation_16_762_978"><span class="code killed mutation_9_260_1291">        },</span></span></li><li><span class="code killed mutation_16_762_978"><span class="code killed mutation_9_260_1291"></li><li>        </span><span class="code killed mutation_17_978_1284">formatAttributes: function(tagAttributes) {</span></span></li><li><span class="code killed mutation_17_978_1284"><span class="code killed mutation_9_260_1291">            <span class="code killed mutation_43_1034_1111">if (<span class="code killed mutation_48_1038_1054"><span class="code killed mutation_46_1038_1061">_(<span class="code killed mutation_47_1040_1053">tagAttributes</span>)</span>.size()</span><span class="code killed mutation_45_1061_1066"> === </span><span class="code killed mutation_49_1066_1067">0</span>) {</span></span></span></li><li><span class="code killed mutation_43_1034_1111"><span class="code killed mutation_17_978_1284"><span class="code killed mutation_9_260_1291">                <span class="code killed mutation_50_1087_1097">return <span class="code killed mutation_51_1094_1096">""</span>;</span></span></span></span></li><li><span class="code killed mutation_43_1034_1111"><span class="code killed mutation_17_978_1284"><span class="code killed mutation_9_260_1291">            }</span></span></span></li><li><span class="code killed mutation_17_978_1284"><span class="code killed mutation_9_260_1291"></li><li>            <span class="code killed mutation_44_1125_1274">return <span class="code killed mutation_53_1132_1136">'\n'</span><span class="code killed mutation_52_1136_1139"> + </span><span class="code killed mutation_70_1139_1155"><span class="code killed mutation_60_1139_1254"><span class="code killed mutation_59_1139_1254"><span class="code killed mutation_57_1139_1262"><span class="code killed mutation_56_1139_1273"><span class="code killed mutation_55_1139_1273">_(<span class="code killed mutation_69_1141_1154">tagAttributes</span>)</span>.map(<span class="code killed mutation_58_1160_1253">function(value, key){</span></span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_60_1139_1254"><span class="code killed mutation_59_1139_1254"><span class="code killed mutation_58_1160_1253"><span class="code killed mutation_57_1139_1262"><span class="code killed mutation_56_1139_1273"><span class="code killed mutation_55_1139_1273"><span class="code killed mutation_44_1125_1274"><span class="code killed mutation_17_978_1284"><span class="code killed mutation_9_260_1291">                <span class="code killed mutation_61_1198_1239">return <span class="code killed mutation_66_1205_1211">'    '</span><span class="code killed mutation_65_1211_1214"> + </span>key<span class="code killed mutation_64_1217_1220"> + </span><span class="code killed mutation_67_1220_1224">'="'</span><span class="code killed mutation_63_1224_1227"> + </span>value<span class="code killed mutation_62_1232_1235"> + </span><span class="code killed mutation_68_1235_1238">'"'</span>;</span></span></span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_60_1139_1254"><span class="code killed mutation_59_1139_1254"><span class="code killed mutation_58_1160_1253"><span class="code killed mutation_57_1139_1262"><span class="code killed mutation_56_1139_1273"><span class="code killed mutation_55_1139_1273"><span class="code killed mutation_44_1125_1274"><span class="code killed mutation_17_978_1284"><span class="code killed mutation_9_260_1291">            }</span>)</span></span>.value()</span>.join(<span class="code killed mutation_54_1268_1272">"\n"</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_17_978_1284"><span class="code killed mutation_9_260_1291">        }</span></span></li><li><span class="code killed mutation_9_260_1291">    };</span></li><li></li><li>    <span class="code killed mutation_10_1297_1317">return JspFormatter;</span></li><li>});</li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_11_62_68" class="killed">resources/xr/tree/JspFormatter.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_197_255" class="killed">resources/xr/tree/JspFormatter.js:11:5 Removed function JspFormatter(jsp) { this.jsp = jsp; } -&gt; KILLED</div><div id="mutation_13_234_249" class="killed">resources/xr/tree/JspFormatter.js:12:9 Removed this.jsp = jsp; -&gt; KILLED</div><div id="mutation_9_260_1291" class="killed">resources/xr/tree/JspFormatter.js:14:5 Removed JspFormatter.prototype = { /** * Returns summary text for JSP nodes. * @return {string} */ summary: function() { return this.jsp.filename + (this.jsp.tagName ? &quot; &quot; + this.formatCode(this.jsp.tagName) : &quot;&quot;); }, /** * Returns the formatted code for JSP tag. * @return {string} */ code: function() { return this.formatCode(this.jsp.tagName, this.jsp.tagAttributes); }, formatCode: function(tagName, tagAttributes) { if (!tagName) { return &quot;&quot;; } return &quot;&lt;&quot; + tagName + this.formatAttributes(tagAttributes) + &quot;&gt;&quot;; }, formatAttributes: function(tagAttributes) { if (_(tagAttributes).size() === 0) { return &quot;&quot;; } return &#x27;\n&#x27; + _(tagAttributes).map(function(value, key){ return &#x27; &#x27; + key + &#x27;=&quot;&#x27; + value + &#x27;&quot;&#x27;; }).value().join(&quot;\n&quot;); } }; -&gt; KILLED</div><div id="mutation_14_394_645" class="killed">resources/xr/tree/JspFormatter.js:19:9 Removed summary: function() { return this.jsp.filename + (this.jsp.tagName ? &quot; &quot; + this.formatCode(this.jsp.tagName) : &quot;&quot;); }, /** * Returns the formatted code for JSP tag. * @return {string} */  -&gt; KILLED</div><div id="mutation_25_517_519" class="killed">resources/xr/tree/JspFormatter.js:20:102 Replaced &quot;&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_18_428_521" class="killed">resources/xr/tree/JspFormatter.js:20:13 Removed return this.jsp.filename + (this.jsp.tagName ? &quot; &quot; + this.formatCode(this.jsp.tagName) : &quot;&quot;); -&gt; KILLED</div><div id="mutation_19_452_455" class="killed">resources/xr/tree/JspFormatter.js:20:37 Replaced  +  with - -&gt; KILLED</div><div id="mutation_20_478_481" class="killed">resources/xr/tree/JspFormatter.js:20:63 Replaced  +  with - -&gt; KILLED</div><div id="mutation_21_475_478" class="killed">resources/xr/tree/JspFormatter.js:20:60 Replaced &quot; &quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_497_513" class="killed">resources/xr/tree/JspFormatter.js:20:82 Replaced this.jsp.tagName with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_23_481_514" class="killed">resources/xr/tree/JspFormatter.js:20:66 Replaced this.formatCode(this.jsp.tagName) with this.jsp.tagName -&gt; KILLED</div><div id="mutation_24_481_514" class="killed">resources/xr/tree/JspFormatter.js:20:66 Replaced this.formatCode(this.jsp.tagName) with this -&gt; KILLED</div><div id="mutation_15_645_762" class="killed">resources/xr/tree/JspFormatter.js:27:9 Removed code: function() { return this.formatCode(this.jsp.tagName, this.jsp.tagAttributes); },  -&gt; KILLED</div><div id="mutation_26_676_741" class="killed">resources/xr/tree/JspFormatter.js:28:13 Removed return this.formatCode(this.jsp.tagName, this.jsp.tagAttributes); -&gt; KILLED</div><div id="mutation_27_699_715" class="killed">resources/xr/tree/JspFormatter.js:28:36 Replaced this.jsp.tagName with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_28_717_739" class="killed">resources/xr/tree/JspFormatter.js:28:54 Replaced this.jsp.tagAttributes with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_29_683_740" class="killed">resources/xr/tree/JspFormatter.js:28:20 Replaced this.formatCode(this.jsp.tagName, this.jsp.tagAttributes) with this -&gt; KILLED</div><div id="mutation_16_762_978" class="killed">resources/xr/tree/JspFormatter.js:31:9 Removed formatCode: function(tagName, tagAttributes) { if (!tagName) { return &quot;&quot;; } return &quot;&lt;&quot; + tagName + this.formatAttributes(tagAttributes) + &quot;&gt;&quot;; },  -&gt; KILLED</div><div id="mutation_30_821_877" class="killed">resources/xr/tree/JspFormatter.js:32:13 Removed if (!tagName) { return &quot;&quot;; } -&gt; KILLED</div><div id="mutation_32_825_826" class="killed">resources/xr/tree/JspFormatter.js:32:25 Removed ! -&gt; KILLED</div><div id="mutation_33_853_863" class="killed">resources/xr/tree/JspFormatter.js:33:17 Removed return &quot;&quot;; -&gt; KILLED</div><div id="mutation_34_860_862" class="killed">resources/xr/tree/JspFormatter.js:33:24 Replaced &quot;&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_40_914_950" class="killed">resources/xr/tree/JspFormatter.js:36:36 Replaced this.formatAttributes(tagAttributes) with tagAttributes -&gt; KILLED</div><div id="mutation_41_914_950" class="killed">resources/xr/tree/JspFormatter.js:36:36 Replaced this.formatAttributes(tagAttributes) with this -&gt; KILLED</div><div id="mutation_42_953_956" class="killed">resources/xr/tree/JspFormatter.js:36:75 Replaced &quot;&gt;&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_35_950_953" class="killed">resources/xr/tree/JspFormatter.js:36:72 Replaced  +  with - -&gt; KILLED</div><div id="mutation_36_911_914" class="killed">resources/xr/tree/JspFormatter.js:36:33 Replaced  +  with - -&gt; KILLED</div><div id="mutation_37_901_904" class="killed">resources/xr/tree/JspFormatter.js:36:23 Replaced  +  with - -&gt; KILLED</div><div id="mutation_38_898_901" class="killed">resources/xr/tree/JspFormatter.js:36:20 Replaced &quot;&lt;&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_39_936_949" class="killed">resources/xr/tree/JspFormatter.js:36:58 Replaced tagAttributes with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_31_891_957" class="killed">resources/xr/tree/JspFormatter.js:36:13 Removed return &quot;&lt;&quot; + tagName + this.formatAttributes(tagAttributes) + &quot;&gt;&quot;; -&gt; KILLED</div><div id="mutation_17_978_1284" class="killed">resources/xr/tree/JspFormatter.js:39:9 Removed formatAttributes: function(tagAttributes) { if (_(tagAttributes).size() === 0) { return &quot;&quot;; } return &#x27;\n&#x27; + _(tagAttributes).map(function(value, key){ return &#x27; &#x27; + key + &#x27;=&quot;&#x27; + value + &#x27;&quot;&#x27;; }).value().join(&quot;\n&quot;); } -&gt; KILLED</div><div id="mutation_43_1034_1111" class="killed">resources/xr/tree/JspFormatter.js:40:13 Removed if (_(tagAttributes).size() === 0) { return &quot;&quot;; } -&gt; KILLED</div><div id="mutation_45_1061_1066" class="killed">resources/xr/tree/JspFormatter.js:40:40 Replaced  ===  with !== -&gt; KILLED</div><div id="mutation_46_1038_1061" class="killed">resources/xr/tree/JspFormatter.js:40:17 Replaced _(tagAttributes).size() with _(tagAttributes) -&gt; KILLED</div><div id="mutation_47_1040_1053" class="killed">resources/xr/tree/JspFormatter.js:40:19 Replaced tagAttributes with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_48_1038_1054" class="killed">resources/xr/tree/JspFormatter.js:40:17 Replaced _(tagAttributes) with tagAttributes -&gt; KILLED</div><div id="mutation_49_1066_1067" class="killed">resources/xr/tree/JspFormatter.js:40:45 Replaced 0 with 1 -&gt; KILLED</div><div id="mutation_50_1087_1097" class="killed">resources/xr/tree/JspFormatter.js:41:17 Removed return &quot;&quot;; -&gt; KILLED</div><div id="mutation_51_1094_1096" class="killed">resources/xr/tree/JspFormatter.js:41:24 Replaced &quot;&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_44_1125_1274" class="killed">resources/xr/tree/JspFormatter.js:44:13 Removed return &#x27;\n&#x27; + _(tagAttributes).map(function(value, key){ return &#x27; &#x27; + key + &#x27;=&quot;&#x27; + value + &#x27;&quot;&#x27;; }).value().join(&quot;\n&quot;); -&gt; KILLED</div><div id="mutation_70_1139_1155" class="killed">resources/xr/tree/JspFormatter.js:44:27 Replaced _(tagAttributes) with tagAttributes -&gt; KILLED</div><div id="mutation_52_1136_1139" class="killed">resources/xr/tree/JspFormatter.js:44:24 Replaced  +  with - -&gt; KILLED</div><div id="mutation_53_1132_1136" class="killed">resources/xr/tree/JspFormatter.js:44:20 Replaced &#x27;\n&#x27; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_69_1141_1154" class="killed">resources/xr/tree/JspFormatter.js:44:29 Replaced tagAttributes with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_55_1139_1273" class="killed">resources/xr/tree/JspFormatter.js:44:27 Replaced _(tagAttributes).map(function(value, key){ return &#x27; &#x27; + key + &#x27;=&quot;&#x27; + value + &#x27;&quot;&#x27;; }).value().join(&quot;\n&quot;) with &quot;\n&quot; -&gt; KILLED</div><div id="mutation_60_1139_1254" class="killed">resources/xr/tree/JspFormatter.js:44:27 Replaced _(tagAttributes).map(function(value, key){ return &#x27; &#x27; + key + &#x27;=&quot;&#x27; + value + &#x27;&quot;&#x27;; }) with _(tagAttributes) -&gt; KILLED</div><div id="mutation_57_1139_1262" class="killed">resources/xr/tree/JspFormatter.js:44:27 Replaced _(tagAttributes).map(function(value, key){ return &#x27; &#x27; + key + &#x27;=&quot;&#x27; + value + &#x27;&quot;&#x27;; }).value() with _(tagAttributes).map(function(value, key){ return &#x27; &#x27; + key + &#x27;=&quot;&#x27; + value + &#x27;&quot;&#x27;; }) -&gt; KILLED</div><div id="mutation_58_1160_1253" class="killed">resources/xr/tree/JspFormatter.js:44:48 Replaced function(value, key){ return &#x27; &#x27; + key + &#x27;=&quot;&#x27; + value + &#x27;&quot;&#x27;; } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_59_1139_1254" class="killed">resources/xr/tree/JspFormatter.js:44:27 Replaced _(tagAttributes).map(function(value, key){ return &#x27; &#x27; + key + &#x27;=&quot;&#x27; + value + &#x27;&quot;&#x27;; }) with function(value, key){ return &#x27; &#x27; + key + &#x27;=&quot;&#x27; + value + &#x27;&quot;&#x27;; } -&gt; KILLED</div><div id="mutation_56_1139_1273" class="killed">resources/xr/tree/JspFormatter.js:44:27 Replaced _(tagAttributes).map(function(value, key){ return &#x27; &#x27; + key + &#x27;=&quot;&#x27; + value + &#x27;&quot;&#x27;; }).value().join(&quot;\n&quot;) with _(tagAttributes).map(function(value, key){ return &#x27; &#x27; + key + &#x27;=&quot;&#x27; + value + &#x27;&quot;&#x27;; }).value() -&gt; KILLED</div><div id="mutation_65_1211_1214" class="killed">resources/xr/tree/JspFormatter.js:45:30 Replaced  +  with - -&gt; KILLED</div><div id="mutation_62_1232_1235" class="killed">resources/xr/tree/JspFormatter.js:45:51 Replaced  +  with - -&gt; KILLED</div><div id="mutation_63_1224_1227" class="killed">resources/xr/tree/JspFormatter.js:45:43 Replaced  +  with - -&gt; KILLED</div><div id="mutation_64_1217_1220" class="killed">resources/xr/tree/JspFormatter.js:45:36 Replaced  +  with - -&gt; KILLED</div><div id="mutation_61_1198_1239" class="killed">resources/xr/tree/JspFormatter.js:45:17 Removed return &#x27; &#x27; + key + &#x27;=&quot;&#x27; + value + &#x27;&quot;&#x27;; -&gt; KILLED</div><div id="mutation_66_1205_1211" class="killed">resources/xr/tree/JspFormatter.js:45:24 Replaced &#x27; &#x27; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_67_1220_1224" class="killed">resources/xr/tree/JspFormatter.js:45:39 Replaced &#x27;=&quot;&#x27; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_68_1235_1238" class="killed">resources/xr/tree/JspFormatter.js:45:54 Replaced &#x27;&quot;&#x27; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_54_1268_1272" class="killed">resources/xr/tree/JspFormatter.js:46:29 Replaced &quot;\n&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_10_1297_1317" class="killed">resources/xr/tree/JspFormatter.js:50:5 Removed return JspFormatter; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

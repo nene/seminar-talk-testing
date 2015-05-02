@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":63,"ignored":13,"untested":0,"survived":44}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>63</strong> of which <strong>44</strong> survived,&nbsp;
+        <strong>13</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>30.2%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/thresholds/index.html'">thresholds</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/thresholds/index.js.html'">index.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require){</li><li>    var _ = require(<span class="code killed mutation_13_61_67">"xr/_"</span>);</li><li>    var settingsComp = require(<span class="code killed mutation_15_101_114">"xr/settings"</span>);</li><li>    var logger = require(<span class="code killed mutation_17_142_153">"xr/logger"</span>);</li><li>    var ThresholdsManager = require(<span class="code killed mutation_19_192_225">"xr/thresholds/ThresholdsManager"</span>);</li><li></li><li>    <span class="code killed mutation_26_233_263"><span class="code killed mutation_25_233_263"><span class="code survived mutation_23_233_286"><span class="code survived mutation_22_233_286"><span class="code survived mutation_11_233_287">logger.getLogger(<span class="code survived mutation_24_250_262">"Thresholds"</span>)</span></span>.log(<span class="code survived mutation_21_268_285">"load thresholds"</span>)</span></span>;</span></li><li></li><li>    <span class="code survived mutation_12_293_1413">return {</span></li><li><span class="code survived mutation_12_293_1413">        /**</span></li><li><span class="code survived mutation_12_293_1413">         * Initializes thresholds module.</span></li><li><span class="code survived mutation_12_293_1413">         */</span></li><li><span class="code survived mutation_12_293_1413">        <span class="code survived mutation_27_376_850">init: function(onComplete) {</span></span></li><li><span class="code survived mutation_27_376_850"><span class="code survived mutation_12_293_1413">            <span class="code survived mutation_30_417_466">this.thresholdsManager = new ThresholdsManager();</span></span></span></li><li><span class="code survived mutation_27_376_850"><span class="code survived mutation_12_293_1413"></li><li>            <span class="code survived mutation_35_480_550"><span class="code survived mutation_34_480_550"><span class="code survived mutation_31_480_551">settingsComp.addSettingsSavedListener(<span class="code survived mutation_38_518_549"><span class="code survived mutation_37_518_549"><span class="code survived mutation_33_518_549">this.settingsChanged.bind(<span class="code survived mutation_36_544_548">this</span>)</span></span></span>)</span></span>;</span></span></span></li><li><span class="code survived mutation_27_376_850"><span class="code survived mutation_12_293_1413">            <span class="code survived mutation_32_564_577">onComplete();</span></span></span></li><li><span class="code survived mutation_27_376_850"><span class="code survived mutation_12_293_1413">        },</span></span></li><li><span class="code survived mutation_27_376_850"><span class="code survived mutation_12_293_1413"></li><li>        /**</span></span></li><li><span class="code survived mutation_27_376_850"><span class="code survived mutation_12_293_1413">         * Checks a value against a threshold type</span></span></li><li><span class="code survived mutation_27_376_850"><span class="code survived mutation_12_293_1413">         * @param {String} type Threshold type.</span></span></li><li><span class="code survived mutation_27_376_850"><span class="code survived mutation_12_293_1413">         * @param {Number} actualValue The value to check.</span></span></li><li><span class="code survived mutation_27_376_850"><span class="code survived mutation_12_293_1413">         * @param {String} [displayValue] Optional value for display.</span></span></li><li><span class="code survived mutation_27_376_850"><span class="code survived mutation_12_293_1413">         */</span></span></li><li><span class="code survived mutation_27_376_850"><span class="code survived mutation_12_293_1413">        </span><span class="code survived mutation_28_850_1020">checkValue: function(type, actualValue, displayValue) {</span></span></li><li><span class="code survived mutation_28_850_1020"><span class="code survived mutation_12_293_1413">            <span class="code survived mutation_45_918_956"><span class="code survived mutation_44_918_956"><span class="code survived mutation_42_918_998"><span class="code survived mutation_39_918_999">this.thresholdsManager.getByType(<span class="code survived mutation_43_951_955">type</span>)</span></span>.setActualValue(<span class="code survived mutation_40_972_983">actualValue</span>, <span class="code survived mutation_41_985_997">displayValue</span>)</span>;</span></span></span></li><li><span class="code survived mutation_28_850_1020"><span class="code survived mutation_12_293_1413">        },</span></span></li><li><span class="code survived mutation_28_850_1020"><span class="code survived mutation_12_293_1413"></li><li>        </span><span class="code survived mutation_29_1020_1406">settingsChanged: function(newSettings) {</span></span></li><li><span class="code survived mutation_29_1020_1406"><span class="code survived mutation_12_293_1413">            <span class="code survived mutation_64_1073_1098"><span class="code survived mutation_49_1073_1395"><span class="code survived mutation_46_1073_1396">_(<span class="code survived mutation_63_1075_1097">newSettings.thresholds</span>)</span>.forEach(<span class="code survived mutation_47_1107_1388">function(config, type){</span></span></span></span></span></li><li><span class="code survived mutation_49_1073_1395"><span class="code survived mutation_47_1107_1388"><span class="code survived mutation_46_1073_1396"><span class="code survived mutation_29_1020_1406"><span class="code survived mutation_12_293_1413">                <span class="code survived mutation_50_1147_1202">var threshold = <span class="code survived mutation_54_1163_1201"><span class="code survived mutation_53_1163_1201">this.thresholdsManager.getByType(<span class="code survived mutation_52_1196_1200">type</span>)</span></span>;</span></span></span></span></span></span></li><li><span class="code survived mutation_49_1073_1395"><span class="code survived mutation_47_1107_1388"><span class="code survived mutation_46_1073_1396"><span class="code survived mutation_29_1020_1406"><span class="code survived mutation_12_293_1413">                <span class="code survived mutation_51_1219_1374">if (threshold) {</span></span></span></span></span></span></li><li><span class="code survived mutation_51_1219_1374"><span class="code survived mutation_49_1073_1395"><span class="code survived mutation_47_1107_1388"><span class="code survived mutation_46_1073_1396"><span class="code survived mutation_29_1020_1406"><span class="code survived mutation_12_293_1413">                    <span class="code survived mutation_59_1256_1292"><span class="code survived mutation_58_1256_1292"><span class="code survived mutation_55_1256_1293">threshold.setEnabled(<span class="code survived mutation_57_1277_1291">config.enabled</span>)</span></span>;</span></span></span></span></span></span></span></li><li><span class="code survived mutation_51_1219_1374"><span class="code survived mutation_49_1073_1395"><span class="code survived mutation_47_1107_1388"><span class="code survived mutation_46_1073_1396"><span class="code survived mutation_29_1020_1406"><span class="code survived mutation_12_293_1413">                    <span class="code survived mutation_62_1314_1355"><span class="code survived mutation_61_1314_1355"><span class="code survived mutation_56_1314_1356">threshold.setThresholdValue(<span class="code survived mutation_60_1342_1354">config.value</span>)</span></span>;</span></span></span></span></span></span></span></li><li><span class="code survived mutation_51_1219_1374"><span class="code survived mutation_49_1073_1395"><span class="code survived mutation_47_1107_1388"><span class="code survived mutation_46_1073_1396"><span class="code survived mutation_29_1020_1406"><span class="code survived mutation_12_293_1413">                }</span></span></span></span></span></span></li><li><span class="code survived mutation_49_1073_1395"><span class="code survived mutation_47_1107_1388"><span class="code survived mutation_46_1073_1396"><span class="code survived mutation_29_1020_1406"><span class="code survived mutation_12_293_1413">            }</span>, <span class="code survived mutation_48_1390_1394">this</span>)</span>;</span></span></span></li><li><span class="code survived mutation_29_1020_1406"><span class="code survived mutation_12_293_1413">        }</span></span></li><li><span class="code survived mutation_12_293_1413">    };</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_13_61_67" class="killed">resources/xr/thresholds/index.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_101_114" class="killed">resources/xr/thresholds/index.js:5:32 Replaced &quot;xr/settings&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_142_153" class="killed">resources/xr/thresholds/index.js:6:26 Replaced &quot;xr/logger&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_19_192_225" class="killed">resources/xr/thresholds/index.js:7:37 Replaced &quot;xr/thresholds/ThresholdsManager&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_21_268_285" class="survived">resources/xr/thresholds/index.js:9:40 Replaced &quot;load thresholds&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_11_233_287" class="survived">resources/xr/thresholds/index.js:9:5 Removed logger.getLogger(&quot;Thresholds&quot;).log(&quot;load thresholds&quot;); -&gt; SURVIVED</div><div id="mutation_23_233_286" class="survived">resources/xr/thresholds/index.js:9:5 Replaced logger.getLogger(&quot;Thresholds&quot;).log(&quot;load thresholds&quot;) with logger.getLogger(&quot;Thresholds&quot;) -&gt; SURVIVED</div><div id="mutation_24_250_262" class="survived">resources/xr/thresholds/index.js:9:22 Replaced &quot;Thresholds&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_25_233_263" class="killed">resources/xr/thresholds/index.js:9:5 Replaced logger.getLogger(&quot;Thresholds&quot;) with &quot;Thresholds&quot; -&gt; KILLED</div><div id="mutation_26_233_263" class="killed">resources/xr/thresholds/index.js:9:5 Replaced logger.getLogger(&quot;Thresholds&quot;) with logger -&gt; KILLED</div><div id="mutation_22_233_286" class="survived">resources/xr/thresholds/index.js:9:5 Replaced logger.getLogger(&quot;Thresholds&quot;).log(&quot;load thresholds&quot;) with &quot;load thresholds&quot; -&gt; SURVIVED</div><div id="mutation_12_293_1413" class="survived">resources/xr/thresholds/index.js:11:5 Removed return { /** * Initializes thresholds module. */ init: function(onComplete) { this.thresholdsManager = new ThresholdsManager(); settingsComp.addSettingsSavedListener(this.settingsChanged.bind(this)); onComplete(); }, /** * Checks a value against a threshold type * @param {String} type Threshold type. * @param {Number} actualValue The value to check. * @param {String} [displayValue] Optional value for display. */ checkValue: function(type, actualValue, displayValue) { this.thresholdsManager.getByType(type).setActualValue(actualValue, displayValue); }, settingsChanged: function(newSettings) { _(newSettings.thresholds).forEach(function(config, type){ var threshold = this.thresholdsManager.getByType(type); if (threshold) { threshold.setEnabled(config.enabled); threshold.setThresholdValue(config.value); } }, this); } }; -&gt; SURVIVED</div><div id="mutation_27_376_850" class="survived">resources/xr/thresholds/index.js:15:9 Removed init: function(onComplete) { this.thresholdsManager = new ThresholdsManager(); settingsComp.addSettingsSavedListener(this.settingsChanged.bind(this)); onComplete(); }, /** * Checks a value against a threshold type * @param {String} type Threshold type. * @param {Number} actualValue The value to check. * @param {String} [displayValue] Optional value for display. */  -&gt; SURVIVED</div><div id="mutation_30_417_466" class="survived">resources/xr/thresholds/index.js:16:13 Removed this.thresholdsManager = new ThresholdsManager(); -&gt; SURVIVED</div><div id="mutation_31_480_551" class="survived">resources/xr/thresholds/index.js:18:13 Removed settingsComp.addSettingsSavedListener(this.settingsChanged.bind(this)); -&gt; SURVIVED</div><div id="mutation_38_518_549" class="survived">resources/xr/thresholds/index.js:18:51 Replaced this.settingsChanged.bind(this) with this.settingsChanged -&gt; SURVIVED</div><div id="mutation_33_518_549" class="survived">resources/xr/thresholds/index.js:18:51 Replaced this.settingsChanged.bind(this) with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_34_480_550" class="survived">resources/xr/thresholds/index.js:18:13 Replaced settingsComp.addSettingsSavedListener(this.settingsChanged.bind(this)) with this.settingsChanged.bind(this) -&gt; SURVIVED</div><div id="mutation_35_480_550" class="survived">resources/xr/thresholds/index.js:18:13 Replaced settingsComp.addSettingsSavedListener(this.settingsChanged.bind(this)) with settingsComp -&gt; SURVIVED</div><div id="mutation_36_544_548" class="survived">resources/xr/thresholds/index.js:18:77 Replaced this with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_37_518_549" class="survived">resources/xr/thresholds/index.js:18:51 Replaced this.settingsChanged.bind(this) with this -&gt; SURVIVED</div><div id="mutation_32_564_577" class="survived">resources/xr/thresholds/index.js:19:13 Removed onComplete(); -&gt; SURVIVED</div><div id="mutation_28_850_1020" class="survived">resources/xr/thresholds/index.js:28:9 Removed checkValue: function(type, actualValue, displayValue) { this.thresholdsManager.getByType(type).setActualValue(actualValue, displayValue); },  -&gt; SURVIVED</div><div id="mutation_40_972_983" class="survived">resources/xr/thresholds/index.js:29:67 Replaced actualValue with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_39_918_999" class="survived">resources/xr/thresholds/index.js:29:13 Removed this.thresholdsManager.getByType(type).setActualValue(actualValue, displayValue); -&gt; SURVIVED</div><div id="mutation_45_918_956" class="survived">resources/xr/thresholds/index.js:29:13 Replaced this.thresholdsManager.getByType(type) with this.thresholdsManager -&gt; SURVIVED</div><div id="mutation_41_985_997" class="survived">resources/xr/thresholds/index.js:29:80 Replaced displayValue with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_42_918_998" class="survived">resources/xr/thresholds/index.js:29:13 Replaced this.thresholdsManager.getByType(type).setActualValue(actualValue, displayValue) with this.thresholdsManager.getByType(type) -&gt; SURVIVED</div><div id="mutation_43_951_955" class="survived">resources/xr/thresholds/index.js:29:46 Replaced type with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_44_918_956" class="survived">resources/xr/thresholds/index.js:29:13 Replaced this.thresholdsManager.getByType(type) with type -&gt; SURVIVED</div><div id="mutation_29_1020_1406" class="survived">resources/xr/thresholds/index.js:32:9 Removed settingsChanged: function(newSettings) { _(newSettings.thresholds).forEach(function(config, type){ var threshold = this.thresholdsManager.getByType(type); if (threshold) { threshold.setEnabled(config.enabled); threshold.setThresholdValue(config.value); } }, this); } -&gt; SURVIVED</div><div id="mutation_64_1073_1098" class="survived">resources/xr/thresholds/index.js:33:13 Replaced _(newSettings.thresholds) with newSettings.thresholds -&gt; SURVIVED</div><div id="mutation_47_1107_1388" class="survived">resources/xr/thresholds/index.js:33:47 Replaced function(config, type){ var threshold = this.thresholdsManager.getByType(type); if (threshold) { threshold.setEnabled(config.enabled); threshold.setThresholdValue(config.value); } } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_63_1075_1097" class="survived">resources/xr/thresholds/index.js:33:15 Replaced newSettings.thresholds with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_49_1073_1395" class="survived">resources/xr/thresholds/index.js:33:13 Replaced _(newSettings.thresholds).forEach(function(config, type){ var threshold = this.thresholdsManager.getByType(type); if (threshold) { threshold.setEnabled(config.enabled); threshold.setThresholdValue(config.value); } }, this) with _(newSettings.thresholds) -&gt; SURVIVED</div><div id="mutation_46_1073_1396" class="survived">resources/xr/thresholds/index.js:33:13 Removed _(newSettings.thresholds).forEach(function(config, type){ var threshold = this.thresholdsManager.getByType(type); if (threshold) { threshold.setEnabled(config.enabled); threshold.setThresholdValue(config.value); } }, this); -&gt; SURVIVED</div><div id="mutation_53_1163_1201" class="survived">resources/xr/thresholds/index.js:34:33 Replaced this.thresholdsManager.getByType(type) with type -&gt; SURVIVED</div><div id="mutation_54_1163_1201" class="survived">resources/xr/thresholds/index.js:34:33 Replaced this.thresholdsManager.getByType(type) with this.thresholdsManager -&gt; SURVIVED</div><div id="mutation_50_1147_1202" class="survived">resources/xr/thresholds/index.js:34:17 Removed var threshold = this.thresholdsManager.getByType(type); -&gt; SURVIVED</div><div id="mutation_52_1196_1200" class="survived">resources/xr/thresholds/index.js:34:66 Replaced type with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_51_1219_1374" class="survived">resources/xr/thresholds/index.js:35:17 Removed if (threshold) { threshold.setEnabled(config.enabled); threshold.setThresholdValue(config.value); } -&gt; SURVIVED</div><div id="mutation_59_1256_1292" class="survived">resources/xr/thresholds/index.js:36:21 Replaced threshold.setEnabled(config.enabled) with threshold -&gt; SURVIVED</div><div id="mutation_57_1277_1291" class="survived">resources/xr/thresholds/index.js:36:42 Replaced config.enabled with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_55_1256_1293" class="survived">resources/xr/thresholds/index.js:36:21 Removed threshold.setEnabled(config.enabled); -&gt; SURVIVED</div><div id="mutation_58_1256_1292" class="survived">resources/xr/thresholds/index.js:36:21 Replaced threshold.setEnabled(config.enabled) with config.enabled -&gt; SURVIVED</div><div id="mutation_56_1314_1356" class="survived">resources/xr/thresholds/index.js:37:21 Removed threshold.setThresholdValue(config.value); -&gt; SURVIVED</div><div id="mutation_60_1342_1354" class="survived">resources/xr/thresholds/index.js:37:49 Replaced config.value with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_61_1314_1355" class="survived">resources/xr/thresholds/index.js:37:21 Replaced threshold.setThresholdValue(config.value) with config.value -&gt; SURVIVED</div><div id="mutation_62_1314_1355" class="survived">resources/xr/thresholds/index.js:37:21 Replaced threshold.setThresholdValue(config.value) with threshold -&gt; SURVIVED</div><div id="mutation_48_1390_1394" class="survived">resources/xr/thresholds/index.js:39:16 Replaced this with &quot;MUTATION!&quot; -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

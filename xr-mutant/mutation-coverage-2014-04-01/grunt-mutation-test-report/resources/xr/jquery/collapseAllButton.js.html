@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":37,"ignored":2,"untested":0,"survived":2}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>37</strong> of which <strong>2</strong> survived,&nbsp;
+        <strong>2</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>94.6%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/jquery/index.html'">jquery</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/jquery/collapseAllButton.js.html'">collapseAllButton.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li><span class="code killed mutation_6_15_908"><span class="code killed mutation_3_15_909">define(<span class="code killed mutation_5_22_907">function(){</span></span></span></li><li><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909"></li><li>    /**</span></span></span></li><li><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909">     * jQuery plugin for button that collapses all requests and request groups.</span></span></span></li><li><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909">     *</span></span></span></li><li><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909">     * @param {Object} options Config options:</span></span></span></li><li><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909">     *   @param {jQuery} options.treeContainer Container for the tree inside which to perform the collapse.</span></span></span></li><li><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909">     *   @param {TreeManager} options.treeManager TreeManager to notify of the collapse/expand</span></span></span></li><li><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909">     *     through calling updateTreeState() method.</span></span></span></li><li><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909">     */</span></span></span></li><li><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909">    <span class="code killed mutation_7_445_904">return function(options) {</span></span></span></span></li><li><span class="code killed mutation_7_445_904"><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909">        <span class="code killed mutation_8_480_897">return <span class="code killed mutation_11_487_896">this.bind(<span class="code killed mutation_9_497_504">"click"</span>, <span class="code killed mutation_10_506_895">function(evt) {</span></span></span></span></span></span></span></li><li><span class="code killed mutation_11_487_896"><span class="code killed mutation_10_506_895"><span class="code killed mutation_8_480_897"><span class="code killed mutation_7_445_904"><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909">            <span class="code survived mutation_14_534_554"><span class="code survived mutation_12_534_555">evt.preventDefault()</span>;</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_11_487_896"><span class="code killed mutation_10_506_895"><span class="code killed mutation_8_480_897"><span class="code killed mutation_7_445_904"><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909"></li><li>            <span class="code killed mutation_38_569_642"><span class="code killed mutation_37_569_642"><span class="code killed mutation_17_569_884"><span class="code killed mutation_16_569_884"><span class="code killed mutation_13_569_885">options.treeContainer.find(<span class="code killed mutation_36_596_641">".node-self.request, .node-self.requestGroup"</span>)</span></span>.each(<span class="code killed mutation_15_648_883">function() {</span></span></span></span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_17_569_884"><span class="code killed mutation_16_569_884"><span class="code killed mutation_15_648_883"><span class="code killed mutation_13_569_885"><span class="code killed mutation_11_487_896"><span class="code killed mutation_10_506_895"><span class="code killed mutation_8_480_897"><span class="code killed mutation_7_445_904"><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909">                <span class="code killed mutation_18_677_700">var nodeSelf = <span class="code killed mutation_22_692_699">$(<span class="code killed mutation_21_694_698">this</span>)</span>;</span></span></span></span></span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_17_569_884"><span class="code killed mutation_16_569_884"><span class="code killed mutation_15_648_883"><span class="code killed mutation_13_569_885"><span class="code killed mutation_11_487_896"><span class="code killed mutation_10_506_895"><span class="code killed mutation_8_480_897"><span class="code killed mutation_7_445_904"><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909">                <span class="code killed mutation_29_717_734"><span class="code killed mutation_28_717_758"><span class="code killed mutation_27_717_758"><span class="code killed mutation_25_717_780"><span class="code killed mutation_24_717_780"><span class="code killed mutation_19_717_781">nodeSelf.parent()</span>.removeClass(<span class="code killed mutation_26_747_757">"expanded"</span>)</span></span>.addClass(<span class="code killed mutation_23_768_779">"collapsed"</span>)</span></span>;</span></span></span></span></span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_17_569_884"><span class="code killed mutation_16_569_884"><span class="code killed mutation_15_648_883"><span class="code killed mutation_13_569_885"><span class="code killed mutation_11_487_896"><span class="code killed mutation_10_506_895"><span class="code killed mutation_8_480_897"><span class="code killed mutation_7_445_904"><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909"></li><li>                <span class="code killed mutation_32_799_868"><span class="code killed mutation_20_799_869">options.treeManager.updateTreeState(<span class="code killed mutation_35_835_854"><span class="code killed mutation_34_835_854"><span class="code killed mutation_30_835_854">nodeSelf.data(<span class="code killed mutation_33_849_853">'id'</span>)</span></span></span>, <span class="code killed mutation_31_856_867">"collapsed"</span>)</span>;</span></span></span></span></span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_17_569_884"><span class="code killed mutation_16_569_884"><span class="code killed mutation_15_648_883"><span class="code killed mutation_13_569_885"><span class="code killed mutation_11_487_896"><span class="code killed mutation_10_506_895"><span class="code killed mutation_8_480_897"><span class="code killed mutation_7_445_904"><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909">            }</span>)</span></span>;</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_11_487_896"><span class="code killed mutation_10_506_895"><span class="code killed mutation_8_480_897"><span class="code killed mutation_7_445_904"><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909">        }</span>)</span>;</span></span></span></span></span></li><li><span class="code killed mutation_7_445_904"><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909">    };</span></span></span></span></li><li><span class="code killed mutation_6_15_908"><span class="code killed mutation_5_22_907"><span class="code killed mutation_3_15_909"></li><li>}</span>)</span>;</span></li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_3_15_909" class="killed">resources/xr/jquery/collapseAllButton.js:3:1 Removed define(function(){ /** * jQuery plugin for button that collapses all requests and request groups. * * @param {Object} options Config options: * @param {jQuery} options.treeContainer Container for the tree inside which to perform the collapse. * @param {TreeManager} options.treeManager TreeManager to notify of the collapse/expand * through calling updateTreeState() method. */ return function(options) { return this.bind(&quot;click&quot;, function(evt) { evt.preventDefault(); options.treeContainer.find(&quot;.node-self.request, .node-self.requestGroup&quot;).each(function() { var nodeSelf = $(this); nodeSelf.parent().removeClass(&quot;expanded&quot;).addClass(&quot;collapsed&quot;); options.treeManager.updateTreeState(nodeSelf.data(&#x27;id&#x27;), &quot;collapsed&quot;); }); }); }; }); -&gt; KILLED</div><div id="mutation_6_15_908" class="killed">resources/xr/jquery/collapseAllButton.js:3:1 Replaced define(function(){ /** * jQuery plugin for button that collapses all requests and request groups. * * @param {Object} options Config options: * @param {jQuery} options.treeContainer Container for the tree inside which to perform the collapse. * @param {TreeManager} options.treeManager TreeManager to notify of the collapse/expand * through calling updateTreeState() method. */ return function(options) { return this.bind(&quot;click&quot;, function(evt) { evt.preventDefault(); options.treeContainer.find(&quot;.node-self.request, .node-self.requestGroup&quot;).each(function() { var nodeSelf = $(this); nodeSelf.parent().removeClass(&quot;expanded&quot;).addClass(&quot;collapsed&quot;); options.treeManager.updateTreeState(nodeSelf.data(&#x27;id&#x27;), &quot;collapsed&quot;); }); }); }; }) with function(){ /** * jQuery plugin for button that collapses all requests and request groups. * * @param {Object} options Config options: * @param {jQuery} options.treeContainer Container for the tree inside which to perform the collapse. * @param {TreeManager} options.treeManager TreeManager to notify of the collapse/expand * through calling updateTreeState() method. */ return function(options) { return this.bind(&quot;click&quot;, function(evt) { evt.preventDefault(); options.treeContainer.find(&quot;.node-self.request, .node-self.requestGroup&quot;).each(function() { var nodeSelf = $(this); nodeSelf.parent().removeClass(&quot;expanded&quot;).addClass(&quot;collapsed&quot;); options.treeManager.updateTreeState(nodeSelf.data(&#x27;id&#x27;), &quot;collapsed&quot;); }); }); }; } -&gt; KILLED</div><div id="mutation_5_22_907" class="killed">resources/xr/jquery/collapseAllButton.js:3:8 Replaced function(){ /** * jQuery plugin for button that collapses all requests and request groups. * * @param {Object} options Config options: * @param {jQuery} options.treeContainer Container for the tree inside which to perform the collapse. * @param {TreeManager} options.treeManager TreeManager to notify of the collapse/expand * through calling updateTreeState() method. */ return function(options) { return this.bind(&quot;click&quot;, function(evt) { evt.preventDefault(); options.treeContainer.find(&quot;.node-self.request, .node-self.requestGroup&quot;).each(function() { var nodeSelf = $(this); nodeSelf.parent().removeClass(&quot;expanded&quot;).addClass(&quot;collapsed&quot;); options.treeManager.updateTreeState(nodeSelf.data(&#x27;id&#x27;), &quot;collapsed&quot;); }); }); }; } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_7_445_904" class="killed">resources/xr/jquery/collapseAllButton.js:13:5 Removed return function(options) { return this.bind(&quot;click&quot;, function(evt) { evt.preventDefault(); options.treeContainer.find(&quot;.node-self.request, .node-self.requestGroup&quot;).each(function() { var nodeSelf = $(this); nodeSelf.parent().removeClass(&quot;expanded&quot;).addClass(&quot;collapsed&quot;); options.treeManager.updateTreeState(nodeSelf.data(&#x27;id&#x27;), &quot;collapsed&quot;); }); }); }; -&gt; KILLED</div><div id="mutation_8_480_897" class="killed">resources/xr/jquery/collapseAllButton.js:14:9 Removed return this.bind(&quot;click&quot;, function(evt) { evt.preventDefault(); options.treeContainer.find(&quot;.node-self.request, .node-self.requestGroup&quot;).each(function() { var nodeSelf = $(this); nodeSelf.parent().removeClass(&quot;expanded&quot;).addClass(&quot;collapsed&quot;); options.treeManager.updateTreeState(nodeSelf.data(&#x27;id&#x27;), &quot;collapsed&quot;); }); }); -&gt; KILLED</div><div id="mutation_9_497_504" class="killed">resources/xr/jquery/collapseAllButton.js:14:26 Replaced &quot;click&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_10_506_895" class="killed">resources/xr/jquery/collapseAllButton.js:14:35 Replaced function(evt) { evt.preventDefault(); options.treeContainer.find(&quot;.node-self.request, .node-self.requestGroup&quot;).each(function() { var nodeSelf = $(this); nodeSelf.parent().removeClass(&quot;expanded&quot;).addClass(&quot;collapsed&quot;); options.treeManager.updateTreeState(nodeSelf.data(&#x27;id&#x27;), &quot;collapsed&quot;); }); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_11_487_896" class="killed">resources/xr/jquery/collapseAllButton.js:14:16 Replaced this.bind(&quot;click&quot;, function(evt) { evt.preventDefault(); options.treeContainer.find(&quot;.node-self.request, .node-self.requestGroup&quot;).each(function() { var nodeSelf = $(this); nodeSelf.parent().removeClass(&quot;expanded&quot;).addClass(&quot;collapsed&quot;); options.treeManager.updateTreeState(nodeSelf.data(&#x27;id&#x27;), &quot;collapsed&quot;); }); }) with this -&gt; KILLED</div><div id="mutation_12_534_555" class="survived">resources/xr/jquery/collapseAllButton.js:15:13 Removed evt.preventDefault(); -&gt; SURVIVED</div><div id="mutation_14_534_554" class="survived">resources/xr/jquery/collapseAllButton.js:15:13 Replaced evt.preventDefault() with evt -&gt; SURVIVED</div><div id="mutation_38_569_642" class="killed">resources/xr/jquery/collapseAllButton.js:17:13 Replaced options.treeContainer.find(&quot;.node-self.request, .node-self.requestGroup&quot;) with options.treeContainer -&gt; KILLED</div><div id="mutation_15_648_883" class="killed">resources/xr/jquery/collapseAllButton.js:17:92 Replaced function() { var nodeSelf = $(this); nodeSelf.parent().removeClass(&quot;expanded&quot;).addClass(&quot;collapsed&quot;); options.treeManager.updateTreeState(nodeSelf.data(&#x27;id&#x27;), &quot;collapsed&quot;); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_16_569_884" class="killed">resources/xr/jquery/collapseAllButton.js:17:13 Replaced options.treeContainer.find(&quot;.node-self.request, .node-self.requestGroup&quot;).each(function() { var nodeSelf = $(this); nodeSelf.parent().removeClass(&quot;expanded&quot;).addClass(&quot;collapsed&quot;); options.treeManager.updateTreeState(nodeSelf.data(&#x27;id&#x27;), &quot;collapsed&quot;); }) with function() { var nodeSelf = $(this); nodeSelf.parent().removeClass(&quot;expanded&quot;).addClass(&quot;collapsed&quot;); options.treeManager.updateTreeState(nodeSelf.data(&#x27;id&#x27;), &quot;collapsed&quot;); } -&gt; KILLED</div><div id="mutation_17_569_884" class="killed">resources/xr/jquery/collapseAllButton.js:17:13 Replaced options.treeContainer.find(&quot;.node-self.request, .node-self.requestGroup&quot;).each(function() { var nodeSelf = $(this); nodeSelf.parent().removeClass(&quot;expanded&quot;).addClass(&quot;collapsed&quot;); options.treeManager.updateTreeState(nodeSelf.data(&#x27;id&#x27;), &quot;collapsed&quot;); }) with options.treeContainer.find(&quot;.node-self.request, .node-self.requestGroup&quot;) -&gt; KILLED</div><div id="mutation_37_569_642" class="killed">resources/xr/jquery/collapseAllButton.js:17:13 Replaced options.treeContainer.find(&quot;.node-self.request, .node-self.requestGroup&quot;) with &quot;.node-self.request, .node-self.requestGroup&quot; -&gt; KILLED</div><div id="mutation_36_596_641" class="killed">resources/xr/jquery/collapseAllButton.js:17:40 Replaced &quot;.node-self.request, .node-self.requestGroup&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_13_569_885" class="killed">resources/xr/jquery/collapseAllButton.js:17:13 Removed options.treeContainer.find(&quot;.node-self.request, .node-self.requestGroup&quot;).each(function() { var nodeSelf = $(this); nodeSelf.parent().removeClass(&quot;expanded&quot;).addClass(&quot;collapsed&quot;); options.treeManager.updateTreeState(nodeSelf.data(&#x27;id&#x27;), &quot;collapsed&quot;); }); -&gt; KILLED</div><div id="mutation_21_694_698" class="killed">resources/xr/jquery/collapseAllButton.js:18:34 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_18_677_700" class="killed">resources/xr/jquery/collapseAllButton.js:18:17 Removed var nodeSelf = $(this); -&gt; KILLED</div><div id="mutation_22_692_699" class="killed">resources/xr/jquery/collapseAllButton.js:18:32 Replaced $(this) with this -&gt; KILLED</div><div id="mutation_25_717_780" class="killed">resources/xr/jquery/collapseAllButton.js:19:17 Replaced nodeSelf.parent().removeClass(&quot;expanded&quot;).addClass(&quot;collapsed&quot;) with nodeSelf.parent().removeClass(&quot;expanded&quot;) -&gt; KILLED</div><div id="mutation_26_747_757" class="killed">resources/xr/jquery/collapseAllButton.js:19:47 Replaced &quot;expanded&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_23_768_779" class="killed">resources/xr/jquery/collapseAllButton.js:19:68 Replaced &quot;collapsed&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_28_717_758" class="killed">resources/xr/jquery/collapseAllButton.js:19:17 Replaced nodeSelf.parent().removeClass(&quot;expanded&quot;) with nodeSelf.parent() -&gt; KILLED</div><div id="mutation_29_717_734" class="killed">resources/xr/jquery/collapseAllButton.js:19:17 Replaced nodeSelf.parent() with nodeSelf -&gt; KILLED</div><div id="mutation_24_717_780" class="killed">resources/xr/jquery/collapseAllButton.js:19:17 Replaced nodeSelf.parent().removeClass(&quot;expanded&quot;).addClass(&quot;collapsed&quot;) with &quot;collapsed&quot; -&gt; KILLED</div><div id="mutation_19_717_781" class="killed">resources/xr/jquery/collapseAllButton.js:19:17 Removed nodeSelf.parent().removeClass(&quot;expanded&quot;).addClass(&quot;collapsed&quot;); -&gt; KILLED</div><div id="mutation_27_717_758" class="killed">resources/xr/jquery/collapseAllButton.js:19:17 Replaced nodeSelf.parent().removeClass(&quot;expanded&quot;) with &quot;expanded&quot; -&gt; KILLED</div><div id="mutation_32_799_868" class="killed">resources/xr/jquery/collapseAllButton.js:21:17 Replaced options.treeManager.updateTreeState(nodeSelf.data(&#x27;id&#x27;), &quot;collapsed&quot;) with options.treeManager -&gt; KILLED</div><div id="mutation_33_849_853" class="killed">resources/xr/jquery/collapseAllButton.js:21:67 Replaced &#x27;id&#x27; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_34_835_854" class="killed">resources/xr/jquery/collapseAllButton.js:21:53 Replaced nodeSelf.data(&#x27;id&#x27;) with &#x27;id&#x27; -&gt; KILLED</div><div id="mutation_35_835_854" class="killed">resources/xr/jquery/collapseAllButton.js:21:53 Replaced nodeSelf.data(&#x27;id&#x27;) with nodeSelf -&gt; KILLED</div><div id="mutation_20_799_869" class="killed">resources/xr/jquery/collapseAllButton.js:21:17 Removed options.treeManager.updateTreeState(nodeSelf.data(&#x27;id&#x27;), &quot;collapsed&quot;); -&gt; KILLED</div><div id="mutation_31_856_867" class="killed">resources/xr/jquery/collapseAllButton.js:21:74 Replaced &quot;collapsed&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_30_835_854" class="killed">resources/xr/jquery/collapseAllButton.js:21:53 Replaced nodeSelf.data(&#x27;id&#x27;) with &quot;MUTATION!&quot; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":67,"ignored":14,"untested":0,"survived":3}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>67</strong> of which <strong>3</strong> survived,&nbsp;
+        <strong>14</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>95.5%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/exceptions/index.html'">exceptions</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/exceptions/ExceptionsToolbarUpdater.js.html'">ExceptionsToolbarUpdater.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_13_62_68">"xr/_"</span>);</li><li>    var toolbar = require(<span class="code killed mutation_15_97_115">"xr/toolbar/index"</span>);</li><li>    var thresholds = require(<span class="code killed mutation_17_147_168">"xr/thresholds/index"</span>);</li><li></li><li>    /**</li><li>     * Updates Exceptions toolbar button with nr exceptions and</li><li>     * notifies the user when threshold is reached</li><li>     *</li><li>     * @constructor</li><li>     * @param {Object} deps Dependencies for testing:</li><li>     *   @param {Object} deps.toolbar</li><li>     *   @param {Object} deps.thresholds</li><li>     */</li><li>    function ExceptionsToolbarUpdater(deps) {</li><li>        <span class="code killed mutation_19_517_532">this.total = <span class="code killed mutation_21_530_531">0</span>;</span></li><li></li><li>        <span class="code killed mutation_28_542_549">_(<span class="code killed mutation_27_544_548">this</span>)</span>.inject(<span class="code killed mutation_22_557_561">deps</span>, <span class="code survived mutation_23_563_639">{</span></li><li><span class="code survived mutation_23_563_639">            <span class="code survived mutation_25_577_607">toolbar: toolbar,</span></span></li><li><span class="code survived mutation_25_577_607"><span class="code survived mutation_23_563_639">            </span><span class="code survived mutation_26_607_629">thresholds: thresholds</span></span></li><li><span class="code survived mutation_23_563_639">        }</span>);</li><li>    }</li><li></li><li>    <span class="code killed mutation_11_653_1804">ExceptionsToolbarUpdater.prototype = {</span></li><li><span class="code killed mutation_11_653_1804">        /**</span></li><li><span class="code killed mutation_11_653_1804">         * Resets updater with completely new requests data.</span></li><li><span class="code killed mutation_11_653_1804">         * @param {Object[]} requests</span></li><li><span class="code killed mutation_11_653_1804">         */</span></li><li><span class="code killed mutation_11_653_1804">        <span class="code killed mutation_29_823_1249">refresh: function(requests) {</span></span></li><li><span class="code killed mutation_29_823_1249"><span class="code killed mutation_11_653_1804">            <span class="code killed mutation_33_865_880">this.total = <span class="code killed mutation_36_878_879">0</span>;</span></span></span></li><li><span class="code killed mutation_29_823_1249"><span class="code killed mutation_11_653_1804">            <span class="code killed mutation_39_893_919"><span class="code killed mutation_38_893_919"><span class="code killed mutation_34_893_920">this.addRequests(<span class="code killed mutation_37_910_918">requests</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_29_823_1249"><span class="code killed mutation_11_653_1804"></li><li>            <span class="code killed mutation_35_934_1124">if (requests.length<span class="code killed mutation_40_953_958"> === </span><span class="code killed mutation_41_958_959">0</span>) {</span></span></span></li><li><span class="code killed mutation_35_934_1124"><span class="code killed mutation_29_823_1249"><span class="code killed mutation_11_653_1804">                // Ensure that exceptionsOccurred threshold gets reset to zero</span></span></span></li><li><span class="code killed mutation_35_934_1124"><span class="code killed mutation_29_823_1249"><span class="code killed mutation_11_653_1804">                <span class="code killed mutation_45_1058_1109"><span class="code killed mutation_42_1058_1110">this.thresholds.checkValue(<span class="code killed mutation_43_1085_1105">"exceptionsOccurred"</span>, <span class="code killed mutation_44_1107_1108">0</span>)</span>;</span></span></span></span></li><li><span class="code killed mutation_35_934_1124"><span class="code killed mutation_29_823_1249"><span class="code killed mutation_11_653_1804">            }</span></span></span></li><li><span class="code killed mutation_29_823_1249"><span class="code killed mutation_11_653_1804">        },</span></span></li><li><span class="code killed mutation_29_823_1249"><span class="code killed mutation_11_653_1804"></li><li>        /**</span></span></li><li><span class="code killed mutation_29_823_1249"><span class="code killed mutation_11_653_1804">         * Adds additional requests data.</span></span></li><li><span class="code killed mutation_29_823_1249"><span class="code killed mutation_11_653_1804">         * @param {Object[]} requests</span></span></li><li><span class="code killed mutation_29_823_1249"><span class="code killed mutation_11_653_1804">         */</span></span></li><li><span class="code killed mutation_29_823_1249"><span class="code killed mutation_11_653_1804">        </span><span class="code killed mutation_30_1249_1386">addRequests: function(requests) {</span></span></li><li><span class="code killed mutation_30_1249_1386"><span class="code killed mutation_11_653_1804">            <span class="code killed mutation_50_1295_1327"><span class="code killed mutation_49_1295_1327"><span class="code killed mutation_46_1295_1328">this.updateToolbarText(<span class="code killed mutation_48_1318_1326">requests</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_30_1249_1386"><span class="code killed mutation_11_653_1804"></li><li>            <span class="code killed mutation_51_1342_1364"><span class="code killed mutation_47_1342_1365">this.checkThresholds()</span>;</span></span></span></li><li><span class="code killed mutation_30_1249_1386"><span class="code killed mutation_11_653_1804">        },</span></span></li><li><span class="code killed mutation_30_1249_1386"><span class="code killed mutation_11_653_1804"></li><li>        </span><span class="code killed mutation_31_1386_1636">updateToolbarText: function(requests) {</span></span></li><li><span class="code killed mutation_31_1386_1636"><span class="code killed mutation_11_653_1804">            <span class="code killed mutation_52_1438_1548">this.total += <span class="code killed mutation_60_1452_1463"><span class="code killed mutation_57_1452_1541"><span class="code killed mutation_56_1452_1541"><span class="code killed mutation_54_1452_1547">_(<span class="code killed mutation_59_1454_1462">requests</span>)</span>.map(<span class="code killed mutation_55_1468_1540">function(rq){</span></span></span></span></span></span></span></li><li><span class="code killed mutation_57_1452_1541"><span class="code killed mutation_56_1452_1541"><span class="code killed mutation_55_1468_1540"><span class="code killed mutation_54_1452_1547"><span class="code killed mutation_52_1438_1548"><span class="code killed mutation_31_1386_1636"><span class="code killed mutation_11_653_1804">                <span class="code killed mutation_58_1498_1526">return rq.exceptions.length;</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_57_1452_1541"><span class="code killed mutation_56_1452_1541"><span class="code killed mutation_55_1468_1540"><span class="code killed mutation_54_1452_1547"><span class="code killed mutation_52_1438_1548"><span class="code killed mutation_31_1386_1636"><span class="code killed mutation_11_653_1804">            }</span>)</span></span>.sum()</span>;</span></span></span></li><li><span class="code killed mutation_31_1386_1636"><span class="code killed mutation_11_653_1804"></li><li>            <span class="code killed mutation_63_1562_1614"><span class="code killed mutation_53_1562_1615">this.toolbar.exceptions.setText(<span class="code killed mutation_61_1594_1601">"upper"</span>, <span class="code killed mutation_62_1603_1613">this.total</span>)</span>;</span></span></span></li><li><span class="code killed mutation_31_1386_1636"><span class="code killed mutation_11_653_1804">        },</span></span></li><li><span class="code killed mutation_31_1386_1636"><span class="code killed mutation_11_653_1804"></li><li>        </span><span class="code killed mutation_32_1636_1797">checkThresholds: function() {</span></span></li><li><span class="code killed mutation_32_1636_1797"><span class="code killed mutation_11_653_1804">            <span class="code killed mutation_64_1678_1787">if (this.total) {</span></span></span></li><li><span class="code killed mutation_64_1678_1787"><span class="code killed mutation_32_1636_1797"><span class="code killed mutation_11_653_1804">                <span class="code killed mutation_68_1712_1772"><span class="code killed mutation_65_1712_1773">this.thresholds.checkValue(<span class="code killed mutation_66_1739_1759">"exceptionsOccurred"</span>, <span class="code killed mutation_67_1761_1771">this.total</span>)</span>;</span></span></span></span></li><li><span class="code killed mutation_64_1678_1787"><span class="code killed mutation_32_1636_1797"><span class="code killed mutation_11_653_1804">            }</span></span></span></li><li><span class="code killed mutation_32_1636_1797"><span class="code killed mutation_11_653_1804">        }</span></span></li><li><span class="code killed mutation_11_653_1804">    };</span></li><li></li><li>    <span class="code killed mutation_12_1810_1842">return ExceptionsToolbarUpdater;</span></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_13_62_68" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_97_115" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:5:27 Replaced &quot;xr/toolbar/index&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_147_168" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:6:30 Replaced &quot;xr/thresholds/index&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_19_517_532" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:18:9 Removed this.total = 0; -&gt; KILLED</div><div id="mutation_21_530_531" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:18:22 Replaced 0 with 1 -&gt; KILLED</div><div id="mutation_28_542_549" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:20:9 Replaced _(this) with this -&gt; KILLED</div><div id="mutation_23_563_639" class="survived">resources/xr/exceptions/ExceptionsToolbarUpdater.js:20:30 Replaced { toolbar: toolbar, thresholds: thresholds } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_27_544_548" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:20:11 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_557_561" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:20:24 Replaced deps with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_25_577_607" class="survived">resources/xr/exceptions/ExceptionsToolbarUpdater.js:21:13 Removed toolbar: toolbar,  -&gt; SURVIVED</div><div id="mutation_26_607_629" class="survived">resources/xr/exceptions/ExceptionsToolbarUpdater.js:22:13 Removed thresholds: thresholds -&gt; SURVIVED</div><div id="mutation_11_653_1804" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:26:5 Removed ExceptionsToolbarUpdater.prototype = { /** * Resets updater with completely new requests data. * @param {Object[]} requests */ refresh: function(requests) { this.total = 0; this.addRequests(requests); if (requests.length === 0) { // Ensure that exceptionsOccurred threshold gets reset to zero this.thresholds.checkValue(&quot;exceptionsOccurred&quot;, 0); } }, /** * Adds additional requests data. * @param {Object[]} requests */ addRequests: function(requests) { this.updateToolbarText(requests); this.checkThresholds(); }, updateToolbarText: function(requests) { this.total += _(requests).map(function(rq){ return rq.exceptions.length; }).sum(); this.toolbar.exceptions.setText(&quot;upper&quot;, this.total); }, checkThresholds: function() { if (this.total) { this.thresholds.checkValue(&quot;exceptionsOccurred&quot;, this.total); } } }; -&gt; KILLED</div><div id="mutation_29_823_1249" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:31:9 Removed refresh: function(requests) { this.total = 0; this.addRequests(requests); if (requests.length === 0) { // Ensure that exceptionsOccurred threshold gets reset to zero this.thresholds.checkValue(&quot;exceptionsOccurred&quot;, 0); } }, /** * Adds additional requests data. * @param {Object[]} requests */  -&gt; KILLED</div><div id="mutation_33_865_880" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:32:13 Removed this.total = 0; -&gt; KILLED</div><div id="mutation_36_878_879" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:32:26 Replaced 0 with 1 -&gt; KILLED</div><div id="mutation_34_893_920" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:33:13 Removed this.addRequests(requests); -&gt; KILLED</div><div id="mutation_37_910_918" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:33:30 Replaced requests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_38_893_919" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:33:13 Replaced this.addRequests(requests) with requests -&gt; KILLED</div><div id="mutation_39_893_919" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:33:13 Replaced this.addRequests(requests) with this -&gt; KILLED</div><div id="mutation_35_934_1124" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:35:13 Removed if (requests.length === 0) { // Ensure that exceptionsOccurred threshold gets reset to zero this.thresholds.checkValue(&quot;exceptionsOccurred&quot;, 0); } -&gt; KILLED</div><div id="mutation_40_953_958" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:35:32 Replaced  ===  with !== -&gt; KILLED</div><div id="mutation_41_958_959" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:35:37 Replaced 0 with 1 -&gt; KILLED</div><div id="mutation_45_1058_1109" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:37:17 Replaced this.thresholds.checkValue(&quot;exceptionsOccurred&quot;, 0) with this.thresholds -&gt; KILLED</div><div id="mutation_44_1107_1108" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:37:66 Replaced 0 with 1 -&gt; KILLED</div><div id="mutation_43_1085_1105" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:37:44 Replaced &quot;exceptionsOccurred&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_42_1058_1110" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:37:17 Removed this.thresholds.checkValue(&quot;exceptionsOccurred&quot;, 0); -&gt; KILLED</div><div id="mutation_30_1249_1386" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:45:9 Removed addRequests: function(requests) { this.updateToolbarText(requests); this.checkThresholds(); },  -&gt; KILLED</div><div id="mutation_46_1295_1328" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:46:13 Removed this.updateToolbarText(requests); -&gt; KILLED</div><div id="mutation_48_1318_1326" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:46:36 Replaced requests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_49_1295_1327" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:46:13 Replaced this.updateToolbarText(requests) with requests -&gt; KILLED</div><div id="mutation_50_1295_1327" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:46:13 Replaced this.updateToolbarText(requests) with this -&gt; KILLED</div><div id="mutation_47_1342_1365" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:48:13 Removed this.checkThresholds(); -&gt; KILLED</div><div id="mutation_51_1342_1364" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:48:13 Replaced this.checkThresholds() with this -&gt; KILLED</div><div id="mutation_31_1386_1636" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:51:9 Removed updateToolbarText: function(requests) { this.total += _(requests).map(function(rq){ return rq.exceptions.length; }).sum(); this.toolbar.exceptions.setText(&quot;upper&quot;, this.total); },  -&gt; KILLED</div><div id="mutation_54_1452_1547" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:52:27 Replaced _(requests).map(function(rq){ return rq.exceptions.length; }).sum() with _(requests).map(function(rq){ return rq.exceptions.length; }) -&gt; KILLED</div><div id="mutation_52_1438_1548" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:52:13 Removed this.total += _(requests).map(function(rq){ return rq.exceptions.length; }).sum(); -&gt; KILLED</div><div id="mutation_60_1452_1463" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:52:27 Replaced _(requests) with requests -&gt; KILLED</div><div id="mutation_55_1468_1540" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:52:43 Replaced function(rq){ return rq.exceptions.length; } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_59_1454_1462" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:52:29 Replaced requests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_56_1452_1541" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:52:27 Replaced _(requests).map(function(rq){ return rq.exceptions.length; }) with function(rq){ return rq.exceptions.length; } -&gt; KILLED</div><div id="mutation_57_1452_1541" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:52:27 Replaced _(requests).map(function(rq){ return rq.exceptions.length; }) with _(requests) -&gt; KILLED</div><div id="mutation_58_1498_1526" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:53:17 Removed return rq.exceptions.length; -&gt; KILLED</div><div id="mutation_53_1562_1615" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:56:13 Removed this.toolbar.exceptions.setText(&quot;upper&quot;, this.total); -&gt; KILLED</div><div id="mutation_61_1594_1601" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:56:45 Replaced &quot;upper&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_62_1603_1613" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:56:54 Replaced this.total with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_63_1562_1614" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:56:13 Replaced this.toolbar.exceptions.setText(&quot;upper&quot;, this.total) with this.toolbar.exceptions -&gt; KILLED</div><div id="mutation_32_1636_1797" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:59:9 Removed checkThresholds: function() { if (this.total) { this.thresholds.checkValue(&quot;exceptionsOccurred&quot;, this.total); } } -&gt; KILLED</div><div id="mutation_64_1678_1787" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:60:13 Removed if (this.total) { this.thresholds.checkValue(&quot;exceptionsOccurred&quot;, this.total); } -&gt; KILLED</div><div id="mutation_68_1712_1772" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:61:17 Replaced this.thresholds.checkValue(&quot;exceptionsOccurred&quot;, this.total) with this.thresholds -&gt; KILLED</div><div id="mutation_65_1712_1773" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:61:17 Removed this.thresholds.checkValue(&quot;exceptionsOccurred&quot;, this.total); -&gt; KILLED</div><div id="mutation_66_1739_1759" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:61:44 Replaced &quot;exceptionsOccurred&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_67_1761_1771" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:61:66 Replaced this.total with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_12_1810_1842" class="killed">resources/xr/exceptions/ExceptionsToolbarUpdater.js:66:5 Removed return ExceptionsToolbarUpdater; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

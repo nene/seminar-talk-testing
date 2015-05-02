@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":51,"ignored":7,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>51</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/ignorelist/index.html'">ignorelist</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/ignorelist/Marker.js.html'">Marker.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_11_62_68">"xr/_"</span>);</li><li></li><li>    /**</li><li>     * Marks requests and queries when they are to be ignored.</li><li>     *</li><li>     * @constructor</li><li>     * @param {Object} cfg Config options:</li><li>     *   @param {RequestList} cfg.requestList</li><li>     *   @param {QueryList} cfg.queryList</li><li>     */</li><li>    <span class="code killed mutation_8_313_370">function Marker(cfg) {</span></li><li><span class="code killed mutation_8_313_370">        <span class="code killed mutation_18_344_351"><span class="code killed mutation_16_344_363"><span class="code killed mutation_15_344_363"><span class="code killed mutation_13_344_364">_(<span class="code killed mutation_17_346_350">this</span>)</span>.assign(<span class="code killed mutation_14_359_362">cfg</span>)</span></span>;</span></span></li><li><span class="code killed mutation_8_313_370">    }</span></li><li>    <span class="code killed mutation_9_375_1264">Marker.prototype = {</span></li><li><span class="code killed mutation_9_375_1264">        /**</span></li><li><span class="code killed mutation_9_375_1264">         * Marks requests and/or queries ignored when they are in ignore lists.</span></li><li><span class="code killed mutation_9_375_1264">         * @param {Object[]} requests</span></li><li><span class="code killed mutation_9_375_1264">         * @return {Object[]}</span></li><li><span class="code killed mutation_9_375_1264">         */</span></li><li><span class="code killed mutation_9_375_1264">        <span class="code killed mutation_19_576_809">mark: function(requests) {</span></span></li><li><span class="code killed mutation_19_576_809"><span class="code killed mutation_9_375_1264">            <span class="code killed mutation_26_615_757"><span class="code killed mutation_22_615_758">requests.forEach(<span class="code killed mutation_24_632_750">function(request){</span></span></span></span></span></li><li><span class="code killed mutation_26_615_757"><span class="code killed mutation_24_632_750"><span class="code killed mutation_22_615_758"><span class="code killed mutation_19_576_809"><span class="code killed mutation_9_375_1264">                <span class="code killed mutation_31_667_692"><span class="code killed mutation_30_667_692"><span class="code killed mutation_27_667_693">this.markRequest(<span class="code killed mutation_29_684_691">request</span>)</span></span>;</span></span></span></span></span></span></li><li><span class="code killed mutation_26_615_757"><span class="code killed mutation_24_632_750"><span class="code killed mutation_22_615_758"><span class="code killed mutation_19_576_809"><span class="code killed mutation_9_375_1264">                <span class="code killed mutation_34_710_735"><span class="code killed mutation_33_710_735"><span class="code killed mutation_28_710_736">this.markQueries(<span class="code killed mutation_32_727_734">request</span>)</span></span>;</span></span></span></span></span></span></li><li><span class="code killed mutation_26_615_757"><span class="code killed mutation_24_632_750"><span class="code killed mutation_22_615_758"><span class="code killed mutation_19_576_809"><span class="code killed mutation_9_375_1264">            }</span>, <span class="code killed mutation_25_752_756">this</span>)</span>;</span></span></span></li><li><span class="code killed mutation_19_576_809"><span class="code killed mutation_9_375_1264"></li><li>            <span class="code killed mutation_23_772_788">return requests;</span></span></span></li><li><span class="code killed mutation_19_576_809"><span class="code killed mutation_9_375_1264">        },</span></span></li><li><span class="code killed mutation_19_576_809"><span class="code killed mutation_9_375_1264"></li><li>        </span><span class="code killed mutation_20_809_1003">markRequest: function(request) {</span></span></li><li><span class="code killed mutation_20_809_1003"><span class="code killed mutation_9_375_1264">            <span class="code killed mutation_35_854_916">if (<span class="code killed mutation_37_858_859">!</span>this.requestList) {</span></span></span></li><li><span class="code killed mutation_35_854_916"><span class="code killed mutation_20_809_1003"><span class="code killed mutation_9_375_1264">                <span class="code killed mutation_38_895_902">return;</span></span></span></span></li><li><span class="code killed mutation_35_854_916"><span class="code killed mutation_20_809_1003"><span class="code killed mutation_9_375_1264">            }</span></span></span></li><li><span class="code killed mutation_20_809_1003"><span class="code killed mutation_9_375_1264"></li><li>            <span class="code killed mutation_36_930_982">request.ignored = <span class="code killed mutation_41_948_981"><span class="code killed mutation_40_948_981">this.requestList.matches(<span class="code killed mutation_39_973_980">request</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_20_809_1003"><span class="code killed mutation_9_375_1264">        },</span></span></li><li><span class="code killed mutation_20_809_1003"><span class="code killed mutation_9_375_1264"></li><li>        </span><span class="code killed mutation_21_1003_1257">markQueries: function(request) {</span></span></li><li><span class="code killed mutation_21_1003_1257"><span class="code killed mutation_9_375_1264">            <span class="code killed mutation_42_1048_1108">if (<span class="code killed mutation_44_1052_1053">!</span>this.queryList) {</span></span></span></li><li><span class="code killed mutation_42_1048_1108"><span class="code killed mutation_21_1003_1257"><span class="code killed mutation_9_375_1264">                <span class="code killed mutation_45_1087_1094">return;</span></span></span></span></li><li><span class="code killed mutation_42_1048_1108"><span class="code killed mutation_21_1003_1257"><span class="code killed mutation_9_375_1264">            }</span></span></span></li><li><span class="code killed mutation_21_1003_1257"><span class="code killed mutation_9_375_1264"></li><li>            <span class="code killed mutation_48_1122_1246"><span class="code killed mutation_43_1122_1247">request.queries.forEach(<span class="code killed mutation_46_1146_1239">function(query){</span></span></span></span></span></li><li><span class="code killed mutation_48_1122_1246"><span class="code killed mutation_46_1146_1239"><span class="code killed mutation_43_1122_1247"><span class="code killed mutation_21_1003_1257"><span class="code killed mutation_9_375_1264">                <span class="code killed mutation_49_1179_1225">query.ignored = <span class="code killed mutation_52_1195_1224"><span class="code killed mutation_51_1195_1224">this.queryList.matches(<span class="code killed mutation_50_1218_1223">query</span>)</span></span>;</span></span></span></span></span></span></li><li><span class="code killed mutation_48_1122_1246"><span class="code killed mutation_46_1146_1239"><span class="code killed mutation_43_1122_1247"><span class="code killed mutation_21_1003_1257"><span class="code killed mutation_9_375_1264">            }</span>, <span class="code killed mutation_47_1241_1245">this</span>)</span>;</span></span></span></li><li><span class="code killed mutation_21_1003_1257"><span class="code killed mutation_9_375_1264">        }</span></span></li><li><span class="code killed mutation_9_375_1264">    };</span></li><li></li><li>    <span class="code killed mutation_10_1270_1284">return Marker;</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_11_62_68" class="killed">resources/xr/ignorelist/Marker.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_313_370" class="killed">resources/xr/ignorelist/Marker.js:14:5 Removed function Marker(cfg) { _(this).assign(cfg); } -&gt; KILLED</div><div id="mutation_16_344_363" class="killed">resources/xr/ignorelist/Marker.js:15:9 Replaced _(this).assign(cfg) with _(this) -&gt; KILLED</div><div id="mutation_13_344_364" class="killed">resources/xr/ignorelist/Marker.js:15:9 Removed _(this).assign(cfg); -&gt; KILLED</div><div id="mutation_14_359_362" class="killed">resources/xr/ignorelist/Marker.js:15:24 Replaced cfg with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_344_363" class="killed">resources/xr/ignorelist/Marker.js:15:9 Replaced _(this).assign(cfg) with cfg -&gt; KILLED</div><div id="mutation_18_344_351" class="killed">resources/xr/ignorelist/Marker.js:15:9 Replaced _(this) with this -&gt; KILLED</div><div id="mutation_17_346_350" class="killed">resources/xr/ignorelist/Marker.js:15:11 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_9_375_1264" class="killed">resources/xr/ignorelist/Marker.js:17:5 Removed Marker.prototype = { /** * Marks requests and/or queries ignored when they are in ignore lists. * @param {Object[]} requests * @return {Object[]} */ mark: function(requests) { requests.forEach(function(request){ this.markRequest(request); this.markQueries(request); }, this); return requests; }, markRequest: function(request) { if (!this.requestList) { return; } request.ignored = this.requestList.matches(request); }, markQueries: function(request) { if (!this.queryList) { return; } request.queries.forEach(function(query){ query.ignored = this.queryList.matches(query); }, this); } }; -&gt; KILLED</div><div id="mutation_19_576_809" class="killed">resources/xr/ignorelist/Marker.js:23:9 Removed mark: function(requests) { requests.forEach(function(request){ this.markRequest(request); this.markQueries(request); }, this); return requests; },  -&gt; KILLED</div><div id="mutation_22_615_758" class="killed">resources/xr/ignorelist/Marker.js:24:13 Removed requests.forEach(function(request){ this.markRequest(request); this.markQueries(request); }, this); -&gt; KILLED</div><div id="mutation_24_632_750" class="killed">resources/xr/ignorelist/Marker.js:24:30 Replaced function(request){ this.markRequest(request); this.markQueries(request); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_26_615_757" class="killed">resources/xr/ignorelist/Marker.js:24:13 Replaced requests.forEach(function(request){ this.markRequest(request); this.markQueries(request); }, this) with requests -&gt; KILLED</div><div id="mutation_31_667_692" class="killed">resources/xr/ignorelist/Marker.js:25:17 Replaced this.markRequest(request) with this -&gt; KILLED</div><div id="mutation_27_667_693" class="killed">resources/xr/ignorelist/Marker.js:25:17 Removed this.markRequest(request); -&gt; KILLED</div><div id="mutation_30_667_692" class="killed">resources/xr/ignorelist/Marker.js:25:17 Replaced this.markRequest(request) with request -&gt; KILLED</div><div id="mutation_29_684_691" class="killed">resources/xr/ignorelist/Marker.js:25:34 Replaced request with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_28_710_736" class="killed">resources/xr/ignorelist/Marker.js:26:17 Removed this.markQueries(request); -&gt; KILLED</div><div id="mutation_32_727_734" class="killed">resources/xr/ignorelist/Marker.js:26:34 Replaced request with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_33_710_735" class="killed">resources/xr/ignorelist/Marker.js:26:17 Replaced this.markQueries(request) with request -&gt; KILLED</div><div id="mutation_34_710_735" class="killed">resources/xr/ignorelist/Marker.js:26:17 Replaced this.markQueries(request) with this -&gt; KILLED</div><div id="mutation_25_752_756" class="killed">resources/xr/ignorelist/Marker.js:27:16 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_23_772_788" class="killed">resources/xr/ignorelist/Marker.js:29:13 Removed return requests; -&gt; KILLED</div><div id="mutation_20_809_1003" class="killed">resources/xr/ignorelist/Marker.js:32:9 Removed markRequest: function(request) { if (!this.requestList) { return; } request.ignored = this.requestList.matches(request); },  -&gt; KILLED</div><div id="mutation_35_854_916" class="killed">resources/xr/ignorelist/Marker.js:33:13 Removed if (!this.requestList) { return; } -&gt; KILLED</div><div id="mutation_37_858_859" class="killed">resources/xr/ignorelist/Marker.js:33:34 Removed ! -&gt; KILLED</div><div id="mutation_38_895_902" class="killed">resources/xr/ignorelist/Marker.js:34:17 Removed return; -&gt; KILLED</div><div id="mutation_36_930_982" class="killed">resources/xr/ignorelist/Marker.js:37:13 Removed request.ignored = this.requestList.matches(request); -&gt; KILLED</div><div id="mutation_39_973_980" class="killed">resources/xr/ignorelist/Marker.js:37:56 Replaced request with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_40_948_981" class="killed">resources/xr/ignorelist/Marker.js:37:31 Replaced this.requestList.matches(request) with request -&gt; KILLED</div><div id="mutation_41_948_981" class="killed">resources/xr/ignorelist/Marker.js:37:31 Replaced this.requestList.matches(request) with this.requestList -&gt; KILLED</div><div id="mutation_21_1003_1257" class="killed">resources/xr/ignorelist/Marker.js:40:9 Removed markQueries: function(request) { if (!this.queryList) { return; } request.queries.forEach(function(query){ query.ignored = this.queryList.matches(query); }, this); } -&gt; KILLED</div><div id="mutation_42_1048_1108" class="killed">resources/xr/ignorelist/Marker.js:41:13 Removed if (!this.queryList) { return; } -&gt; KILLED</div><div id="mutation_44_1052_1053" class="killed">resources/xr/ignorelist/Marker.js:41:32 Removed ! -&gt; KILLED</div><div id="mutation_45_1087_1094" class="killed">resources/xr/ignorelist/Marker.js:42:17 Removed return; -&gt; KILLED</div><div id="mutation_46_1146_1239" class="killed">resources/xr/ignorelist/Marker.js:45:37 Replaced function(query){ query.ignored = this.queryList.matches(query); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_43_1122_1247" class="killed">resources/xr/ignorelist/Marker.js:45:13 Removed request.queries.forEach(function(query){ query.ignored = this.queryList.matches(query); }, this); -&gt; KILLED</div><div id="mutation_48_1122_1246" class="killed">resources/xr/ignorelist/Marker.js:45:13 Replaced request.queries.forEach(function(query){ query.ignored = this.queryList.matches(query); }, this) with request.queries -&gt; KILLED</div><div id="mutation_51_1195_1224" class="killed">resources/xr/ignorelist/Marker.js:46:33 Replaced this.queryList.matches(query) with query -&gt; KILLED</div><div id="mutation_52_1195_1224" class="killed">resources/xr/ignorelist/Marker.js:46:33 Replaced this.queryList.matches(query) with this.queryList -&gt; KILLED</div><div id="mutation_49_1179_1225" class="killed">resources/xr/ignorelist/Marker.js:46:17 Removed query.ignored = this.queryList.matches(query); -&gt; KILLED</div><div id="mutation_50_1218_1223" class="killed">resources/xr/ignorelist/Marker.js:46:56 Replaced query with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_47_1241_1245" class="killed">resources/xr/ignorelist/Marker.js:47:16 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_10_1270_1284" class="killed">resources/xr/ignorelist/Marker.js:51:5 Removed return Marker; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

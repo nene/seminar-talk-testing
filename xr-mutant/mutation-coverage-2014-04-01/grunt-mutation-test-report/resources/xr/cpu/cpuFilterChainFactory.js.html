@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":53,"ignored":21,"untested":0,"survived":24}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>53</strong> of which <strong>24</strong> survived,&nbsp;
+        <strong>21</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>54.7%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/cpu/index.html'">cpu</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/cpu/cpuFilterChainFactory.js.html'">cpuFilterChainFactory.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var FilterChain = require(<span class="code killed mutation_16_72_88">"xr/FilterChain"</span>);</li><li>    var TraceFilter = require(<span class="code killed mutation_18_121_141">"xr/cpu/TraceFilter"</span>);</li><li>    var RequestList = require(<span class="code killed mutation_20_174_201">"xr/ignorelist/RequestList"</span>);</li><li>    var Filter = require(<span class="code killed mutation_22_229_251">"xr/ignorelist/Filter"</span>);</li><li>    var Marker = require(<span class="code killed mutation_24_279_301">"xr/ignorelist/Marker"</span>);</li><li>    var FilterApplier = require(<span class="code killed mutation_26_336_365">"xr/ignorelist/FilterApplier"</span>);</li><li>    var RequestCounter = require(<span class="code killed mutation_28_401_431">"xr/ignorelist/RequestCounter"</span>);</li><li>    var settings = require(<span class="code killed mutation_30_461_474">"xr/settings"</span>);</li><li></li><li>    <span class="code survived mutation_15_482_1431">return {</span></li><li><span class="code survived mutation_15_482_1431">        /**</span></li><li><span class="code survived mutation_15_482_1431">         * Creates FilterChain configured for CPU view.</span></li><li><span class="code survived mutation_15_482_1431">         * @return {FilterChain}</span></li><li><span class="code survived mutation_15_482_1431">         */</span></li><li><span class="code survived mutation_15_482_1431">        <span class="code survived mutation_32_612_987">create: function() {</span></span></li><li><span class="code survived mutation_32_612_987"><span class="code survived mutation_15_482_1431">            <span class="code survived mutation_34_645_698">var ignorelistFilter = <span class="code survived mutation_36_668_697">this.createIgnorelistFilter()</span>;</span></span></span></li><li><span class="code survived mutation_32_612_987"><span class="code survived mutation_15_482_1431"></li><li>            <span class="code survived mutation_35_712_966">return new FilterChain({</span></span></span></li><li><span class="code survived mutation_35_712_966"><span class="code survived mutation_32_612_987"><span class="code survived mutation_15_482_1431">                <span class="code survived mutation_37_753_878">preFilters: [</span></span></span></span></li><li><span class="code survived mutation_37_753_878"><span class="code survived mutation_35_712_966"><span class="code survived mutation_32_612_987"><span class="code survived mutation_15_482_1431">                    <span class="code survived mutation_39_787_825">ignorelistFilter,</span></span></span></span></span></li><li><span class="code survived mutation_39_787_825"><span class="code survived mutation_37_753_878"><span class="code survived mutation_35_712_966"><span class="code survived mutation_32_612_987"><span class="code survived mutation_15_482_1431">                    </span><span class="code survived mutation_40_825_842">new TraceFilter()</span></span></span></span></span></li><li><span class="code survived mutation_37_753_878"><span class="code survived mutation_35_712_966"><span class="code survived mutation_32_612_987"><span class="code survived mutation_15_482_1431">                ],</span></span></span></span></li><li><span class="code survived mutation_37_753_878"><span class="code survived mutation_35_712_966"><span class="code survived mutation_32_612_987"><span class="code survived mutation_15_482_1431">                </span><span class="code survived mutation_38_878_950">getIgnoredCount: <span class="code survived mutation_43_895_950"><span class="code survived mutation_42_895_950">ignorelistFilter.getIgnoredCount.bind(<span class="code survived mutation_41_933_949">ignorelistFilter</span>)</span></span></span></span></span></span></li><li><span class="code survived mutation_35_712_966"><span class="code survived mutation_32_612_987"><span class="code survived mutation_15_482_1431">            });</span></span></span></li><li><span class="code survived mutation_32_612_987"><span class="code survived mutation_15_482_1431">        },</span></span></li><li><span class="code survived mutation_32_612_987"><span class="code survived mutation_15_482_1431"></li><li>        </span><span class="code survived mutation_33_987_1424">createIgnorelistFilter: function() {</span></span></li><li><span class="code survived mutation_33_987_1424"><span class="code survived mutation_15_482_1431">            <span class="code survived mutation_44_1036_1148">var filterCfg = {</span></span></span></li><li><span class="code survived mutation_44_1036_1148"><span class="code survived mutation_33_987_1424"><span class="code survived mutation_15_482_1431">                <span class="code survived mutation_46_1070_1133">requestList: new RequestList(<span class="code survived mutation_47_1099_1123">settings.getIgnorelist()</span>.requests)</span></span></span></span></li><li><span class="code survived mutation_44_1036_1148"><span class="code survived mutation_33_987_1424"><span class="code survived mutation_15_482_1431">            };</span></span></span></li><li><span class="code survived mutation_33_987_1424"><span class="code survived mutation_15_482_1431"></li><li>            <span class="code survived mutation_45_1162_1414">return new FilterApplier({</span></span></span></li><li><span class="code survived mutation_45_1162_1414"><span class="code survived mutation_33_987_1424"><span class="code survived mutation_15_482_1431">                <span class="code survived mutation_48_1205_1267">showIgnores: <span class="code survived mutation_54_1218_1249"><span class="code survived mutation_53_1218_1249">settings.get(<span class="code survived mutation_52_1231_1248">"showIgnores.cpu"</span>)</span></span>,</span></span></span></span></li><li><span class="code survived mutation_48_1205_1267"><span class="code survived mutation_45_1162_1414"><span class="code survived mutation_33_987_1424"><span class="code survived mutation_15_482_1431">                </span><span class="code survived mutation_49_1267_1318">listFilter: new Filter(filterCfg),</span></span></span></span></li><li><span class="code survived mutation_49_1267_1318"><span class="code survived mutation_45_1162_1414"><span class="code survived mutation_33_987_1424"><span class="code survived mutation_15_482_1431">                </span><span class="code survived mutation_50_1318_1369">listMarker: new Marker(filterCfg),</span></span></span></span></li><li><span class="code survived mutation_50_1318_1369"><span class="code survived mutation_45_1162_1414"><span class="code survived mutation_33_987_1424"><span class="code survived mutation_15_482_1431">                </span><span class="code survived mutation_51_1369_1398">counter: new RequestCounter()</span></span></span></span></li><li><span class="code survived mutation_45_1162_1414"><span class="code survived mutation_33_987_1424"><span class="code survived mutation_15_482_1431">            });</span></span></span></li><li><span class="code survived mutation_33_987_1424"><span class="code survived mutation_15_482_1431">        }</span></span></li><li><span class="code survived mutation_15_482_1431">    };</span></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_16_72_88" class="killed">resources/xr/cpu/cpuFilterChainFactory.js:4:31 Replaced &quot;xr/FilterChain&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_18_121_141" class="killed">resources/xr/cpu/cpuFilterChainFactory.js:5:31 Replaced &quot;xr/cpu/TraceFilter&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_174_201" class="killed">resources/xr/cpu/cpuFilterChainFactory.js:6:31 Replaced &quot;xr/ignorelist/RequestList&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_229_251" class="killed">resources/xr/cpu/cpuFilterChainFactory.js:7:26 Replaced &quot;xr/ignorelist/Filter&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_24_279_301" class="killed">resources/xr/cpu/cpuFilterChainFactory.js:8:26 Replaced &quot;xr/ignorelist/Marker&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_26_336_365" class="killed">resources/xr/cpu/cpuFilterChainFactory.js:9:33 Replaced &quot;xr/ignorelist/FilterApplier&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_28_401_431" class="killed">resources/xr/cpu/cpuFilterChainFactory.js:10:34 Replaced &quot;xr/ignorelist/RequestCounter&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_30_461_474" class="killed">resources/xr/cpu/cpuFilterChainFactory.js:11:28 Replaced &quot;xr/settings&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_482_1431" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:13:5 Removed return { /** * Creates FilterChain configured for CPU view. * @return {FilterChain} */ create: function() { var ignorelistFilter = this.createIgnorelistFilter(); return new FilterChain({ preFilters: [ ignorelistFilter, new TraceFilter() ], getIgnoredCount: ignorelistFilter.getIgnoredCount.bind(ignorelistFilter) }); }, createIgnorelistFilter: function() { var filterCfg = { requestList: new RequestList(settings.getIgnorelist().requests) }; return new FilterApplier({ showIgnores: settings.get(&quot;showIgnores.cpu&quot;), listFilter: new Filter(filterCfg), listMarker: new Marker(filterCfg), counter: new RequestCounter() }); } }; -&gt; SURVIVED</div><div id="mutation_32_612_987" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:18:9 Removed create: function() { var ignorelistFilter = this.createIgnorelistFilter(); return new FilterChain({ preFilters: [ ignorelistFilter, new TraceFilter() ], getIgnoredCount: ignorelistFilter.getIgnoredCount.bind(ignorelistFilter) }); },  -&gt; SURVIVED</div><div id="mutation_34_645_698" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:19:13 Removed var ignorelistFilter = this.createIgnorelistFilter(); -&gt; SURVIVED</div><div id="mutation_36_668_697" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:19:36 Replaced this.createIgnorelistFilter() with this -&gt; SURVIVED</div><div id="mutation_35_712_966" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:21:13 Removed return new FilterChain({ preFilters: [ ignorelistFilter, new TraceFilter() ], getIgnoredCount: ignorelistFilter.getIgnoredCount.bind(ignorelistFilter) }); -&gt; SURVIVED</div><div id="mutation_37_753_878" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:22:17 Removed preFilters: [ ignorelistFilter, new TraceFilter() ],  -&gt; SURVIVED</div><div id="mutation_39_787_825" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:23:21 Removed ignorelistFilter,  -&gt; SURVIVED</div><div id="mutation_40_825_842" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:24:21 Removed new TraceFilter() -&gt; SURVIVED</div><div id="mutation_38_878_950" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:26:17 Removed getIgnoredCount: ignorelistFilter.getIgnoredCount.bind(ignorelistFilter) -&gt; SURVIVED</div><div id="mutation_41_933_949" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:26:72 Replaced ignorelistFilter with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_42_895_950" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:26:34 Replaced ignorelistFilter.getIgnoredCount.bind(ignorelistFilter) with ignorelistFilter -&gt; SURVIVED</div><div id="mutation_43_895_950" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:26:34 Replaced ignorelistFilter.getIgnoredCount.bind(ignorelistFilter) with ignorelistFilter.getIgnoredCount -&gt; SURVIVED</div><div id="mutation_33_987_1424" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:30:9 Removed createIgnorelistFilter: function() { var filterCfg = { requestList: new RequestList(settings.getIgnorelist().requests) }; return new FilterApplier({ showIgnores: settings.get(&quot;showIgnores.cpu&quot;), listFilter: new Filter(filterCfg), listMarker: new Marker(filterCfg), counter: new RequestCounter() }); } -&gt; SURVIVED</div><div id="mutation_44_1036_1148" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:31:13 Removed var filterCfg = { requestList: new RequestList(settings.getIgnorelist().requests) }; -&gt; SURVIVED</div><div id="mutation_47_1099_1123" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:32:46 Replaced settings.getIgnorelist() with settings -&gt; SURVIVED</div><div id="mutation_46_1070_1133" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:32:17 Removed requestList: new RequestList(settings.getIgnorelist().requests) -&gt; SURVIVED</div><div id="mutation_45_1162_1414" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:35:13 Removed return new FilterApplier({ showIgnores: settings.get(&quot;showIgnores.cpu&quot;), listFilter: new Filter(filterCfg), listMarker: new Marker(filterCfg), counter: new RequestCounter() }); -&gt; SURVIVED</div><div id="mutation_48_1205_1267" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:36:17 Removed showIgnores: settings.get(&quot;showIgnores.cpu&quot;),  -&gt; SURVIVED</div><div id="mutation_52_1231_1248" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:36:43 Replaced &quot;showIgnores.cpu&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_53_1218_1249" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:36:30 Replaced settings.get(&quot;showIgnores.cpu&quot;) with &quot;showIgnores.cpu&quot; -&gt; SURVIVED</div><div id="mutation_54_1218_1249" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:36:30 Replaced settings.get(&quot;showIgnores.cpu&quot;) with settings -&gt; SURVIVED</div><div id="mutation_49_1267_1318" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:37:17 Removed listFilter: new Filter(filterCfg),  -&gt; SURVIVED</div><div id="mutation_50_1318_1369" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:38:17 Removed listMarker: new Marker(filterCfg),  -&gt; SURVIVED</div><div id="mutation_51_1369_1398" class="survived">resources/xr/cpu/cpuFilterChainFactory.js:39:17 Removed counter: new RequestCounter() -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

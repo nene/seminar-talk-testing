@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#successRate {
+    padding: 2px;
+    border: none;
+}
+#files {
+    margin-left: 30px;
+}
+#files .perc {
+    width: 25%;
+    text-align: right;
+}
+.link {
+    cursor: pointer;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript"></script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>603</strong> of which <strong>84</strong> survived,&nbsp;
+        <strong>70</strong> ignored and <strong>0</strong> untested</p>
+    <span id="successRate" class="killed">Mutation success rate: <strong>86.1%</strong></span>
+</div>
+<h2></h2>
+<table id='files'><tr><td><span class="link killed" onclick="location.href='ExceptionsFilterChain.js.html'">ExceptionsFilterChain.js.html</span></td><td class="perc">86.1%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='ExceptionsToolbarUpdater.js.html'">ExceptionsToolbarUpdater.js.html</span></td><td class="perc">95.5%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='ExceptionsTreeBuilder.js.html'">ExceptionsTreeBuilder.js.html</span></td><td class="perc">95.8%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='ExceptionsView.js.html'">ExceptionsView.js.html</span></td><td class="perc">78.9%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='exceptionsTreeFactory.js.html'">exceptionsTreeFactory.js.html</span></td><td class="perc">63.6%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='invertExceptions.js.html'">invertExceptions.js.html</span></td><td class="perc">92.9%</td></tr>
+</table>
+</body>
+</html>

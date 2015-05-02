@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":48,"ignored":7,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>48</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/DefaultSettings.js.html'">DefaultSettings.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_11_62_68">"xr/_"</span>);</li><li></li><li>    /**</li><li>     * Merges default settings with loaded settings.</li><li>     *</li><li>     * @param {Object} defaults The actual defaults</li><li>     */</li><li>    <span class="code killed mutation_8_204_280">function DefaultSettings(defaults) {</span></li><li><span class="code killed mutation_8_204_280">        <span class="code killed mutation_13_249_274">this.defaults = defaults;</span></span></li><li><span class="code killed mutation_8_204_280">    }</span></li><li>    <span class="code killed mutation_9_285_1664">DefaultSettings.prototype = {</span></li><li><span class="code killed mutation_9_285_1664">        /**</span></li><li><span class="code killed mutation_9_285_1664">         * Applies defaults to settings.</span></li><li><span class="code killed mutation_9_285_1664">         * @param  {Object} loadedSettings</span></li><li><span class="code killed mutation_9_285_1664">         * @return {Object}</span></li><li><span class="code killed mutation_9_285_1664">         */</span></li><li><span class="code killed mutation_9_285_1664">        <span class="code killed mutation_14_459_861">apply: function(loadedSettings) {</span></span></li><li><span class="code killed mutation_14_459_861"><span class="code killed mutation_9_285_1664">            <span class="code killed mutation_16_505_562">var settings = <span class="code killed mutation_21_520_561">this.merge(<span class="code killed mutation_19_531_545">loadedSettings</span>, <span class="code killed mutation_20_547_560">this.defaults</span>)</span>;</span></span></span></li><li><span class="code killed mutation_14_459_861"><span class="code killed mutation_9_285_1664"></li><li>            // Special case of exceptionsOccurred.value which we force to always be 0</span></span></li><li><span class="code killed mutation_14_459_861"><span class="code killed mutation_9_285_1664">            <span class="code killed mutation_17_662_810">if (settings.thresholds<span class="code killed mutation_22_685_689"> && </span>settings.thresholds.exceptionsOccurred) {</span></span></span></li><li><span class="code killed mutation_17_662_810"><span class="code killed mutation_14_459_861"><span class="code killed mutation_9_285_1664">                <span class="code killed mutation_23_747_796">settings.thresholds.exceptionsOccurred.value = <span class="code killed mutation_24_794_795">0</span>;</span></span></span></span></li><li><span class="code killed mutation_17_662_810"><span class="code killed mutation_14_459_861"><span class="code killed mutation_9_285_1664">            }</span></span></span></li><li><span class="code killed mutation_14_459_861"><span class="code killed mutation_9_285_1664"></li><li>            <span class="code killed mutation_18_824_840">return settings;</span></span></span></li><li><span class="code killed mutation_14_459_861"><span class="code killed mutation_9_285_1664">        },</span></span></li><li><span class="code killed mutation_14_459_861"><span class="code killed mutation_9_285_1664"></li><li>        </span><span class="code killed mutation_15_861_1657">merge: function(loadedSettings, defaults) {</span></span></li><li><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">            <span class="code killed mutation_25_917_986">if (<span class="code killed mutation_29_921_922">!</span>loadedSettings) {</span></span></span></li><li><span class="code killed mutation_25_917_986"><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">                <span class="code killed mutation_30_956_972">return defaults;</span></span></span></span></li><li><span class="code killed mutation_25_917_986"><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">            }</span></span></span></li><li><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664"></li><li>            <span class="code killed mutation_26_1000_1018">var settings = {};</span></span></span></li><li><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">            <span class="code killed mutation_49_1031_1042"><span class="code killed mutation_33_1031_1616"><span class="code killed mutation_27_1031_1617">_(<span class="code killed mutation_48_1033_1041">defaults</span>)</span>.forEach(<span class="code killed mutation_31_1051_1609">function(defaultValue, key){</span></span></span></span></span></li><li><span class="code killed mutation_33_1031_1616"><span class="code killed mutation_31_1051_1609"><span class="code killed mutation_27_1031_1617"><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">                <span class="code killed mutation_34_1096_1595">if (<span class="code killed mutation_37_1100_1134"><span class="code killed mutation_36_1100_1134">loadedSettings.hasOwnProperty(<span class="code killed mutation_35_1130_1133">key</span>)</span></span>) {</span></span></span></span></span></span></li><li><span class="code killed mutation_34_1096_1595"><span class="code killed mutation_33_1031_1616"><span class="code killed mutation_31_1051_1609"><span class="code killed mutation_27_1031_1617"><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">                    <span class="code killed mutation_38_1158_1194">settings[key] = loadedSettings[key];</span></span></span></span></span></span></span></li><li><span class="code killed mutation_34_1096_1595"><span class="code killed mutation_33_1031_1616"><span class="code killed mutation_31_1051_1609"><span class="code killed mutation_27_1031_1617"><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">                    // Recursively apply additional defaults</span></span></span></span></span></span></li><li><span class="code killed mutation_34_1096_1595"><span class="code killed mutation_33_1031_1616"><span class="code killed mutation_31_1051_1609"><span class="code killed mutation_27_1031_1617"><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">                    // e.g. when additional thresholds have been added</span></span></span></span></span></span></li><li><span class="code killed mutation_34_1096_1595"><span class="code killed mutation_33_1031_1616"><span class="code killed mutation_31_1051_1609"><span class="code killed mutation_27_1031_1617"><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">                    <span class="code killed mutation_39_1347_1486">if (<span class="code killed mutation_42_1351_1380"><span class="code killed mutation_41_1351_1380">_.isPlainObject(<span class="code killed mutation_40_1367_1379">defaultValue</span>)</span></span>) {</span></span></span></span></span></span></span></li><li><span class="code killed mutation_39_1347_1486"><span class="code killed mutation_34_1096_1595"><span class="code killed mutation_33_1031_1616"><span class="code killed mutation_31_1051_1609"><span class="code killed mutation_27_1031_1617"><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">                        <span class="code killed mutation_43_1408_1464">settings[key] = <span class="code killed mutation_46_1424_1463">this.merge(<span class="code killed mutation_44_1435_1448">settings[key]</span>, <span class="code killed mutation_45_1450_1462">defaultValue</span>)</span>;</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_39_1347_1486"><span class="code killed mutation_34_1096_1595"><span class="code killed mutation_33_1031_1616"><span class="code killed mutation_31_1051_1609"><span class="code killed mutation_27_1031_1617"><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">                    }</span></span></span></span></span></span></span></li><li><span class="code killed mutation_34_1096_1595"><span class="code killed mutation_33_1031_1616"><span class="code killed mutation_31_1051_1609"><span class="code killed mutation_27_1031_1617"><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">                }</span></span></span></span></span></span></li><li><span class="code killed mutation_34_1096_1595"><span class="code killed mutation_33_1031_1616"><span class="code killed mutation_31_1051_1609"><span class="code killed mutation_27_1031_1617"><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">                else {</span></span></span></span></span></span></li><li><span class="code killed mutation_34_1096_1595"><span class="code killed mutation_33_1031_1616"><span class="code killed mutation_31_1051_1609"><span class="code killed mutation_27_1031_1617"><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">                    <span class="code killed mutation_47_1548_1577">settings[key] = defaultValue;</span></span></span></span></span></span></span></li><li><span class="code killed mutation_34_1096_1595"><span class="code killed mutation_33_1031_1616"><span class="code killed mutation_31_1051_1609"><span class="code killed mutation_27_1031_1617"><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">                }</span></span></span></span></span></span></li><li><span class="code killed mutation_33_1031_1616"><span class="code killed mutation_31_1051_1609"><span class="code killed mutation_27_1031_1617"><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">            }</span>, <span class="code killed mutation_32_1611_1615">this</span>)</span>;</span></span></span></li><li><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664"></li><li>            <span class="code killed mutation_28_1631_1647">return settings;</span></span></span></li><li><span class="code killed mutation_15_861_1657"><span class="code killed mutation_9_285_1664">        }</span></span></li><li><span class="code killed mutation_9_285_1664">    };</span></li><li></li><li>    <span class="code killed mutation_10_1670_1693">return DefaultSettings;</span></li><li>});</li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_11_62_68" class="killed">resources/xr/DefaultSettings.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_204_280" class="killed">resources/xr/DefaultSettings.js:11:5 Removed function DefaultSettings(defaults) { this.defaults = defaults; } -&gt; KILLED</div><div id="mutation_13_249_274" class="killed">resources/xr/DefaultSettings.js:12:9 Removed this.defaults = defaults; -&gt; KILLED</div><div id="mutation_9_285_1664" class="killed">resources/xr/DefaultSettings.js:14:5 Removed DefaultSettings.prototype = { /** * Applies defaults to settings. * @param {Object} loadedSettings * @return {Object} */ apply: function(loadedSettings) { var settings = this.merge(loadedSettings, this.defaults); // Special case of exceptionsOccurred.value which we force to always be 0 if (settings.thresholds &amp;&amp; settings.thresholds.exceptionsOccurred) { settings.thresholds.exceptionsOccurred.value = 0; } return settings; }, merge: function(loadedSettings, defaults) { if (!loadedSettings) { return defaults; } var settings = {}; _(defaults).forEach(function(defaultValue, key){ if (loadedSettings.hasOwnProperty(key)) { settings[key] = loadedSettings[key]; // Recursively apply additional defaults // e.g. when additional thresholds have been added if (_.isPlainObject(defaultValue)) { settings[key] = this.merge(settings[key], defaultValue); } } else { settings[key] = defaultValue; } }, this); return settings; } }; -&gt; KILLED</div><div id="mutation_14_459_861" class="killed">resources/xr/DefaultSettings.js:20:9 Removed apply: function(loadedSettings) { var settings = this.merge(loadedSettings, this.defaults); // Special case of exceptionsOccurred.value which we force to always be 0 if (settings.thresholds &amp;&amp; settings.thresholds.exceptionsOccurred) { settings.thresholds.exceptionsOccurred.value = 0; } return settings; },  -&gt; KILLED</div><div id="mutation_16_505_562" class="killed">resources/xr/DefaultSettings.js:21:13 Removed var settings = this.merge(loadedSettings, this.defaults); -&gt; KILLED</div><div id="mutation_21_520_561" class="killed">resources/xr/DefaultSettings.js:21:28 Replaced this.merge(loadedSettings, this.defaults) with this -&gt; KILLED</div><div id="mutation_19_531_545" class="killed">resources/xr/DefaultSettings.js:21:39 Replaced loadedSettings with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_547_560" class="killed">resources/xr/DefaultSettings.js:21:55 Replaced this.defaults with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_685_689" class="killed">resources/xr/DefaultSettings.js:24:36 Replaced  &amp;&amp;  with || -&gt; KILLED</div><div id="mutation_17_662_810" class="killed">resources/xr/DefaultSettings.js:24:13 Removed if (settings.thresholds &amp;&amp; settings.thresholds.exceptionsOccurred) { settings.thresholds.exceptionsOccurred.value = 0; } -&gt; KILLED</div><div id="mutation_23_747_796" class="killed">resources/xr/DefaultSettings.js:25:17 Removed settings.thresholds.exceptionsOccurred.value = 0; -&gt; KILLED</div><div id="mutation_24_794_795" class="killed">resources/xr/DefaultSettings.js:25:64 Replaced 0 with 1 -&gt; KILLED</div><div id="mutation_18_824_840" class="killed">resources/xr/DefaultSettings.js:28:13 Removed return settings; -&gt; KILLED</div><div id="mutation_15_861_1657" class="killed">resources/xr/DefaultSettings.js:31:9 Removed merge: function(loadedSettings, defaults) { if (!loadedSettings) { return defaults; } var settings = {}; _(defaults).forEach(function(defaultValue, key){ if (loadedSettings.hasOwnProperty(key)) { settings[key] = loadedSettings[key]; // Recursively apply additional defaults // e.g. when additional thresholds have been added if (_.isPlainObject(defaultValue)) { settings[key] = this.merge(settings[key], defaultValue); } } else { settings[key] = defaultValue; } }, this); return settings; } -&gt; KILLED</div><div id="mutation_29_921_922" class="killed">resources/xr/DefaultSettings.js:32:32 Removed ! -&gt; KILLED</div><div id="mutation_25_917_986" class="killed">resources/xr/DefaultSettings.js:32:13 Removed if (!loadedSettings) { return defaults; } -&gt; KILLED</div><div id="mutation_30_956_972" class="killed">resources/xr/DefaultSettings.js:33:17 Removed return defaults; -&gt; KILLED</div><div id="mutation_26_1000_1018" class="killed">resources/xr/DefaultSettings.js:36:13 Removed var settings = {}; -&gt; KILLED</div><div id="mutation_48_1033_1041" class="killed">resources/xr/DefaultSettings.js:37:15 Replaced defaults with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_27_1031_1617" class="killed">resources/xr/DefaultSettings.js:37:13 Removed _(defaults).forEach(function(defaultValue, key){ if (loadedSettings.hasOwnProperty(key)) { settings[key] = loadedSettings[key]; // Recursively apply additional defaults // e.g. when additional thresholds have been added if (_.isPlainObject(defaultValue)) { settings[key] = this.merge(settings[key], defaultValue); } } else { settings[key] = defaultValue; } }, this); -&gt; KILLED</div><div id="mutation_49_1031_1042" class="killed">resources/xr/DefaultSettings.js:37:13 Replaced _(defaults) with defaults -&gt; KILLED</div><div id="mutation_31_1051_1609" class="killed">resources/xr/DefaultSettings.js:37:33 Replaced function(defaultValue, key){ if (loadedSettings.hasOwnProperty(key)) { settings[key] = loadedSettings[key]; // Recursively apply additional defaults // e.g. when additional thresholds have been added if (_.isPlainObject(defaultValue)) { settings[key] = this.merge(settings[key], defaultValue); } } else { settings[key] = defaultValue; } } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_33_1031_1616" class="killed">resources/xr/DefaultSettings.js:37:13 Replaced _(defaults).forEach(function(defaultValue, key){ if (loadedSettings.hasOwnProperty(key)) { settings[key] = loadedSettings[key]; // Recursively apply additional defaults // e.g. when additional thresholds have been added if (_.isPlainObject(defaultValue)) { settings[key] = this.merge(settings[key], defaultValue); } } else { settings[key] = defaultValue; } }, this) with _(defaults) -&gt; KILLED</div><div id="mutation_35_1130_1133" class="killed">resources/xr/DefaultSettings.js:38:51 Replaced key with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_36_1100_1134" class="killed">resources/xr/DefaultSettings.js:38:21 Replaced loadedSettings.hasOwnProperty(key) with key -&gt; KILLED</div><div id="mutation_37_1100_1134" class="killed">resources/xr/DefaultSettings.js:38:21 Replaced loadedSettings.hasOwnProperty(key) with loadedSettings -&gt; KILLED</div><div id="mutation_34_1096_1595" class="killed">resources/xr/DefaultSettings.js:38:17 Removed if (loadedSettings.hasOwnProperty(key)) { settings[key] = loadedSettings[key]; // Recursively apply additional defaults // e.g. when additional thresholds have been added if (_.isPlainObject(defaultValue)) { settings[key] = this.merge(settings[key], defaultValue); } } else { settings[key] = defaultValue; } -&gt; KILLED</div><div id="mutation_38_1158_1194" class="killed">resources/xr/DefaultSettings.js:39:21 Removed settings[key] = loadedSettings[key]; -&gt; KILLED</div><div id="mutation_42_1351_1380" class="killed">resources/xr/DefaultSettings.js:42:25 Replaced _.isPlainObject(defaultValue) with _ -&gt; KILLED</div><div id="mutation_39_1347_1486" class="killed">resources/xr/DefaultSettings.js:42:21 Removed if (_.isPlainObject(defaultValue)) { settings[key] = this.merge(settings[key], defaultValue); } -&gt; KILLED</div><div id="mutation_40_1367_1379" class="killed">resources/xr/DefaultSettings.js:42:41 Replaced defaultValue with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_41_1351_1380" class="killed">resources/xr/DefaultSettings.js:42:25 Replaced _.isPlainObject(defaultValue) with defaultValue -&gt; KILLED</div><div id="mutation_43_1408_1464" class="killed">resources/xr/DefaultSettings.js:43:25 Removed settings[key] = this.merge(settings[key], defaultValue); -&gt; KILLED</div><div id="mutation_44_1435_1448" class="killed">resources/xr/DefaultSettings.js:43:52 Replaced settings[key] with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_45_1450_1462" class="killed">resources/xr/DefaultSettings.js:43:67 Replaced defaultValue with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_46_1424_1463" class="killed">resources/xr/DefaultSettings.js:43:41 Replaced this.merge(settings[key], defaultValue) with this -&gt; KILLED</div><div id="mutation_47_1548_1577" class="killed">resources/xr/DefaultSettings.js:47:21 Removed settings[key] = defaultValue; -&gt; KILLED</div><div id="mutation_32_1611_1615" class="killed">resources/xr/DefaultSettings.js:49:16 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_28_1631_1647" class="killed">resources/xr/DefaultSettings.js:51:13 Removed return settings; -&gt; KILLED</div><div id="mutation_10_1670_1693" class="killed">resources/xr/DefaultSettings.js:55:5 Removed return DefaultSettings; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

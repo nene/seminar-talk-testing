@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":49,"ignored":9,"untested":0,"survived":40}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>49</strong> of which <strong>40</strong> survived,&nbsp;
+        <strong>9</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>18.4%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/version.js.html'">version.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var alerts = require(<span class="code survived mutation_14_67_78">"xr/alerts"</span>);</li><li>    var vmInfo = require(<span class="code survived mutation_16_106_117">"xr/vmInfo"</span>);</li><li></li><li>    <span class="code survived mutation_9_125_519">return {</span></li><li><span class="code survived mutation_9_125_519">        /**</span></li><li><span class="code survived mutation_9_125_519">         * Checks whether new XRebel version is available and displays a popup alert if so.</span></li><li><span class="code survived mutation_9_125_519">         *</span></li><li><span class="code survived mutation_9_125_519">         * @param {Function} onComplete Callback to call when done.</span></li><li><span class="code survived mutation_9_125_519">         */</span></li><li><span class="code survived mutation_9_125_519">        <span class="code survived mutation_18_337_512">checkForNew: function(onComplete) {</span></span></li><li><span class="code survived mutation_18_337_512"><span class="code survived mutation_9_125_519">            <span class="code survived mutation_19_385_475">if (isOutdated()<span class="code survived mutation_21_401_405"> && </span><span class="code survived mutation_22_405_406">!</span>isUserNotified()) {</span></span></span></li><li><span class="code survived mutation_19_385_475"><span class="code survived mutation_18_337_512"><span class="code survived mutation_9_125_519">                <span class="code survived mutation_23_442_461">notifyNewVersion();</span></span></span></span></li><li><span class="code survived mutation_19_385_475"><span class="code survived mutation_18_337_512"><span class="code survived mutation_9_125_519">            }</span></span></span></li><li><span class="code survived mutation_18_337_512"><span class="code survived mutation_9_125_519"></li><li>            <span class="code survived mutation_20_489_502">onComplete();</span></span></span></li><li><span class="code survived mutation_18_337_512"><span class="code survived mutation_9_125_519">        }</span></span></li><li><span class="code survived mutation_9_125_519">    };</span></li><li></li><li>    <span class="code survived mutation_10_525_616">function isOutdated() {</span></li><li><span class="code survived mutation_10_525_616">        <span class="code survived mutation_24_557_610">return vmInfo.info.xrImpl<span class="code survived mutation_26_582_585"><span class="code survived mutation_25_582_585"> < </span></span>vmInfo.info.xrLatestImpl;</span></span></li><li><span class="code survived mutation_10_525_616">    }</span></li><li></li><li>    <span class="code survived mutation_11_622_717">function isUserNotified() {</span></li><li><span class="code survived mutation_11_622_717">        <span class="code survived mutation_27_658_711">return sessionStorage.__xrNewVersionAvailableNoticed;</span></span></li><li><span class="code survived mutation_11_622_717">    }</span></li><li></li><li>    <span class="code survived mutation_12_723_820">function markUserNotified() {</span></li><li><span class="code survived mutation_12_723_820">        <span class="code survived mutation_28_761_814">sessionStorage.__xrNewVersionAvailableNoticed = <span class="code survived mutation_29_809_813">true</span>;</span></span></li><li><span class="code survived mutation_12_723_820">    }</span></li><li></li><li>    <span class="code survived mutation_13_826_1324">function notifyNewVersion() {</span></li><li><span class="code survived mutation_13_826_1324">        <span class="code survived mutation_33_864_1317"><span class="code survived mutation_32_864_1317"><span class="code survived mutation_30_864_1318">alerts.alert(<span class="code survived mutation_31_877_1316">{</span></span></span></span></span></li><li><span class="code survived mutation_33_864_1317"><span class="code survived mutation_32_864_1317"><span class="code survived mutation_31_877_1316"><span class="code survived mutation_30_864_1318"><span class="code survived mutation_13_826_1324">            <span class="code survived mutation_34_891_922">id:     <span class="code survived mutation_39_899_908">"version"</span>,</span></span></span></span></span></span></li><li><span class="code survived mutation_34_891_922"><span class="code survived mutation_33_864_1317"><span class="code survived mutation_32_864_1317"><span class="code survived mutation_31_877_1316"><span class="code survived mutation_30_864_1318"><span class="code survived mutation_13_826_1324">            </span><span class="code survived mutation_35_922_998">title:  <span class="code survived mutation_42_930_939">"XRebel "</span><span class="code survived mutation_41_939_942"> + </span>vmInfo.info.xrLatestSpec<span class="code survived mutation_40_966_969"> + </span><span class="code survived mutation_43_969_984">" is available"</span>,</span></span></span></span></span></span></li><li><span class="code survived mutation_35_922_998"><span class="code survived mutation_33_864_1317"><span class="code survived mutation_32_864_1317"><span class="code survived mutation_31_877_1316"><span class="code survived mutation_30_864_1318"><span class="code survived mutation_13_826_1324">            </span><span class="code survived mutation_36_998_1072">msg:    <span class="code survived mutation_44_1006_1058">"Click here to open the download page on xrebel.com"</span>,</span></span></span></span></span></span></li><li><span class="code survived mutation_36_998_1072"><span class="code survived mutation_33_864_1317"><span class="code survived mutation_32_864_1317"><span class="code survived mutation_31_877_1316"><span class="code survived mutation_30_864_1318"><span class="code survived mutation_13_826_1324">            </span><span class="code survived mutation_37_1072_1236">onClick: function() {</span></span></span></span></span></span></li><li><span class="code survived mutation_37_1072_1236"><span class="code survived mutation_33_864_1317"><span class="code survived mutation_32_864_1317"><span class="code survived mutation_31_877_1316"><span class="code survived mutation_30_864_1318"><span class="code survived mutation_13_826_1324">                <span class="code survived mutation_45_1110_1129">markUserNotified();</span></span></span></span></span></span></span></li><li><span class="code survived mutation_37_1072_1236"><span class="code survived mutation_33_864_1317"><span class="code survived mutation_32_864_1317"><span class="code survived mutation_31_877_1316"><span class="code survived mutation_30_864_1318"><span class="code survived mutation_13_826_1324">                <span class="code survived mutation_49_1146_1207"><span class="code survived mutation_46_1146_1208">window.open(<span class="code survived mutation_47_1158_1196">vmInfo.info.xrLatestVersionDownloadUrl</span>, <span class="code survived mutation_48_1198_1206">'_blank'</span>)</span>;</span></span></span></span></span></span></span></li><li><span class="code survived mutation_37_1072_1236"><span class="code survived mutation_33_864_1317"><span class="code survived mutation_32_864_1317"><span class="code survived mutation_31_877_1316"><span class="code survived mutation_30_864_1318"><span class="code survived mutation_13_826_1324">            },</span></span></span></span></span></span></li><li><span class="code survived mutation_37_1072_1236"><span class="code survived mutation_33_864_1317"><span class="code survived mutation_32_864_1317"><span class="code survived mutation_31_877_1316"><span class="code survived mutation_30_864_1318"><span class="code survived mutation_13_826_1324">            </span><span class="code survived mutation_38_1236_1306">onHide: function() {</span></span></span></span></span></span></li><li><span class="code survived mutation_38_1236_1306"><span class="code survived mutation_33_864_1317"><span class="code survived mutation_32_864_1317"><span class="code survived mutation_31_877_1316"><span class="code survived mutation_30_864_1318"><span class="code survived mutation_13_826_1324">                <span class="code survived mutation_50_1273_1292">markUserNotified();</span></span></span></span></span></span></span></li><li><span class="code survived mutation_38_1236_1306"><span class="code survived mutation_33_864_1317"><span class="code survived mutation_32_864_1317"><span class="code survived mutation_31_877_1316"><span class="code survived mutation_30_864_1318"><span class="code survived mutation_13_826_1324">            }</span></span></span></span></span></span></li><li><span class="code survived mutation_33_864_1317"><span class="code survived mutation_32_864_1317"><span class="code survived mutation_31_877_1316"><span class="code survived mutation_30_864_1318"><span class="code survived mutation_13_826_1324">        }</span>)</span></span>;</span></span></li><li><span class="code survived mutation_13_826_1324">    }</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_14_67_78" class="survived">resources/xr/version.js:4:26 Replaced &quot;xr/alerts&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_16_106_117" class="survived">resources/xr/version.js:5:26 Replaced &quot;xr/vmInfo&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_9_125_519" class="survived">resources/xr/version.js:7:5 Removed return { /** * Checks whether new XRebel version is available and displays a popup alert if so. * * @param {Function} onComplete Callback to call when done. */ checkForNew: function(onComplete) { if (isOutdated() &amp;&amp; !isUserNotified()) { notifyNewVersion(); } onComplete(); } }; -&gt; SURVIVED</div><div id="mutation_18_337_512" class="survived">resources/xr/version.js:13:9 Removed checkForNew: function(onComplete) { if (isOutdated() &amp;&amp; !isUserNotified()) { notifyNewVersion(); } onComplete(); } -&gt; SURVIVED</div><div id="mutation_21_401_405" class="survived">resources/xr/version.js:14:29 Replaced  &amp;&amp;  with || -&gt; SURVIVED</div><div id="mutation_22_405_406" class="survived">resources/xr/version.js:14:50 Removed ! -&gt; SURVIVED</div><div id="mutation_19_385_475" class="survived">resources/xr/version.js:14:13 Removed if (isOutdated() &amp;&amp; !isUserNotified()) { notifyNewVersion(); } -&gt; SURVIVED</div><div id="mutation_23_442_461" class="survived">resources/xr/version.js:15:17 Removed notifyNewVersion(); -&gt; SURVIVED</div><div id="mutation_20_489_502" class="survived">resources/xr/version.js:18:13 Removed onComplete(); -&gt; SURVIVED</div><div id="mutation_10_525_616" class="survived">resources/xr/version.js:22:5 Removed function isOutdated() { return vmInfo.info.xrImpl &lt; vmInfo.info.xrLatestImpl; } -&gt; SURVIVED</div><div id="mutation_25_582_585" class="survived">resources/xr/version.js:23:34 Replaced  &lt;  with &lt;= -&gt; SURVIVED</div><div id="mutation_26_582_585" class="survived">resources/xr/version.js:23:34 Replaced  &lt;  with &gt;= -&gt; SURVIVED</div><div id="mutation_24_557_610" class="survived">resources/xr/version.js:23:9 Removed return vmInfo.info.xrImpl &lt; vmInfo.info.xrLatestImpl; -&gt; SURVIVED</div><div id="mutation_11_622_717" class="survived">resources/xr/version.js:26:5 Removed function isUserNotified() { return sessionStorage.__xrNewVersionAvailableNoticed; } -&gt; SURVIVED</div><div id="mutation_27_658_711" class="survived">resources/xr/version.js:27:9 Removed return sessionStorage.__xrNewVersionAvailableNoticed; -&gt; SURVIVED</div><div id="mutation_12_723_820" class="survived">resources/xr/version.js:30:5 Removed function markUserNotified() { sessionStorage.__xrNewVersionAvailableNoticed = true; } -&gt; SURVIVED</div><div id="mutation_28_761_814" class="survived">resources/xr/version.js:31:9 Removed sessionStorage.__xrNewVersionAvailableNoticed = true; -&gt; SURVIVED</div><div id="mutation_29_809_813" class="survived">resources/xr/version.js:31:57 Replaced true with false -&gt; SURVIVED</div><div id="mutation_13_826_1324" class="survived">resources/xr/version.js:34:5 Removed function notifyNewVersion() { alerts.alert({ id: &quot;version&quot;, title: &quot;XRebel &quot; + vmInfo.info.xrLatestSpec + &quot; is available&quot;, msg: &quot;Click here to open the download page on xrebel.com&quot;, onClick: function() { markUserNotified(); window.open(vmInfo.info.xrLatestVersionDownloadUrl, &#x27;_blank&#x27;); }, onHide: function() { markUserNotified(); } }); } -&gt; SURVIVED</div><div id="mutation_30_864_1318" class="survived">resources/xr/version.js:35:9 Removed alerts.alert({ id: &quot;version&quot;, title: &quot;XRebel &quot; + vmInfo.info.xrLatestSpec + &quot; is available&quot;, msg: &quot;Click here to open the download page on xrebel.com&quot;, onClick: function() { markUserNotified(); window.open(vmInfo.info.xrLatestVersionDownloadUrl, &#x27;_blank&#x27;); }, onHide: function() { markUserNotified(); } }); -&gt; SURVIVED</div><div id="mutation_31_877_1316" class="survived">resources/xr/version.js:35:22 Replaced { id: &quot;version&quot;, title: &quot;XRebel &quot; + vmInfo.info.xrLatestSpec + &quot; is available&quot;, msg: &quot;Click here to open the download page on xrebel.com&quot;, onClick: function() { markUserNotified(); window.open(vmInfo.info.xrLatestVersionDownloadUrl, &#x27;_blank&#x27;); }, onHide: function() { markUserNotified(); } } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_32_864_1317" class="survived">resources/xr/version.js:35:9 Replaced alerts.alert({ id: &quot;version&quot;, title: &quot;XRebel &quot; + vmInfo.info.xrLatestSpec + &quot; is available&quot;, msg: &quot;Click here to open the download page on xrebel.com&quot;, onClick: function() { markUserNotified(); window.open(vmInfo.info.xrLatestVersionDownloadUrl, &#x27;_blank&#x27;); }, onHide: function() { markUserNotified(); } }) with { id: &quot;version&quot;, title: &quot;XRebel &quot; + vmInfo.info.xrLatestSpec + &quot; is available&quot;, msg: &quot;Click here to open the download page on xrebel.com&quot;, onClick: function() { markUserNotified(); window.open(vmInfo.info.xrLatestVersionDownloadUrl, &#x27;_blank&#x27;); }, onHide: function() { markUserNotified(); } } -&gt; SURVIVED</div><div id="mutation_33_864_1317" class="survived">resources/xr/version.js:35:9 Replaced alerts.alert({ id: &quot;version&quot;, title: &quot;XRebel &quot; + vmInfo.info.xrLatestSpec + &quot; is available&quot;, msg: &quot;Click here to open the download page on xrebel.com&quot;, onClick: function() { markUserNotified(); window.open(vmInfo.info.xrLatestVersionDownloadUrl, &#x27;_blank&#x27;); }, onHide: function() { markUserNotified(); } }) with alerts -&gt; SURVIVED</div><div id="mutation_34_891_922" class="survived">resources/xr/version.js:36:13 Removed id: &quot;version&quot;,  -&gt; SURVIVED</div><div id="mutation_39_899_908" class="survived">resources/xr/version.js:36:21 Replaced &quot;version&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_43_969_984" class="survived">resources/xr/version.js:37:60 Replaced &quot; is available&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_35_922_998" class="survived">resources/xr/version.js:37:13 Removed title: &quot;XRebel &quot; + vmInfo.info.xrLatestSpec + &quot; is available&quot;,  -&gt; SURVIVED</div><div id="mutation_41_939_942" class="survived">resources/xr/version.js:37:30 Replaced  +  with - -&gt; SURVIVED</div><div id="mutation_42_930_939" class="survived">resources/xr/version.js:37:21 Replaced &quot;XRebel &quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_40_966_969" class="survived">resources/xr/version.js:37:57 Replaced  +  with - -&gt; SURVIVED</div><div id="mutation_36_998_1072" class="survived">resources/xr/version.js:38:13 Removed msg: &quot;Click here to open the download page on xrebel.com&quot;,  -&gt; SURVIVED</div><div id="mutation_44_1006_1058" class="survived">resources/xr/version.js:38:21 Replaced &quot;Click here to open the download page on xrebel.com&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_37_1072_1236" class="survived">resources/xr/version.js:39:13 Removed onClick: function() { markUserNotified(); window.open(vmInfo.info.xrLatestVersionDownloadUrl, &#x27;_blank&#x27;); },  -&gt; SURVIVED</div><div id="mutation_45_1110_1129" class="survived">resources/xr/version.js:40:17 Removed markUserNotified(); -&gt; SURVIVED</div><div id="mutation_46_1146_1208" class="survived">resources/xr/version.js:41:17 Removed window.open(vmInfo.info.xrLatestVersionDownloadUrl, &#x27;_blank&#x27;); -&gt; SURVIVED</div><div id="mutation_47_1158_1196" class="survived">resources/xr/version.js:41:29 Replaced vmInfo.info.xrLatestVersionDownloadUrl with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_48_1198_1206" class="survived">resources/xr/version.js:41:69 Replaced &#x27;_blank&#x27; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_49_1146_1207" class="survived">resources/xr/version.js:41:17 Replaced window.open(vmInfo.info.xrLatestVersionDownloadUrl, &#x27;_blank&#x27;) with window -&gt; SURVIVED</div><div id="mutation_38_1236_1306" class="survived">resources/xr/version.js:43:13 Removed onHide: function() { markUserNotified(); } -&gt; SURVIVED</div><div id="mutation_50_1273_1292" class="survived">resources/xr/version.js:44:17 Removed markUserNotified(); -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":41,"ignored":11,"untested":0,"survived":2}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>41</strong> of which <strong>2</strong> survived,&nbsp;
+        <strong>11</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>95.1%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/index.html'">tree</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/node/index.html'">node</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/node/JspTraceNode.js.html'">JspTraceNode.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_13_62_68">"xr/_"</span>);</li><li>    var CpuTraceNode = require(<span class="code killed mutation_15_102_129">"xr/tree/node/CpuTraceNode"</span>);</li><li>    var JspFormatter = require(<span class="code killed mutation_17_163_185">"xr/tree/JspFormatter"</span>);</li><li></li><li>    /**</li><li>     * Branch node for JSP elements. They are inserted in place of stack trace elements</li><li>     *</li><li>     * @constructor</li><li>     * @param  {Object} traceEl Raw trace data.</li><li>     * @param  {TreeNode[]} children Array of child nodes.</li><li>     */</li><li>    <span class="code killed mutation_10_431_559">function JspTraceNode(traceEl, children) {</span></li><li><span class="code killed mutation_10_431_559">        <span class="code killed mutation_24_482_524"><span class="code killed mutation_19_482_525">CpuTraceNode.call(<span class="code killed mutation_21_500_504">this</span>, <span class="code killed mutation_22_506_513">traceEl</span>, <span class="code killed mutation_23_515_523">children</span>)</span>;</span></span></li><li><span class="code killed mutation_10_431_559"></li><li>        <span class="code killed mutation_20_535_553">this.type = <span class="code killed mutation_25_547_552">"jsp"</span>;</span></span></li><li><span class="code killed mutation_10_431_559">    }</span></li><li></li><li>    <span class="code killed mutation_42_565_580"><span class="code killed mutation_28_565_874"><span class="code killed mutation_11_565_875">_(<span class="code killed mutation_41_567_579">JspTraceNode</span>)</span>.extendClass(<span class="code killed mutation_26_593_605">CpuTraceNode</span>, <span class="code killed mutation_27_607_873">{</span></span></span></li><li><span class="code killed mutation_28_565_874"><span class="code killed mutation_27_607_873"><span class="code killed mutation_11_565_875">        <span class="code survived mutation_29_617_672">template: <span class="code survived mutation_31_627_661">"templates/tree/JspTraceNode.html"</span>,</span></span></span></span></li><li><span class="code survived mutation_29_617_672"><span class="code killed mutation_28_565_874"><span class="code killed mutation_27_607_873"><span class="code killed mutation_11_565_875"></li><li>        </span><span class="code killed mutation_30_672_867">getTemplateData: function() {</span></span></span></span></li><li><span class="code killed mutation_30_672_867"><span class="code killed mutation_28_565_874"><span class="code killed mutation_27_607_873"><span class="code killed mutation_11_565_875">            <span class="code killed mutation_32_714_857">return <span class="code killed mutation_35_721_856">_.assign(<span class="code killed mutation_38_730_779"><span class="code killed mutation_37_730_779"><span class="code killed mutation_33_730_779">CpuTraceNode.prototype.getTemplateData.call(<span class="code killed mutation_36_774_778">this</span>)</span></span></span>, <span class="code killed mutation_34_781_855">{</span></span></span></span></span></span></span></li><li><span class="code killed mutation_35_721_856"><span class="code killed mutation_34_781_855"><span class="code killed mutation_32_714_857"><span class="code killed mutation_30_672_867"><span class="code killed mutation_28_565_874"><span class="code killed mutation_27_607_873"><span class="code killed mutation_11_565_875">                <span class="code killed mutation_39_799_841">code: <span class="code killed mutation_40_805_841">new JspFormatter(this.el.jsp).code()</span></span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_35_721_856"><span class="code killed mutation_34_781_855"><span class="code killed mutation_32_714_857"><span class="code killed mutation_30_672_867"><span class="code killed mutation_28_565_874"><span class="code killed mutation_27_607_873"><span class="code killed mutation_11_565_875">            }</span>)</span>;</span></span></span></span></span></li><li><span class="code killed mutation_30_672_867"><span class="code killed mutation_28_565_874"><span class="code killed mutation_27_607_873"><span class="code killed mutation_11_565_875">        }</span></span></span></span></li><li><span class="code killed mutation_28_565_874"><span class="code killed mutation_27_607_873"><span class="code killed mutation_11_565_875">    }</span>)</span>;</span></li><li></li><li>    <span class="code killed mutation_12_881_901">return JspTraceNode;</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_13_62_68" class="killed">resources/xr/tree/node/JspTraceNode.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_102_129" class="killed">resources/xr/tree/node/JspTraceNode.js:5:32 Replaced &quot;xr/tree/node/CpuTraceNode&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_163_185" class="killed">resources/xr/tree/node/JspTraceNode.js:6:32 Replaced &quot;xr/tree/JspFormatter&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_10_431_559" class="killed">resources/xr/tree/node/JspTraceNode.js:15:5 Removed function JspTraceNode(traceEl, children) { CpuTraceNode.call(this, traceEl, children); this.type = &quot;jsp&quot;; } -&gt; KILLED</div><div id="mutation_19_482_525" class="killed">resources/xr/tree/node/JspTraceNode.js:16:9 Removed CpuTraceNode.call(this, traceEl, children); -&gt; KILLED</div><div id="mutation_21_500_504" class="killed">resources/xr/tree/node/JspTraceNode.js:16:27 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_506_513" class="killed">resources/xr/tree/node/JspTraceNode.js:16:33 Replaced traceEl with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_23_515_523" class="killed">resources/xr/tree/node/JspTraceNode.js:16:42 Replaced children with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_24_482_524" class="killed">resources/xr/tree/node/JspTraceNode.js:16:9 Replaced CpuTraceNode.call(this, traceEl, children) with CpuTraceNode -&gt; KILLED</div><div id="mutation_25_547_552" class="killed">resources/xr/tree/node/JspTraceNode.js:18:21 Replaced &quot;jsp&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_535_553" class="killed">resources/xr/tree/node/JspTraceNode.js:18:9 Removed this.type = &quot;jsp&quot;; -&gt; KILLED</div><div id="mutation_42_565_580" class="killed">resources/xr/tree/node/JspTraceNode.js:21:5 Replaced _(JspTraceNode) with JspTraceNode -&gt; KILLED</div><div id="mutation_41_567_579" class="killed">resources/xr/tree/node/JspTraceNode.js:21:7 Replaced JspTraceNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_26_593_605" class="killed">resources/xr/tree/node/JspTraceNode.js:21:33 Replaced CpuTraceNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_27_607_873" class="killed">resources/xr/tree/node/JspTraceNode.js:21:47 Replaced { template: &quot;templates/tree/JspTraceNode.html&quot;, getTemplateData: function() { return _.assign(CpuTraceNode.prototype.getTemplateData.call(this), { code: new JspFormatter(this.el.jsp).code() }); } } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_11_565_875" class="killed">resources/xr/tree/node/JspTraceNode.js:21:5 Removed _(JspTraceNode).extendClass(CpuTraceNode, { template: &quot;templates/tree/JspTraceNode.html&quot;, getTemplateData: function() { return _.assign(CpuTraceNode.prototype.getTemplateData.call(this), { code: new JspFormatter(this.el.jsp).code() }); } }); -&gt; KILLED</div><div id="mutation_28_565_874" class="killed">resources/xr/tree/node/JspTraceNode.js:21:5 Replaced _(JspTraceNode).extendClass(CpuTraceNode, { template: &quot;templates/tree/JspTraceNode.html&quot;, getTemplateData: function() { return _.assign(CpuTraceNode.prototype.getTemplateData.call(this), { code: new JspFormatter(this.el.jsp).code() }); } }) with _(JspTraceNode) -&gt; KILLED</div><div id="mutation_29_617_672" class="survived">resources/xr/tree/node/JspTraceNode.js:22:9 Removed template: &quot;templates/tree/JspTraceNode.html&quot;,  -&gt; SURVIVED</div><div id="mutation_31_627_661" class="survived">resources/xr/tree/node/JspTraceNode.js:22:19 Replaced &quot;templates/tree/JspTraceNode.html&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_30_672_867" class="killed">resources/xr/tree/node/JspTraceNode.js:24:9 Removed getTemplateData: function() { return _.assign(CpuTraceNode.prototype.getTemplateData.call(this), { code: new JspFormatter(this.el.jsp).code() }); } -&gt; KILLED</div><div id="mutation_37_730_779" class="killed">resources/xr/tree/node/JspTraceNode.js:25:29 Replaced CpuTraceNode.prototype.getTemplateData.call(this) with this -&gt; KILLED</div><div id="mutation_34_781_855" class="killed">resources/xr/tree/node/JspTraceNode.js:25:80 Replaced { code: new JspFormatter(this.el.jsp).code() } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_35_721_856" class="killed">resources/xr/tree/node/JspTraceNode.js:25:20 Replaced _.assign(CpuTraceNode.prototype.getTemplateData.call(this), { code: new JspFormatter(this.el.jsp).code() }) with _ -&gt; KILLED</div><div id="mutation_32_714_857" class="killed">resources/xr/tree/node/JspTraceNode.js:25:13 Removed return _.assign(CpuTraceNode.prototype.getTemplateData.call(this), { code: new JspFormatter(this.el.jsp).code() }); -&gt; KILLED</div><div id="mutation_33_730_779" class="killed">resources/xr/tree/node/JspTraceNode.js:25:29 Replaced CpuTraceNode.prototype.getTemplateData.call(this) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_38_730_779" class="killed">resources/xr/tree/node/JspTraceNode.js:25:29 Replaced CpuTraceNode.prototype.getTemplateData.call(this) with CpuTraceNode.prototype.getTemplateData -&gt; KILLED</div><div id="mutation_36_774_778" class="killed">resources/xr/tree/node/JspTraceNode.js:25:73 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_39_799_841" class="killed">resources/xr/tree/node/JspTraceNode.js:26:17 Removed code: new JspFormatter(this.el.jsp).code() -&gt; KILLED</div><div id="mutation_40_805_841" class="killed">resources/xr/tree/node/JspTraceNode.js:26:23 Replaced new JspFormatter(this.el.jsp).code() with new JspFormatter(this.el.jsp) -&gt; KILLED</div><div id="mutation_12_881_901" class="killed">resources/xr/tree/node/JspTraceNode.js:31:5 Removed return JspTraceNode; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

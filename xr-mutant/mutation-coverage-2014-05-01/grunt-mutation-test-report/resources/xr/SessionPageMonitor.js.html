@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":66,"ignored":12,"untested":0,"survived":2}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>66</strong> of which <strong>2</strong> survived,&nbsp;
+        <strong>12</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>97.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/SessionPageMonitor.js.html'">SessionPageMonitor.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_12_62_68">"xr/_"</span>);</li><li>    var pages = require(<span class="code killed mutation_14_95_105">"xr/pages"</span>);</li><li></li><li>    /**</li><li>     * Tracks whether the session page has been opened.</li><li>     *</li><li>     * Use whenFirstTimeOpened() to set up a function to be called</li><li>     * when session page is opened for the first time.</li><li>     *</li><li>     * @constructor</li><li>     * @param {Object} deps Dependencies:</li><li>     *   @param {Object} deps.pages Pages module</li><li>     */</li><li>    function SessionPageMonitor(deps) {</li><li>        <span class="code killed mutation_23_476_483">_(<span class="code killed mutation_22_478_482">this</span>)</span>.inject(<span class="code killed mutation_18_491_495">deps</span>, <span class="code survived mutation_19_497_533">{</span></li><li><span class="code survived mutation_19_497_533">            <span class="code survived mutation_21_511_523">pages: pages</span></span></li><li><span class="code survived mutation_19_497_533">        }</span>);</li><li></li><li>        <span class="code killed mutation_17_545_682">if (<span class="code killed mutation_24_549_562">this.isOpen()</span>) {</span></li><li><span class="code killed mutation_17_545_682">            <span class="code killed mutation_26_578_592"><span class="code killed mutation_25_578_593">this.setOpen()</span>;</span></span></li><li><span class="code killed mutation_17_545_682">        }</span></li><li><span class="code killed mutation_17_545_682">        else {</span></li><li><span class="code killed mutation_17_545_682">            <span class="code killed mutation_30_631_671"><span class="code killed mutation_29_631_671"><span class="code killed mutation_27_631_672">this.whenOpened(<span class="code killed mutation_33_647_670"><span class="code killed mutation_32_647_670"><span class="code killed mutation_28_647_670">this.setOpen.bind(<span class="code killed mutation_31_665_669">this</span>)</span></span></span>)</span></span>;</span></span></li><li><span class="code killed mutation_17_545_682">        }</span></li><li>    }</li><li>    <span class="code killed mutation_10_693_1776">SessionPageMonitor.prototype = {</span></li><li><span class="code killed mutation_10_693_1776">        <span class="code killed mutation_34_734_849">isOpen: function() {</span></span></li><li><span class="code killed mutation_34_734_849"><span class="code killed mutation_10_693_1776">            <span class="code killed mutation_40_767_828">return this.pages.sessionData<span class="code killed mutation_41_796_801"> === </span><span class="code killed mutation_42_801_827">this.pages.getActivePage()</span>;</span></span></span></li><li><span class="code killed mutation_34_734_849"><span class="code killed mutation_10_693_1776">        },</span></span></li><li><span class="code killed mutation_34_734_849"><span class="code killed mutation_10_693_1776"></li><li>        </span><span class="code killed mutation_35_849_1078">whenOpened: function(fn) {</span></span></li><li><span class="code killed mutation_35_849_1078"><span class="code killed mutation_10_693_1776">            <span class="code killed mutation_46_888_1056"><span class="code killed mutation_45_888_1056"><span class="code killed mutation_43_888_1057">this.pages.sessionData.addLifecycleListener(<span class="code killed mutation_44_932_1055">function(eventName) {</span></span></span></span></span></span></li><li><span class="code killed mutation_46_888_1056"><span class="code killed mutation_45_888_1056"><span class="code killed mutation_44_932_1055"><span class="code killed mutation_43_888_1057"><span class="code killed mutation_35_849_1078"><span class="code killed mutation_10_693_1776">                <span class="code killed mutation_47_970_1041">if (eventName<span class="code killed mutation_48_983_988"> === </span><span class="code killed mutation_49_988_994">"show"</span>) {</span></span></span></span></span></span></span></li><li><span class="code killed mutation_47_970_1041"><span class="code killed mutation_46_888_1056"><span class="code killed mutation_45_888_1056"><span class="code killed mutation_44_932_1055"><span class="code killed mutation_43_888_1057"><span class="code killed mutation_35_849_1078"><span class="code killed mutation_10_693_1776">                    <span class="code killed mutation_50_1018_1023">fn();</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_47_970_1041"><span class="code killed mutation_46_888_1056"><span class="code killed mutation_45_888_1056"><span class="code killed mutation_44_932_1055"><span class="code killed mutation_43_888_1057"><span class="code killed mutation_35_849_1078"><span class="code killed mutation_10_693_1776">                }</span></span></span></span></span></span></span></li><li><span class="code killed mutation_46_888_1056"><span class="code killed mutation_45_888_1056"><span class="code killed mutation_44_932_1055"><span class="code killed mutation_43_888_1057"><span class="code killed mutation_35_849_1078"><span class="code killed mutation_10_693_1776">            }</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_35_849_1078"><span class="code killed mutation_10_693_1776">        },</span></span></li><li><span class="code killed mutation_35_849_1078"><span class="code killed mutation_10_693_1776"></li><li>        </span><span class="code killed mutation_36_1078_1358">setOpen: function() {</span></span></li><li><span class="code killed mutation_36_1078_1358"><span class="code killed mutation_10_693_1776">            <span class="code killed mutation_54_1112_1134"><span class="code killed mutation_51_1112_1135">this.set(<span class="code killed mutation_52_1121_1127">"open"</span>, <span class="code killed mutation_53_1129_1133">true</span>)</span>;</span></span></span></li><li><span class="code killed mutation_36_1078_1358"><span class="code killed mutation_10_693_1776">        },</span></span></li><li><span class="code killed mutation_36_1078_1358"><span class="code killed mutation_10_693_1776"></li><li>        /**</span></span></li><li><span class="code killed mutation_36_1078_1358"><span class="code killed mutation_10_693_1776">         * Call this after initial session data has been loaded</span></span></li><li><span class="code killed mutation_36_1078_1358"><span class="code killed mutation_10_693_1776">         * and it will call the supplied function after the session</span></span></li><li><span class="code killed mutation_36_1078_1358"><span class="code killed mutation_10_693_1776">         * page is opened for the first time.</span></span></li><li><span class="code killed mutation_36_1078_1358"><span class="code killed mutation_10_693_1776">         */</span></span></li><li><span class="code killed mutation_36_1078_1358"><span class="code killed mutation_10_693_1776">        </span><span class="code killed mutation_37_1358_1464">whenFirstTimeOpened: function(callback) {</span></span></li><li><span class="code killed mutation_37_1358_1464"><span class="code killed mutation_10_693_1776">            <span class="code killed mutation_58_1412_1442"><span class="code killed mutation_55_1412_1443">this.set(<span class="code killed mutation_56_1421_1431">"callback"</span>, <span class="code killed mutation_57_1433_1441">callback</span>)</span>;</span></span></span></li><li><span class="code killed mutation_37_1358_1464"><span class="code killed mutation_10_693_1776">        },</span></span></li><li><span class="code killed mutation_37_1358_1464"><span class="code killed mutation_10_693_1776"></li><li>        </span><span class="code killed mutation_38_1464_1637">set: function(field, value) {</span></span></li><li><span class="code killed mutation_38_1464_1637"><span class="code killed mutation_10_693_1776">            <span class="code killed mutation_59_1506_1616">if (<span class="code killed mutation_60_1510_1511">!</span>this[field]) {</span></span></span></li><li><span class="code killed mutation_59_1506_1616"><span class="code killed mutation_38_1464_1637"><span class="code killed mutation_10_693_1776">                <span class="code killed mutation_61_1542_1562">this[field] = value;</span></span></span></span></li><li><span class="code killed mutation_59_1506_1616"><span class="code killed mutation_38_1464_1637"><span class="code killed mutation_10_693_1776">                <span class="code killed mutation_63_1579_1601"><span class="code killed mutation_62_1579_1602">this.triggerCallback()</span>;</span></span></span></span></li><li><span class="code killed mutation_59_1506_1616"><span class="code killed mutation_38_1464_1637"><span class="code killed mutation_10_693_1776">            }</span></span></span></li><li><span class="code killed mutation_38_1464_1637"><span class="code killed mutation_10_693_1776">        },</span></span></li><li><span class="code killed mutation_38_1464_1637"><span class="code killed mutation_10_693_1776"></li><li>        </span><span class="code killed mutation_39_1637_1769">triggerCallback: function() {</span></span></li><li><span class="code killed mutation_39_1637_1769"><span class="code killed mutation_10_693_1776">            <span class="code killed mutation_64_1679_1759">if (this.open<span class="code killed mutation_65_1692_1696"> && </span>this.callback) {</span></span></span></li><li><span class="code killed mutation_64_1679_1759"><span class="code killed mutation_39_1637_1769"><span class="code killed mutation_10_693_1776">                <span class="code killed mutation_67_1729_1744"><span class="code killed mutation_66_1729_1745">this.callback()</span>;</span></span></span></span></li><li><span class="code killed mutation_64_1679_1759"><span class="code killed mutation_39_1637_1769"><span class="code killed mutation_10_693_1776">            }</span></span></span></li><li><span class="code killed mutation_39_1637_1769"><span class="code killed mutation_10_693_1776">        }</span></span></li><li><span class="code killed mutation_10_693_1776">    };</span></li><li></li><li>    <span class="code killed mutation_11_1782_1808">return SessionPageMonitor;</span></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_12_62_68" class="killed">resources/xr/SessionPageMonitor.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_14_95_105" class="killed">resources/xr/SessionPageMonitor.js:5:25 Replaced &quot;xr/pages&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_18_491_495" class="killed">resources/xr/SessionPageMonitor.js:18:24 Replaced deps with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_19_497_533" class="survived">resources/xr/SessionPageMonitor.js:18:30 Replaced { pages: pages } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_22_478_482" class="killed">resources/xr/SessionPageMonitor.js:18:11 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_23_476_483" class="killed">resources/xr/SessionPageMonitor.js:18:9 Replaced _(this) with this -&gt; KILLED</div><div id="mutation_21_511_523" class="survived">resources/xr/SessionPageMonitor.js:19:13 Removed pages: pages -&gt; SURVIVED</div><div id="mutation_17_545_682" class="killed">resources/xr/SessionPageMonitor.js:22:9 Removed if (this.isOpen()) { this.setOpen(); } else { this.whenOpened(this.setOpen.bind(this)); } -&gt; KILLED</div><div id="mutation_24_549_562" class="killed">resources/xr/SessionPageMonitor.js:22:13 Replaced this.isOpen() with this -&gt; KILLED</div><div id="mutation_25_578_593" class="killed">resources/xr/SessionPageMonitor.js:23:13 Removed this.setOpen(); -&gt; KILLED</div><div id="mutation_26_578_592" class="killed">resources/xr/SessionPageMonitor.js:23:13 Replaced this.setOpen() with this -&gt; KILLED</div><div id="mutation_27_631_672" class="killed">resources/xr/SessionPageMonitor.js:26:13 Removed this.whenOpened(this.setOpen.bind(this)); -&gt; KILLED</div><div id="mutation_28_647_670" class="killed">resources/xr/SessionPageMonitor.js:26:29 Replaced this.setOpen.bind(this) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_29_631_671" class="killed">resources/xr/SessionPageMonitor.js:26:13 Replaced this.whenOpened(this.setOpen.bind(this)) with this.setOpen.bind(this) -&gt; KILLED</div><div id="mutation_30_631_671" class="killed">resources/xr/SessionPageMonitor.js:26:13 Replaced this.whenOpened(this.setOpen.bind(this)) with this -&gt; KILLED</div><div id="mutation_31_665_669" class="killed">resources/xr/SessionPageMonitor.js:26:47 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_32_647_670" class="killed">resources/xr/SessionPageMonitor.js:26:29 Replaced this.setOpen.bind(this) with this -&gt; KILLED</div><div id="mutation_33_647_670" class="killed">resources/xr/SessionPageMonitor.js:26:29 Replaced this.setOpen.bind(this) with this.setOpen -&gt; KILLED</div><div id="mutation_10_693_1776" class="killed">resources/xr/SessionPageMonitor.js:29:5 Removed SessionPageMonitor.prototype = { isOpen: function() { return this.pages.sessionData === this.pages.getActivePage(); }, whenOpened: function(fn) { this.pages.sessionData.addLifecycleListener(function(eventName) { if (eventName === &quot;show&quot;) { fn(); } }); }, setOpen: function() { this.set(&quot;open&quot;, true); }, /** * Call this after initial session data has been loaded * and it will call the supplied function after the session * page is opened for the first time. */ whenFirstTimeOpened: function(callback) { this.set(&quot;callback&quot;, callback); }, set: function(field, value) { if (!this[field]) { this[field] = value; this.triggerCallback(); } }, triggerCallback: function() { if (this.open &amp;&amp; this.callback) { this.callback(); } } }; -&gt; KILLED</div><div id="mutation_34_734_849" class="killed">resources/xr/SessionPageMonitor.js:30:9 Removed isOpen: function() { return this.pages.sessionData === this.pages.getActivePage(); },  -&gt; KILLED</div><div id="mutation_41_796_801" class="killed">resources/xr/SessionPageMonitor.js:31:42 Replaced  ===  with !== -&gt; KILLED</div><div id="mutation_42_801_827" class="killed">resources/xr/SessionPageMonitor.js:31:47 Replaced this.pages.getActivePage() with this.pages -&gt; KILLED</div><div id="mutation_40_767_828" class="killed">resources/xr/SessionPageMonitor.js:31:13 Removed return this.pages.sessionData === this.pages.getActivePage(); -&gt; KILLED</div><div id="mutation_35_849_1078" class="killed">resources/xr/SessionPageMonitor.js:34:9 Removed whenOpened: function(fn) { this.pages.sessionData.addLifecycleListener(function(eventName) { if (eventName === &quot;show&quot;) { fn(); } }); },  -&gt; KILLED</div><div id="mutation_45_888_1056" class="killed">resources/xr/SessionPageMonitor.js:35:13 Replaced this.pages.sessionData.addLifecycleListener(function(eventName) { if (eventName === &quot;show&quot;) { fn(); } }) with function(eventName) { if (eventName === &quot;show&quot;) { fn(); } } -&gt; KILLED</div><div id="mutation_43_888_1057" class="killed">resources/xr/SessionPageMonitor.js:35:13 Removed this.pages.sessionData.addLifecycleListener(function(eventName) { if (eventName === &quot;show&quot;) { fn(); } }); -&gt; KILLED</div><div id="mutation_44_932_1055" class="killed">resources/xr/SessionPageMonitor.js:35:57 Replaced function(eventName) { if (eventName === &quot;show&quot;) { fn(); } } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_46_888_1056" class="killed">resources/xr/SessionPageMonitor.js:35:13 Replaced this.pages.sessionData.addLifecycleListener(function(eventName) { if (eventName === &quot;show&quot;) { fn(); } }) with this.pages.sessionData -&gt; KILLED</div><div id="mutation_47_970_1041" class="killed">resources/xr/SessionPageMonitor.js:36:17 Removed if (eventName === &quot;show&quot;) { fn(); } -&gt; KILLED</div><div id="mutation_48_983_988" class="killed">resources/xr/SessionPageMonitor.js:36:30 Replaced  ===  with !== -&gt; KILLED</div><div id="mutation_49_988_994" class="killed">resources/xr/SessionPageMonitor.js:36:35 Replaced &quot;show&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_50_1018_1023" class="killed">resources/xr/SessionPageMonitor.js:37:21 Removed fn(); -&gt; KILLED</div><div id="mutation_36_1078_1358" class="killed">resources/xr/SessionPageMonitor.js:42:9 Removed setOpen: function() { this.set(&quot;open&quot;, true); }, /** * Call this after initial session data has been loaded * and it will call the supplied function after the session * page is opened for the first time. */  -&gt; KILLED</div><div id="mutation_54_1112_1134" class="killed">resources/xr/SessionPageMonitor.js:43:13 Replaced this.set(&quot;open&quot;, true) with this -&gt; KILLED</div><div id="mutation_53_1129_1133" class="killed">resources/xr/SessionPageMonitor.js:43:30 Replaced true with false -&gt; KILLED</div><div id="mutation_52_1121_1127" class="killed">resources/xr/SessionPageMonitor.js:43:22 Replaced &quot;open&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_51_1112_1135" class="killed">resources/xr/SessionPageMonitor.js:43:13 Removed this.set(&quot;open&quot;, true); -&gt; KILLED</div><div id="mutation_37_1358_1464" class="killed">resources/xr/SessionPageMonitor.js:51:9 Removed whenFirstTimeOpened: function(callback) { this.set(&quot;callback&quot;, callback); },  -&gt; KILLED</div><div id="mutation_55_1412_1443" class="killed">resources/xr/SessionPageMonitor.js:52:13 Removed this.set(&quot;callback&quot;, callback); -&gt; KILLED</div><div id="mutation_56_1421_1431" class="killed">resources/xr/SessionPageMonitor.js:52:22 Replaced &quot;callback&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_57_1433_1441" class="killed">resources/xr/SessionPageMonitor.js:52:34 Replaced callback with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_58_1412_1442" class="killed">resources/xr/SessionPageMonitor.js:52:13 Replaced this.set(&quot;callback&quot;, callback) with this -&gt; KILLED</div><div id="mutation_38_1464_1637" class="killed">resources/xr/SessionPageMonitor.js:55:9 Removed set: function(field, value) { if (!this[field]) { this[field] = value; this.triggerCallback(); } },  -&gt; KILLED</div><div id="mutation_60_1510_1511" class="killed">resources/xr/SessionPageMonitor.js:56:29 Removed ! -&gt; KILLED</div><div id="mutation_59_1506_1616" class="killed">resources/xr/SessionPageMonitor.js:56:13 Removed if (!this[field]) { this[field] = value; this.triggerCallback(); } -&gt; KILLED</div><div id="mutation_61_1542_1562" class="killed">resources/xr/SessionPageMonitor.js:57:17 Removed this[field] = value; -&gt; KILLED</div><div id="mutation_62_1579_1602" class="killed">resources/xr/SessionPageMonitor.js:58:17 Removed this.triggerCallback(); -&gt; KILLED</div><div id="mutation_63_1579_1601" class="killed">resources/xr/SessionPageMonitor.js:58:17 Replaced this.triggerCallback() with this -&gt; KILLED</div><div id="mutation_39_1637_1769" class="killed">resources/xr/SessionPageMonitor.js:62:9 Removed triggerCallback: function() { if (this.open &amp;&amp; this.callback) { this.callback(); } } -&gt; KILLED</div><div id="mutation_64_1679_1759" class="killed">resources/xr/SessionPageMonitor.js:63:13 Removed if (this.open &amp;&amp; this.callback) { this.callback(); } -&gt; KILLED</div><div id="mutation_65_1692_1696" class="killed">resources/xr/SessionPageMonitor.js:63:26 Replaced  &amp;&amp;  with || -&gt; KILLED</div><div id="mutation_66_1729_1745" class="killed">resources/xr/SessionPageMonitor.js:64:17 Removed this.callback(); -&gt; KILLED</div><div id="mutation_67_1729_1744" class="killed">resources/xr/SessionPageMonitor.js:64:17 Replaced this.callback() with this -&gt; KILLED</div><div id="mutation_11_1782_1808" class="killed">resources/xr/SessionPageMonitor.js:69:5 Removed return SessionPageMonitor; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

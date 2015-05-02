@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":19,"ignored":7,"untested":0,"survived":11}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>19</strong> of which <strong>11</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>42.1%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/createElementInTopWin.js.html'">createElementInTopWin.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var jQueryFactory = require(<span class="code killed mutation_9_74_92">"xr/jQueryFactory"</span>);</li><li></li><li>    /**</li><li>     * Creates an element in the topmost window's document, inheriting any dom enhancements</li><li>     * the host document may be using such as methods added by prototype.js</li><li>     *</li><li>     * This function should be used whenever adding elements to the topmost window's dom</li><li>     *</li><li>     * Returns the element in JQuery wrapper, but does not attach it to the dom</li><li>     *</li><li>     * @param {string} html tag name to create</li><li>     * @return {jQuery}</li><li>     */</li><li>    <span class="code survived mutation_8_545_690">return function(tagName) {</span></li><li><span class="code survived mutation_8_545_690">        <span class="code survived mutation_11_580_621">var $ = <span class="code survived mutation_15_588_620"><span class="code survived mutation_14_588_620">jQueryFactory.create(<span class="code survived mutation_13_609_619">window.top</span>)</span></span>;</span></span></li><li><span class="code survived mutation_8_545_690">        <span class="code survived mutation_12_630_683">return <span class="code survived mutation_17_637_682">$(<span class="code survived mutation_20_639_681"><span class="code survived mutation_19_639_681"><span class="code survived mutation_16_639_681">window.top.document.createElement(<span class="code survived mutation_18_673_680">tagName</span>)</span></span></span>)</span>;</span></span></li><li><span class="code survived mutation_8_545_690">    };</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_9_74_92" class="killed">resources/xr/createElementInTopWin.js:4:33 Replaced &quot;xr/jQueryFactory&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_545_690" class="survived">resources/xr/createElementInTopWin.js:17:5 Removed return function(tagName) { var $ = jQueryFactory.create(window.top); return $(window.top.document.createElement(tagName)); }; -&gt; SURVIVED</div><div id="mutation_11_580_621" class="survived">resources/xr/createElementInTopWin.js:18:9 Removed var $ = jQueryFactory.create(window.top); -&gt; SURVIVED</div><div id="mutation_15_588_620" class="survived">resources/xr/createElementInTopWin.js:18:17 Replaced jQueryFactory.create(window.top) with jQueryFactory -&gt; SURVIVED</div><div id="mutation_13_609_619" class="survived">resources/xr/createElementInTopWin.js:18:38 Replaced window.top with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_14_588_620" class="survived">resources/xr/createElementInTopWin.js:18:17 Replaced jQueryFactory.create(window.top) with window.top -&gt; SURVIVED</div><div id="mutation_12_630_683" class="survived">resources/xr/createElementInTopWin.js:19:9 Removed return $(window.top.document.createElement(tagName)); -&gt; SURVIVED</div><div id="mutation_16_639_681" class="survived">resources/xr/createElementInTopWin.js:19:18 Replaced window.top.document.createElement(tagName) with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_17_637_682" class="survived">resources/xr/createElementInTopWin.js:19:16 Replaced $(window.top.document.createElement(tagName)) with window.top.document.createElement(tagName) -&gt; SURVIVED</div><div id="mutation_18_673_680" class="survived">resources/xr/createElementInTopWin.js:19:52 Replaced tagName with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_19_639_681" class="survived">resources/xr/createElementInTopWin.js:19:18 Replaced window.top.document.createElement(tagName) with tagName -&gt; SURVIVED</div><div id="mutation_20_639_681" class="survived">resources/xr/createElementInTopWin.js:19:18 Replaced window.top.document.createElement(tagName) with window.top.document -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

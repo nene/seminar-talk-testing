@@ -1,4 +1,4 @@
-resources/
+/resources/
 node_modules/
 mutation-coverage/
 all-files.txt

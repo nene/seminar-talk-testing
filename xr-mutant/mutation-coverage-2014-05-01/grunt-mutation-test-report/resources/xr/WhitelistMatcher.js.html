@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":35,"ignored":12,"untested":0,"survived":5}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>35</strong> of which <strong>5</strong> survived,&nbsp;
+        <strong>12</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>85.7%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/WhitelistMatcher.js.html'">WhitelistMatcher.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_12_62_68">"xr/_"</span>);</li><li>    var appWhitelistSettings = require(<span class="code killed mutation_14_110_144">"xr/settings/appWhitelistSettings"</span>);</li><li></li><li>    /**</li><li>     * Matches classname against whitelist.</li><li>     *</li><li>     * Grabs whitelist from settings.</li><li>     *</li><li>     * @constructor</li><li>     * @param {Object} deps Dependencies:</li><li>     *   @param {RegExpList} deps.whitelist</li><li>     */</li><li>    function WhitelistMatcher(deps) {</li><li>        <span class="code killed mutation_24_412_419">_(<span class="code killed mutation_23_414_418">this</span>)</span>.inject(<span class="code killed mutation_17_427_431">deps</span>, <span class="code survived mutation_18_433_554">function(){</span></li><li><span class="code survived mutation_18_433_554">            <span class="code survived mutation_20_457_544">return {</span></span></li><li><span class="code survived mutation_20_457_544"><span class="code survived mutation_18_433_554">                <span class="code survived mutation_21_482_529">whitelist: <span class="code survived mutation_22_493_529">appWhitelistSettings.getRegExpList()</span></span></span></span></li><li><span class="code survived mutation_20_457_544"><span class="code survived mutation_18_433_554">            };</span></span></li><li><span class="code survived mutation_18_433_554">        }</span>);</li><li>    }</li><li>    <span class="code killed mutation_10_567_1040">WhitelistMatcher.prototype = {</span></li><li><span class="code killed mutation_10_567_1040">        /**</span></li><li><span class="code killed mutation_10_567_1040">         * Returns true when class should be shown, highlighted, etc.</span></li><li><span class="code killed mutation_10_567_1040">         *</span></li><li><span class="code killed mutation_10_567_1040">         * @return {Boolean}</span></li><li><span class="code killed mutation_10_567_1040">         */</span></li><li><span class="code killed mutation_10_567_1040">        <span class="code killed mutation_25_740_1033">matches: function(className) {</span></span></li><li><span class="code killed mutation_25_740_1033"><span class="code killed mutation_10_567_1040">            <span class="code killed mutation_26_783_1023">if (<span class="code killed mutation_29_787_810">this.whitelist.length()</span><span class="code killed mutation_28_810_813"><span class="code killed mutation_27_810_813"> > </span></span><span class="code survived mutation_30_813_814">0</span> ) {</span></span></span></li><li><span class="code killed mutation_26_783_1023"><span class="code killed mutation_25_740_1033"><span class="code killed mutation_10_567_1040">                <span class="code killed mutation_31_835_876">return <span class="code killed mutation_34_842_875"><span class="code killed mutation_33_842_875">this.whitelist.matches(<span class="code killed mutation_32_865_874">className</span>)</span></span>;</span></span></span></span></li><li><span class="code killed mutation_26_783_1023"><span class="code killed mutation_25_740_1033"><span class="code killed mutation_10_567_1040">            }</span></span></span></li><li><span class="code killed mutation_26_783_1023"><span class="code killed mutation_25_740_1033"><span class="code killed mutation_10_567_1040">            else {</span></span></span></li><li><span class="code killed mutation_26_783_1023"><span class="code killed mutation_25_740_1033"><span class="code killed mutation_10_567_1040">                // always match (no filtering) when whitelist is empty</span></span></span></li><li><span class="code killed mutation_26_783_1023"><span class="code killed mutation_25_740_1033"><span class="code killed mutation_10_567_1040">                <span class="code killed mutation_35_997_1009">return <span class="code killed mutation_36_1004_1008">true</span>;</span></span></span></span></li><li><span class="code killed mutation_26_783_1023"><span class="code killed mutation_25_740_1033"><span class="code killed mutation_10_567_1040">            }</span></span></span></li><li><span class="code killed mutation_25_740_1033"><span class="code killed mutation_10_567_1040">        }</span></span></li><li><span class="code killed mutation_10_567_1040">    };</span></li><li></li><li>    <span class="code killed mutation_11_1046_1070">return WhitelistMatcher;</span></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_12_62_68" class="killed">resources/xr/WhitelistMatcher.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_14_110_144" class="killed">resources/xr/WhitelistMatcher.js:5:40 Replaced &quot;xr/settings/appWhitelistSettings&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_427_431" class="killed">resources/xr/WhitelistMatcher.js:17:24 Replaced deps with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_18_433_554" class="survived">resources/xr/WhitelistMatcher.js:17:30 Replaced function(){ return { whitelist: appWhitelistSettings.getRegExpList() }; } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_23_414_418" class="killed">resources/xr/WhitelistMatcher.js:17:11 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_24_412_419" class="killed">resources/xr/WhitelistMatcher.js:17:9 Replaced _(this) with this -&gt; KILLED</div><div id="mutation_20_457_544" class="survived">resources/xr/WhitelistMatcher.js:18:13 Removed return { whitelist: appWhitelistSettings.getRegExpList() }; -&gt; SURVIVED</div><div id="mutation_21_482_529" class="survived">resources/xr/WhitelistMatcher.js:19:17 Removed whitelist: appWhitelistSettings.getRegExpList() -&gt; SURVIVED</div><div id="mutation_22_493_529" class="survived">resources/xr/WhitelistMatcher.js:19:28 Replaced appWhitelistSettings.getRegExpList() with appWhitelistSettings -&gt; SURVIVED</div><div id="mutation_10_567_1040" class="killed">resources/xr/WhitelistMatcher.js:23:5 Removed WhitelistMatcher.prototype = { /** * Returns true when class should be shown, highlighted, etc. * * @return {Boolean} */ matches: function(className) { if (this.whitelist.length() &gt; 0 ) { return this.whitelist.matches(className); } else { // always match (no filtering) when whitelist is empty return true; } } }; -&gt; KILLED</div><div id="mutation_25_740_1033" class="killed">resources/xr/WhitelistMatcher.js:29:9 Removed matches: function(className) { if (this.whitelist.length() &gt; 0 ) { return this.whitelist.matches(className); } else { // always match (no filtering) when whitelist is empty return true; } } -&gt; KILLED</div><div id="mutation_27_810_813" class="killed">resources/xr/WhitelistMatcher.js:30:40 Replaced  &gt;  with &gt;= -&gt; KILLED</div><div id="mutation_28_810_813" class="killed">resources/xr/WhitelistMatcher.js:30:40 Replaced  &gt;  with &lt;= -&gt; KILLED</div><div id="mutation_29_787_810" class="killed">resources/xr/WhitelistMatcher.js:30:17 Replaced this.whitelist.length() with this.whitelist -&gt; KILLED</div><div id="mutation_30_813_814" class="survived">resources/xr/WhitelistMatcher.js:30:43 Replaced 0 with 1 -&gt; SURVIVED</div><div id="mutation_26_783_1023" class="killed">resources/xr/WhitelistMatcher.js:30:13 Removed if (this.whitelist.length() &gt; 0 ) { return this.whitelist.matches(className); } else { // always match (no filtering) when whitelist is empty return true; } -&gt; KILLED</div><div id="mutation_31_835_876" class="killed">resources/xr/WhitelistMatcher.js:31:17 Removed return this.whitelist.matches(className); -&gt; KILLED</div><div id="mutation_32_865_874" class="killed">resources/xr/WhitelistMatcher.js:31:47 Replaced className with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_33_842_875" class="killed">resources/xr/WhitelistMatcher.js:31:24 Replaced this.whitelist.matches(className) with className -&gt; KILLED</div><div id="mutation_34_842_875" class="killed">resources/xr/WhitelistMatcher.js:31:24 Replaced this.whitelist.matches(className) with this.whitelist -&gt; KILLED</div><div id="mutation_36_1004_1008" class="killed">resources/xr/WhitelistMatcher.js:35:24 Replaced true with false -&gt; KILLED</div><div id="mutation_35_997_1009" class="killed">resources/xr/WhitelistMatcher.js:35:17 Removed return true; -&gt; KILLED</div><div id="mutation_11_1046_1070" class="killed">resources/xr/WhitelistMatcher.js:40:5 Removed return WhitelistMatcher; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

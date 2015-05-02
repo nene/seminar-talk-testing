@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":36,"ignored":9,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>36</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>9</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/cpu/index.html'">cpu</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/cpu/applyPackageBoundaries.js.html'">applyPackageBoundaries.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_11_62_68">"xr/_"</span>);</li><li>    var TraceName = require(<span class="code killed mutation_13_99_118">"xr/tree/TraceName"</span>);</li><li></li><li>    /**</li><li>     * Marks nodes that are in a different domain than its preceding node.</li><li>     * Domain name consists of the first two names in package name.</li><li>     * @param {Object[]} traces</li><li>     * @return {Object[]}</li><li>     */</li><li>    <span class="code killed mutation_9_343_868">return function applyPackageBoundaries(traces, previous) {</span></li><li><span class="code killed mutation_9_343_868">        // Shared state object to keep track of the previous domain</span></li><li><span class="code killed mutation_9_343_868">        <span class="code killed mutation_15_478_504">previous = previous<span class="code killed mutation_18_497_501"> || </span>{};</span></span></li><li><span class="code killed mutation_9_343_868"></li><li>        <span class="code killed mutation_35_514_523"><span class="code killed mutation_22_514_828"><span class="code killed mutation_21_514_828"><span class="code killed mutation_19_514_836"><span class="code killed mutation_16_514_837">_(<span class="code killed mutation_34_516_522">traces</span>)</span>.forEach(<span class="code killed mutation_20_532_827">function(node){</span></span></span></span></span></span></li><li><span class="code killed mutation_22_514_828"><span class="code killed mutation_21_514_828"><span class="code killed mutation_20_532_827"><span class="code killed mutation_19_514_836"><span class="code killed mutation_16_514_837"><span class="code killed mutation_9_343_868">            <span class="code killed mutation_23_560_600">var currentDomain = <span class="code killed mutation_28_580_599">packageDomain(<span class="code killed mutation_27_594_598">node</span>)</span>;</span></span></span></span></span></span></span></li><li><span class="code killed mutation_22_514_828"><span class="code killed mutation_21_514_828"><span class="code killed mutation_20_532_827"><span class="code killed mutation_19_514_836"><span class="code killed mutation_16_514_837"><span class="code killed mutation_9_343_868">            <span class="code killed mutation_24_613_712">if (currentDomain<span class="code killed mutation_29_630_635"> !== </span>previous.domain) {</span></span></span></span></span></span></span></li><li><span class="code killed mutation_24_613_712"><span class="code killed mutation_22_514_828"><span class="code killed mutation_21_514_828"><span class="code killed mutation_20_532_827"><span class="code killed mutation_19_514_836"><span class="code killed mutation_16_514_837"><span class="code killed mutation_9_343_868">                <span class="code killed mutation_30_670_698">node.packageBoundary = <span class="code killed mutation_31_693_697">true</span>;</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_24_613_712"><span class="code killed mutation_22_514_828"><span class="code killed mutation_21_514_828"><span class="code killed mutation_20_532_827"><span class="code killed mutation_19_514_836"><span class="code killed mutation_16_514_837"><span class="code killed mutation_9_343_868">            }</span></span></span></span></span></span></span></li><li><span class="code killed mutation_22_514_828"><span class="code killed mutation_21_514_828"><span class="code killed mutation_20_532_827"><span class="code killed mutation_19_514_836"><span class="code killed mutation_16_514_837"><span class="code killed mutation_9_343_868">            <span class="code killed mutation_25_725_757">previous.domain = currentDomain;</span></span></span></span></span></span></span></li><li><span class="code killed mutation_22_514_828"><span class="code killed mutation_21_514_828"><span class="code killed mutation_20_532_827"><span class="code killed mutation_19_514_836"><span class="code killed mutation_16_514_837"><span class="code killed mutation_9_343_868"></li><li>            <span class="code killed mutation_26_771_817">applyPackageBoundaries(<span class="code killed mutation_32_794_805">node.traces</span>, <span class="code killed mutation_33_807_815">previous</span>);</span></span></span></span></span></span></span></li><li><span class="code killed mutation_22_514_828"><span class="code killed mutation_21_514_828"><span class="code killed mutation_20_532_827"><span class="code killed mutation_19_514_836"><span class="code killed mutation_16_514_837"><span class="code killed mutation_9_343_868">        }</span>)</span></span>.value()</span>;</span></span></li><li><span class="code killed mutation_9_343_868"></li><li>        <span class="code killed mutation_17_847_861">return traces;</span></span></li><li><span class="code killed mutation_9_343_868">    };</span></li><li></li><li>    <span class="code killed mutation_10_874_958">function packageDomain(node) {</span></li><li><span class="code killed mutation_10_874_958">        <span class="code killed mutation_36_913_952">return <span class="code killed mutation_37_920_951">new TraceName(node).getDomain()</span>;</span></span></li><li><span class="code killed mutation_10_874_958">    }</span></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_11_62_68" class="killed">resources/xr/cpu/applyPackageBoundaries.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_13_99_118" class="killed">resources/xr/cpu/applyPackageBoundaries.js:5:29 Replaced &quot;xr/tree/TraceName&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_9_343_868" class="killed">resources/xr/cpu/applyPackageBoundaries.js:13:5 Removed return function applyPackageBoundaries(traces, previous) { // Shared state object to keep track of the previous domain previous = previous || {}; _(traces).forEach(function(node){ var currentDomain = packageDomain(node); if (currentDomain !== previous.domain) { node.packageBoundary = true; } previous.domain = currentDomain; applyPackageBoundaries(node.traces, previous); }).value(); return traces; }; -&gt; KILLED</div><div id="mutation_15_478_504" class="killed">resources/xr/cpu/applyPackageBoundaries.js:15:9 Removed previous = previous || {}; -&gt; KILLED</div><div id="mutation_18_497_501" class="killed">resources/xr/cpu/applyPackageBoundaries.js:15:28 Replaced  ||  with &amp;&amp; -&gt; KILLED</div><div id="mutation_35_514_523" class="killed">resources/xr/cpu/applyPackageBoundaries.js:17:9 Replaced _(traces) with traces -&gt; KILLED</div><div id="mutation_19_514_836" class="killed">resources/xr/cpu/applyPackageBoundaries.js:17:9 Replaced _(traces).forEach(function(node){ var currentDomain = packageDomain(node); if (currentDomain !== previous.domain) { node.packageBoundary = true; } previous.domain = currentDomain; applyPackageBoundaries(node.traces, previous); }).value() with _(traces).forEach(function(node){ var currentDomain = packageDomain(node); if (currentDomain !== previous.domain) { node.packageBoundary = true; } previous.domain = currentDomain; applyPackageBoundaries(node.traces, previous); }) -&gt; KILLED</div><div id="mutation_16_514_837" class="killed">resources/xr/cpu/applyPackageBoundaries.js:17:9 Removed _(traces).forEach(function(node){ var currentDomain = packageDomain(node); if (currentDomain !== previous.domain) { node.packageBoundary = true; } previous.domain = currentDomain; applyPackageBoundaries(node.traces, previous); }).value(); -&gt; KILLED</div><div id="mutation_20_532_827" class="killed">resources/xr/cpu/applyPackageBoundaries.js:17:27 Replaced function(node){ var currentDomain = packageDomain(node); if (currentDomain !== previous.domain) { node.packageBoundary = true; } previous.domain = currentDomain; applyPackageBoundaries(node.traces, previous); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_21_514_828" class="killed">resources/xr/cpu/applyPackageBoundaries.js:17:9 Replaced _(traces).forEach(function(node){ var currentDomain = packageDomain(node); if (currentDomain !== previous.domain) { node.packageBoundary = true; } previous.domain = currentDomain; applyPackageBoundaries(node.traces, previous); }) with function(node){ var currentDomain = packageDomain(node); if (currentDomain !== previous.domain) { node.packageBoundary = true; } previous.domain = currentDomain; applyPackageBoundaries(node.traces, previous); } -&gt; KILLED</div><div id="mutation_22_514_828" class="killed">resources/xr/cpu/applyPackageBoundaries.js:17:9 Replaced _(traces).forEach(function(node){ var currentDomain = packageDomain(node); if (currentDomain !== previous.domain) { node.packageBoundary = true; } previous.domain = currentDomain; applyPackageBoundaries(node.traces, previous); }) with _(traces) -&gt; KILLED</div><div id="mutation_34_516_522" class="killed">resources/xr/cpu/applyPackageBoundaries.js:17:11 Replaced traces with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_23_560_600" class="killed">resources/xr/cpu/applyPackageBoundaries.js:18:13 Removed var currentDomain = packageDomain(node); -&gt; KILLED</div><div id="mutation_28_580_599" class="killed">resources/xr/cpu/applyPackageBoundaries.js:18:33 Replaced packageDomain(node) with node -&gt; KILLED</div><div id="mutation_27_594_598" class="killed">resources/xr/cpu/applyPackageBoundaries.js:18:47 Replaced node with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_24_613_712" class="killed">resources/xr/cpu/applyPackageBoundaries.js:19:13 Removed if (currentDomain !== previous.domain) { node.packageBoundary = true; } -&gt; KILLED</div><div id="mutation_29_630_635" class="killed">resources/xr/cpu/applyPackageBoundaries.js:19:30 Replaced  !==  with === -&gt; KILLED</div><div id="mutation_30_670_698" class="killed">resources/xr/cpu/applyPackageBoundaries.js:20:17 Removed node.packageBoundary = true; -&gt; KILLED</div><div id="mutation_31_693_697" class="killed">resources/xr/cpu/applyPackageBoundaries.js:20:40 Replaced true with false -&gt; KILLED</div><div id="mutation_25_725_757" class="killed">resources/xr/cpu/applyPackageBoundaries.js:22:13 Removed previous.domain = currentDomain; -&gt; KILLED</div><div id="mutation_26_771_817" class="killed">resources/xr/cpu/applyPackageBoundaries.js:24:13 Removed applyPackageBoundaries(node.traces, previous); -&gt; KILLED</div><div id="mutation_32_794_805" class="killed">resources/xr/cpu/applyPackageBoundaries.js:24:36 Replaced node.traces with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_33_807_815" class="killed">resources/xr/cpu/applyPackageBoundaries.js:24:49 Replaced previous with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_847_861" class="killed">resources/xr/cpu/applyPackageBoundaries.js:27:9 Removed return traces; -&gt; KILLED</div><div id="mutation_10_874_958" class="killed">resources/xr/cpu/applyPackageBoundaries.js:30:5 Removed function packageDomain(node) { return new TraceName(node).getDomain(); } -&gt; KILLED</div><div id="mutation_36_913_952" class="killed">resources/xr/cpu/applyPackageBoundaries.js:31:9 Removed return new TraceName(node).getDomain(); -&gt; KILLED</div><div id="mutation_37_920_951" class="killed">resources/xr/cpu/applyPackageBoundaries.js:31:16 Replaced new TraceName(node).getDomain() with new TraceName(node) -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

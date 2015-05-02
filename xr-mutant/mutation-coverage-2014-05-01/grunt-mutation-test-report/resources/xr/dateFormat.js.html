@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":43,"ignored":7,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>43</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/dateFormat.js.html'">dateFormat.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_10_62_68">"xr/_"</span>);</li><li></li><li>    /**</li><li>     * Very basic time formatting function, which accepts Moment.js style</li><li>     * format string (giving us a simple path for upgrading to full</li><li>     * Moment.js library at some later time).</li><li>     *</li><li>     * Accepted format characters are as follows:</li><li>     *</li><li>     * - H   - Hours         1,  2, ... 22, 23</li><li>     * - HH                 01, 02, ... 22, 23</li><li>     * - h                   1,  2, ... 22, 23</li><li>     * - hh                 01, 02, ... 22, 23</li><li>     * - m   - Minutes       1,  2, ... 58, 59</li><li>     * - mm                 01, 02, ... 58, 59</li><li>     * - s   - Seconds       1,  2, ... 58, 59</li><li>     * - ss                 01, 02, ... 58, 59</li><li>     * - SSS - Milliseconds 001, 002, ... 998, 999</li><li>     *</li><li>     * @param {Date} date</li><li>     * @param {String} format</li><li>     * @return {String}</li><li>     */</li><li>    <span class="code killed mutation_8_858_1136">return function(date, format) {</span></li><li><span class="code killed mutation_8_858_1136">        <span class="code killed mutation_12_898_1129">return <span class="code killed mutation_15_905_1128">format.replace(<span class="code killed mutation_13_920_948">/([hH]+|m+|s+|S+|[a-zA-Z])/g</span>, <span class="code killed mutation_14_950_1127">function(token) {</span></span></span></span></li><li><span class="code killed mutation_15_905_1128"><span class="code killed mutation_14_950_1127"><span class="code killed mutation_12_898_1129"><span class="code killed mutation_8_858_1136">            <span class="code killed mutation_16_980_1007">var type = <span class="code killed mutation_21_991_1006"><span class="code killed mutation_20_991_1006">token.charAt(<span class="code killed mutation_19_1004_1005">0</span>)</span></span>;</span></span></span></span></span></li><li><span class="code killed mutation_15_905_1128"><span class="code killed mutation_14_950_1127"><span class="code killed mutation_12_898_1129"><span class="code killed mutation_8_858_1136">            <span class="code killed mutation_17_1020_1059">var timeStr = <span class="code killed mutation_23_1034_1036">""</span><span class="code killed mutation_22_1036_1039"> + </span>extract(<span class="code killed mutation_24_1047_1051">date</span>, <span class="code killed mutation_25_1053_1057">type</span>);</span></span></span></span></span></li><li><span class="code killed mutation_15_905_1128"><span class="code killed mutation_14_950_1127"><span class="code killed mutation_12_898_1129"><span class="code killed mutation_8_858_1136">            <span class="code killed mutation_18_1072_1117">return <span class="code killed mutation_30_1079_1089"><span class="code killed mutation_28_1079_1116">_(<span class="code killed mutation_29_1081_1088">timeStr</span>)</span>.padLeft(<span class="code killed mutation_26_1098_1110">token.length</span>, <span class="code killed mutation_27_1112_1115">"0"</span>)</span>;</span></span></span></span></span></li><li><span class="code killed mutation_15_905_1128"><span class="code killed mutation_14_950_1127"><span class="code killed mutation_12_898_1129"><span class="code killed mutation_8_858_1136">        }</span>)</span>;</span></span></li><li><span class="code killed mutation_8_858_1136">    };</span></li><li></li><li>    <span class="code killed mutation_9_1142_1563">function extract(date, type) {</span></li><li><span class="code killed mutation_9_1142_1563">        <span class="code killed mutation_31_1181_1557">switch (type) {</span></span></li><li><span class="code killed mutation_31_1181_1557"><span class="code killed mutation_9_1142_1563">            case <span class="code killed mutation_32_1214_1217">"h"</span>:</span></span></li><li><span class="code killed mutation_31_1181_1557"><span class="code killed mutation_9_1142_1563">            case <span class="code killed mutation_33_1236_1239">"H"</span>:</span></span></li><li><span class="code killed mutation_31_1181_1557"><span class="code killed mutation_9_1142_1563">                return <span class="code killed mutation_34_1264_1279">date.getHours()</span>;</span></span></li><li><span class="code killed mutation_31_1181_1557"><span class="code killed mutation_9_1142_1563">            case <span class="code killed mutation_35_1298_1301">"m"</span>:</span></span></li><li><span class="code killed mutation_31_1181_1557"><span class="code killed mutation_9_1142_1563">                return <span class="code killed mutation_36_1326_1343">date.getMinutes()</span>;</span></span></li><li><span class="code killed mutation_31_1181_1557"><span class="code killed mutation_9_1142_1563">            case <span class="code killed mutation_37_1362_1365">"s"</span>:</span></span></li><li><span class="code killed mutation_31_1181_1557"><span class="code killed mutation_9_1142_1563">                return <span class="code killed mutation_38_1390_1407">date.getSeconds()</span>;</span></span></li><li><span class="code killed mutation_31_1181_1557"><span class="code killed mutation_9_1142_1563">            case <span class="code killed mutation_39_1426_1429">"S"</span>:</span></span></li><li><span class="code killed mutation_31_1181_1557"><span class="code killed mutation_9_1142_1563">                return <span class="code killed mutation_40_1454_1476">date.getMilliseconds()</span>;</span></span></li><li><span class="code killed mutation_31_1181_1557"><span class="code killed mutation_9_1142_1563">            default:</span></span></li><li><span class="code killed mutation_31_1181_1557"><span class="code killed mutation_9_1142_1563">                return <span class="code killed mutation_43_1522_1537">"(Unsupported:"</span><span class="code killed mutation_42_1537_1538">+</span>type<span class="code killed mutation_41_1542_1543">+</span><span class="code killed mutation_44_1543_1546">")"</span>;</span></span></li><li><span class="code killed mutation_31_1181_1557"><span class="code killed mutation_9_1142_1563">        }</span></span></li><li><span class="code killed mutation_9_1142_1563">    }</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_10_62_68" class="killed">resources/xr/dateFormat.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_858_1136" class="killed">resources/xr/dateFormat.js:27:5 Removed return function(date, format) { return format.replace(/([hH]+|m+|s+|S+|[a-zA-Z])/g, function(token) { var type = token.charAt(0); var timeStr = &quot;&quot; + extract(date, type); return _(timeStr).padLeft(token.length, &quot;0&quot;); }); }; -&gt; KILLED</div><div id="mutation_12_898_1129" class="killed">resources/xr/dateFormat.js:28:9 Removed return format.replace(/([hH]+|m+|s+|S+|[a-zA-Z])/g, function(token) { var type = token.charAt(0); var timeStr = &quot;&quot; + extract(date, type); return _(timeStr).padLeft(token.length, &quot;0&quot;); }); -&gt; KILLED</div><div id="mutation_13_920_948" class="killed">resources/xr/dateFormat.js:28:31 Replaced /([hH]+|m+|s+|S+|[a-zA-Z])/g with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_14_950_1127" class="killed">resources/xr/dateFormat.js:28:61 Replaced function(token) { var type = token.charAt(0); var timeStr = &quot;&quot; + extract(date, type); return _(timeStr).padLeft(token.length, &quot;0&quot;); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_905_1128" class="killed">resources/xr/dateFormat.js:28:16 Replaced format.replace(/([hH]+|m+|s+|S+|[a-zA-Z])/g, function(token) { var type = token.charAt(0); var timeStr = &quot;&quot; + extract(date, type); return _(timeStr).padLeft(token.length, &quot;0&quot;); }) with format -&gt; KILLED</div><div id="mutation_16_980_1007" class="killed">resources/xr/dateFormat.js:29:13 Removed var type = token.charAt(0); -&gt; KILLED</div><div id="mutation_19_1004_1005" class="killed">resources/xr/dateFormat.js:29:37 Replaced 0 with 1 -&gt; KILLED</div><div id="mutation_20_991_1006" class="killed">resources/xr/dateFormat.js:29:24 Replaced token.charAt(0) with 0 -&gt; KILLED</div><div id="mutation_21_991_1006" class="killed">resources/xr/dateFormat.js:29:24 Replaced token.charAt(0) with token -&gt; KILLED</div><div id="mutation_25_1053_1057" class="killed">resources/xr/dateFormat.js:30:46 Replaced type with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_1036_1039" class="killed">resources/xr/dateFormat.js:30:29 Replaced  +  with - -&gt; KILLED</div><div id="mutation_23_1034_1036" class="killed">resources/xr/dateFormat.js:30:27 Replaced &quot;&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_24_1047_1051" class="killed">resources/xr/dateFormat.js:30:40 Replaced date with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_1020_1059" class="killed">resources/xr/dateFormat.js:30:13 Removed var timeStr = &quot;&quot; + extract(date, type); -&gt; KILLED</div><div id="mutation_18_1072_1117" class="killed">resources/xr/dateFormat.js:31:13 Removed return _(timeStr).padLeft(token.length, &quot;0&quot;); -&gt; KILLED</div><div id="mutation_27_1112_1115" class="killed">resources/xr/dateFormat.js:31:53 Replaced &quot;0&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_26_1098_1110" class="killed">resources/xr/dateFormat.js:31:39 Replaced token.length with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_30_1079_1089" class="killed">resources/xr/dateFormat.js:31:20 Replaced _(timeStr) with timeStr -&gt; KILLED</div><div id="mutation_28_1079_1116" class="killed">resources/xr/dateFormat.js:31:20 Replaced _(timeStr).padLeft(token.length, &quot;0&quot;) with _(timeStr) -&gt; KILLED</div><div id="mutation_29_1081_1088" class="killed">resources/xr/dateFormat.js:31:22 Replaced timeStr with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_9_1142_1563" class="killed">resources/xr/dateFormat.js:35:5 Removed function extract(date, type) { switch (type) { case &quot;h&quot;: case &quot;H&quot;: return date.getHours(); case &quot;m&quot;: return date.getMinutes(); case &quot;s&quot;: return date.getSeconds(); case &quot;S&quot;: return date.getMilliseconds(); default: return &quot;(Unsupported:&quot;+type+&quot;)&quot;; } } -&gt; KILLED</div><div id="mutation_31_1181_1557" class="killed">resources/xr/dateFormat.js:36:9 Removed switch (type) { case &quot;h&quot;: case &quot;H&quot;: return date.getHours(); case &quot;m&quot;: return date.getMinutes(); case &quot;s&quot;: return date.getSeconds(); case &quot;S&quot;: return date.getMilliseconds(); default: return &quot;(Unsupported:&quot;+type+&quot;)&quot;; } -&gt; KILLED</div><div id="mutation_32_1214_1217" class="killed">resources/xr/dateFormat.js:37:18 Replaced &quot;h&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_33_1236_1239" class="killed">resources/xr/dateFormat.js:38:18 Replaced &quot;H&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_34_1264_1279" class="killed">resources/xr/dateFormat.js:39:24 Replaced date.getHours() with date -&gt; KILLED</div><div id="mutation_35_1298_1301" class="killed">resources/xr/dateFormat.js:40:18 Replaced &quot;m&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_36_1326_1343" class="killed">resources/xr/dateFormat.js:41:24 Replaced date.getMinutes() with date -&gt; KILLED</div><div id="mutation_37_1362_1365" class="killed">resources/xr/dateFormat.js:42:18 Replaced &quot;s&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_38_1390_1407" class="killed">resources/xr/dateFormat.js:43:24 Replaced date.getSeconds() with date -&gt; KILLED</div><div id="mutation_39_1426_1429" class="killed">resources/xr/dateFormat.js:44:18 Replaced &quot;S&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_40_1454_1476" class="killed">resources/xr/dateFormat.js:45:24 Replaced date.getMilliseconds() with date -&gt; KILLED</div><div id="mutation_41_1542_1543" class="killed">resources/xr/dateFormat.js:47:44 Replaced + with - -&gt; KILLED</div><div id="mutation_42_1537_1538" class="killed">resources/xr/dateFormat.js:47:39 Replaced + with - -&gt; KILLED</div><div id="mutation_43_1522_1537" class="killed">resources/xr/dateFormat.js:47:24 Replaced &quot;(Unsupported:&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_44_1543_1546" class="killed">resources/xr/dateFormat.js:47:45 Replaced &quot;)&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

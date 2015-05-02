@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":56,"ignored":9,"untested":0,"survived":2}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>56</strong> of which <strong>2</strong> survived,&nbsp;
+        <strong>9</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>96.4%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/index.html'">tree</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/groupRequests.js.html'">groupRequests.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_10_62_68">"xr/_"</span>);</li><li>    var nodeFactory = require(<span class="code killed mutation_12_101_122">"xr/tree/nodeFactory"</span>);</li><li></li><li>    /**</li><li>     * Groups sequential identical requests into request groups</li><li>     * @param {RequestNode[]} requestNodes</li><li>     * @returns { (RequestNode|RequestGroupNode)[] }</li><li>     */</li><li>    <span class="code killed mutation_9_306_1234">return function(requestNodes, opts) {</span></li><li><span class="code killed mutation_9_306_1234">        <span class="code killed mutation_14_352_368">var groups = [];</span></span></li><li><span class="code killed mutation_9_306_1234">        <span class="code killed mutation_15_377_391">var prevGroup;</span></span></li><li><span class="code killed mutation_9_306_1234">        <span class="code killed mutation_16_400_423">var prevGroupName = <span class="code survived mutation_19_420_422">""</span>;</span></span></li><li><span class="code killed mutation_9_306_1234"></li><li>        // Group all requests into simple arrays</span></li><li><span class="code killed mutation_9_306_1234">        <span class="code killed mutation_42_482_497"><span class="code killed mutation_23_482_868"><span class="code killed mutation_22_482_868"><span class="code killed mutation_20_482_876"><span class="code killed mutation_17_482_877">_(<span class="code killed mutation_41_484_496">requestNodes</span>)</span>.forEach(<span class="code killed mutation_21_506_867">function(requestEl) {</span></span></span></span></span></span></li><li><span class="code killed mutation_23_482_868"><span class="code killed mutation_22_482_868"><span class="code killed mutation_21_506_867"><span class="code killed mutation_20_482_876"><span class="code killed mutation_17_482_877"><span class="code killed mutation_9_306_1234">            <span class="code killed mutation_24_540_606">var name = requestEl.request.method<span class="code killed mutation_27_575_578"> + </span><span class="code survived mutation_28_578_581">" "</span><span class="code killed mutation_26_581_584"> + </span>requestEl.request.url;</span></span></span></span></span></span></span></li><li><span class="code killed mutation_23_482_868"><span class="code killed mutation_22_482_868"><span class="code killed mutation_21_506_867"><span class="code killed mutation_20_482_876"><span class="code killed mutation_17_482_877"><span class="code killed mutation_9_306_1234">            <span class="code killed mutation_25_619_857">if (name<span class="code killed mutation_29_627_632"> === </span>prevGroupName) {</span></span></span></span></span></span></span></li><li><span class="code killed mutation_25_619_857"><span class="code killed mutation_23_482_868"><span class="code killed mutation_22_482_868"><span class="code killed mutation_21_506_867"><span class="code killed mutation_20_482_876"><span class="code killed mutation_17_482_877"><span class="code killed mutation_9_306_1234">                <span class="code killed mutation_33_665_690"><span class="code killed mutation_32_665_690"><span class="code killed mutation_30_665_691">prevGroup.push(<span class="code killed mutation_31_680_689">requestEl</span>)</span></span>;</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_25_619_857"><span class="code killed mutation_23_482_868"><span class="code killed mutation_22_482_868"><span class="code killed mutation_21_506_867"><span class="code killed mutation_20_482_876"><span class="code killed mutation_17_482_877"><span class="code killed mutation_9_306_1234">            }</span></span></span></span></span></span></span></li><li><span class="code killed mutation_25_619_857"><span class="code killed mutation_23_482_868"><span class="code killed mutation_22_482_868"><span class="code killed mutation_21_506_867"><span class="code killed mutation_20_482_876"><span class="code killed mutation_17_482_877"><span class="code killed mutation_9_306_1234">            else {</span></span></span></span></span></span></span></li><li><span class="code killed mutation_25_619_857"><span class="code killed mutation_23_482_868"><span class="code killed mutation_22_482_868"><span class="code killed mutation_21_506_867"><span class="code killed mutation_20_482_876"><span class="code killed mutation_17_482_877"><span class="code killed mutation_9_306_1234">                <span class="code killed mutation_34_741_765">prevGroup = [<span class="code killed mutation_37_754_763">requestEl</span>];</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_25_619_857"><span class="code killed mutation_23_482_868"><span class="code killed mutation_22_482_868"><span class="code killed mutation_21_506_867"><span class="code killed mutation_20_482_876"><span class="code killed mutation_17_482_877"><span class="code killed mutation_9_306_1234">                <span class="code killed mutation_35_782_803">prevGroupName = name;</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_25_619_857"><span class="code killed mutation_23_482_868"><span class="code killed mutation_22_482_868"><span class="code killed mutation_21_506_867"><span class="code killed mutation_20_482_876"><span class="code killed mutation_17_482_877"><span class="code killed mutation_9_306_1234">                <span class="code killed mutation_40_820_842"><span class="code killed mutation_39_820_842"><span class="code killed mutation_36_820_843">groups.push(<span class="code killed mutation_38_832_841">prevGroup</span>)</span></span>;</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_25_619_857"><span class="code killed mutation_23_482_868"><span class="code killed mutation_22_482_868"><span class="code killed mutation_21_506_867"><span class="code killed mutation_20_482_876"><span class="code killed mutation_17_482_877"><span class="code killed mutation_9_306_1234">            }</span></span></span></span></span></span></span></li><li><span class="code killed mutation_23_482_868"><span class="code killed mutation_22_482_868"><span class="code killed mutation_21_506_867"><span class="code killed mutation_20_482_876"><span class="code killed mutation_17_482_877"><span class="code killed mutation_9_306_1234">        }</span>)</span></span>.value()</span>;</span></span></li><li><span class="code killed mutation_9_306_1234"></li><li>        // Unwrap one-Node arrays into basic requests,</span></li><li><span class="code killed mutation_9_306_1234">        // and turn larger arrays into request groups.</span></li><li><span class="code killed mutation_9_306_1234">        <span class="code killed mutation_18_997_1227">return <span class="code killed mutation_57_1004_1013"><span class="code killed mutation_46_1004_1218"><span class="code killed mutation_45_1004_1218"><span class="code killed mutation_43_1004_1226">_(<span class="code killed mutation_56_1006_1012">groups</span>)</span>.map(<span class="code killed mutation_44_1018_1217">function(grp) {</span></span></span></span></span></span></li><li><span class="code killed mutation_46_1004_1218"><span class="code killed mutation_45_1004_1218"><span class="code killed mutation_44_1018_1217"><span class="code killed mutation_43_1004_1226"><span class="code killed mutation_18_997_1227"><span class="code killed mutation_9_306_1234">            <span class="code killed mutation_47_1046_1207">if (grp.length<span class="code killed mutation_48_1060_1065"> === </span><span class="code killed mutation_49_1065_1066">1</span>) {</span></span></span></span></span></span></span></li><li><span class="code killed mutation_47_1046_1207"><span class="code killed mutation_46_1004_1218"><span class="code killed mutation_45_1004_1218"><span class="code killed mutation_44_1018_1217"><span class="code killed mutation_43_1004_1226"><span class="code killed mutation_18_997_1227"><span class="code killed mutation_9_306_1234">                <span class="code killed mutation_50_1086_1100">return grp[<span class="code killed mutation_51_1097_1098">0</span>];</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_47_1046_1207"><span class="code killed mutation_46_1004_1218"><span class="code killed mutation_45_1004_1218"><span class="code killed mutation_44_1018_1217"><span class="code killed mutation_43_1004_1226"><span class="code killed mutation_18_997_1227"><span class="code killed mutation_9_306_1234">            }</span></span></span></span></span></span></span></li><li><span class="code killed mutation_47_1046_1207"><span class="code killed mutation_46_1004_1218"><span class="code killed mutation_45_1004_1218"><span class="code killed mutation_44_1018_1217"><span class="code killed mutation_43_1004_1226"><span class="code killed mutation_18_997_1227"><span class="code killed mutation_9_306_1234">            else {</span></span></span></span></span></span></span></li><li><span class="code killed mutation_47_1046_1207"><span class="code killed mutation_46_1004_1218"><span class="code killed mutation_45_1004_1218"><span class="code killed mutation_44_1018_1217"><span class="code killed mutation_43_1004_1226"><span class="code killed mutation_18_997_1227"><span class="code killed mutation_9_306_1234">                <span class="code killed mutation_52_1150_1193">return <span class="code killed mutation_55_1157_1192">nodeFactory.requestGroup(<span class="code killed mutation_53_1182_1185">grp</span>, <span class="code killed mutation_54_1187_1191">opts</span>)</span>;</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_47_1046_1207"><span class="code killed mutation_46_1004_1218"><span class="code killed mutation_45_1004_1218"><span class="code killed mutation_44_1018_1217"><span class="code killed mutation_43_1004_1226"><span class="code killed mutation_18_997_1227"><span class="code killed mutation_9_306_1234">            }</span></span></span></span></span></span></span></li><li><span class="code killed mutation_46_1004_1218"><span class="code killed mutation_45_1004_1218"><span class="code killed mutation_44_1018_1217"><span class="code killed mutation_43_1004_1226"><span class="code killed mutation_18_997_1227"><span class="code killed mutation_9_306_1234">        }</span>)</span></span>.value()</span>;</span></span></li><li><span class="code killed mutation_9_306_1234">    };</span></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_10_62_68" class="killed">resources/xr/tree/groupRequests.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_12_101_122" class="killed">resources/xr/tree/groupRequests.js:5:31 Replaced &quot;xr/tree/nodeFactory&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_9_306_1234" class="killed">resources/xr/tree/groupRequests.js:12:5 Removed return function(requestNodes, opts) { var groups = []; var prevGroup; var prevGroupName = &quot;&quot;; // Group all requests into simple arrays _(requestNodes).forEach(function(requestEl) { var name = requestEl.request.method + &quot; &quot; + requestEl.request.url; if (name === prevGroupName) { prevGroup.push(requestEl); } else { prevGroup = [requestEl]; prevGroupName = name; groups.push(prevGroup); } }).value(); // Unwrap one-Node arrays into basic requests, // and turn larger arrays into request groups. return _(groups).map(function(grp) { if (grp.length === 1) { return grp[0]; } else { return nodeFactory.requestGroup(grp, opts); } }).value(); }; -&gt; KILLED</div><div id="mutation_14_352_368" class="killed">resources/xr/tree/groupRequests.js:13:9 Removed var groups = []; -&gt; KILLED</div><div id="mutation_15_377_391" class="killed">resources/xr/tree/groupRequests.js:14:9 Removed var prevGroup; -&gt; KILLED</div><div id="mutation_16_400_423" class="killed">resources/xr/tree/groupRequests.js:15:9 Removed var prevGroupName = &quot;&quot;; -&gt; KILLED</div><div id="mutation_19_420_422" class="survived">resources/xr/tree/groupRequests.js:15:29 Replaced &quot;&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_41_484_496" class="killed">resources/xr/tree/groupRequests.js:18:11 Replaced requestNodes with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_482_876" class="killed">resources/xr/tree/groupRequests.js:18:9 Replaced _(requestNodes).forEach(function(requestEl) { var name = requestEl.request.method + &quot; &quot; + requestEl.request.url; if (name === prevGroupName) { prevGroup.push(requestEl); } else { prevGroup = [requestEl]; prevGroupName = name; groups.push(prevGroup); } }).value() with _(requestNodes).forEach(function(requestEl) { var name = requestEl.request.method + &quot; &quot; + requestEl.request.url; if (name === prevGroupName) { prevGroup.push(requestEl); } else { prevGroup = [requestEl]; prevGroupName = name; groups.push(prevGroup); } }) -&gt; KILLED</div><div id="mutation_21_506_867" class="killed">resources/xr/tree/groupRequests.js:18:33 Replaced function(requestEl) { var name = requestEl.request.method + &quot; &quot; + requestEl.request.url; if (name === prevGroupName) { prevGroup.push(requestEl); } else { prevGroup = [requestEl]; prevGroupName = name; groups.push(prevGroup); } } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_482_868" class="killed">resources/xr/tree/groupRequests.js:18:9 Replaced _(requestNodes).forEach(function(requestEl) { var name = requestEl.request.method + &quot; &quot; + requestEl.request.url; if (name === prevGroupName) { prevGroup.push(requestEl); } else { prevGroup = [requestEl]; prevGroupName = name; groups.push(prevGroup); } }) with function(requestEl) { var name = requestEl.request.method + &quot; &quot; + requestEl.request.url; if (name === prevGroupName) { prevGroup.push(requestEl); } else { prevGroup = [requestEl]; prevGroupName = name; groups.push(prevGroup); } } -&gt; KILLED</div><div id="mutation_23_482_868" class="killed">resources/xr/tree/groupRequests.js:18:9 Replaced _(requestNodes).forEach(function(requestEl) { var name = requestEl.request.method + &quot; &quot; + requestEl.request.url; if (name === prevGroupName) { prevGroup.push(requestEl); } else { prevGroup = [requestEl]; prevGroupName = name; groups.push(prevGroup); } }) with _(requestNodes) -&gt; KILLED</div><div id="mutation_17_482_877" class="killed">resources/xr/tree/groupRequests.js:18:9 Removed _(requestNodes).forEach(function(requestEl) { var name = requestEl.request.method + &quot; &quot; + requestEl.request.url; if (name === prevGroupName) { prevGroup.push(requestEl); } else { prevGroup = [requestEl]; prevGroupName = name; groups.push(prevGroup); } }).value(); -&gt; KILLED</div><div id="mutation_42_482_497" class="killed">resources/xr/tree/groupRequests.js:18:9 Replaced _(requestNodes) with requestNodes -&gt; KILLED</div><div id="mutation_26_581_584" class="killed">resources/xr/tree/groupRequests.js:19:54 Replaced  +  with - -&gt; KILLED</div><div id="mutation_27_575_578" class="killed">resources/xr/tree/groupRequests.js:19:48 Replaced  +  with - -&gt; KILLED</div><div id="mutation_28_578_581" class="survived">resources/xr/tree/groupRequests.js:19:51 Replaced &quot; &quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_24_540_606" class="killed">resources/xr/tree/groupRequests.js:19:13 Removed var name = requestEl.request.method + &quot; &quot; + requestEl.request.url; -&gt; KILLED</div><div id="mutation_29_627_632" class="killed">resources/xr/tree/groupRequests.js:20:21 Replaced  ===  with !== -&gt; KILLED</div><div id="mutation_25_619_857" class="killed">resources/xr/tree/groupRequests.js:20:13 Removed if (name === prevGroupName) { prevGroup.push(requestEl); } else { prevGroup = [requestEl]; prevGroupName = name; groups.push(prevGroup); } -&gt; KILLED</div><div id="mutation_30_665_691" class="killed">resources/xr/tree/groupRequests.js:21:17 Removed prevGroup.push(requestEl); -&gt; KILLED</div><div id="mutation_31_680_689" class="killed">resources/xr/tree/groupRequests.js:21:32 Replaced requestEl with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_32_665_690" class="killed">resources/xr/tree/groupRequests.js:21:17 Replaced prevGroup.push(requestEl) with requestEl -&gt; KILLED</div><div id="mutation_33_665_690" class="killed">resources/xr/tree/groupRequests.js:21:17 Replaced prevGroup.push(requestEl) with prevGroup -&gt; KILLED</div><div id="mutation_34_741_765" class="killed">resources/xr/tree/groupRequests.js:24:17 Removed prevGroup = [requestEl]; -&gt; KILLED</div><div id="mutation_37_754_763" class="killed">resources/xr/tree/groupRequests.js:24:30 Removed requestEl -&gt; KILLED</div><div id="mutation_35_782_803" class="killed">resources/xr/tree/groupRequests.js:25:17 Removed prevGroupName = name; -&gt; KILLED</div><div id="mutation_36_820_843" class="killed">resources/xr/tree/groupRequests.js:26:17 Removed groups.push(prevGroup); -&gt; KILLED</div><div id="mutation_39_820_842" class="killed">resources/xr/tree/groupRequests.js:26:17 Replaced groups.push(prevGroup) with prevGroup -&gt; KILLED</div><div id="mutation_40_820_842" class="killed">resources/xr/tree/groupRequests.js:26:17 Replaced groups.push(prevGroup) with groups -&gt; KILLED</div><div id="mutation_38_832_841" class="killed">resources/xr/tree/groupRequests.js:26:29 Replaced prevGroup with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_18_997_1227" class="killed">resources/xr/tree/groupRequests.js:32:9 Removed return _(groups).map(function(grp) { if (grp.length === 1) { return grp[0]; } else { return nodeFactory.requestGroup(grp, opts); } }).value(); -&gt; KILLED</div><div id="mutation_43_1004_1226" class="killed">resources/xr/tree/groupRequests.js:32:16 Replaced _(groups).map(function(grp) { if (grp.length === 1) { return grp[0]; } else { return nodeFactory.requestGroup(grp, opts); } }).value() with _(groups).map(function(grp) { if (grp.length === 1) { return grp[0]; } else { return nodeFactory.requestGroup(grp, opts); } }) -&gt; KILLED</div><div id="mutation_44_1018_1217" class="killed">resources/xr/tree/groupRequests.js:32:30 Replaced function(grp) { if (grp.length === 1) { return grp[0]; } else { return nodeFactory.requestGroup(grp, opts); } } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_45_1004_1218" class="killed">resources/xr/tree/groupRequests.js:32:16 Replaced _(groups).map(function(grp) { if (grp.length === 1) { return grp[0]; } else { return nodeFactory.requestGroup(grp, opts); } }) with function(grp) { if (grp.length === 1) { return grp[0]; } else { return nodeFactory.requestGroup(grp, opts); } } -&gt; KILLED</div><div id="mutation_46_1004_1218" class="killed">resources/xr/tree/groupRequests.js:32:16 Replaced _(groups).map(function(grp) { if (grp.length === 1) { return grp[0]; } else { return nodeFactory.requestGroup(grp, opts); } }) with _(groups) -&gt; KILLED</div><div id="mutation_57_1004_1013" class="killed">resources/xr/tree/groupRequests.js:32:16 Replaced _(groups) with groups -&gt; KILLED</div><div id="mutation_56_1006_1012" class="killed">resources/xr/tree/groupRequests.js:32:18 Replaced groups with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_49_1065_1066" class="killed">resources/xr/tree/groupRequests.js:33:32 Replaced 1 with 2 -&gt; KILLED</div><div id="mutation_48_1060_1065" class="killed">resources/xr/tree/groupRequests.js:33:27 Replaced  ===  with !== -&gt; KILLED</div><div id="mutation_47_1046_1207" class="killed">resources/xr/tree/groupRequests.js:33:13 Removed if (grp.length === 1) { return grp[0]; } else { return nodeFactory.requestGroup(grp, opts); } -&gt; KILLED</div><div id="mutation_50_1086_1100" class="killed">resources/xr/tree/groupRequests.js:34:17 Removed return grp[0]; -&gt; KILLED</div><div id="mutation_51_1097_1098" class="killed">resources/xr/tree/groupRequests.js:34:28 Replaced 0 with 1 -&gt; KILLED</div><div id="mutation_52_1150_1193" class="killed">resources/xr/tree/groupRequests.js:37:17 Removed return nodeFactory.requestGroup(grp, opts); -&gt; KILLED</div><div id="mutation_53_1182_1185" class="killed">resources/xr/tree/groupRequests.js:37:49 Replaced grp with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_54_1187_1191" class="killed">resources/xr/tree/groupRequests.js:37:54 Replaced opts with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_55_1157_1192" class="killed">resources/xr/tree/groupRequests.js:37:24 Replaced nodeFactory.requestGroup(grp, opts) with nodeFactory -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

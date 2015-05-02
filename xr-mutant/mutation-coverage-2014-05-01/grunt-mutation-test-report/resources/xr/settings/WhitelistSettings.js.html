@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":53,"ignored":16,"untested":0,"survived":4}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>53</strong> of which <strong>4</strong> survived,&nbsp;
+        <strong>16</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>92.5%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/settings/index.html'">settings</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/settings/WhitelistSettings.js.html'">WhitelistSettings.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_14_62_68">"xr/_"</span>);</li><li>    var whitelistParser = require(<span class="code killed mutation_16_105_125">"xr/whitelistParser"</span>);</li><li>    var globPattern = require(<span class="code killed mutation_18_158_174">"xr/globPattern"</span>);</li><li>    var RegExpList = require(<span class="code killed mutation_20_206_221">"xr/RegExpList"</span>);</li><li></li><li>    /**</li><li>     * Manages reading and writing of whitelist-related settings.</li><li>     *</li><li>     * @constructor</li><li>     * @param {Object} appSettings The main settings module,</li><li>     *   from which getSettings() and setSettings() methods are used.</li><li>     * @param {Object} deps Dependencies:</li><li>     *   @param {Object} deps.whitelistParser whitelistParser module</li><li>     *   @param {Function} deps.globPattern globPattern module</li><li>     *   @param {Function} deps.RegExpList RegExpList class</li><li>     */</li><li>    function WhitelistSettings(appSettings, deps) {</li><li>        <span class="code killed mutation_22_759_790">this.appSettings = appSettings;</span></li><li></li><li>        <span class="code killed mutation_31_800_807">_(<span class="code killed mutation_30_802_806">this</span>)</span>.inject(<span class="code killed mutation_24_815_819">deps</span>, <span class="code survived mutation_25_821_951">{</span></li><li><span class="code survived mutation_25_821_951">            <span class="code survived mutation_27_835_881">whitelistParser: whitelistParser,</span></span></li><li><span class="code survived mutation_27_835_881"><span class="code survived mutation_25_821_951">            </span><span class="code survived mutation_28_881_919">globPattern: globPattern,</span></span></li><li><span class="code survived mutation_28_881_919"><span class="code survived mutation_25_821_951">            </span><span class="code survived mutation_29_919_941">RegExpList: RegExpList</span></span></li><li><span class="code survived mutation_25_821_951">        }</span>);</li><li>    }</li><li>    <span class="code killed mutation_12_964_1832">WhitelistSettings.prototype = {</span></li><li><span class="code killed mutation_12_964_1832">        /**</span></li><li><span class="code killed mutation_12_964_1832">         * Saves whitelist configuration.</span></li><li><span class="code killed mutation_12_964_1832">         *</span></li><li><span class="code killed mutation_12_964_1832">         * @param {String} sourceText The contents of whitelist editor textarea.</span></li><li><span class="code killed mutation_12_964_1832">         */</span></li><li><span class="code killed mutation_12_964_1832">        <span class="code killed mutation_32_1162_1404">setSourceText: function(sourceText){</span></span></li><li><span class="code killed mutation_32_1162_1404"><span class="code killed mutation_12_964_1832">            <span class="code killed mutation_38_1211_1267"><span class="code killed mutation_35_1211_1268">this.appSettings.set(<span class="code killed mutation_36_1232_1254">"whitelist.editorText"</span>, <span class="code killed mutation_37_1256_1266">sourceText</span>)</span>;</span></span></span></li><li><span class="code killed mutation_32_1162_1404"><span class="code killed mutation_12_964_1832">        },</span></span></li><li><span class="code killed mutation_32_1162_1404"><span class="code killed mutation_12_964_1832"></li><li>        /**</span></span></li><li><span class="code killed mutation_32_1162_1404"><span class="code killed mutation_12_964_1832">         * Returns the contents for whitelist editor textarea.</span></span></li><li><span class="code killed mutation_32_1162_1404"><span class="code killed mutation_12_964_1832">         * @return {String}</span></span></li><li><span class="code killed mutation_32_1162_1404"><span class="code killed mutation_12_964_1832">         */</span></span></li><li><span class="code killed mutation_32_1162_1404"><span class="code killed mutation_12_964_1832">        </span><span class="code killed mutation_33_1404_1619">getSourceText: function(){</span></span></li><li><span class="code killed mutation_33_1404_1619"><span class="code killed mutation_12_964_1832">            <span class="code killed mutation_39_1443_1495">return <span class="code killed mutation_42_1450_1494"><span class="code killed mutation_41_1450_1494">this.appSettings.get(<span class="code killed mutation_40_1471_1493">"whitelist.editorText"</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_33_1404_1619"><span class="code killed mutation_12_964_1832">        },</span></span></li><li><span class="code killed mutation_33_1404_1619"><span class="code killed mutation_12_964_1832"></li><li>        /**</span></span></li><li><span class="code killed mutation_33_1404_1619"><span class="code killed mutation_12_964_1832">         * Returns compiled whitelist matcher.</span></span></li><li><span class="code killed mutation_33_1404_1619"><span class="code killed mutation_12_964_1832">         * @return {RegExpList}</span></span></li><li><span class="code killed mutation_33_1404_1619"><span class="code killed mutation_12_964_1832">         */</span></span></li><li><span class="code killed mutation_33_1404_1619"><span class="code killed mutation_12_964_1832">        </span><span class="code killed mutation_34_1619_1824">getRegExpList: function(){</span></span></li><li><span class="code killed mutation_34_1619_1824"><span class="code killed mutation_12_964_1832">            <span class="code killed mutation_43_1658_1722">var patterns = <span class="code killed mutation_47_1673_1721"><span class="code killed mutation_46_1673_1721">this.whitelistParser.parse(<span class="code killed mutation_48_1700_1720"><span class="code killed mutation_45_1700_1720">this.getSourceText()</span></span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_34_1619_1824"><span class="code killed mutation_12_964_1832">            <span class="code killed mutation_44_1735_1814">return new this.RegExpList(<span class="code killed mutation_54_1762_1773"><span class="code killed mutation_52_1762_1804"><span class="code killed mutation_51_1762_1804"><span class="code killed mutation_49_1762_1812">_(<span class="code killed mutation_53_1764_1772">patterns</span>)</span>.map(<span class="code killed mutation_50_1778_1803">this.globPattern.toRegExp</span>)</span></span>.value()</span>);</span></span></span></li><li><span class="code killed mutation_34_1619_1824"><span class="code killed mutation_12_964_1832">        }</span></span></li><li><span class="code killed mutation_12_964_1832"></li><li>    };</span></li><li></li><li>    <span class="code killed mutation_13_1838_1863">return WhitelistSettings;</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_14_62_68" class="killed">resources/xr/settings/WhitelistSettings.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_16_105_125" class="killed">resources/xr/settings/WhitelistSettings.js:5:35 Replaced &quot;xr/whitelistParser&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_18_158_174" class="killed">resources/xr/settings/WhitelistSettings.js:6:31 Replaced &quot;xr/globPattern&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_206_221" class="killed">resources/xr/settings/WhitelistSettings.js:7:30 Replaced &quot;xr/RegExpList&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_759_790" class="killed">resources/xr/settings/WhitelistSettings.js:21:9 Removed this.appSettings = appSettings; -&gt; KILLED</div><div id="mutation_24_815_819" class="killed">resources/xr/settings/WhitelistSettings.js:23:24 Replaced deps with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_25_821_951" class="survived">resources/xr/settings/WhitelistSettings.js:23:30 Replaced { whitelistParser: whitelistParser, globPattern: globPattern, RegExpList: RegExpList } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_30_802_806" class="killed">resources/xr/settings/WhitelistSettings.js:23:11 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_31_800_807" class="killed">resources/xr/settings/WhitelistSettings.js:23:9 Replaced _(this) with this -&gt; KILLED</div><div id="mutation_27_835_881" class="survived">resources/xr/settings/WhitelistSettings.js:24:13 Removed whitelistParser: whitelistParser,  -&gt; SURVIVED</div><div id="mutation_28_881_919" class="survived">resources/xr/settings/WhitelistSettings.js:25:13 Removed globPattern: globPattern,  -&gt; SURVIVED</div><div id="mutation_29_919_941" class="survived">resources/xr/settings/WhitelistSettings.js:26:13 Removed RegExpList: RegExpList -&gt; SURVIVED</div><div id="mutation_12_964_1832" class="killed">resources/xr/settings/WhitelistSettings.js:29:5 Removed WhitelistSettings.prototype = { /** * Saves whitelist configuration. * * @param {String} sourceText The contents of whitelist editor textarea. */ setSourceText: function(sourceText){ this.appSettings.set(&quot;whitelist.editorText&quot;, sourceText); }, /** * Returns the contents for whitelist editor textarea. * @return {String} */ getSourceText: function(){ return this.appSettings.get(&quot;whitelist.editorText&quot;); }, /** * Returns compiled whitelist matcher. * @return {RegExpList} */ getRegExpList: function(){ var patterns = this.whitelistParser.parse(this.getSourceText()); return new this.RegExpList(_(patterns).map(this.globPattern.toRegExp).value()); } }; -&gt; KILLED</div><div id="mutation_32_1162_1404" class="killed">resources/xr/settings/WhitelistSettings.js:35:9 Removed setSourceText: function(sourceText){ this.appSettings.set(&quot;whitelist.editorText&quot;, sourceText); }, /** * Returns the contents for whitelist editor textarea. * @return {String} */  -&gt; KILLED</div><div id="mutation_36_1232_1254" class="killed">resources/xr/settings/WhitelistSettings.js:36:34 Replaced &quot;whitelist.editorText&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_38_1211_1267" class="killed">resources/xr/settings/WhitelistSettings.js:36:13 Replaced this.appSettings.set(&quot;whitelist.editorText&quot;, sourceText) with this.appSettings -&gt; KILLED</div><div id="mutation_37_1256_1266" class="killed">resources/xr/settings/WhitelistSettings.js:36:58 Replaced sourceText with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_35_1211_1268" class="killed">resources/xr/settings/WhitelistSettings.js:36:13 Removed this.appSettings.set(&quot;whitelist.editorText&quot;, sourceText); -&gt; KILLED</div><div id="mutation_33_1404_1619" class="killed">resources/xr/settings/WhitelistSettings.js:43:9 Removed getSourceText: function(){ return this.appSettings.get(&quot;whitelist.editorText&quot;); }, /** * Returns compiled whitelist matcher. * @return {RegExpList} */  -&gt; KILLED</div><div id="mutation_42_1450_1494" class="killed">resources/xr/settings/WhitelistSettings.js:44:20 Replaced this.appSettings.get(&quot;whitelist.editorText&quot;) with this.appSettings -&gt; KILLED</div><div id="mutation_39_1443_1495" class="killed">resources/xr/settings/WhitelistSettings.js:44:13 Removed return this.appSettings.get(&quot;whitelist.editorText&quot;); -&gt; KILLED</div><div id="mutation_40_1471_1493" class="killed">resources/xr/settings/WhitelistSettings.js:44:41 Replaced &quot;whitelist.editorText&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_41_1450_1494" class="killed">resources/xr/settings/WhitelistSettings.js:44:20 Replaced this.appSettings.get(&quot;whitelist.editorText&quot;) with &quot;whitelist.editorText&quot; -&gt; KILLED</div><div id="mutation_34_1619_1824" class="killed">resources/xr/settings/WhitelistSettings.js:51:9 Removed getRegExpList: function(){ var patterns = this.whitelistParser.parse(this.getSourceText()); return new this.RegExpList(_(patterns).map(this.globPattern.toRegExp).value()); } -&gt; KILLED</div><div id="mutation_43_1658_1722" class="killed">resources/xr/settings/WhitelistSettings.js:52:13 Removed var patterns = this.whitelistParser.parse(this.getSourceText()); -&gt; KILLED</div><div id="mutation_45_1700_1720" class="killed">resources/xr/settings/WhitelistSettings.js:52:55 Replaced this.getSourceText() with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_46_1673_1721" class="killed">resources/xr/settings/WhitelistSettings.js:52:28 Replaced this.whitelistParser.parse(this.getSourceText()) with this.getSourceText() -&gt; KILLED</div><div id="mutation_47_1673_1721" class="killed">resources/xr/settings/WhitelistSettings.js:52:28 Replaced this.whitelistParser.parse(this.getSourceText()) with this.whitelistParser -&gt; KILLED</div><div id="mutation_48_1700_1720" class="killed">resources/xr/settings/WhitelistSettings.js:52:55 Replaced this.getSourceText() with this -&gt; KILLED</div><div id="mutation_54_1762_1773" class="killed">resources/xr/settings/WhitelistSettings.js:53:40 Replaced _(patterns) with patterns -&gt; KILLED</div><div id="mutation_44_1735_1814" class="killed">resources/xr/settings/WhitelistSettings.js:53:13 Removed return new this.RegExpList(_(patterns).map(this.globPattern.toRegExp).value()); -&gt; KILLED</div><div id="mutation_49_1762_1812" class="killed">resources/xr/settings/WhitelistSettings.js:53:40 Replaced _(patterns).map(this.globPattern.toRegExp).value() with _(patterns).map(this.globPattern.toRegExp) -&gt; KILLED</div><div id="mutation_50_1778_1803" class="killed">resources/xr/settings/WhitelistSettings.js:53:56 Replaced this.globPattern.toRegExp with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_51_1762_1804" class="killed">resources/xr/settings/WhitelistSettings.js:53:40 Replaced _(patterns).map(this.globPattern.toRegExp) with this.globPattern.toRegExp -&gt; KILLED</div><div id="mutation_52_1762_1804" class="killed">resources/xr/settings/WhitelistSettings.js:53:40 Replaced _(patterns).map(this.globPattern.toRegExp) with _(patterns) -&gt; KILLED</div><div id="mutation_53_1764_1772" class="killed">resources/xr/settings/WhitelistSettings.js:53:42 Replaced patterns with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_13_1838_1863" class="killed">resources/xr/settings/WhitelistSettings.js:58:5 Removed return WhitelistSettings; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

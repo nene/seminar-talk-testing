@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":20,"ignored":11,"untested":0,"survived":4}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>20</strong> of which <strong>4</strong> survived,&nbsp;
+        <strong>11</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>80.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/settings/index.html'">settings</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/settings/globalSettings.js.html'">globalSettings.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var Settings = require(<span class="code killed mutation_13_69_91">"xr/settings/Settings"</span>);</li><li>    var SettingsStorage = require(<span class="code killed mutation_15_128_157">"xr/settings/SettingsStorage"</span>);</li><li>    var DefaultSettings = require(<span class="code killed mutation_17_194_223">"xr/settings/DefaultSettings"</span>);</li><li></li><li>    <span class="code killed mutation_10_231_287">var storage = new SettingsStorage(<span class="code survived mutation_19_265_285">"../settings/global"</span>);</span></li><li>    <span class="code killed mutation_11_292_356">var defaults = new DefaultSettings({<span class="code survived mutation_20_328_353">allowUsageReporting: <span class="code survived mutation_21_349_353">true</span></span>});</span></li><li></li><li>    /**</li><li>     * Creates a Settings object for global settings</li><li>     */</li><li>    <span class="code survived mutation_12_431_470">return new Settings(storage, defaults);</span></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_13_69_91" class="killed">resources/xr/settings/globalSettings.js:4:28 Replaced &quot;xr/settings/Settings&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_128_157" class="killed">resources/xr/settings/globalSettings.js:5:35 Replaced &quot;xr/settings/SettingsStorage&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_194_223" class="killed">resources/xr/settings/globalSettings.js:6:35 Replaced &quot;xr/settings/DefaultSettings&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_10_231_287" class="killed">resources/xr/settings/globalSettings.js:8:5 Removed var storage = new SettingsStorage(&quot;../settings/global&quot;); -&gt; KILLED</div><div id="mutation_19_265_285" class="survived">resources/xr/settings/globalSettings.js:8:39 Replaced &quot;../settings/global&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_11_292_356" class="killed">resources/xr/settings/globalSettings.js:9:5 Removed var defaults = new DefaultSettings({allowUsageReporting: true}); -&gt; KILLED</div><div id="mutation_20_328_353" class="survived">resources/xr/settings/globalSettings.js:9:41 Removed allowUsageReporting: true -&gt; SURVIVED</div><div id="mutation_21_349_353" class="survived">resources/xr/settings/globalSettings.js:9:62 Replaced true with false -&gt; SURVIVED</div><div id="mutation_12_431_470" class="survived">resources/xr/settings/globalSettings.js:14:5 Removed return new Settings(storage, defaults); -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

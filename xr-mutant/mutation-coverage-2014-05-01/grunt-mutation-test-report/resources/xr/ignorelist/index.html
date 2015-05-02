@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#successRate {
+    padding: 2px;
+    border: none;
+}
+#files {
+    margin-left: 30px;
+}
+#files .perc {
+    width: 25%;
+    text-align: right;
+}
+.link {
+    cursor: pointer;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript"></script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>208</strong> of which <strong>2</strong> survived,&nbsp;
+        <strong>48</strong> ignored and <strong>0</strong> untested</p>
+    <span id="successRate" class="killed">Mutation success rate: <strong>99.0%</strong></span>
+</div>
+<h2></h2>
+<table id='files'><tr><td><span class="link killed" onclick="location.href='Filter.js.html'">Filter.js.html</span></td><td class="perc">100.0%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='Marker.js.html'">Marker.js.html</span></td><td class="perc">100.0%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='QueryCounter.js.html'">QueryCounter.js.html</span></td><td class="perc">100.0%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='QueryList.js.html'">QueryList.js.html</span></td><td class="perc">95.2%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='RequestCounter.js.html'">RequestCounter.js.html</span></td><td class="perc">100.0%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='RequestList.js.html'">RequestList.js.html</span></td><td class="perc">96.2%</td></tr>
+</table>
+</body>
+</html>

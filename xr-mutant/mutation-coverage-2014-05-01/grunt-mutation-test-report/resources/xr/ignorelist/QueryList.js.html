@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":21,"ignored":7,"untested":0,"survived":1}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>21</strong> of which <strong>1</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>95.2%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/ignorelist/index.html'">ignorelist</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/ignorelist/QueryList.js.html'">QueryList.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_11_62_68">"xr/_"</span>);</li><li></li><li>    /**</li><li>     * Matches queries against list of ignored queries.</li><li>     *</li><li>     * @constructor</li><li>     * @param {String[]} ignoredQueries</li><li>     */</li><li>    <span class="code killed mutation_8_215_303">function QueryList(ignoredQueries) {</span></li><li><span class="code killed mutation_8_215_303">        <span class="code killed mutation_13_260_297">this.ignoredQueries = ignoredQueries;</span></span></li><li><span class="code killed mutation_8_215_303">    }</span></li><li>    <span class="code killed mutation_9_308_667">QueryList.prototype = {</span></li><li><span class="code killed mutation_9_308_667">        /**</span></li><li><span class="code killed mutation_9_308_667">         * True when query is in ignorelist.</span></li><li><span class="code killed mutation_9_308_667">         * @param {Object} query</span></li><li><span class="code killed mutation_9_308_667">         * @return {Boolean}</span></li><li><span class="code killed mutation_9_308_667">         */</span></li><li><span class="code killed mutation_9_308_667">        <span class="code killed mutation_14_471_660">matches: function(query) {</span></span></li><li><span class="code killed mutation_14_471_660"><span class="code killed mutation_9_308_667">            <span class="code killed mutation_15_510_650">return <span class="code survived mutation_22_517_539"><span class="code killed mutation_18_517_649"><span class="code killed mutation_17_517_649">_(<span class="code killed mutation_21_519_538">this.ignoredQueries</span>)</span>.some(<span class="code killed mutation_16_545_648">function(ignoredQueryHash) {</span></span></span></span></span></span></li><li><span class="code killed mutation_18_517_649"><span class="code killed mutation_17_517_649"><span class="code killed mutation_16_545_648"><span class="code killed mutation_15_510_650"><span class="code killed mutation_14_471_660"><span class="code killed mutation_9_308_667">                <span class="code killed mutation_19_590_634">return query.queryHash<span class="code killed mutation_20_612_617"> === </span>ignoredQueryHash;</span></span></span></span></span></span></span></li><li><span class="code killed mutation_18_517_649"><span class="code killed mutation_17_517_649"><span class="code killed mutation_16_545_648"><span class="code killed mutation_15_510_650"><span class="code killed mutation_14_471_660"><span class="code killed mutation_9_308_667">            }</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_14_471_660"><span class="code killed mutation_9_308_667">        }</span></span></li><li><span class="code killed mutation_9_308_667">    };</span></li><li></li><li>    <span class="code killed mutation_10_673_690">return QueryList;</span></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_11_62_68" class="killed">resources/xr/ignorelist/QueryList.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_215_303" class="killed">resources/xr/ignorelist/QueryList.js:12:5 Removed function QueryList(ignoredQueries) { this.ignoredQueries = ignoredQueries; } -&gt; KILLED</div><div id="mutation_13_260_297" class="killed">resources/xr/ignorelist/QueryList.js:13:9 Removed this.ignoredQueries = ignoredQueries; -&gt; KILLED</div><div id="mutation_9_308_667" class="killed">resources/xr/ignorelist/QueryList.js:15:5 Removed QueryList.prototype = { /** * True when query is in ignorelist. * @param {Object} query * @return {Boolean} */ matches: function(query) { return _(this.ignoredQueries).some(function(ignoredQueryHash) { return query.queryHash === ignoredQueryHash; }); } }; -&gt; KILLED</div><div id="mutation_14_471_660" class="killed">resources/xr/ignorelist/QueryList.js:21:9 Removed matches: function(query) { return _(this.ignoredQueries).some(function(ignoredQueryHash) { return query.queryHash === ignoredQueryHash; }); } -&gt; KILLED</div><div id="mutation_22_517_539" class="survived">resources/xr/ignorelist/QueryList.js:22:20 Replaced _(this.ignoredQueries) with this.ignoredQueries -&gt; SURVIVED</div><div id="mutation_15_510_650" class="killed">resources/xr/ignorelist/QueryList.js:22:13 Removed return _(this.ignoredQueries).some(function(ignoredQueryHash) { return query.queryHash === ignoredQueryHash; }); -&gt; KILLED</div><div id="mutation_21_519_538" class="killed">resources/xr/ignorelist/QueryList.js:22:22 Replaced this.ignoredQueries with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_517_649" class="killed">resources/xr/ignorelist/QueryList.js:22:20 Replaced _(this.ignoredQueries).some(function(ignoredQueryHash) { return query.queryHash === ignoredQueryHash; }) with function(ignoredQueryHash) { return query.queryHash === ignoredQueryHash; } -&gt; KILLED</div><div id="mutation_18_517_649" class="killed">resources/xr/ignorelist/QueryList.js:22:20 Replaced _(this.ignoredQueries).some(function(ignoredQueryHash) { return query.queryHash === ignoredQueryHash; }) with _(this.ignoredQueries) -&gt; KILLED</div><div id="mutation_16_545_648" class="killed">resources/xr/ignorelist/QueryList.js:22:48 Replaced function(ignoredQueryHash) { return query.queryHash === ignoredQueryHash; } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_19_590_634" class="killed">resources/xr/ignorelist/QueryList.js:23:17 Removed return query.queryHash === ignoredQueryHash; -&gt; KILLED</div><div id="mutation_20_612_617" class="killed">resources/xr/ignorelist/QueryList.js:23:39 Replaced  ===  with !== -&gt; KILLED</div><div id="mutation_10_673_690" class="killed">resources/xr/ignorelist/QueryList.js:28:5 Removed return QueryList; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

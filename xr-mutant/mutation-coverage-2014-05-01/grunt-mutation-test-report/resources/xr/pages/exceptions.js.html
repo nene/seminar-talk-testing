@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":58,"ignored":15,"untested":0,"survived":43}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>58</strong> of which <strong>43</strong> survived,&nbsp;
+        <strong>15</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>25.9%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/pages/index.html'">pages</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/pages/exceptions.js.html'">exceptions.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require){</li><li>    var jQueryFactory = require(<span class="code survived mutation_13_73_91">"xr/jQueryFactory"</span>);</li><li>    var ExceptionsController = require(<span class="code survived mutation_15_133_169">"xr/exceptions/ExceptionsController"</span>);</li><li>    var updates = require(<span class="code survived mutation_17_198_210">"xr/updates"</span>);</li><li>    var appSettings = require(<span class="code survived mutation_19_243_268">"xr/settings/appSettings"</span>);</li><li>    var toolbar = require(<span class="code survived mutation_21_297_315">"xr/toolbar/index"</span>);</li><li></li><li>    <span class="code survived mutation_12_323_1123">return function(window) {</span></li><li><span class="code survived mutation_12_323_1123">        <span class="code survived mutation_23_357_394">var $ = <span class="code survived mutation_31_365_393"><span class="code survived mutation_30_365_393">jQueryFactory.create(<span class="code survived mutation_29_386_392">window</span>)</span></span>;</span></span></li><li><span class="code survived mutation_12_323_1123"></li><li>        <span class="code survived mutation_24_404_512">var controller = new ExceptionsController({</span></span></li><li><span class="code survived mutation_24_404_512"><span class="code survived mutation_12_323_1123">            <span class="code survived mutation_32_460_500">container: <span class="code survived mutation_34_471_500">$(<span class="code survived mutation_33_473_499">"#exceptions-view-content"</span>)</span></span></span></span></li><li><span class="code survived mutation_24_404_512"><span class="code survived mutation_12_323_1123">        });</span></span></li><li><span class="code survived mutation_12_323_1123"></li><li>        <span class="code survived mutation_37_522_626"><span class="code survived mutation_36_522_626"><span class="code survived mutation_25_522_627">updates.addUpdatesListener(<span class="code survived mutation_35_549_625">function(requests) {</span></span></span></span></span></li><li><span class="code survived mutation_37_522_626"><span class="code survived mutation_36_522_626"><span class="code survived mutation_35_549_625"><span class="code survived mutation_25_522_627"><span class="code survived mutation_12_323_1123">            <span class="code survived mutation_41_582_614"><span class="code survived mutation_40_582_614"><span class="code survived mutation_38_582_615">controller.addRequests(<span class="code survived mutation_39_605_613">requests</span>)</span></span>;</span></span></span></span></span></span></li><li><span class="code survived mutation_37_522_626"><span class="code survived mutation_36_522_626"><span class="code survived mutation_35_549_625"><span class="code survived mutation_25_522_627"><span class="code survived mutation_12_323_1123">        }</span>)</span></span>;</span></span></li><li><span class="code survived mutation_12_323_1123">        <span class="code survived mutation_44_636_717"><span class="code survived mutation_26_636_718">appSettings.on(<span class="code survived mutation_42_651_659">"change"</span>, <span class="code survived mutation_43_661_716">function(){</span></span></span></span></li><li><span class="code survived mutation_44_636_717"><span class="code survived mutation_43_661_716"><span class="code survived mutation_26_636_718"><span class="code survived mutation_12_323_1123">            <span class="code survived mutation_46_685_705"><span class="code survived mutation_45_685_706">controller.refresh()</span>;</span></span></span></span></span></li><li><span class="code survived mutation_44_636_717"><span class="code survived mutation_43_661_716"><span class="code survived mutation_26_636_718"><span class="code survived mutation_12_323_1123">        }</span>)</span>;</span></span></li><li><span class="code survived mutation_12_323_1123"></li><li>        // prevent collapsing of the exception tree node when user clicks on stack trace inside closure</span></li><li><span class="code survived mutation_12_323_1123">        // this is a general issue with the tree. Same problem occurs on the io page</span></li><li><span class="code survived mutation_12_323_1123">        <span class="code survived mutation_54_917_943"><span class="code survived mutation_50_917_1029"><span class="code survived mutation_27_917_1030">$(<span class="code survived mutation_53_919_942">".exceptions-view-tree"</span>)</span>.on(<span class="code survived mutation_47_947_954">"click"</span>, <span class="code survived mutation_48_956_966">".closure"</span>, <span class="code survived mutation_49_968_1028">function(evt) {</span></span></span></span></li><li><span class="code survived mutation_50_917_1029"><span class="code survived mutation_49_968_1028"><span class="code survived mutation_27_917_1030"><span class="code survived mutation_12_323_1123">            <span class="code survived mutation_52_996_1017"><span class="code survived mutation_51_996_1018">evt.stopPropagation()</span>;</span></span></span></span></span></li><li><span class="code survived mutation_50_917_1029"><span class="code survived mutation_49_968_1028"><span class="code survived mutation_27_917_1030"><span class="code survived mutation_12_323_1123">        }</span>)</span>;</span></span></li><li><span class="code survived mutation_12_323_1123"></li><li>        <span class="code survived mutation_57_1040_1115"><span class="code survived mutation_28_1040_1116">toolbar.on(<span class="code survived mutation_55_1051_1058">'clear'</span>, <span class="code survived mutation_56_1060_1114">function() {</span></span></span></span></li><li><span class="code survived mutation_57_1040_1115"><span class="code survived mutation_56_1060_1114"><span class="code survived mutation_28_1040_1116"><span class="code survived mutation_12_323_1123">            <span class="code survived mutation_59_1085_1103"><span class="code survived mutation_58_1085_1104">controller.clear()</span>;</span></span></span></span></span></li><li><span class="code survived mutation_57_1040_1115"><span class="code survived mutation_56_1060_1114"><span class="code survived mutation_28_1040_1116"><span class="code survived mutation_12_323_1123">        }</span>)</span>;</span></span></li><li><span class="code survived mutation_12_323_1123">    };</span></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_13_73_91" class="survived">resources/xr/pages/exceptions.js:4:33 Replaced &quot;xr/jQueryFactory&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_15_133_169" class="survived">resources/xr/pages/exceptions.js:5:40 Replaced &quot;xr/exceptions/ExceptionsController&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_17_198_210" class="survived">resources/xr/pages/exceptions.js:6:27 Replaced &quot;xr/updates&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_19_243_268" class="survived">resources/xr/pages/exceptions.js:7:31 Replaced &quot;xr/settings/appSettings&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_21_297_315" class="survived">resources/xr/pages/exceptions.js:8:27 Replaced &quot;xr/toolbar/index&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_12_323_1123" class="survived">resources/xr/pages/exceptions.js:10:5 Removed return function(window) { var $ = jQueryFactory.create(window); var controller = new ExceptionsController({ container: $(&quot;#exceptions-view-content&quot;) }); updates.addUpdatesListener(function(requests) { controller.addRequests(requests); }); appSettings.on(&quot;change&quot;, function(){ controller.refresh(); }); // prevent collapsing of the exception tree node when user clicks on stack trace inside closure // this is a general issue with the tree. Same problem occurs on the io page $(&quot;.exceptions-view-tree&quot;).on(&quot;click&quot;, &quot;.closure&quot;, function(evt) { evt.stopPropagation(); }); toolbar.on(&#x27;clear&#x27;, function() { controller.clear(); }); }; -&gt; SURVIVED</div><div id="mutation_30_365_393" class="survived">resources/xr/pages/exceptions.js:11:17 Replaced jQueryFactory.create(window) with window -&gt; SURVIVED</div><div id="mutation_29_386_392" class="survived">resources/xr/pages/exceptions.js:11:38 Replaced window with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_23_357_394" class="survived">resources/xr/pages/exceptions.js:11:9 Removed var $ = jQueryFactory.create(window); -&gt; SURVIVED</div><div id="mutation_31_365_393" class="survived">resources/xr/pages/exceptions.js:11:17 Replaced jQueryFactory.create(window) with jQueryFactory -&gt; SURVIVED</div><div id="mutation_24_404_512" class="survived">resources/xr/pages/exceptions.js:13:9 Removed var controller = new ExceptionsController({ container: $(&quot;#exceptions-view-content&quot;) }); -&gt; SURVIVED</div><div id="mutation_32_460_500" class="survived">resources/xr/pages/exceptions.js:14:13 Removed container: $(&quot;#exceptions-view-content&quot;) -&gt; SURVIVED</div><div id="mutation_34_471_500" class="survived">resources/xr/pages/exceptions.js:14:24 Replaced $(&quot;#exceptions-view-content&quot;) with &quot;#exceptions-view-content&quot; -&gt; SURVIVED</div><div id="mutation_33_473_499" class="survived">resources/xr/pages/exceptions.js:14:26 Replaced &quot;#exceptions-view-content&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_25_522_627" class="survived">resources/xr/pages/exceptions.js:17:9 Removed updates.addUpdatesListener(function(requests) { controller.addRequests(requests); }); -&gt; SURVIVED</div><div id="mutation_35_549_625" class="survived">resources/xr/pages/exceptions.js:17:36 Replaced function(requests) { controller.addRequests(requests); } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_36_522_626" class="survived">resources/xr/pages/exceptions.js:17:9 Replaced updates.addUpdatesListener(function(requests) { controller.addRequests(requests); }) with function(requests) { controller.addRequests(requests); } -&gt; SURVIVED</div><div id="mutation_37_522_626" class="survived">resources/xr/pages/exceptions.js:17:9 Replaced updates.addUpdatesListener(function(requests) { controller.addRequests(requests); }) with updates -&gt; SURVIVED</div><div id="mutation_40_582_614" class="survived">resources/xr/pages/exceptions.js:18:13 Replaced controller.addRequests(requests) with requests -&gt; SURVIVED</div><div id="mutation_39_605_613" class="survived">resources/xr/pages/exceptions.js:18:36 Replaced requests with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_38_582_615" class="survived">resources/xr/pages/exceptions.js:18:13 Removed controller.addRequests(requests); -&gt; SURVIVED</div><div id="mutation_41_582_614" class="survived">resources/xr/pages/exceptions.js:18:13 Replaced controller.addRequests(requests) with controller -&gt; SURVIVED</div><div id="mutation_42_651_659" class="survived">resources/xr/pages/exceptions.js:20:24 Replaced &quot;change&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_43_661_716" class="survived">resources/xr/pages/exceptions.js:20:34 Replaced function(){ controller.refresh(); } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_44_636_717" class="survived">resources/xr/pages/exceptions.js:20:9 Replaced appSettings.on(&quot;change&quot;, function(){ controller.refresh(); }) with appSettings -&gt; SURVIVED</div><div id="mutation_26_636_718" class="survived">resources/xr/pages/exceptions.js:20:9 Removed appSettings.on(&quot;change&quot;, function(){ controller.refresh(); }); -&gt; SURVIVED</div><div id="mutation_45_685_706" class="survived">resources/xr/pages/exceptions.js:21:13 Removed controller.refresh(); -&gt; SURVIVED</div><div id="mutation_46_685_705" class="survived">resources/xr/pages/exceptions.js:21:13 Replaced controller.refresh() with controller -&gt; SURVIVED</div><div id="mutation_47_947_954" class="survived">resources/xr/pages/exceptions.js:26:39 Replaced &quot;click&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_49_968_1028" class="survived">resources/xr/pages/exceptions.js:26:60 Replaced function(evt) { evt.stopPropagation(); } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_48_956_966" class="survived">resources/xr/pages/exceptions.js:26:48 Replaced &quot;.closure&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_27_917_1030" class="survived">resources/xr/pages/exceptions.js:26:9 Removed $(&quot;.exceptions-view-tree&quot;).on(&quot;click&quot;, &quot;.closure&quot;, function(evt) { evt.stopPropagation(); }); -&gt; SURVIVED</div><div id="mutation_50_917_1029" class="survived">resources/xr/pages/exceptions.js:26:9 Replaced $(&quot;.exceptions-view-tree&quot;).on(&quot;click&quot;, &quot;.closure&quot;, function(evt) { evt.stopPropagation(); }) with $(&quot;.exceptions-view-tree&quot;) -&gt; SURVIVED</div><div id="mutation_53_919_942" class="survived">resources/xr/pages/exceptions.js:26:11 Replaced &quot;.exceptions-view-tree&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_54_917_943" class="survived">resources/xr/pages/exceptions.js:26:9 Replaced $(&quot;.exceptions-view-tree&quot;) with &quot;.exceptions-view-tree&quot; -&gt; SURVIVED</div><div id="mutation_52_996_1017" class="survived">resources/xr/pages/exceptions.js:27:13 Replaced evt.stopPropagation() with evt -&gt; SURVIVED</div><div id="mutation_51_996_1018" class="survived">resources/xr/pages/exceptions.js:27:13 Removed evt.stopPropagation(); -&gt; SURVIVED</div><div id="mutation_28_1040_1116" class="survived">resources/xr/pages/exceptions.js:30:9 Removed toolbar.on(&#x27;clear&#x27;, function() { controller.clear(); }); -&gt; SURVIVED</div><div id="mutation_55_1051_1058" class="survived">resources/xr/pages/exceptions.js:30:20 Replaced &#x27;clear&#x27; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_56_1060_1114" class="survived">resources/xr/pages/exceptions.js:30:29 Replaced function() { controller.clear(); } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_57_1040_1115" class="survived">resources/xr/pages/exceptions.js:30:9 Replaced toolbar.on(&#x27;clear&#x27;, function() { controller.clear(); }) with toolbar -&gt; SURVIVED</div><div id="mutation_58_1085_1104" class="survived">resources/xr/pages/exceptions.js:31:13 Removed controller.clear(); -&gt; SURVIVED</div><div id="mutation_59_1085_1103" class="survived">resources/xr/pages/exceptions.js:31:13 Replaced controller.clear() with controller -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

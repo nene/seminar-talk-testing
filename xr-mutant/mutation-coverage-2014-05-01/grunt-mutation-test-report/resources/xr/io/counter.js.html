@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":21,"ignored":7,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>21</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/io/index.html'">io</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/io/counter.js.html'">counter.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function (require) {</li><li>    var _ = require(<span class="code killed mutation_10_63_69">"xr/_"</span>);</li><li></li><li>    <span class="code killed mutation_8_77_133">return {</span></li><li><span class="code killed mutation_8_77_133">        <span class="code killed mutation_12_94_126">countAllQueries: countAllQueries</span></span></li><li><span class="code killed mutation_8_77_133">    };</span></li><li></li><li>    /**</li><li>     * Counts queries under a request.</li><li>     * @returns {Number}</li><li>     */</li><li>    <span class="code killed mutation_9_219_328">function countAllQueries(requests) {</span></li><li><span class="code killed mutation_9_219_328">        <span class="code killed mutation_13_264_322">return <span class="code killed mutation_22_271_282"><span class="code killed mutation_20_271_299"><span class="code killed mutation_19_271_299"><span class="code killed mutation_17_271_315"><span class="code killed mutation_16_271_315"><span class="code killed mutation_14_271_321">_(<span class="code killed mutation_21_273_281">requests</span>)</span>.pluck(<span class="code killed mutation_18_289_298">"queries"</span>)</span></span>.pluck(<span class="code killed mutation_15_306_314">"length"</span>)</span></span>.sum()</span>;</span></span></li><li><span class="code killed mutation_9_219_328">    }</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_10_63_69" class="killed">resources/xr/io/counter.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_77_133" class="killed">resources/xr/io/counter.js:6:5 Removed return { countAllQueries: countAllQueries }; -&gt; KILLED</div><div id="mutation_12_94_126" class="killed">resources/xr/io/counter.js:7:9 Removed countAllQueries: countAllQueries -&gt; KILLED</div><div id="mutation_9_219_328" class="killed">resources/xr/io/counter.js:14:5 Removed function countAllQueries(requests) { return _(requests).pluck(&quot;queries&quot;).pluck(&quot;length&quot;).sum(); } -&gt; KILLED</div><div id="mutation_13_264_322" class="killed">resources/xr/io/counter.js:15:9 Removed return _(requests).pluck(&quot;queries&quot;).pluck(&quot;length&quot;).sum(); -&gt; KILLED</div><div id="mutation_14_271_321" class="killed">resources/xr/io/counter.js:15:16 Replaced _(requests).pluck(&quot;queries&quot;).pluck(&quot;length&quot;).sum() with _(requests).pluck(&quot;queries&quot;).pluck(&quot;length&quot;) -&gt; KILLED</div><div id="mutation_15_306_314" class="killed">resources/xr/io/counter.js:15:51 Replaced &quot;length&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_271_282" class="killed">resources/xr/io/counter.js:15:16 Replaced _(requests) with requests -&gt; KILLED</div><div id="mutation_17_271_315" class="killed">resources/xr/io/counter.js:15:16 Replaced _(requests).pluck(&quot;queries&quot;).pluck(&quot;length&quot;) with _(requests).pluck(&quot;queries&quot;) -&gt; KILLED</div><div id="mutation_18_289_298" class="killed">resources/xr/io/counter.js:15:34 Replaced &quot;queries&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_19_271_299" class="killed">resources/xr/io/counter.js:15:16 Replaced _(requests).pluck(&quot;queries&quot;) with &quot;queries&quot; -&gt; KILLED</div><div id="mutation_20_271_299" class="killed">resources/xr/io/counter.js:15:16 Replaced _(requests).pluck(&quot;queries&quot;) with _(requests) -&gt; KILLED</div><div id="mutation_21_273_281" class="killed">resources/xr/io/counter.js:15:18 Replaced requests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_16_271_315" class="killed">resources/xr/io/counter.js:15:16 Replaced _(requests).pluck(&quot;queries&quot;).pluck(&quot;length&quot;) with &quot;length&quot; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

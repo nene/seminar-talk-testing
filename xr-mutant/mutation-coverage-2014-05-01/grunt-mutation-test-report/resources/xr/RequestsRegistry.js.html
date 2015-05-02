@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":36,"ignored":7,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>36</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/RequestsRegistry.js.html'">RequestsRegistry.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_11_62_68">"xr/_"</span>);</li><li></li><li>    /**</li><li>     * Collects request data and provides means for accessing it.</li><li>     */</li><li>    <span class="code killed mutation_8_158_221">function RequestsRegistry() {</span></li><li><span class="code killed mutation_8_158_221">        <span class="code killed mutation_13_196_215">this.requests = [];</span></span></li><li><span class="code killed mutation_8_158_221">    }</span></li><li>    <span class="code killed mutation_9_226_1330">RequestsRegistry.prototype = {</span></li><li><span class="code killed mutation_9_226_1330">        /**</span></li><li><span class="code killed mutation_9_226_1330">         * Adds additional requests.</span></li><li><span class="code killed mutation_9_226_1330">         * @param {Object[]} requests</span></li><li><span class="code killed mutation_9_226_1330">         */</span></li><li><span class="code killed mutation_9_226_1330">        <span class="code killed mutation_14_364_552">addRequests: function(requests) {</span></span></li><li><span class="code killed mutation_14_364_552"><span class="code killed mutation_9_226_1330">            <span class="code killed mutation_21_410_443"><span class="code killed mutation_18_410_444">_.append(<span class="code killed mutation_19_419_432">this.requests</span>, <span class="code killed mutation_20_434_442">requests</span>)</span>;</span></span></span></li><li><span class="code killed mutation_14_364_552"><span class="code killed mutation_9_226_1330">        },</span></span></li><li><span class="code killed mutation_14_364_552"><span class="code killed mutation_9_226_1330"></li><li>        /**</span></span></li><li><span class="code killed mutation_14_364_552"><span class="code killed mutation_9_226_1330">         * Returns all requests.</span></span></li><li><span class="code killed mutation_14_364_552"><span class="code killed mutation_9_226_1330">         * @return {Object[]}</span></span></li><li><span class="code killed mutation_14_364_552"><span class="code killed mutation_9_226_1330">         */</span></span></li><li><span class="code killed mutation_14_364_552"><span class="code killed mutation_9_226_1330">        </span><span class="code killed mutation_15_552_1067">getAll: function() {</span></span></li><li><span class="code killed mutation_15_552_1067"><span class="code killed mutation_9_226_1330">            // Clone the requests array instead of returning it directly.</span></span></li><li><span class="code killed mutation_15_552_1067"><span class="code killed mutation_9_226_1330">            // Both this class and FilterChain (where we pass on these requests)</span></span></li><li><span class="code killed mutation_15_552_1067"><span class="code killed mutation_9_226_1330">            // want to push new requests into it, so make us safe from external</span></span></li><li><span class="code killed mutation_15_552_1067"><span class="code killed mutation_9_226_1330">            // modifications by creating a copy.</span></span></li><li><span class="code killed mutation_15_552_1067"><span class="code killed mutation_9_226_1330">            <span class="code killed mutation_22_869_899">return <span class="code killed mutation_25_876_898"><span class="code killed mutation_24_876_898">_.clone(<span class="code killed mutation_23_884_897">this.requests</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_15_552_1067"><span class="code killed mutation_9_226_1330">        },</span></span></li><li><span class="code killed mutation_15_552_1067"><span class="code killed mutation_9_226_1330"></li><li>        /**</span></span></li><li><span class="code killed mutation_15_552_1067"><span class="code killed mutation_9_226_1330">         * Returns query object corresponding to given ID.</span></span></li><li><span class="code killed mutation_15_552_1067"><span class="code killed mutation_9_226_1330">         * @param  {Number} queryId</span></span></li><li><span class="code killed mutation_15_552_1067"><span class="code killed mutation_9_226_1330">         * @return {Object}</span></span></li><li><span class="code killed mutation_15_552_1067"><span class="code killed mutation_9_226_1330">         */</span></span></li><li><span class="code killed mutation_15_552_1067"><span class="code killed mutation_9_226_1330">        </span><span class="code killed mutation_16_1067_1262">getQueryById: function(queryId) {</span></span></li><li><span class="code killed mutation_16_1067_1262"><span class="code killed mutation_9_226_1330">            <span class="code killed mutation_26_1113_1184">return <span class="code killed mutation_36_1120_1136"><span class="code killed mutation_34_1120_1153"><span class="code killed mutation_33_1120_1153"><span class="code killed mutation_31_1120_1163"><span class="code killed mutation_29_1120_1183"><span class="code killed mutation_28_1120_1183">_(<span class="code killed mutation_35_1122_1135">this.requests</span>)</span>.pluck(<span class="code killed mutation_32_1143_1152">"queries"</span>)</span></span>.flatten()</span>.find(<span class="code killed mutation_27_1169_1182">{<span class="code killed mutation_30_1170_1181">id: queryId</span>}</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_16_1067_1262"><span class="code killed mutation_9_226_1330">        },</span></span></li><li><span class="code killed mutation_16_1067_1262"><span class="code killed mutation_9_226_1330"></li><li>        /**</span></span></li><li><span class="code killed mutation_16_1067_1262"><span class="code killed mutation_9_226_1330">         * Removes all requests.</span></span></li><li><span class="code killed mutation_16_1067_1262"><span class="code killed mutation_9_226_1330">         */</span></span></li><li><span class="code killed mutation_16_1067_1262"><span class="code killed mutation_9_226_1330">        </span><span class="code killed mutation_17_1262_1323">clear: function() {</span></span></li><li><span class="code killed mutation_17_1262_1323"><span class="code killed mutation_9_226_1330">            <span class="code killed mutation_37_1294_1313">this.requests = [];</span></span></span></li><li><span class="code killed mutation_17_1262_1323"><span class="code killed mutation_9_226_1330">        }</span></span></li><li><span class="code killed mutation_9_226_1330">    };</span></li><li></li><li>    <span class="code killed mutation_10_1336_1360">return RequestsRegistry;</span></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_11_62_68" class="killed">resources/xr/RequestsRegistry.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_158_221" class="killed">resources/xr/RequestsRegistry.js:9:5 Removed function RequestsRegistry() { this.requests = []; } -&gt; KILLED</div><div id="mutation_13_196_215" class="killed">resources/xr/RequestsRegistry.js:10:9 Removed this.requests = []; -&gt; KILLED</div><div id="mutation_9_226_1330" class="killed">resources/xr/RequestsRegistry.js:12:5 Removed RequestsRegistry.prototype = { /** * Adds additional requests. * @param {Object[]} requests */ addRequests: function(requests) { _.append(this.requests, requests); }, /** * Returns all requests. * @return {Object[]} */ getAll: function() { // Clone the requests array instead of returning it directly. // Both this class and FilterChain (where we pass on these requests) // want to push new requests into it, so make us safe from external // modifications by creating a copy. return _.clone(this.requests); }, /** * Returns query object corresponding to given ID. * @param {Number} queryId * @return {Object} */ getQueryById: function(queryId) { return _(this.requests).pluck(&quot;queries&quot;).flatten().find({id: queryId}); }, /** * Removes all requests. */ clear: function() { this.requests = []; } }; -&gt; KILLED</div><div id="mutation_14_364_552" class="killed">resources/xr/RequestsRegistry.js:17:9 Removed addRequests: function(requests) { _.append(this.requests, requests); }, /** * Returns all requests. * @return {Object[]} */  -&gt; KILLED</div><div id="mutation_18_410_444" class="killed">resources/xr/RequestsRegistry.js:18:13 Removed _.append(this.requests, requests); -&gt; KILLED</div><div id="mutation_19_419_432" class="killed">resources/xr/RequestsRegistry.js:18:22 Replaced this.requests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_434_442" class="killed">resources/xr/RequestsRegistry.js:18:37 Replaced requests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_21_410_443" class="killed">resources/xr/RequestsRegistry.js:18:13 Replaced _.append(this.requests, requests) with _ -&gt; KILLED</div><div id="mutation_15_552_1067" class="killed">resources/xr/RequestsRegistry.js:25:9 Removed getAll: function() { // Clone the requests array instead of returning it directly. // Both this class and FilterChain (where we pass on these requests) // want to push new requests into it, so make us safe from external // modifications by creating a copy. return _.clone(this.requests); }, /** * Returns query object corresponding to given ID. * @param {Number} queryId * @return {Object} */  -&gt; KILLED</div><div id="mutation_24_876_898" class="killed">resources/xr/RequestsRegistry.js:30:20 Replaced _.clone(this.requests) with this.requests -&gt; KILLED</div><div id="mutation_23_884_897" class="killed">resources/xr/RequestsRegistry.js:30:28 Replaced this.requests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_25_876_898" class="killed">resources/xr/RequestsRegistry.js:30:20 Replaced _.clone(this.requests) with _ -&gt; KILLED</div><div id="mutation_22_869_899" class="killed">resources/xr/RequestsRegistry.js:30:13 Removed return _.clone(this.requests); -&gt; KILLED</div><div id="mutation_16_1067_1262" class="killed">resources/xr/RequestsRegistry.js:38:9 Removed getQueryById: function(queryId) { return _(this.requests).pluck(&quot;queries&quot;).flatten().find({id: queryId}); }, /** * Removes all requests. */  -&gt; KILLED</div><div id="mutation_30_1170_1181" class="killed">resources/xr/RequestsRegistry.js:39:70 Removed id: queryId -&gt; KILLED</div><div id="mutation_26_1113_1184" class="killed">resources/xr/RequestsRegistry.js:39:13 Removed return _(this.requests).pluck(&quot;queries&quot;).flatten().find({id: queryId}); -&gt; KILLED</div><div id="mutation_27_1169_1182" class="killed">resources/xr/RequestsRegistry.js:39:69 Replaced {id: queryId} with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_28_1120_1183" class="killed">resources/xr/RequestsRegistry.js:39:20 Replaced _(this.requests).pluck(&quot;queries&quot;).flatten().find({id: queryId}) with {id: queryId} -&gt; KILLED</div><div id="mutation_29_1120_1183" class="killed">resources/xr/RequestsRegistry.js:39:20 Replaced _(this.requests).pluck(&quot;queries&quot;).flatten().find({id: queryId}) with _(this.requests).pluck(&quot;queries&quot;).flatten() -&gt; KILLED</div><div id="mutation_36_1120_1136" class="killed">resources/xr/RequestsRegistry.js:39:20 Replaced _(this.requests) with this.requests -&gt; KILLED</div><div id="mutation_31_1120_1163" class="killed">resources/xr/RequestsRegistry.js:39:20 Replaced _(this.requests).pluck(&quot;queries&quot;).flatten() with _(this.requests).pluck(&quot;queries&quot;) -&gt; KILLED</div><div id="mutation_32_1143_1152" class="killed">resources/xr/RequestsRegistry.js:39:43 Replaced &quot;queries&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_33_1120_1153" class="killed">resources/xr/RequestsRegistry.js:39:20 Replaced _(this.requests).pluck(&quot;queries&quot;) with &quot;queries&quot; -&gt; KILLED</div><div id="mutation_34_1120_1153" class="killed">resources/xr/RequestsRegistry.js:39:20 Replaced _(this.requests).pluck(&quot;queries&quot;) with _(this.requests) -&gt; KILLED</div><div id="mutation_35_1122_1135" class="killed">resources/xr/RequestsRegistry.js:39:22 Replaced this.requests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_1262_1323" class="killed">resources/xr/RequestsRegistry.js:45:9 Removed clear: function() { this.requests = []; } -&gt; KILLED</div><div id="mutation_37_1294_1313" class="killed">resources/xr/RequestsRegistry.js:46:13 Removed this.requests = []; -&gt; KILLED</div><div id="mutation_10_1336_1360" class="killed">resources/xr/RequestsRegistry.js:50:5 Removed return RequestsRegistry; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

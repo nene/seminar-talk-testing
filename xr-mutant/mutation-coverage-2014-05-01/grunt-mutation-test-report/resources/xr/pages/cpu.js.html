@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":56,"ignored":17,"untested":0,"survived":39}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>56</strong> of which <strong>39</strong> survived,&nbsp;
+        <strong>17</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>30.4%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/pages/index.html'">pages</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/pages/cpu.js.html'">cpu.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code survived mutation_14_62_68">"xr/_"</span>);</li><li>    var updates = require(<span class="code survived mutation_16_97_109">"xr/updates"</span>);</li><li>    var CpuController = require(<span class="code survived mutation_18_144_166">"xr/cpu/CpuController"</span>);</li><li>    var jQueryFactory = require(<span class="code survived mutation_20_201_219">"xr/jQueryFactory"</span>);</li><li>    var appSettings = require(<span class="code survived mutation_22_252_277">"xr/settings/appSettings"</span>);</li><li>    var toolbar = require(<span class="code survived mutation_24_306_324">"xr/toolbar/index"</span>);</li><li></li><li>    <span class="code survived mutation_13_332_886">return function(window) {</span></li><li><span class="code survived mutation_13_332_886">        <span class="code survived mutation_26_366_403">var $ = <span class="code survived mutation_33_374_402"><span class="code survived mutation_32_374_402">jQueryFactory.create(<span class="code survived mutation_31_395_401">window</span>)</span></span>;</span></span></li><li><span class="code survived mutation_13_332_886"></li><li>        <span class="code survived mutation_27_413_507">var controller = new CpuController({</span></span></li><li><span class="code survived mutation_27_413_507"><span class="code survived mutation_13_332_886">            <span class="code survived mutation_34_462_495">container: <span class="code survived mutation_36_473_495">$(<span class="code survived mutation_35_475_494">"#cpu-view-content"</span>)</span></span></span></span></li><li><span class="code survived mutation_27_413_507"><span class="code survived mutation_13_332_886">        });</span></span></li><li><span class="code survived mutation_13_332_886"></li><li>        <span class="code survived mutation_39_517_698"><span class="code survived mutation_38_517_698"><span class="code survived mutation_28_517_699">updates.addUpdatesListener(<span class="code survived mutation_37_544_697">function(requests) {</span></span></span></span></span></li><li><span class="code survived mutation_39_517_698"><span class="code survived mutation_38_517_698"><span class="code survived mutation_37_544_697"><span class="code survived mutation_28_517_699"><span class="code survived mutation_13_332_886">            <span class="code survived mutation_40_577_630">var requestsWithTraces = <span class="code survived mutation_44_602_629">_.filter(<span class="code survived mutation_42_611_619">requests</span>, <span class="code survived mutation_43_621_628">'trace'</span>)</span>;</span></span></span></span></span></span></li><li><span class="code survived mutation_39_517_698"><span class="code survived mutation_38_517_698"><span class="code survived mutation_37_544_697"><span class="code survived mutation_28_517_699"><span class="code survived mutation_13_332_886"></li><li>            <span class="code survived mutation_47_644_686"><span class="code survived mutation_46_644_686"><span class="code survived mutation_41_644_687">controller.addRequests(<span class="code survived mutation_45_667_685">requestsWithTraces</span>)</span></span>;</span></span></span></span></span></span></li><li><span class="code survived mutation_39_517_698"><span class="code survived mutation_38_517_698"><span class="code survived mutation_37_544_697"><span class="code survived mutation_28_517_699"><span class="code survived mutation_13_332_886">        }</span>)</span></span>;</span></span></li><li><span class="code survived mutation_13_332_886"></li><li>        <span class="code survived mutation_50_709_791"><span class="code survived mutation_29_709_792">appSettings.on(<span class="code survived mutation_48_724_732">"change"</span>, <span class="code survived mutation_49_734_790">function() {</span></span></span></span></li><li><span class="code survived mutation_50_709_791"><span class="code survived mutation_49_734_790"><span class="code survived mutation_29_709_792"><span class="code survived mutation_13_332_886">            <span class="code survived mutation_52_759_779"><span class="code survived mutation_51_759_780">controller.refresh()</span>;</span></span></span></span></span></li><li><span class="code survived mutation_50_709_791"><span class="code survived mutation_49_734_790"><span class="code survived mutation_29_709_792"><span class="code survived mutation_13_332_886">        }</span>)</span>;</span></span></li><li><span class="code survived mutation_13_332_886"></li><li>        <span class="code survived mutation_55_802_877"><span class="code survived mutation_30_802_878">toolbar.on(<span class="code survived mutation_53_813_820">'clear'</span>, <span class="code survived mutation_54_822_876">function() {</span></span></span></span></li><li><span class="code survived mutation_55_802_877"><span class="code survived mutation_54_822_876"><span class="code survived mutation_30_802_878"><span class="code survived mutation_13_332_886">            <span class="code survived mutation_57_847_865"><span class="code survived mutation_56_847_866">controller.clear()</span>;</span></span></span></span></span></li><li><span class="code survived mutation_55_802_877"><span class="code survived mutation_54_822_876"><span class="code survived mutation_30_802_878"><span class="code survived mutation_13_332_886">        }</span>)</span>;</span></span></li><li><span class="code survived mutation_13_332_886"></li><li>    };</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_14_62_68" class="survived">resources/xr/pages/cpu.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_16_97_109" class="survived">resources/xr/pages/cpu.js:5:27 Replaced &quot;xr/updates&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_18_144_166" class="survived">resources/xr/pages/cpu.js:6:33 Replaced &quot;xr/cpu/CpuController&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_20_201_219" class="survived">resources/xr/pages/cpu.js:7:33 Replaced &quot;xr/jQueryFactory&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_22_252_277" class="survived">resources/xr/pages/cpu.js:8:31 Replaced &quot;xr/settings/appSettings&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_24_306_324" class="survived">resources/xr/pages/cpu.js:9:27 Replaced &quot;xr/toolbar/index&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_13_332_886" class="survived">resources/xr/pages/cpu.js:11:5 Removed return function(window) { var $ = jQueryFactory.create(window); var controller = new CpuController({ container: $(&quot;#cpu-view-content&quot;) }); updates.addUpdatesListener(function(requests) { var requestsWithTraces = _.filter(requests, &#x27;trace&#x27;); controller.addRequests(requestsWithTraces); }); appSettings.on(&quot;change&quot;, function() { controller.refresh(); }); toolbar.on(&#x27;clear&#x27;, function() { controller.clear(); }); }; -&gt; SURVIVED</div><div id="mutation_33_374_402" class="survived">resources/xr/pages/cpu.js:12:17 Replaced jQueryFactory.create(window) with jQueryFactory -&gt; SURVIVED</div><div id="mutation_31_395_401" class="survived">resources/xr/pages/cpu.js:12:38 Replaced window with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_32_374_402" class="survived">resources/xr/pages/cpu.js:12:17 Replaced jQueryFactory.create(window) with window -&gt; SURVIVED</div><div id="mutation_26_366_403" class="survived">resources/xr/pages/cpu.js:12:9 Removed var $ = jQueryFactory.create(window); -&gt; SURVIVED</div><div id="mutation_27_413_507" class="survived">resources/xr/pages/cpu.js:14:9 Removed var controller = new CpuController({ container: $(&quot;#cpu-view-content&quot;) }); -&gt; SURVIVED</div><div id="mutation_34_462_495" class="survived">resources/xr/pages/cpu.js:15:13 Removed container: $(&quot;#cpu-view-content&quot;) -&gt; SURVIVED</div><div id="mutation_35_475_494" class="survived">resources/xr/pages/cpu.js:15:26 Replaced &quot;#cpu-view-content&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_36_473_495" class="survived">resources/xr/pages/cpu.js:15:24 Replaced $(&quot;#cpu-view-content&quot;) with &quot;#cpu-view-content&quot; -&gt; SURVIVED</div><div id="mutation_28_517_699" class="survived">resources/xr/pages/cpu.js:18:9 Removed updates.addUpdatesListener(function(requests) { var requestsWithTraces = _.filter(requests, &#x27;trace&#x27;); controller.addRequests(requestsWithTraces); }); -&gt; SURVIVED</div><div id="mutation_39_517_698" class="survived">resources/xr/pages/cpu.js:18:9 Replaced updates.addUpdatesListener(function(requests) { var requestsWithTraces = _.filter(requests, &#x27;trace&#x27;); controller.addRequests(requestsWithTraces); }) with updates -&gt; SURVIVED</div><div id="mutation_38_517_698" class="survived">resources/xr/pages/cpu.js:18:9 Replaced updates.addUpdatesListener(function(requests) { var requestsWithTraces = _.filter(requests, &#x27;trace&#x27;); controller.addRequests(requestsWithTraces); }) with function(requests) { var requestsWithTraces = _.filter(requests, &#x27;trace&#x27;); controller.addRequests(requestsWithTraces); } -&gt; SURVIVED</div><div id="mutation_37_544_697" class="survived">resources/xr/pages/cpu.js:18:36 Replaced function(requests) { var requestsWithTraces = _.filter(requests, &#x27;trace&#x27;); controller.addRequests(requestsWithTraces); } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_42_611_619" class="survived">resources/xr/pages/cpu.js:19:47 Replaced requests with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_43_621_628" class="survived">resources/xr/pages/cpu.js:19:57 Replaced &#x27;trace&#x27; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_44_602_629" class="survived">resources/xr/pages/cpu.js:19:38 Replaced _.filter(requests, &#x27;trace&#x27;) with _ -&gt; SURVIVED</div><div id="mutation_40_577_630" class="survived">resources/xr/pages/cpu.js:19:13 Removed var requestsWithTraces = _.filter(requests, &#x27;trace&#x27;); -&gt; SURVIVED</div><div id="mutation_46_644_686" class="survived">resources/xr/pages/cpu.js:21:13 Replaced controller.addRequests(requestsWithTraces) with requestsWithTraces -&gt; SURVIVED</div><div id="mutation_41_644_687" class="survived">resources/xr/pages/cpu.js:21:13 Removed controller.addRequests(requestsWithTraces); -&gt; SURVIVED</div><div id="mutation_45_667_685" class="survived">resources/xr/pages/cpu.js:21:36 Replaced requestsWithTraces with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_47_644_686" class="survived">resources/xr/pages/cpu.js:21:13 Replaced controller.addRequests(requestsWithTraces) with controller -&gt; SURVIVED</div><div id="mutation_48_724_732" class="survived">resources/xr/pages/cpu.js:24:24 Replaced &quot;change&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_29_709_792" class="survived">resources/xr/pages/cpu.js:24:9 Removed appSettings.on(&quot;change&quot;, function() { controller.refresh(); }); -&gt; SURVIVED</div><div id="mutation_49_734_790" class="survived">resources/xr/pages/cpu.js:24:34 Replaced function() { controller.refresh(); } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_50_709_791" class="survived">resources/xr/pages/cpu.js:24:9 Replaced appSettings.on(&quot;change&quot;, function() { controller.refresh(); }) with appSettings -&gt; SURVIVED</div><div id="mutation_51_759_780" class="survived">resources/xr/pages/cpu.js:25:13 Removed controller.refresh(); -&gt; SURVIVED</div><div id="mutation_52_759_779" class="survived">resources/xr/pages/cpu.js:25:13 Replaced controller.refresh() with controller -&gt; SURVIVED</div><div id="mutation_30_802_878" class="survived">resources/xr/pages/cpu.js:28:9 Removed toolbar.on(&#x27;clear&#x27;, function() { controller.clear(); }); -&gt; SURVIVED</div><div id="mutation_53_813_820" class="survived">resources/xr/pages/cpu.js:28:20 Replaced &#x27;clear&#x27; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_54_822_876" class="survived">resources/xr/pages/cpu.js:28:29 Replaced function() { controller.clear(); } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_55_802_877" class="survived">resources/xr/pages/cpu.js:28:9 Replaced toolbar.on(&#x27;clear&#x27;, function() { controller.clear(); }) with toolbar -&gt; SURVIVED</div><div id="mutation_56_847_866" class="survived">resources/xr/pages/cpu.js:29:13 Removed controller.clear(); -&gt; SURVIVED</div><div id="mutation_57_847_865" class="survived">resources/xr/pages/cpu.js:29:13 Replaced controller.clear() with controller -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

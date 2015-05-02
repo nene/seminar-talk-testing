@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":60,"ignored":7,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>60</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/FilterChain.js.html'">FilterChain.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_11_62_68">"xr/_"</span>);</li><li></li><li>    /**</li><li>     * Pipes raw request data through two groups of filters:</li><li>     *</li><li>     * - preFilters : applied first and the result is remembered</li><li>     *   so it can be used when getStatsData() is called.</li><li>     *</li><li>     * - postFilters : applied to the previous result, providing the</li><li>     *   final requests data accessed through getRequests().</li><li>     *</li><li>     * @constructor</li><li>     * @param {Object} cfg Configuration:</li><li>     *   @param {Object[]} cfg.preFilters Objects with filter() method.</li><li>     *   @param {Object[]} cfg.postFilters Objects with filter() method.</li><li>     *   @param {Function} cfg.getIgnoredCount Function that returns</li><li>     *   number of ignored items.</li><li>     */</li><li>    <span class="code killed mutation_8_737_867">function FilterChain(cfg) {</span></li><li><span class="code killed mutation_8_737_867">        <span class="code killed mutation_18_773_792"><span class="code killed mutation_13_773_793">_.assign(<span class="code killed mutation_16_782_786">this</span>, <span class="code killed mutation_17_788_791">cfg</span>)</span>;</span></span></li><li><span class="code killed mutation_8_737_867"></li><li>        <span class="code killed mutation_14_803_833">this.preFilteredRequests = [];</span></span></li><li><span class="code killed mutation_8_737_867">        <span class="code killed mutation_15_842_861">this.requests = [];</span></span></li><li><span class="code killed mutation_8_737_867">    }</span></li><li></li><li>    <span class="code killed mutation_9_873_2327">FilterChain.prototype = {</span></li><li><span class="code killed mutation_9_873_2327">        /**</span></li><li><span class="code killed mutation_9_873_2327">         * Adds requests to existing FilterChain.</span></li><li><span class="code killed mutation_9_873_2327">         * Immediately applies all the filters to these requests.</span></li><li><span class="code killed mutation_9_873_2327">         *</span></li><li><span class="code killed mutation_9_873_2327">         * @param {Object[]} requests</span></li><li><span class="code killed mutation_9_873_2327">         * @returns {Object[]} All requests that were not filtered out.</span></li><li><span class="code killed mutation_9_873_2327">         */</span></li><li><span class="code killed mutation_9_873_2327">        <span class="code killed mutation_19_1168_1671">addRequests: function(requests) {</span></span></li><li><span class="code killed mutation_19_1168_1671"><span class="code killed mutation_9_873_2327">            <span class="code killed mutation_23_1214_1277">var preFiltered = <span class="code killed mutation_30_1232_1276">this.applyFilters(<span class="code killed mutation_28_1250_1258">requests</span>, <span class="code killed mutation_29_1260_1275">this.preFilters</span>)</span>;</span></span></span></li><li><span class="code killed mutation_19_1168_1671"><span class="code killed mutation_9_873_2327">            <span class="code killed mutation_35_1290_1317"><span class="code killed mutation_33_1290_1337"><span class="code killed mutation_32_1290_1337"><span class="code killed mutation_24_1290_1338">_(<span class="code killed mutation_34_1292_1316">this.preFilteredRequests</span>)</span>.append(<span class="code killed mutation_31_1325_1336">preFiltered</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_19_1168_1671"><span class="code killed mutation_9_873_2327"></li><li>            <span class="code killed mutation_25_1352_1420">var postFiltered = <span class="code killed mutation_38_1371_1419">this.applyFilters(<span class="code killed mutation_36_1389_1400">preFiltered</span>, <span class="code killed mutation_37_1402_1418">this.postFilters</span>)</span>;</span></span></span></li><li><span class="code killed mutation_19_1168_1671"><span class="code killed mutation_9_873_2327">            <span class="code killed mutation_43_1433_1449"><span class="code killed mutation_41_1433_1470"><span class="code killed mutation_40_1433_1470"><span class="code killed mutation_26_1433_1471">_(<span class="code killed mutation_42_1435_1448">this.requests</span>)</span>.append(<span class="code killed mutation_39_1457_1469">postFiltered</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_19_1168_1671"><span class="code killed mutation_9_873_2327"></li><li>            <span class="code killed mutation_27_1485_1505">return postFiltered;</span></span></span></li><li><span class="code killed mutation_19_1168_1671"><span class="code killed mutation_9_873_2327">        },</span></span></li><li><span class="code killed mutation_19_1168_1671"><span class="code killed mutation_9_873_2327"></li><li>        /**</span></span></li><li><span class="code killed mutation_19_1168_1671"><span class="code killed mutation_9_873_2327">         * Returns stats object used as input for io/Stats.</span></span></li><li><span class="code killed mutation_19_1168_1671"><span class="code killed mutation_9_873_2327">         * @return {Object} Data generated by statsReporter.</span></span></li><li><span class="code killed mutation_19_1168_1671"><span class="code killed mutation_9_873_2327">         */</span></span></li><li><span class="code killed mutation_19_1168_1671"><span class="code killed mutation_9_873_2327">        </span><span class="code killed mutation_20_1671_2002">getStatsData: function() {</span></span></li><li><span class="code killed mutation_20_1671_2002"><span class="code killed mutation_9_873_2327">            <span class="code killed mutation_44_1710_1838">return {</span></span></span></li><li><span class="code killed mutation_44_1710_1838"><span class="code killed mutation_20_1671_2002"><span class="code killed mutation_9_873_2327">                <span class="code killed mutation_45_1735_1787">requests: this.preFilteredRequests,</span></span></span></span></li><li><span class="code killed mutation_45_1735_1787"><span class="code killed mutation_44_1710_1838"><span class="code killed mutation_20_1671_2002"><span class="code killed mutation_9_873_2327">                </span><span class="code killed mutation_46_1787_1823">ignoredCount: <span class="code killed mutation_47_1801_1823">this.getIgnoredCount()</span></span></span></span></span></li><li><span class="code killed mutation_44_1710_1838"><span class="code killed mutation_20_1671_2002"><span class="code killed mutation_9_873_2327">            };</span></span></span></li><li><span class="code killed mutation_20_1671_2002"><span class="code killed mutation_9_873_2327">        },</span></span></li><li><span class="code killed mutation_20_1671_2002"><span class="code killed mutation_9_873_2327"></li><li>        /**</span></span></li><li><span class="code killed mutation_20_1671_2002"><span class="code killed mutation_9_873_2327">         * Returns an array of requests that remain after all filters have been applied.</span></span></li><li><span class="code killed mutation_20_1671_2002"><span class="code killed mutation_9_873_2327">         * @return {Object[]}</span></span></li><li><span class="code killed mutation_20_1671_2002"><span class="code killed mutation_9_873_2327">         */</span></span></li><li><span class="code killed mutation_20_1671_2002"><span class="code killed mutation_9_873_2327">        </span><span class="code killed mutation_21_2002_2082">getRequests: function() {</span></span></li><li><span class="code killed mutation_21_2002_2082"><span class="code killed mutation_9_873_2327">            <span class="code killed mutation_48_2040_2061">return this.requests;</span></span></span></li><li><span class="code killed mutation_21_2002_2082"><span class="code killed mutation_9_873_2327">        },</span></span></li><li><span class="code killed mutation_21_2002_2082"><span class="code killed mutation_9_873_2327"></li><li>        </span><span class="code killed mutation_22_2082_2319">applyFilters: function(requests, filters) {</span></span></li><li><span class="code killed mutation_22_2082_2319"><span class="code killed mutation_9_873_2327">            <span class="code killed mutation_49_2138_2160">var result = requests;</span></span></span></li><li><span class="code killed mutation_22_2082_2319"><span class="code killed mutation_9_873_2327">            <span class="code killed mutation_61_2173_2183"><span class="code killed mutation_55_2173_2273"><span class="code killed mutation_54_2173_2273"><span class="code killed mutation_52_2173_2281"><span class="code killed mutation_50_2173_2282">_(<span class="code killed mutation_60_2175_2182">filters</span>)</span>.forEach(<span class="code killed mutation_53_2192_2272">function(filter) {</span></span></span></span></span></span></span></li><li><span class="code killed mutation_55_2173_2273"><span class="code killed mutation_54_2173_2273"><span class="code killed mutation_53_2192_2272"><span class="code killed mutation_52_2173_2281"><span class="code killed mutation_50_2173_2282"><span class="code killed mutation_22_2082_2319"><span class="code killed mutation_9_873_2327">                <span class="code killed mutation_56_2227_2258">result = <span class="code killed mutation_59_2236_2257"><span class="code killed mutation_58_2236_2257">filter.filter(<span class="code killed mutation_57_2250_2256">result</span>)</span></span>;</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_55_2173_2273"><span class="code killed mutation_54_2173_2273"><span class="code killed mutation_53_2192_2272"><span class="code killed mutation_52_2173_2281"><span class="code killed mutation_50_2173_2282"><span class="code killed mutation_22_2082_2319"><span class="code killed mutation_9_873_2327">            }</span>)</span></span>.value()</span>;</span></span></span></li><li><span class="code killed mutation_22_2082_2319"><span class="code killed mutation_9_873_2327">            <span class="code killed mutation_51_2295_2309">return result;</span></span></span></li><li><span class="code killed mutation_22_2082_2319"><span class="code killed mutation_9_873_2327">        }</span></span></li><li><span class="code killed mutation_9_873_2327"></li><li>    };</span></li><li></li><li>    <span class="code killed mutation_10_2333_2352">return FilterChain;</span></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_11_62_68" class="killed">resources/xr/FilterChain.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_737_867" class="killed">resources/xr/FilterChain.js:22:5 Removed function FilterChain(cfg) { _.assign(this, cfg); this.preFilteredRequests = []; this.requests = []; } -&gt; KILLED</div><div id="mutation_17_788_791" class="killed">resources/xr/FilterChain.js:23:24 Replaced cfg with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_13_773_793" class="killed">resources/xr/FilterChain.js:23:9 Removed _.assign(this, cfg); -&gt; KILLED</div><div id="mutation_18_773_792" class="killed">resources/xr/FilterChain.js:23:9 Replaced _.assign(this, cfg) with _ -&gt; KILLED</div><div id="mutation_16_782_786" class="killed">resources/xr/FilterChain.js:23:18 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_14_803_833" class="killed">resources/xr/FilterChain.js:25:9 Removed this.preFilteredRequests = []; -&gt; KILLED</div><div id="mutation_15_842_861" class="killed">resources/xr/FilterChain.js:26:9 Removed this.requests = []; -&gt; KILLED</div><div id="mutation_9_873_2327" class="killed">resources/xr/FilterChain.js:29:5 Removed FilterChain.prototype = { /** * Adds requests to existing FilterChain. * Immediately applies all the filters to these requests. * * @param {Object[]} requests * @returns {Object[]} All requests that were not filtered out. */ addRequests: function(requests) { var preFiltered = this.applyFilters(requests, this.preFilters); _(this.preFilteredRequests).append(preFiltered); var postFiltered = this.applyFilters(preFiltered, this.postFilters); _(this.requests).append(postFiltered); return postFiltered; }, /** * Returns stats object used as input for io/Stats. * @return {Object} Data generated by statsReporter. */ getStatsData: function() { return { requests: this.preFilteredRequests, ignoredCount: this.getIgnoredCount() }; }, /** * Returns an array of requests that remain after all filters have been applied. * @return {Object[]} */ getRequests: function() { return this.requests; }, applyFilters: function(requests, filters) { var result = requests; _(filters).forEach(function(filter) { result = filter.filter(result); }).value(); return result; } }; -&gt; KILLED</div><div id="mutation_19_1168_1671" class="killed">resources/xr/FilterChain.js:37:9 Removed addRequests: function(requests) { var preFiltered = this.applyFilters(requests, this.preFilters); _(this.preFilteredRequests).append(preFiltered); var postFiltered = this.applyFilters(preFiltered, this.postFilters); _(this.requests).append(postFiltered); return postFiltered; }, /** * Returns stats object used as input for io/Stats. * @return {Object} Data generated by statsReporter. */  -&gt; KILLED</div><div id="mutation_23_1214_1277" class="killed">resources/xr/FilterChain.js:38:13 Removed var preFiltered = this.applyFilters(requests, this.preFilters); -&gt; KILLED</div><div id="mutation_30_1232_1276" class="killed">resources/xr/FilterChain.js:38:31 Replaced this.applyFilters(requests, this.preFilters) with this -&gt; KILLED</div><div id="mutation_29_1260_1275" class="killed">resources/xr/FilterChain.js:38:59 Replaced this.preFilters with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_28_1250_1258" class="killed">resources/xr/FilterChain.js:38:49 Replaced requests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_35_1290_1317" class="killed">resources/xr/FilterChain.js:39:13 Replaced _(this.preFilteredRequests) with this.preFilteredRequests -&gt; KILLED</div><div id="mutation_24_1290_1338" class="killed">resources/xr/FilterChain.js:39:13 Removed _(this.preFilteredRequests).append(preFiltered); -&gt; KILLED</div><div id="mutation_31_1325_1336" class="killed">resources/xr/FilterChain.js:39:48 Replaced preFiltered with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_34_1292_1316" class="killed">resources/xr/FilterChain.js:39:15 Replaced this.preFilteredRequests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_33_1290_1337" class="killed">resources/xr/FilterChain.js:39:13 Replaced _(this.preFilteredRequests).append(preFiltered) with _(this.preFilteredRequests) -&gt; KILLED</div><div id="mutation_32_1290_1337" class="killed">resources/xr/FilterChain.js:39:13 Replaced _(this.preFilteredRequests).append(preFiltered) with preFiltered -&gt; KILLED</div><div id="mutation_36_1389_1400" class="killed">resources/xr/FilterChain.js:41:50 Replaced preFiltered with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_25_1352_1420" class="killed">resources/xr/FilterChain.js:41:13 Removed var postFiltered = this.applyFilters(preFiltered, this.postFilters); -&gt; KILLED</div><div id="mutation_37_1402_1418" class="killed">resources/xr/FilterChain.js:41:63 Replaced this.postFilters with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_38_1371_1419" class="killed">resources/xr/FilterChain.js:41:32 Replaced this.applyFilters(preFiltered, this.postFilters) with this -&gt; KILLED</div><div id="mutation_40_1433_1470" class="killed">resources/xr/FilterChain.js:42:13 Replaced _(this.requests).append(postFiltered) with postFiltered -&gt; KILLED</div><div id="mutation_43_1433_1449" class="killed">resources/xr/FilterChain.js:42:13 Replaced _(this.requests) with this.requests -&gt; KILLED</div><div id="mutation_42_1435_1448" class="killed">resources/xr/FilterChain.js:42:15 Replaced this.requests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_26_1433_1471" class="killed">resources/xr/FilterChain.js:42:13 Removed _(this.requests).append(postFiltered); -&gt; KILLED</div><div id="mutation_41_1433_1470" class="killed">resources/xr/FilterChain.js:42:13 Replaced _(this.requests).append(postFiltered) with _(this.requests) -&gt; KILLED</div><div id="mutation_39_1457_1469" class="killed">resources/xr/FilterChain.js:42:37 Replaced postFiltered with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_27_1485_1505" class="killed">resources/xr/FilterChain.js:44:13 Removed return postFiltered; -&gt; KILLED</div><div id="mutation_20_1671_2002" class="killed">resources/xr/FilterChain.js:51:9 Removed getStatsData: function() { return { requests: this.preFilteredRequests, ignoredCount: this.getIgnoredCount() }; }, /** * Returns an array of requests that remain after all filters have been applied. * @return {Object[]} */  -&gt; KILLED</div><div id="mutation_44_1710_1838" class="killed">resources/xr/FilterChain.js:52:13 Removed return { requests: this.preFilteredRequests, ignoredCount: this.getIgnoredCount() }; -&gt; KILLED</div><div id="mutation_45_1735_1787" class="killed">resources/xr/FilterChain.js:53:17 Removed requests: this.preFilteredRequests,  -&gt; KILLED</div><div id="mutation_46_1787_1823" class="killed">resources/xr/FilterChain.js:54:17 Removed ignoredCount: this.getIgnoredCount() -&gt; KILLED</div><div id="mutation_47_1801_1823" class="killed">resources/xr/FilterChain.js:54:31 Replaced this.getIgnoredCount() with this -&gt; KILLED</div><div id="mutation_21_2002_2082" class="killed">resources/xr/FilterChain.js:62:9 Removed getRequests: function() { return this.requests; },  -&gt; KILLED</div><div id="mutation_48_2040_2061" class="killed">resources/xr/FilterChain.js:63:13 Removed return this.requests; -&gt; KILLED</div><div id="mutation_22_2082_2319" class="killed">resources/xr/FilterChain.js:66:9 Removed applyFilters: function(requests, filters) { var result = requests; _(filters).forEach(function(filter) { result = filter.filter(result); }).value(); return result; } -&gt; KILLED</div><div id="mutation_49_2138_2160" class="killed">resources/xr/FilterChain.js:67:13 Removed var result = requests; -&gt; KILLED</div><div id="mutation_52_2173_2281" class="killed">resources/xr/FilterChain.js:68:13 Replaced _(filters).forEach(function(filter) { result = filter.filter(result); }).value() with _(filters).forEach(function(filter) { result = filter.filter(result); }) -&gt; KILLED</div><div id="mutation_50_2173_2282" class="killed">resources/xr/FilterChain.js:68:13 Removed _(filters).forEach(function(filter) { result = filter.filter(result); }).value(); -&gt; KILLED</div><div id="mutation_60_2175_2182" class="killed">resources/xr/FilterChain.js:68:15 Replaced filters with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_61_2173_2183" class="killed">resources/xr/FilterChain.js:68:13 Replaced _(filters) with filters -&gt; KILLED</div><div id="mutation_53_2192_2272" class="killed">resources/xr/FilterChain.js:68:32 Replaced function(filter) { result = filter.filter(result); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_54_2173_2273" class="killed">resources/xr/FilterChain.js:68:13 Replaced _(filters).forEach(function(filter) { result = filter.filter(result); }) with function(filter) { result = filter.filter(result); } -&gt; KILLED</div><div id="mutation_55_2173_2273" class="killed">resources/xr/FilterChain.js:68:13 Replaced _(filters).forEach(function(filter) { result = filter.filter(result); }) with _(filters) -&gt; KILLED</div><div id="mutation_56_2227_2258" class="killed">resources/xr/FilterChain.js:69:17 Removed result = filter.filter(result); -&gt; KILLED</div><div id="mutation_57_2250_2256" class="killed">resources/xr/FilterChain.js:69:40 Replaced result with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_58_2236_2257" class="killed">resources/xr/FilterChain.js:69:26 Replaced filter.filter(result) with result -&gt; KILLED</div><div id="mutation_59_2236_2257" class="killed">resources/xr/FilterChain.js:69:26 Replaced filter.filter(result) with filter -&gt; KILLED</div><div id="mutation_51_2295_2309" class="killed">resources/xr/FilterChain.js:71:13 Removed return result; -&gt; KILLED</div><div id="mutation_10_2333_2352" class="killed">resources/xr/FilterChain.js:76:5 Removed return FilterChain; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

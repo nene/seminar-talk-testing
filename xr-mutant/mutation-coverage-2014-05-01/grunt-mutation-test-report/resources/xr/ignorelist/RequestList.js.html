@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":26,"ignored":9,"untested":0,"survived":1}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>26</strong> of which <strong>1</strong> survived,&nbsp;
+        <strong>9</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>96.2%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/ignorelist/index.html'">ignorelist</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/ignorelist/RequestList.js.html'">RequestList.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_12_62_68">"xr/_"</span>);</li><li>    var requestUtil = require(<span class="code killed mutation_14_101_117">"xr/requestUtil"</span>);</li><li></li><li>    /**</li><li>     * Matches requests against list of ignored requests.</li><li>     *</li><li>     * @constructor</li><li>     * @param {Object[]} ignoredRequests Objects with method and url fields.</li><li>     */</li><li>    <span class="code killed mutation_9_303_396">function RequestList(ignoredRequests) {</span></li><li><span class="code killed mutation_9_303_396">        <span class="code killed mutation_16_351_390">this.ignoredRequests = ignoredRequests;</span></span></li><li><span class="code killed mutation_9_303_396">    }</span></li><li>    <span class="code killed mutation_10_401_786">RequestList.prototype = {</span></li><li><span class="code killed mutation_10_401_786">        /**</span></li><li><span class="code killed mutation_10_401_786">         * True when request is in ignorelist.</span></li><li><span class="code killed mutation_10_401_786">         * @param {Object} request</span></li><li><span class="code killed mutation_10_401_786">         * @return {Boolean}</span></li><li><span class="code killed mutation_10_401_786">         */</span></li><li><span class="code killed mutation_10_401_786">        <span class="code killed mutation_17_570_779">matches: function(request) {</span></span></li><li><span class="code killed mutation_17_570_779"><span class="code killed mutation_10_401_786">            <span class="code killed mutation_18_611_769">return <span class="code survived mutation_27_618_641"><span class="code killed mutation_21_618_768"><span class="code killed mutation_20_618_768">_(<span class="code killed mutation_26_620_640">this.ignoredRequests</span>)</span>.some(<span class="code killed mutation_19_647_767">function(ignoredRequest) {</span></span></span></span></span></span></li><li><span class="code killed mutation_21_618_768"><span class="code killed mutation_20_618_768"><span class="code killed mutation_19_647_767"><span class="code killed mutation_18_611_769"><span class="code killed mutation_17_570_779"><span class="code killed mutation_10_401_786">                <span class="code killed mutation_22_690_753">return <span class="code killed mutation_25_697_752">requestUtil.requestsAreSimilar(<span class="code killed mutation_23_728_735">request</span>, <span class="code killed mutation_24_737_751">ignoredRequest</span>)</span>;</span></span></span></span></span></span></span></li><li><span class="code killed mutation_21_618_768"><span class="code killed mutation_20_618_768"><span class="code killed mutation_19_647_767"><span class="code killed mutation_18_611_769"><span class="code killed mutation_17_570_779"><span class="code killed mutation_10_401_786">            }</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_17_570_779"><span class="code killed mutation_10_401_786">        }</span></span></li><li><span class="code killed mutation_10_401_786">    };</span></li><li></li><li>    <span class="code killed mutation_11_792_811">return RequestList;</span></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_12_62_68" class="killed">resources/xr/ignorelist/RequestList.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_14_101_117" class="killed">resources/xr/ignorelist/RequestList.js:5:31 Replaced &quot;xr/requestUtil&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_9_303_396" class="killed">resources/xr/ignorelist/RequestList.js:13:5 Removed function RequestList(ignoredRequests) { this.ignoredRequests = ignoredRequests; } -&gt; KILLED</div><div id="mutation_16_351_390" class="killed">resources/xr/ignorelist/RequestList.js:14:9 Removed this.ignoredRequests = ignoredRequests; -&gt; KILLED</div><div id="mutation_10_401_786" class="killed">resources/xr/ignorelist/RequestList.js:16:5 Removed RequestList.prototype = { /** * True when request is in ignorelist. * @param {Object} request * @return {Boolean} */ matches: function(request) { return _(this.ignoredRequests).some(function(ignoredRequest) { return requestUtil.requestsAreSimilar(request, ignoredRequest); }); } }; -&gt; KILLED</div><div id="mutation_17_570_779" class="killed">resources/xr/ignorelist/RequestList.js:22:9 Removed matches: function(request) { return _(this.ignoredRequests).some(function(ignoredRequest) { return requestUtil.requestsAreSimilar(request, ignoredRequest); }); } -&gt; KILLED</div><div id="mutation_26_620_640" class="killed">resources/xr/ignorelist/RequestList.js:23:22 Replaced this.ignoredRequests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_18_611_769" class="killed">resources/xr/ignorelist/RequestList.js:23:13 Removed return _(this.ignoredRequests).some(function(ignoredRequest) { return requestUtil.requestsAreSimilar(request, ignoredRequest); }); -&gt; KILLED</div><div id="mutation_27_618_641" class="survived">resources/xr/ignorelist/RequestList.js:23:20 Replaced _(this.ignoredRequests) with this.ignoredRequests -&gt; SURVIVED</div><div id="mutation_20_618_768" class="killed">resources/xr/ignorelist/RequestList.js:23:20 Replaced _(this.ignoredRequests).some(function(ignoredRequest) { return requestUtil.requestsAreSimilar(request, ignoredRequest); }) with function(ignoredRequest) { return requestUtil.requestsAreSimilar(request, ignoredRequest); } -&gt; KILLED</div><div id="mutation_21_618_768" class="killed">resources/xr/ignorelist/RequestList.js:23:20 Replaced _(this.ignoredRequests).some(function(ignoredRequest) { return requestUtil.requestsAreSimilar(request, ignoredRequest); }) with _(this.ignoredRequests) -&gt; KILLED</div><div id="mutation_19_647_767" class="killed">resources/xr/ignorelist/RequestList.js:23:49 Replaced function(ignoredRequest) { return requestUtil.requestsAreSimilar(request, ignoredRequest); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_690_753" class="killed">resources/xr/ignorelist/RequestList.js:24:17 Removed return requestUtil.requestsAreSimilar(request, ignoredRequest); -&gt; KILLED</div><div id="mutation_23_728_735" class="killed">resources/xr/ignorelist/RequestList.js:24:55 Replaced request with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_24_737_751" class="killed">resources/xr/ignorelist/RequestList.js:24:64 Replaced ignoredRequest with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_25_697_752" class="killed">resources/xr/ignorelist/RequestList.js:24:24 Replaced requestUtil.requestsAreSimilar(request, ignoredRequest) with requestUtil -&gt; KILLED</div><div id="mutation_11_792_811" class="killed">resources/xr/ignorelist/RequestList.js:29:5 Removed return RequestList; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

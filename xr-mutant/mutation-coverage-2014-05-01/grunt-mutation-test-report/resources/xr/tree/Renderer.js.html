@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":31,"ignored":7,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>31</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/index.html'">tree</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/Renderer.js.html'">Renderer.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_11_62_68">"xr/_"</span>);</li><li></li><li>    /**</li><li>     * Builds HTML tree.</li><li>     * @constructor</li><li>     * @param {Object} cfg Dependencies:</li><li>     *   @param {Template} cfg.template</li><li>     *   @param {Layout} cfg.layout</li><li>     *   @param {TreeFlattener} cfg.flattener</li><li>     */</li><li>    <span class="code killed mutation_8_300_359">function Renderer(cfg) {</span></li><li><span class="code killed mutation_8_300_359">        <span class="code killed mutation_16_333_352"><span class="code killed mutation_13_333_353">_.assign(<span class="code killed mutation_14_342_346">this</span>, <span class="code killed mutation_15_348_351">cfg</span>)</span>;</span></span></li><li><span class="code killed mutation_8_300_359">    }</span></li><li></li><li>    <span class="code killed mutation_9_365_1104">Renderer.prototype = {</span></li><li><span class="code killed mutation_9_365_1104">        /**</span></li><li><span class="code killed mutation_9_365_1104">         * Renders tree node as HTML.</span></li><li><span class="code killed mutation_9_365_1104">         *</span></li><li><span class="code killed mutation_9_365_1104">         * @param {TreeNode} node</span></li><li><span class="code killed mutation_9_365_1104">         * @param {{skipChildren: Boolean}} opts An option to turn off rendering of child nodes.</span></li><li><span class="code killed mutation_9_365_1104">         * When skipChildren is true, only an empty placeholder div is left for child nodes.</span></li><li><span class="code killed mutation_9_365_1104">         * @return {String} HTML</span></li><li><span class="code killed mutation_9_365_1104">         */</span></li><li><span class="code killed mutation_9_365_1104">        <span class="code killed mutation_17_726_1005">render: function(node, opts) {</span></span></li><li><span class="code killed mutation_17_726_1005"><span class="code killed mutation_9_365_1104">            <span class="code killed mutation_19_769_853">return <span class="code killed mutation_22_776_852"><span class="code killed mutation_21_776_852">this.template.render(<span class="code killed mutation_25_797_851"><span class="code killed mutation_20_797_851">this.layout.layout(<span class="code killed mutation_28_816_844"><span class="code killed mutation_27_816_844"><span class="code killed mutation_23_816_844">this.flattener.flatten(<span class="code killed mutation_26_839_843">node</span>)</span></span></span>, <span class="code killed mutation_24_846_850">opts</span>)</span></span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_17_726_1005"><span class="code killed mutation_9_365_1104">        },</span></span></li><li><span class="code killed mutation_17_726_1005"><span class="code killed mutation_9_365_1104"></li><li>        /**</span></span></li><li><span class="code killed mutation_17_726_1005"><span class="code killed mutation_9_365_1104">         * Renders tree node template.</span></span></li><li><span class="code killed mutation_17_726_1005"><span class="code killed mutation_9_365_1104">         * @param  {TreeNode} node</span></span></li><li><span class="code killed mutation_17_726_1005"><span class="code killed mutation_9_365_1104">         * @return {String} HTML</span></span></li><li><span class="code killed mutation_17_726_1005"><span class="code killed mutation_9_365_1104">         */</span></span></li><li><span class="code killed mutation_17_726_1005"><span class="code killed mutation_9_365_1104">        </span><span class="code killed mutation_18_1005_1097">applyTemplate: function(node) {</span></span></li><li><span class="code killed mutation_18_1005_1097"><span class="code killed mutation_9_365_1104">            <span class="code killed mutation_29_1049_1087">return <span class="code killed mutation_32_1056_1086"><span class="code killed mutation_31_1056_1086">this.template.renderNode(<span class="code killed mutation_30_1081_1085">node</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_18_1005_1097"><span class="code killed mutation_9_365_1104">        }</span></span></li><li><span class="code killed mutation_9_365_1104">    };</span></li><li></li><li>    <span class="code killed mutation_10_1110_1126">return Renderer;</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_11_62_68" class="killed">resources/xr/tree/Renderer.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_300_359" class="killed">resources/xr/tree/Renderer.js:14:5 Removed function Renderer(cfg) { _.assign(this, cfg); } -&gt; KILLED</div><div id="mutation_13_333_353" class="killed">resources/xr/tree/Renderer.js:15:9 Removed _.assign(this, cfg); -&gt; KILLED</div><div id="mutation_14_342_346" class="killed">resources/xr/tree/Renderer.js:15:18 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_348_351" class="killed">resources/xr/tree/Renderer.js:15:24 Replaced cfg with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_16_333_352" class="killed">resources/xr/tree/Renderer.js:15:9 Replaced _.assign(this, cfg) with _ -&gt; KILLED</div><div id="mutation_9_365_1104" class="killed">resources/xr/tree/Renderer.js:18:5 Removed Renderer.prototype = { /** * Renders tree node as HTML. * * @param {TreeNode} node * @param {{skipChildren: Boolean}} opts An option to turn off rendering of child nodes. * When skipChildren is true, only an empty placeholder div is left for child nodes. * @return {String} HTML */ render: function(node, opts) { return this.template.render(this.layout.layout(this.flattener.flatten(node), opts)); }, /** * Renders tree node template. * @param {TreeNode} node * @return {String} HTML */ applyTemplate: function(node) { return this.template.renderNode(node); } }; -&gt; KILLED</div><div id="mutation_17_726_1005" class="killed">resources/xr/tree/Renderer.js:27:9 Removed render: function(node, opts) { return this.template.render(this.layout.layout(this.flattener.flatten(node), opts)); }, /** * Renders tree node template. * @param {TreeNode} node * @return {String} HTML */  -&gt; KILLED</div><div id="mutation_28_816_844" class="killed">resources/xr/tree/Renderer.js:28:60 Replaced this.flattener.flatten(node) with this.flattener -&gt; KILLED</div><div id="mutation_27_816_844" class="killed">resources/xr/tree/Renderer.js:28:60 Replaced this.flattener.flatten(node) with node -&gt; KILLED</div><div id="mutation_19_769_853" class="killed">resources/xr/tree/Renderer.js:28:13 Removed return this.template.render(this.layout.layout(this.flattener.flatten(node), opts)); -&gt; KILLED</div><div id="mutation_20_797_851" class="killed">resources/xr/tree/Renderer.js:28:41 Replaced this.layout.layout(this.flattener.flatten(node), opts) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_21_776_852" class="killed">resources/xr/tree/Renderer.js:28:20 Replaced this.template.render(this.layout.layout(this.flattener.flatten(node), opts)) with this.layout.layout(this.flattener.flatten(node), opts) -&gt; KILLED</div><div id="mutation_22_776_852" class="killed">resources/xr/tree/Renderer.js:28:20 Replaced this.template.render(this.layout.layout(this.flattener.flatten(node), opts)) with this.template -&gt; KILLED</div><div id="mutation_23_816_844" class="killed">resources/xr/tree/Renderer.js:28:60 Replaced this.flattener.flatten(node) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_24_846_850" class="killed">resources/xr/tree/Renderer.js:28:90 Replaced opts with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_25_797_851" class="killed">resources/xr/tree/Renderer.js:28:41 Replaced this.layout.layout(this.flattener.flatten(node), opts) with this.layout -&gt; KILLED</div><div id="mutation_26_839_843" class="killed">resources/xr/tree/Renderer.js:28:83 Replaced node with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_18_1005_1097" class="killed">resources/xr/tree/Renderer.js:36:9 Removed applyTemplate: function(node) { return this.template.renderNode(node); } -&gt; KILLED</div><div id="mutation_29_1049_1087" class="killed">resources/xr/tree/Renderer.js:37:13 Removed return this.template.renderNode(node); -&gt; KILLED</div><div id="mutation_30_1081_1085" class="killed">resources/xr/tree/Renderer.js:37:45 Replaced node with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_31_1056_1086" class="killed">resources/xr/tree/Renderer.js:37:20 Replaced this.template.renderNode(node) with node -&gt; KILLED</div><div id="mutation_32_1056_1086" class="killed">resources/xr/tree/Renderer.js:37:20 Replaced this.template.renderNode(node) with this.template -&gt; KILLED</div><div id="mutation_10_1110_1126" class="killed">resources/xr/tree/Renderer.js:41:5 Removed return Renderer; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

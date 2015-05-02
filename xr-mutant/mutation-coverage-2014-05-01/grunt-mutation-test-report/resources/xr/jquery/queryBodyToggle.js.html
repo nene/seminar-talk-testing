@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":65,"ignored":9,"untested":0,"survived":6}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>65</strong> of which <strong>6</strong> survived,&nbsp;
+        <strong>9</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>90.8%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/jquery/index.html'">jquery</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/jquery/queryBodyToggle.js.html'">queryBodyToggle.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var QueryBody = require(<span class="code killed mutation_10_70_87">"xr/io/QueryBody"</span>);</li><li>    var highlight = require(<span class="code killed mutation_12_118_133">"lib/highlight"</span>);</li><li></li><li>    /**</li><li>     * jQuery plugin for rendering the inverted stacktrace content on demand when it's expanded</li><li>     * for the first time.  On further clicks just expanding/collapsing it.</li><li>     *</li><li>     * @param {Object} options</li><li>     * @param {Object} options.treeState Map of query body ID-s and whether they'd collapsed or not.</li><li>     * @param {Function} option.getQueryById Returns query with given ID.</li><li>     * @param {Object} deps Dependencies:</li><li>     * @param {Function} deps.QueryBody QueryBody constructor.</li><li>     */</li><li>    <span class="code killed mutation_9_647_1521">return function(options, deps) {</span></li><li><span class="code killed mutation_9_647_1521">        <span class="code survived mutation_14_688_753">if (<span class="code killed mutation_16_692_693">!</span>deps) {</span></span></li><li><span class="code survived mutation_14_688_753"><span class="code killed mutation_9_647_1521">            <span class="code survived mutation_17_713_743">deps = {<span class="code survived mutation_18_721_741">QueryBody: QueryBody</span>};</span></span></span></li><li><span class="code survived mutation_14_688_753"><span class="code killed mutation_9_647_1521">        }</span></span></li><li><span class="code killed mutation_9_647_1521"></li><li>        <span class="code killed mutation_15_763_1514">return <span class="code killed mutation_22_770_1513">this.on(<span class="code killed mutation_19_778_785">"click"</span>, <span class="code killed mutation_20_787_814">".query-body-show-all-link"</span>, <span class="code killed mutation_21_816_1512">function(evt) {</span></span></span></span></li><li><span class="code killed mutation_22_770_1513"><span class="code killed mutation_21_816_1512"><span class="code killed mutation_15_763_1514"><span class="code killed mutation_9_647_1521">            <span class="code survived mutation_32_844_864"><span class="code survived mutation_23_844_865">evt.preventDefault()</span>;</span></span></span></span></span></li><li><span class="code killed mutation_22_770_1513"><span class="code killed mutation_21_816_1512"><span class="code killed mutation_15_763_1514"><span class="code killed mutation_9_647_1521"></li><li>            <span class="code killed mutation_24_879_926">var nodeSelfEl = <span class="code killed mutation_37_896_903"><span class="code killed mutation_35_896_925"><span class="code killed mutation_34_896_925">$(<span class="code killed mutation_36_898_902">this</span>)</span>.parents(<span class="code killed mutation_33_912_924">".node-self"</span>)</span></span>;</span></span></span></span></span></li><li><span class="code killed mutation_22_770_1513"><span class="code killed mutation_21_816_1512"><span class="code killed mutation_15_763_1514"><span class="code killed mutation_9_647_1521">            <span class="code killed mutation_25_939_995">var query = <span class="code killed mutation_40_951_994"><span class="code killed mutation_39_951_994">options.getQueryById(<span class="code killed mutation_43_972_993"><span class="code killed mutation_42_972_993"><span class="code killed mutation_38_972_993">nodeSelfEl.data(<span class="code killed mutation_41_988_992">"id"</span>)</span></span></span>)</span></span>;</span></span></span></span></span></li><li><span class="code killed mutation_22_770_1513"><span class="code killed mutation_21_816_1512"><span class="code killed mutation_15_763_1514"><span class="code killed mutation_9_647_1521">            <span class="code killed mutation_26_1008_1055">var oldBodyEl = <span class="code killed mutation_46_1024_1054"><span class="code killed mutation_45_1024_1054">nodeSelfEl.find(<span class="code killed mutation_44_1040_1053">".query-body"</span>)</span></span>;</span></span></span></span></span></li><li><span class="code killed mutation_22_770_1513"><span class="code killed mutation_21_816_1512"><span class="code killed mutation_15_763_1514"><span class="code killed mutation_9_647_1521"></li><li>            <span class="code killed mutation_27_1069_1196">var queryBody = new deps.QueryBody({</span></span></span></span></span></li><li><span class="code killed mutation_27_1069_1196"><span class="code killed mutation_22_770_1513"><span class="code killed mutation_21_816_1512"><span class="code killed mutation_15_763_1514"><span class="code killed mutation_9_647_1521">                <span class="code killed mutation_47_1122_1152">query: query,</span></span></span></span></span></span></li><li><span class="code killed mutation_47_1122_1152"><span class="code killed mutation_27_1069_1196"><span class="code killed mutation_22_770_1513"><span class="code killed mutation_21_816_1512"><span class="code killed mutation_15_763_1514"><span class="code killed mutation_9_647_1521">                </span><span class="code killed mutation_48_1152_1180">treeState: options.treeState</span></span></span></span></span></span></li><li><span class="code killed mutation_27_1069_1196"><span class="code killed mutation_22_770_1513"><span class="code killed mutation_21_816_1512"><span class="code killed mutation_15_763_1514"><span class="code killed mutation_9_647_1521">            });</span></span></span></span></span></li><li><span class="code killed mutation_22_770_1513"><span class="code killed mutation_21_816_1512"><span class="code killed mutation_15_763_1514"><span class="code killed mutation_9_647_1521">            <span class="code killed mutation_49_1209_1235"><span class="code killed mutation_28_1209_1236">queryBody.toggleExpanded()</span>;</span></span></span></span></span></li><li><span class="code killed mutation_22_770_1513"><span class="code killed mutation_21_816_1512"><span class="code killed mutation_15_763_1514"><span class="code killed mutation_9_647_1521"></li><li>            <span class="code killed mutation_29_1250_1288">var newBodyEl = <span class="code killed mutation_51_1266_1287">$(<span class="code killed mutation_52_1268_1286"><span class="code killed mutation_50_1268_1286">queryBody.render()</span></span>)</span>;</span></span></span></span></span></li><li><span class="code killed mutation_22_770_1513"><span class="code killed mutation_21_816_1512"><span class="code killed mutation_15_763_1514"><span class="code killed mutation_9_647_1521">            <span class="code killed mutation_55_1301_1333"><span class="code killed mutation_54_1301_1333"><span class="code killed mutation_30_1301_1334">oldBodyEl.replaceWith(<span class="code killed mutation_53_1323_1332">newBodyEl</span>)</span></span>;</span></span></span></span></span></li><li><span class="code killed mutation_22_770_1513"><span class="code killed mutation_21_816_1512"><span class="code killed mutation_15_763_1514"><span class="code killed mutation_9_647_1521"></li><li>            // Re-highlight</span></span></span></span></li><li><span class="code killed mutation_22_770_1513"><span class="code killed mutation_21_816_1512"><span class="code killed mutation_15_763_1514"><span class="code killed mutation_9_647_1521">            <span class="code killed mutation_31_1376_1502">if (<span class="code killed mutation_58_1380_1416"><span class="code killed mutation_57_1380_1416">newBodyEl.hasClass(<span class="code killed mutation_56_1399_1415">"highlight-code"</span>)</span></span>) {</span></span></span></span></span></li><li><span class="code killed mutation_31_1376_1502"><span class="code killed mutation_22_770_1513"><span class="code killed mutation_21_816_1512"><span class="code killed mutation_15_763_1514"><span class="code killed mutation_9_647_1521">                <span class="code killed mutation_62_1436_1487"><span class="code killed mutation_61_1436_1487"><span class="code killed mutation_59_1436_1488">highlight.highlightBlock(<span class="code survived mutation_65_1461_1483"><span class="code killed mutation_64_1461_1483"><span class="code killed mutation_60_1461_1486">newBodyEl.find(<span class="code killed mutation_63_1476_1482">"code"</span>)</span></span>[<span class="code killed mutation_66_1484_1485">0</span>]</span>)</span></span>;</span></span></span></span></span></span></li><li><span class="code killed mutation_31_1376_1502"><span class="code killed mutation_22_770_1513"><span class="code killed mutation_21_816_1512"><span class="code killed mutation_15_763_1514"><span class="code killed mutation_9_647_1521">            }</span></span></span></span></span></li><li><span class="code killed mutation_22_770_1513"><span class="code killed mutation_21_816_1512"><span class="code killed mutation_15_763_1514"><span class="code killed mutation_9_647_1521">        }</span>)</span>;</span></span></li><li><span class="code killed mutation_9_647_1521">    };</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_10_70_87" class="killed">resources/xr/jquery/queryBodyToggle.js:4:29 Replaced &quot;xr/io/QueryBody&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_12_118_133" class="killed">resources/xr/jquery/queryBodyToggle.js:5:29 Replaced &quot;lib/highlight&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_9_647_1521" class="killed">resources/xr/jquery/queryBodyToggle.js:17:5 Removed return function(options, deps) { if (!deps) { deps = {QueryBody: QueryBody}; } return this.on(&quot;click&quot;, &quot;.query-body-show-all-link&quot;, function(evt) { evt.preventDefault(); var nodeSelfEl = $(this).parents(&quot;.node-self&quot;); var query = options.getQueryById(nodeSelfEl.data(&quot;id&quot;)); var oldBodyEl = nodeSelfEl.find(&quot;.query-body&quot;); var queryBody = new deps.QueryBody({ query: query, treeState: options.treeState }); queryBody.toggleExpanded(); var newBodyEl = $(queryBody.render()); oldBodyEl.replaceWith(newBodyEl); // Re-highlight if (newBodyEl.hasClass(&quot;highlight-code&quot;)) { highlight.highlightBlock(newBodyEl.find(&quot;code&quot;)[0]); } }); }; -&gt; KILLED</div><div id="mutation_14_688_753" class="survived">resources/xr/jquery/queryBodyToggle.js:18:9 Removed if (!deps) { deps = {QueryBody: QueryBody}; } -&gt; SURVIVED</div><div id="mutation_16_692_693" class="killed">resources/xr/jquery/queryBodyToggle.js:18:18 Removed ! -&gt; KILLED</div><div id="mutation_17_713_743" class="survived">resources/xr/jquery/queryBodyToggle.js:19:13 Removed deps = {QueryBody: QueryBody}; -&gt; SURVIVED</div><div id="mutation_18_721_741" class="survived">resources/xr/jquery/queryBodyToggle.js:19:21 Removed QueryBody: QueryBody -&gt; SURVIVED</div><div id="mutation_19_778_785" class="killed">resources/xr/jquery/queryBodyToggle.js:22:24 Replaced &quot;click&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_787_814" class="killed">resources/xr/jquery/queryBodyToggle.js:22:33 Replaced &quot;.query-body-show-all-link&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_21_816_1512" class="killed">resources/xr/jquery/queryBodyToggle.js:22:62 Replaced function(evt) { evt.preventDefault(); var nodeSelfEl = $(this).parents(&quot;.node-self&quot;); var query = options.getQueryById(nodeSelfEl.data(&quot;id&quot;)); var oldBodyEl = nodeSelfEl.find(&quot;.query-body&quot;); var queryBody = new deps.QueryBody({ query: query, treeState: options.treeState }); queryBody.toggleExpanded(); var newBodyEl = $(queryBody.render()); oldBodyEl.replaceWith(newBodyEl); // Re-highlight if (newBodyEl.hasClass(&quot;highlight-code&quot;)) { highlight.highlightBlock(newBodyEl.find(&quot;code&quot;)[0]); } } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_763_1514" class="killed">resources/xr/jquery/queryBodyToggle.js:22:9 Removed return this.on(&quot;click&quot;, &quot;.query-body-show-all-link&quot;, function(evt) { evt.preventDefault(); var nodeSelfEl = $(this).parents(&quot;.node-self&quot;); var query = options.getQueryById(nodeSelfEl.data(&quot;id&quot;)); var oldBodyEl = nodeSelfEl.find(&quot;.query-body&quot;); var queryBody = new deps.QueryBody({ query: query, treeState: options.treeState }); queryBody.toggleExpanded(); var newBodyEl = $(queryBody.render()); oldBodyEl.replaceWith(newBodyEl); // Re-highlight if (newBodyEl.hasClass(&quot;highlight-code&quot;)) { highlight.highlightBlock(newBodyEl.find(&quot;code&quot;)[0]); } }); -&gt; KILLED</div><div id="mutation_22_770_1513" class="killed">resources/xr/jquery/queryBodyToggle.js:22:16 Replaced this.on(&quot;click&quot;, &quot;.query-body-show-all-link&quot;, function(evt) { evt.preventDefault(); var nodeSelfEl = $(this).parents(&quot;.node-self&quot;); var query = options.getQueryById(nodeSelfEl.data(&quot;id&quot;)); var oldBodyEl = nodeSelfEl.find(&quot;.query-body&quot;); var queryBody = new deps.QueryBody({ query: query, treeState: options.treeState }); queryBody.toggleExpanded(); var newBodyEl = $(queryBody.render()); oldBodyEl.replaceWith(newBodyEl); // Re-highlight if (newBodyEl.hasClass(&quot;highlight-code&quot;)) { highlight.highlightBlock(newBodyEl.find(&quot;code&quot;)[0]); } }) with this -&gt; KILLED</div><div id="mutation_23_844_865" class="survived">resources/xr/jquery/queryBodyToggle.js:23:13 Removed evt.preventDefault(); -&gt; SURVIVED</div><div id="mutation_32_844_864" class="survived">resources/xr/jquery/queryBodyToggle.js:23:13 Replaced evt.preventDefault() with evt -&gt; SURVIVED</div><div id="mutation_24_879_926" class="killed">resources/xr/jquery/queryBodyToggle.js:25:13 Removed var nodeSelfEl = $(this).parents(&quot;.node-self&quot;); -&gt; KILLED</div><div id="mutation_33_912_924" class="killed">resources/xr/jquery/queryBodyToggle.js:25:46 Replaced &quot;.node-self&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_34_896_925" class="killed">resources/xr/jquery/queryBodyToggle.js:25:30 Replaced $(this).parents(&quot;.node-self&quot;) with &quot;.node-self&quot; -&gt; KILLED</div><div id="mutation_35_896_925" class="killed">resources/xr/jquery/queryBodyToggle.js:25:30 Replaced $(this).parents(&quot;.node-self&quot;) with $(this) -&gt; KILLED</div><div id="mutation_36_898_902" class="killed">resources/xr/jquery/queryBodyToggle.js:25:32 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_37_896_903" class="killed">resources/xr/jquery/queryBodyToggle.js:25:30 Replaced $(this) with this -&gt; KILLED</div><div id="mutation_38_972_993" class="killed">resources/xr/jquery/queryBodyToggle.js:26:46 Replaced nodeSelfEl.data(&quot;id&quot;) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_25_939_995" class="killed">resources/xr/jquery/queryBodyToggle.js:26:13 Removed var query = options.getQueryById(nodeSelfEl.data(&quot;id&quot;)); -&gt; KILLED</div><div id="mutation_43_972_993" class="killed">resources/xr/jquery/queryBodyToggle.js:26:46 Replaced nodeSelfEl.data(&quot;id&quot;) with nodeSelfEl -&gt; KILLED</div><div id="mutation_42_972_993" class="killed">resources/xr/jquery/queryBodyToggle.js:26:46 Replaced nodeSelfEl.data(&quot;id&quot;) with &quot;id&quot; -&gt; KILLED</div><div id="mutation_41_988_992" class="killed">resources/xr/jquery/queryBodyToggle.js:26:62 Replaced &quot;id&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_40_951_994" class="killed">resources/xr/jquery/queryBodyToggle.js:26:25 Replaced options.getQueryById(nodeSelfEl.data(&quot;id&quot;)) with options -&gt; KILLED</div><div id="mutation_39_951_994" class="killed">resources/xr/jquery/queryBodyToggle.js:26:25 Replaced options.getQueryById(nodeSelfEl.data(&quot;id&quot;)) with nodeSelfEl.data(&quot;id&quot;) -&gt; KILLED</div><div id="mutation_26_1008_1055" class="killed">resources/xr/jquery/queryBodyToggle.js:27:13 Removed var oldBodyEl = nodeSelfEl.find(&quot;.query-body&quot;); -&gt; KILLED</div><div id="mutation_44_1040_1053" class="killed">resources/xr/jquery/queryBodyToggle.js:27:45 Replaced &quot;.query-body&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_45_1024_1054" class="killed">resources/xr/jquery/queryBodyToggle.js:27:29 Replaced nodeSelfEl.find(&quot;.query-body&quot;) with &quot;.query-body&quot; -&gt; KILLED</div><div id="mutation_46_1024_1054" class="killed">resources/xr/jquery/queryBodyToggle.js:27:29 Replaced nodeSelfEl.find(&quot;.query-body&quot;) with nodeSelfEl -&gt; KILLED</div><div id="mutation_27_1069_1196" class="killed">resources/xr/jquery/queryBodyToggle.js:29:13 Removed var queryBody = new deps.QueryBody({ query: query, treeState: options.treeState }); -&gt; KILLED</div><div id="mutation_47_1122_1152" class="killed">resources/xr/jquery/queryBodyToggle.js:30:17 Removed query: query,  -&gt; KILLED</div><div id="mutation_48_1152_1180" class="killed">resources/xr/jquery/queryBodyToggle.js:31:17 Removed treeState: options.treeState -&gt; KILLED</div><div id="mutation_28_1209_1236" class="killed">resources/xr/jquery/queryBodyToggle.js:33:13 Removed queryBody.toggleExpanded(); -&gt; KILLED</div><div id="mutation_49_1209_1235" class="killed">resources/xr/jquery/queryBodyToggle.js:33:13 Replaced queryBody.toggleExpanded() with queryBody -&gt; KILLED</div><div id="mutation_52_1268_1286" class="killed">resources/xr/jquery/queryBodyToggle.js:35:31 Replaced queryBody.render() with queryBody -&gt; KILLED</div><div id="mutation_29_1250_1288" class="killed">resources/xr/jquery/queryBodyToggle.js:35:13 Removed var newBodyEl = $(queryBody.render()); -&gt; KILLED</div><div id="mutation_50_1268_1286" class="killed">resources/xr/jquery/queryBodyToggle.js:35:31 Replaced queryBody.render() with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_51_1266_1287" class="killed">resources/xr/jquery/queryBodyToggle.js:35:29 Replaced $(queryBody.render()) with queryBody.render() -&gt; KILLED</div><div id="mutation_30_1301_1334" class="killed">resources/xr/jquery/queryBodyToggle.js:36:13 Removed oldBodyEl.replaceWith(newBodyEl); -&gt; KILLED</div><div id="mutation_53_1323_1332" class="killed">resources/xr/jquery/queryBodyToggle.js:36:35 Replaced newBodyEl with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_54_1301_1333" class="killed">resources/xr/jquery/queryBodyToggle.js:36:13 Replaced oldBodyEl.replaceWith(newBodyEl) with newBodyEl -&gt; KILLED</div><div id="mutation_55_1301_1333" class="killed">resources/xr/jquery/queryBodyToggle.js:36:13 Replaced oldBodyEl.replaceWith(newBodyEl) with oldBodyEl -&gt; KILLED</div><div id="mutation_31_1376_1502" class="killed">resources/xr/jquery/queryBodyToggle.js:39:13 Removed if (newBodyEl.hasClass(&quot;highlight-code&quot;)) { highlight.highlightBlock(newBodyEl.find(&quot;code&quot;)[0]); } -&gt; KILLED</div><div id="mutation_56_1399_1415" class="killed">resources/xr/jquery/queryBodyToggle.js:39:36 Replaced &quot;highlight-code&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_57_1380_1416" class="killed">resources/xr/jquery/queryBodyToggle.js:39:17 Replaced newBodyEl.hasClass(&quot;highlight-code&quot;) with &quot;highlight-code&quot; -&gt; KILLED</div><div id="mutation_58_1380_1416" class="killed">resources/xr/jquery/queryBodyToggle.js:39:17 Replaced newBodyEl.hasClass(&quot;highlight-code&quot;) with newBodyEl -&gt; KILLED</div><div id="mutation_59_1436_1488" class="killed">resources/xr/jquery/queryBodyToggle.js:40:17 Removed highlight.highlightBlock(newBodyEl.find(&quot;code&quot;)[0]); -&gt; KILLED</div><div id="mutation_60_1461_1486" class="killed">resources/xr/jquery/queryBodyToggle.js:40:42 Replaced newBodyEl.find(&quot;code&quot;)[0] with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_61_1436_1487" class="killed">resources/xr/jquery/queryBodyToggle.js:40:17 Replaced highlight.highlightBlock(newBodyEl.find(&quot;code&quot;)[0]) with newBodyEl.find(&quot;code&quot;)[0] -&gt; KILLED</div><div id="mutation_62_1436_1487" class="killed">resources/xr/jquery/queryBodyToggle.js:40:17 Replaced highlight.highlightBlock(newBodyEl.find(&quot;code&quot;)[0]) with highlight -&gt; KILLED</div><div id="mutation_63_1476_1482" class="killed">resources/xr/jquery/queryBodyToggle.js:40:57 Replaced &quot;code&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_64_1461_1483" class="killed">resources/xr/jquery/queryBodyToggle.js:40:42 Replaced newBodyEl.find(&quot;code&quot;) with &quot;code&quot; -&gt; KILLED</div><div id="mutation_65_1461_1483" class="survived">resources/xr/jquery/queryBodyToggle.js:40:42 Replaced newBodyEl.find(&quot;code&quot;) with newBodyEl -&gt; SURVIVED</div><div id="mutation_66_1484_1485" class="killed">resources/xr/jquery/queryBodyToggle.js:40:65 Replaced 0 with 1 -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

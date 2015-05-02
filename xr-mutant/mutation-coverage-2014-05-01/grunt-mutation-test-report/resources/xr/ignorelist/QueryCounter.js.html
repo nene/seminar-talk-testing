@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":42,"ignored":9,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>42</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>9</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/ignorelist/index.html'">ignorelist</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/ignorelist/QueryCounter.js.html'">QueryCounter.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_12_62_68">"xr/_"</span>);</li><li>    var counter = require(<span class="code killed mutation_14_97_112">"xr/io/counter"</span>);</li><li></li><li>    /**</li><li>     * Counter of queries in requests.</li><li>     */</li><li>    <span class="code killed mutation_9_175_206">function QueryCounter() {</span></li><li><span class="code killed mutation_9_175_206">    }</span></li><li>    <span class="code killed mutation_10_211_975">QueryCounter.prototype = {</span></li><li><span class="code killed mutation_10_211_975">        /**</span></li><li><span class="code killed mutation_10_211_975">         * Returns number of queries.</span></li><li><span class="code killed mutation_10_211_975">         * @param {Object[]} requests</span></li><li><span class="code killed mutation_10_211_975">         * @return {Number}</span></li><li><span class="code killed mutation_10_211_975">         */</span></li><li><span class="code killed mutation_10_211_975">        <span class="code killed mutation_16_374_624">count: function(requests) {</span></span></li><li><span class="code killed mutation_16_374_624"><span class="code killed mutation_10_211_975">            <span class="code killed mutation_18_414_455">return <span class="code killed mutation_21_421_454"><span class="code killed mutation_20_421_454">counter.countAllQueries(<span class="code killed mutation_19_445_453">requests</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_16_374_624"><span class="code killed mutation_10_211_975">        },</span></span></li><li><span class="code killed mutation_16_374_624"><span class="code killed mutation_10_211_975"></li><li>        /**</span></span></li><li><span class="code killed mutation_16_374_624"><span class="code killed mutation_10_211_975">         * Returns number of ignored queries in requests.</span></span></li><li><span class="code killed mutation_16_374_624"><span class="code killed mutation_10_211_975">         * @param {Object[]} requests</span></span></li><li><span class="code killed mutation_16_374_624"><span class="code killed mutation_10_211_975">         * @return {Number}</span></span></li><li><span class="code killed mutation_16_374_624"><span class="code killed mutation_10_211_975">         */</span></span></li><li><span class="code killed mutation_16_374_624"><span class="code killed mutation_10_211_975">        </span><span class="code killed mutation_17_624_968">countIgnored: function(requests) {</span></span></li><li><span class="code killed mutation_17_624_968"><span class="code killed mutation_10_211_975">            <span class="code killed mutation_22_671_958">return <span class="code killed mutation_43_678_689"><span class="code killed mutation_26_678_951"><span class="code killed mutation_23_678_957">_(<span class="code killed mutation_42_680_688">requests</span>)</span>.map(<span class="code killed mutation_24_694_944">function(req) {</span></span></span></span></span></span></li><li><span class="code killed mutation_26_678_951"><span class="code killed mutation_24_694_944"><span class="code killed mutation_23_678_957"><span class="code killed mutation_22_671_958"><span class="code killed mutation_17_624_968"><span class="code killed mutation_10_211_975">                <span class="code killed mutation_27_726_930">if (req.ignored) {</span></span></span></span></span></span></span></li><li><span class="code killed mutation_27_726_930"><span class="code killed mutation_26_678_951"><span class="code killed mutation_24_694_944"><span class="code killed mutation_23_678_957"><span class="code killed mutation_22_671_958"><span class="code killed mutation_17_624_968"><span class="code killed mutation_10_211_975">                    <span class="code killed mutation_28_765_790">return <span class="code killed mutation_31_772_789"><span class="code killed mutation_30_772_789">this.count(<span class="code killed mutation_29_783_788">[<span class="code killed mutation_32_784_787">req</span>]</span>)</span></span>;</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_27_726_930"><span class="code killed mutation_26_678_951"><span class="code killed mutation_24_694_944"><span class="code killed mutation_23_678_957"><span class="code killed mutation_22_671_958"><span class="code killed mutation_17_624_968"><span class="code killed mutation_10_211_975">                }</span></span></span></span></span></span></span></li><li><span class="code killed mutation_27_726_930"><span class="code killed mutation_26_678_951"><span class="code killed mutation_24_694_944"><span class="code killed mutation_23_678_957"><span class="code killed mutation_22_671_958"><span class="code killed mutation_17_624_968"><span class="code killed mutation_10_211_975">                else {</span></span></span></span></span></span></span></li><li><span class="code killed mutation_27_726_930"><span class="code killed mutation_26_678_951"><span class="code killed mutation_24_694_944"><span class="code killed mutation_23_678_957"><span class="code killed mutation_22_671_958"><span class="code killed mutation_17_624_968"><span class="code killed mutation_10_211_975">                    <span class="code killed mutation_33_852_912">return <span class="code killed mutation_41_859_873"><span class="code killed mutation_37_859_896"><span class="code killed mutation_36_859_896"><span class="code killed mutation_34_859_904">_(<span class="code killed mutation_40_861_872">req.queries</span>)</span>.where(<span class="code killed mutation_35_880_895">{<span class="code killed mutation_38_881_894">ignored: <span class="code killed mutation_39_890_894">true</span></span>}</span>)</span></span>.value()</span>.length;</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_27_726_930"><span class="code killed mutation_26_678_951"><span class="code killed mutation_24_694_944"><span class="code killed mutation_23_678_957"><span class="code killed mutation_22_671_958"><span class="code killed mutation_17_624_968"><span class="code killed mutation_10_211_975">                }</span></span></span></span></span></span></span></li><li><span class="code killed mutation_26_678_951"><span class="code killed mutation_24_694_944"><span class="code killed mutation_23_678_957"><span class="code killed mutation_22_671_958"><span class="code killed mutation_17_624_968"><span class="code killed mutation_10_211_975">            }</span>, <span class="code killed mutation_25_946_950">this</span>)</span>.sum()</span>;</span></span></span></li><li><span class="code killed mutation_17_624_968"><span class="code killed mutation_10_211_975">        }</span></span></li><li><span class="code killed mutation_10_211_975">    };</span></li><li></li><li>    <span class="code killed mutation_11_981_1001">return QueryCounter;</span></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_12_62_68" class="killed">resources/xr/ignorelist/QueryCounter.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_14_97_112" class="killed">resources/xr/ignorelist/QueryCounter.js:5:27 Replaced &quot;xr/io/counter&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_9_175_206" class="killed">resources/xr/ignorelist/QueryCounter.js:10:5 Removed function QueryCounter() { } -&gt; KILLED</div><div id="mutation_10_211_975" class="killed">resources/xr/ignorelist/QueryCounter.js:12:5 Removed QueryCounter.prototype = { /** * Returns number of queries. * @param {Object[]} requests * @return {Number} */ count: function(requests) { return counter.countAllQueries(requests); }, /** * Returns number of ignored queries in requests. * @param {Object[]} requests * @return {Number} */ countIgnored: function(requests) { return _(requests).map(function(req) { if (req.ignored) { return this.count([req]); } else { return _(req.queries).where({ignored: true}).value().length; } }, this).sum(); } }; -&gt; KILLED</div><div id="mutation_16_374_624" class="killed">resources/xr/ignorelist/QueryCounter.js:18:9 Removed count: function(requests) { return counter.countAllQueries(requests); }, /** * Returns number of ignored queries in requests. * @param {Object[]} requests * @return {Number} */  -&gt; KILLED</div><div id="mutation_18_414_455" class="killed">resources/xr/ignorelist/QueryCounter.js:19:13 Removed return counter.countAllQueries(requests); -&gt; KILLED</div><div id="mutation_19_445_453" class="killed">resources/xr/ignorelist/QueryCounter.js:19:44 Replaced requests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_421_454" class="killed">resources/xr/ignorelist/QueryCounter.js:19:20 Replaced counter.countAllQueries(requests) with requests -&gt; KILLED</div><div id="mutation_21_421_454" class="killed">resources/xr/ignorelist/QueryCounter.js:19:20 Replaced counter.countAllQueries(requests) with counter -&gt; KILLED</div><div id="mutation_17_624_968" class="killed">resources/xr/ignorelist/QueryCounter.js:27:9 Removed countIgnored: function(requests) { return _(requests).map(function(req) { if (req.ignored) { return this.count([req]); } else { return _(req.queries).where({ignored: true}).value().length; } }, this).sum(); } -&gt; KILLED</div><div id="mutation_42_680_688" class="killed">resources/xr/ignorelist/QueryCounter.js:28:22 Replaced requests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_671_958" class="killed">resources/xr/ignorelist/QueryCounter.js:28:13 Removed return _(requests).map(function(req) { if (req.ignored) { return this.count([req]); } else { return _(req.queries).where({ignored: true}).value().length; } }, this).sum(); -&gt; KILLED</div><div id="mutation_23_678_957" class="killed">resources/xr/ignorelist/QueryCounter.js:28:20 Replaced _(requests).map(function(req) { if (req.ignored) { return this.count([req]); } else { return _(req.queries).where({ignored: true}).value().length; } }, this).sum() with _(requests).map(function(req) { if (req.ignored) { return this.count([req]); } else { return _(req.queries).where({ignored: true}).value().length; } }, this) -&gt; KILLED</div><div id="mutation_24_694_944" class="killed">resources/xr/ignorelist/QueryCounter.js:28:36 Replaced function(req) { if (req.ignored) { return this.count([req]); } else { return _(req.queries).where({ignored: true}).value().length; } } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_43_678_689" class="killed">resources/xr/ignorelist/QueryCounter.js:28:20 Replaced _(requests) with requests -&gt; KILLED</div><div id="mutation_26_678_951" class="killed">resources/xr/ignorelist/QueryCounter.js:28:20 Replaced _(requests).map(function(req) { if (req.ignored) { return this.count([req]); } else { return _(req.queries).where({ignored: true}).value().length; } }, this) with _(requests) -&gt; KILLED</div><div id="mutation_27_726_930" class="killed">resources/xr/ignorelist/QueryCounter.js:29:17 Removed if (req.ignored) { return this.count([req]); } else { return _(req.queries).where({ignored: true}).value().length; } -&gt; KILLED</div><div id="mutation_29_783_788" class="killed">resources/xr/ignorelist/QueryCounter.js:30:39 Replaced [req] with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_30_772_789" class="killed">resources/xr/ignorelist/QueryCounter.js:30:28 Replaced this.count([req]) with [req] -&gt; KILLED</div><div id="mutation_31_772_789" class="killed">resources/xr/ignorelist/QueryCounter.js:30:28 Replaced this.count([req]) with this -&gt; KILLED</div><div id="mutation_32_784_787" class="killed">resources/xr/ignorelist/QueryCounter.js:30:40 Removed req -&gt; KILLED</div><div id="mutation_28_765_790" class="killed">resources/xr/ignorelist/QueryCounter.js:30:21 Removed return this.count([req]); -&gt; KILLED</div><div id="mutation_33_852_912" class="killed">resources/xr/ignorelist/QueryCounter.js:33:21 Removed return _(req.queries).where({ignored: true}).value().length; -&gt; KILLED</div><div id="mutation_34_859_904" class="killed">resources/xr/ignorelist/QueryCounter.js:33:28 Replaced _(req.queries).where({ignored: true}).value() with _(req.queries).where({ignored: true}) -&gt; KILLED</div><div id="mutation_35_880_895" class="killed">resources/xr/ignorelist/QueryCounter.js:33:49 Replaced {ignored: true} with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_36_859_896" class="killed">resources/xr/ignorelist/QueryCounter.js:33:28 Replaced _(req.queries).where({ignored: true}) with {ignored: true} -&gt; KILLED</div><div id="mutation_37_859_896" class="killed">resources/xr/ignorelist/QueryCounter.js:33:28 Replaced _(req.queries).where({ignored: true}) with _(req.queries) -&gt; KILLED</div><div id="mutation_38_881_894" class="killed">resources/xr/ignorelist/QueryCounter.js:33:50 Removed ignored: true -&gt; KILLED</div><div id="mutation_39_890_894" class="killed">resources/xr/ignorelist/QueryCounter.js:33:59 Replaced true with false -&gt; KILLED</div><div id="mutation_40_861_872" class="killed">resources/xr/ignorelist/QueryCounter.js:33:30 Replaced req.queries with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_41_859_873" class="killed">resources/xr/ignorelist/QueryCounter.js:33:28 Replaced _(req.queries) with req.queries -&gt; KILLED</div><div id="mutation_25_946_950" class="killed">resources/xr/ignorelist/QueryCounter.js:35:16 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_11_981_1001" class="killed">resources/xr/ignorelist/QueryCounter.js:39:5 Removed return QueryCounter; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

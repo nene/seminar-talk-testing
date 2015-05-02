@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":56,"ignored":7,"untested":0,"survived":1}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>56</strong> of which <strong>1</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>98.2%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/PropertyAccessor.js.html'">PropertyAccessor.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_11_62_68">"xr/_"</span>);</li><li></li><li>    /**</li><li>     * Helper for accessing nested object properties using strings</li><li>     * with "foo.bar.baz" notation.</li><li>     *</li><li>     * @constructor</li><li>     * @param {Object} obj The object to read from and write to.</li><li>     */</li><li>    <span class="code killed mutation_8_287_349">function PropertyAccessor(obj) {</span></li><li><span class="code killed mutation_8_287_349">        <span class="code killed mutation_13_328_343">this.obj = obj;</span></span></li><li><span class="code killed mutation_8_287_349">    }</span></li><li>    <span class="code killed mutation_9_354_1434">PropertyAccessor.prototype = {</span></li><li><span class="code killed mutation_9_354_1434">        /**</span></li><li><span class="code killed mutation_9_354_1434">         * Returns the value of property.</span></li><li><span class="code killed mutation_9_354_1434">         * @param {String} path</span></li><li><span class="code killed mutation_9_354_1434">         */</span></li><li><span class="code killed mutation_9_354_1434">        <span class="code killed mutation_14_491_707">get: function(path) {</span></span></li><li><span class="code killed mutation_14_491_707"><span class="code killed mutation_9_354_1434">            <span class="code killed mutation_17_525_563">return <span class="code killed mutation_20_532_562"><span class="code killed mutation_19_532_562">this.resolve(<span class="code killed mutation_23_545_561"><span class="code killed mutation_22_545_561"><span class="code killed mutation_18_545_561">path.split(<span class="code killed mutation_21_556_560">/\./</span>)</span></span></span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_14_491_707"><span class="code killed mutation_9_354_1434">        },</span></span></li><li><span class="code killed mutation_14_491_707"><span class="code killed mutation_9_354_1434"></li><li>        /**</span></span></li><li><span class="code killed mutation_14_491_707"><span class="code killed mutation_9_354_1434">         * Sets the value of property.</span></span></li><li><span class="code killed mutation_14_491_707"><span class="code killed mutation_9_354_1434">         * @param {String} path</span></span></li><li><span class="code killed mutation_14_491_707"><span class="code killed mutation_9_354_1434">         * @param {*} value</span></span></li><li><span class="code killed mutation_14_491_707"><span class="code killed mutation_9_354_1434">         */</span></span></li><li><span class="code killed mutation_14_491_707"><span class="code killed mutation_9_354_1434">        </span><span class="code killed mutation_15_707_903">set: function(path, value) {</span></span></li><li><span class="code killed mutation_15_707_903"><span class="code killed mutation_9_354_1434">            <span class="code killed mutation_24_748_778">var tokens = <span class="code killed mutation_29_761_777"><span class="code killed mutation_28_761_777">path.split(<span class="code killed mutation_27_772_776">/\./</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_15_707_903"><span class="code killed mutation_9_354_1434"></li><li>            <span class="code killed mutation_25_792_840">var obj = <span class="code killed mutation_32_802_839">this.resolve(<span class="code killed mutation_35_815_832"><span class="code killed mutation_34_815_832"><span class="code killed mutation_30_815_832">_.initial(<span class="code killed mutation_33_825_831">tokens</span>)</span></span></span>, <span class="code killed mutation_31_834_838">true</span>)</span>;</span></span></span></li><li><span class="code killed mutation_15_707_903"><span class="code killed mutation_9_354_1434"></li><li>            <span class="code killed mutation_26_854_882">obj[<span class="code killed mutation_38_858_872"><span class="code killed mutation_37_858_872">_.last(<span class="code killed mutation_36_865_871">tokens</span>)</span></span>] = value;</span></span></span></li><li><span class="code killed mutation_15_707_903"><span class="code killed mutation_9_354_1434">        },</span></span></li><li><span class="code killed mutation_15_707_903"><span class="code killed mutation_9_354_1434"></li><li>        </span><span class="code killed mutation_16_903_1427">resolve: function(tokens, throwOnMissingKeys) {</span></span></li><li><span class="code killed mutation_16_903_1427"><span class="code killed mutation_9_354_1434">            <span class="code killed mutation_39_963_985">var result = this.obj;</span></span></span></li><li><span class="code killed mutation_16_903_1427"><span class="code killed mutation_9_354_1434"></li><li>            <span class="code killed mutation_44_999_1388"><span class="code killed mutation_40_999_1389">tokens.forEach(<span class="code killed mutation_42_1014_1381">function(key){</span></span></span></span></span></li><li><span class="code killed mutation_44_999_1388"><span class="code killed mutation_42_1014_1381"><span class="code killed mutation_40_999_1389"><span class="code killed mutation_16_903_1427"><span class="code killed mutation_9_354_1434">                <span class="code killed mutation_45_1045_1367">if (result<span class="code killed mutation_46_1055_1059"> && </span><span class="code killed mutation_49_1059_1085"><span class="code killed mutation_48_1059_1085">result.hasOwnProperty(<span class="code killed mutation_47_1081_1084">key</span>)</span></span>) {</span></span></span></span></span></span></li><li><span class="code killed mutation_45_1045_1367"><span class="code killed mutation_44_999_1388"><span class="code killed mutation_42_1014_1381"><span class="code killed mutation_40_999_1389"><span class="code killed mutation_16_903_1427"><span class="code killed mutation_9_354_1434">                    <span class="code killed mutation_50_1109_1130">result = result[key];</span></span></span></span></span></span></span></li><li><span class="code killed mutation_45_1045_1367"><span class="code killed mutation_44_999_1388"><span class="code killed mutation_42_1014_1381"><span class="code killed mutation_40_999_1389"><span class="code killed mutation_16_903_1427"><span class="code killed mutation_9_354_1434">                }</span></span></span></span></span></span></li><li><span class="code killed mutation_45_1045_1367"><span class="code killed mutation_44_999_1388"><span class="code killed mutation_42_1014_1381"><span class="code killed mutation_40_999_1389"><span class="code killed mutation_16_903_1427"><span class="code killed mutation_9_354_1434">                else if (throwOnMissingKeys) {</span></span></span></span></span></span></li><li><span class="code killed mutation_45_1045_1367"><span class="code killed mutation_44_999_1388"><span class="code killed mutation_42_1014_1381"><span class="code killed mutation_40_999_1389"><span class="code killed mutation_16_903_1427"><span class="code killed mutation_9_354_1434">                    <span class="code killed mutation_51_1216_1268">throw <span class="code killed mutation_53_1222_1248">"Unable to read property "</span><span class="code killed mutation_52_1248_1251"> + </span><span class="code killed mutation_56_1251_1267"><span class="code killed mutation_55_1251_1267">tokens.join(<span class="code killed mutation_54_1263_1266">"."</span>)</span></span>;</span></span></span></span></span></span></span></li><li><span class="code killed mutation_45_1045_1367"><span class="code killed mutation_44_999_1388"><span class="code killed mutation_42_1014_1381"><span class="code killed mutation_40_999_1389"><span class="code killed mutation_16_903_1427"><span class="code killed mutation_9_354_1434">                }</span></span></span></span></span></span></li><li><span class="code killed mutation_45_1045_1367"><span class="code killed mutation_44_999_1388"><span class="code killed mutation_42_1014_1381"><span class="code killed mutation_40_999_1389"><span class="code killed mutation_16_903_1427"><span class="code killed mutation_9_354_1434">                else {</span></span></span></span></span></span></li><li><span class="code killed mutation_45_1045_1367"><span class="code killed mutation_44_999_1388"><span class="code killed mutation_42_1014_1381"><span class="code killed mutation_40_999_1389"><span class="code killed mutation_16_903_1427"><span class="code killed mutation_9_354_1434">                    <span class="code killed mutation_57_1330_1349">result = undefined;</span></span></span></span></span></span></span></li><li><span class="code killed mutation_45_1045_1367"><span class="code killed mutation_44_999_1388"><span class="code killed mutation_42_1014_1381"><span class="code killed mutation_40_999_1389"><span class="code killed mutation_16_903_1427"><span class="code killed mutation_9_354_1434">                }</span></span></span></span></span></span></li><li><span class="code killed mutation_44_999_1388"><span class="code killed mutation_42_1014_1381"><span class="code killed mutation_40_999_1389"><span class="code killed mutation_16_903_1427"><span class="code killed mutation_9_354_1434">            }</span>, <span class="code survived mutation_43_1383_1387">this</span>)</span>;</span></span></span></li><li><span class="code killed mutation_16_903_1427"><span class="code killed mutation_9_354_1434"></li><li>            <span class="code killed mutation_41_1403_1417">return result;</span></span></span></li><li><span class="code killed mutation_16_903_1427"><span class="code killed mutation_9_354_1434">        }</span></span></li><li><span class="code killed mutation_9_354_1434">    };</span></li><li></li><li>    <span class="code killed mutation_10_1440_1464">return PropertyAccessor;</span></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_11_62_68" class="killed">resources/xr/PropertyAccessor.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_287_349" class="killed">resources/xr/PropertyAccessor.js:13:5 Removed function PropertyAccessor(obj) { this.obj = obj; } -&gt; KILLED</div><div id="mutation_13_328_343" class="killed">resources/xr/PropertyAccessor.js:14:9 Removed this.obj = obj; -&gt; KILLED</div><div id="mutation_9_354_1434" class="killed">resources/xr/PropertyAccessor.js:16:5 Removed PropertyAccessor.prototype = { /** * Returns the value of property. * @param {String} path */ get: function(path) { return this.resolve(path.split(/\./)); }, /** * Sets the value of property. * @param {String} path * @param {*} value */ set: function(path, value) { var tokens = path.split(/\./); var obj = this.resolve(_.initial(tokens), true); obj[_.last(tokens)] = value; }, resolve: function(tokens, throwOnMissingKeys) { var result = this.obj; tokens.forEach(function(key){ if (result &amp;&amp; result.hasOwnProperty(key)) { result = result[key]; } else if (throwOnMissingKeys) { throw &quot;Unable to read property &quot; + tokens.join(&quot;.&quot;); } else { result = undefined; } }, this); return result; } }; -&gt; KILLED</div><div id="mutation_14_491_707" class="killed">resources/xr/PropertyAccessor.js:21:9 Removed get: function(path) { return this.resolve(path.split(/\./)); }, /** * Sets the value of property. * @param {String} path * @param {*} value */  -&gt; KILLED</div><div id="mutation_17_525_563" class="killed">resources/xr/PropertyAccessor.js:22:13 Removed return this.resolve(path.split(/\./)); -&gt; KILLED</div><div id="mutation_18_545_561" class="killed">resources/xr/PropertyAccessor.js:22:33 Replaced path.split(/\./) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_19_532_562" class="killed">resources/xr/PropertyAccessor.js:22:20 Replaced this.resolve(path.split(/\./)) with path.split(/\./) -&gt; KILLED</div><div id="mutation_20_532_562" class="killed">resources/xr/PropertyAccessor.js:22:20 Replaced this.resolve(path.split(/\./)) with this -&gt; KILLED</div><div id="mutation_21_556_560" class="killed">resources/xr/PropertyAccessor.js:22:44 Replaced /\./ with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_545_561" class="killed">resources/xr/PropertyAccessor.js:22:33 Replaced path.split(/\./) with /\./ -&gt; KILLED</div><div id="mutation_23_545_561" class="killed">resources/xr/PropertyAccessor.js:22:33 Replaced path.split(/\./) with path -&gt; KILLED</div><div id="mutation_15_707_903" class="killed">resources/xr/PropertyAccessor.js:30:9 Removed set: function(path, value) { var tokens = path.split(/\./); var obj = this.resolve(_.initial(tokens), true); obj[_.last(tokens)] = value; },  -&gt; KILLED</div><div id="mutation_24_748_778" class="killed">resources/xr/PropertyAccessor.js:31:13 Removed var tokens = path.split(/\./); -&gt; KILLED</div><div id="mutation_27_772_776" class="killed">resources/xr/PropertyAccessor.js:31:37 Replaced /\./ with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_28_761_777" class="killed">resources/xr/PropertyAccessor.js:31:26 Replaced path.split(/\./) with /\./ -&gt; KILLED</div><div id="mutation_29_761_777" class="killed">resources/xr/PropertyAccessor.js:31:26 Replaced path.split(/\./) with path -&gt; KILLED</div><div id="mutation_34_815_832" class="killed">resources/xr/PropertyAccessor.js:33:36 Replaced _.initial(tokens) with tokens -&gt; KILLED</div><div id="mutation_33_825_831" class="killed">resources/xr/PropertyAccessor.js:33:46 Replaced tokens with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_35_815_832" class="killed">resources/xr/PropertyAccessor.js:33:36 Replaced _.initial(tokens) with _ -&gt; KILLED</div><div id="mutation_25_792_840" class="killed">resources/xr/PropertyAccessor.js:33:13 Removed var obj = this.resolve(_.initial(tokens), true); -&gt; KILLED</div><div id="mutation_30_815_832" class="killed">resources/xr/PropertyAccessor.js:33:36 Replaced _.initial(tokens) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_31_834_838" class="killed">resources/xr/PropertyAccessor.js:33:55 Replaced true with false -&gt; KILLED</div><div id="mutation_32_802_839" class="killed">resources/xr/PropertyAccessor.js:33:23 Replaced this.resolve(_.initial(tokens), true) with this -&gt; KILLED</div><div id="mutation_26_854_882" class="killed">resources/xr/PropertyAccessor.js:35:13 Removed obj[_.last(tokens)] = value; -&gt; KILLED</div><div id="mutation_36_865_871" class="killed">resources/xr/PropertyAccessor.js:35:24 Replaced tokens with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_37_858_872" class="killed">resources/xr/PropertyAccessor.js:35:17 Replaced _.last(tokens) with tokens -&gt; KILLED</div><div id="mutation_38_858_872" class="killed">resources/xr/PropertyAccessor.js:35:17 Replaced _.last(tokens) with _ -&gt; KILLED</div><div id="mutation_16_903_1427" class="killed">resources/xr/PropertyAccessor.js:38:9 Removed resolve: function(tokens, throwOnMissingKeys) { var result = this.obj; tokens.forEach(function(key){ if (result &amp;&amp; result.hasOwnProperty(key)) { result = result[key]; } else if (throwOnMissingKeys) { throw &quot;Unable to read property &quot; + tokens.join(&quot;.&quot;); } else { result = undefined; } }, this); return result; } -&gt; KILLED</div><div id="mutation_39_963_985" class="killed">resources/xr/PropertyAccessor.js:39:13 Removed var result = this.obj; -&gt; KILLED</div><div id="mutation_40_999_1389" class="killed">resources/xr/PropertyAccessor.js:41:13 Removed tokens.forEach(function(key){ if (result &amp;&amp; result.hasOwnProperty(key)) { result = result[key]; } else if (throwOnMissingKeys) { throw &quot;Unable to read property &quot; + tokens.join(&quot;.&quot;); } else { result = undefined; } }, this); -&gt; KILLED</div><div id="mutation_42_1014_1381" class="killed">resources/xr/PropertyAccessor.js:41:28 Replaced function(key){ if (result &amp;&amp; result.hasOwnProperty(key)) { result = result[key]; } else if (throwOnMissingKeys) { throw &quot;Unable to read property &quot; + tokens.join(&quot;.&quot;); } else { result = undefined; } } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_44_999_1388" class="killed">resources/xr/PropertyAccessor.js:41:13 Replaced tokens.forEach(function(key){ if (result &amp;&amp; result.hasOwnProperty(key)) { result = result[key]; } else if (throwOnMissingKeys) { throw &quot;Unable to read property &quot; + tokens.join(&quot;.&quot;); } else { result = undefined; } }, this) with tokens -&gt; KILLED</div><div id="mutation_49_1059_1085" class="killed">resources/xr/PropertyAccessor.js:42:31 Replaced result.hasOwnProperty(key) with result -&gt; KILLED</div><div id="mutation_47_1081_1084" class="killed">resources/xr/PropertyAccessor.js:42:53 Replaced key with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_45_1045_1367" class="killed">resources/xr/PropertyAccessor.js:42:17 Removed if (result &amp;&amp; result.hasOwnProperty(key)) { result = result[key]; } else if (throwOnMissingKeys) { throw &quot;Unable to read property &quot; + tokens.join(&quot;.&quot;); } else { result = undefined; } -&gt; KILLED</div><div id="mutation_48_1059_1085" class="killed">resources/xr/PropertyAccessor.js:42:31 Replaced result.hasOwnProperty(key) with key -&gt; KILLED</div><div id="mutation_46_1055_1059" class="killed">resources/xr/PropertyAccessor.js:42:27 Replaced  &amp;&amp;  with || -&gt; KILLED</div><div id="mutation_50_1109_1130" class="killed">resources/xr/PropertyAccessor.js:43:21 Removed result = result[key]; -&gt; KILLED</div><div id="mutation_52_1248_1251" class="killed">resources/xr/PropertyAccessor.js:46:53 Replaced  +  with - -&gt; KILLED</div><div id="mutation_56_1251_1267" class="killed">resources/xr/PropertyAccessor.js:46:56 Replaced tokens.join(&quot;.&quot;) with tokens -&gt; KILLED</div><div id="mutation_51_1216_1268" class="killed">resources/xr/PropertyAccessor.js:46:21 Removed throw &quot;Unable to read property &quot; + tokens.join(&quot;.&quot;); -&gt; KILLED</div><div id="mutation_55_1251_1267" class="killed">resources/xr/PropertyAccessor.js:46:56 Replaced tokens.join(&quot;.&quot;) with &quot;.&quot; -&gt; KILLED</div><div id="mutation_53_1222_1248" class="killed">resources/xr/PropertyAccessor.js:46:27 Replaced &quot;Unable to read property &quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_54_1263_1266" class="killed">resources/xr/PropertyAccessor.js:46:68 Replaced &quot;.&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_57_1330_1349" class="killed">resources/xr/PropertyAccessor.js:49:21 Removed result = undefined; -&gt; KILLED</div><div id="mutation_43_1383_1387" class="survived">resources/xr/PropertyAccessor.js:51:16 Replaced this with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_41_1403_1417" class="killed">resources/xr/PropertyAccessor.js:53:13 Removed return result; -&gt; KILLED</div><div id="mutation_10_1440_1464" class="killed">resources/xr/PropertyAccessor.js:57:5 Removed return PropertyAccessor; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

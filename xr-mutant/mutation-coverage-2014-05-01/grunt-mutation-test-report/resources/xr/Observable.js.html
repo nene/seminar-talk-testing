@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":39,"ignored":7,"untested":0,"survived":2}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>39</strong> of which <strong>2</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>94.9%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/Observable.js.html'">Observable.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require){</li><li>    var _ = require(<span class="code killed mutation_11_61_67">"xr/_"</span>);</li><li></li><li>    /**</li><li>     * Provides a basic publish/subscribe event dispatch.</li><li>     *</li><li>     * Extend your class with this method, eg.</li><li>     *</li><li>     *     function MyClass {</li><li>     *         Observable.call(this);</li><li>     *     }</li><li>     *</li><li>     *     _(MyClass).extendClass(Observable, {</li><li>     *         yourMethod : function () {}</li><li>     *     });</li><li>     */</li><li>    <span class="code killed mutation_8_404_591">function Observable() {</span></li><li><span class="code killed mutation_8_404_591">        // Funky name to reduce the chance of conflicts</span></li><li><span class="code killed mutation_8_404_591">        // when this private property gets mixed to other classes.</span></li><li><span class="code killed mutation_8_404_591">        <span class="code killed mutation_13_559_585">this.__eventRegistry = {};</span></span></li><li><span class="code killed mutation_8_404_591">    }</span></li><li>    <span class="code killed mutation_9_596_1626">Observable.prototype = {</span></li><li><span class="code killed mutation_9_596_1626">        /**</span></li><li><span class="code killed mutation_9_596_1626">         * Registers handler for an event.</span></li><li><span class="code killed mutation_9_596_1626">         * @param {String} eventName</span></li><li><span class="code killed mutation_9_596_1626">         * @param {Function} fn Callback function.</span></li><li><span class="code killed mutation_9_596_1626">         * @param {Object} [scope] Optional `this` value inside the callback function.</span></li><li><span class="code killed mutation_9_596_1626">         */</span></li><li><span class="code killed mutation_9_596_1626">        <span class="code killed mutation_14_871_1379">on: function(eventName, fn, scope) {</span></span></li><li><span class="code killed mutation_14_871_1379"><span class="code killed mutation_9_596_1626">            <span class="code killed mutation_16_920_972">var eventHandlers = this.__eventRegistry[eventName];</span></span></span></li><li><span class="code killed mutation_14_871_1379"><span class="code killed mutation_9_596_1626">            <span class="code killed mutation_17_985_1090">if (<span class="code killed mutation_19_989_990">!</span>eventHandlers) {</span></span></span></li><li><span class="code killed mutation_17_985_1090"><span class="code killed mutation_14_871_1379"><span class="code killed mutation_9_596_1626">                <span class="code killed mutation_20_1023_1076">this.__eventRegistry[eventName] = eventHandlers = [];</span></span></span></span></li><li><span class="code killed mutation_17_985_1090"><span class="code killed mutation_14_871_1379"><span class="code killed mutation_9_596_1626">            }</span></span></span></li><li><span class="code killed mutation_14_871_1379"><span class="code killed mutation_9_596_1626"></li><li>            <span class="code killed mutation_23_1104_1146"><span class="code killed mutation_22_1104_1146"><span class="code killed mutation_18_1104_1147">eventHandlers.push(<span class="code killed mutation_21_1123_1145">{<span class="code killed mutation_24_1124_1132">fn: fn, </span><span class="code survived mutation_25_1132_1144">scope: scope</span>}</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_14_871_1379"><span class="code killed mutation_9_596_1626">        },</span></span></li><li><span class="code killed mutation_14_871_1379"><span class="code killed mutation_9_596_1626"></li><li>        /**</span></span></li><li><span class="code killed mutation_14_871_1379"><span class="code killed mutation_9_596_1626">         * Calls all the registered handlers of an event, passing them all</span></span></li><li><span class="code killed mutation_14_871_1379"><span class="code killed mutation_9_596_1626">         * the parameters after `eventName`.</span></span></li><li><span class="code killed mutation_14_871_1379"><span class="code killed mutation_9_596_1626">         * @param {String} eventName</span></span></li><li><span class="code killed mutation_14_871_1379"><span class="code killed mutation_9_596_1626">         * @param {*...} args</span></span></li><li><span class="code killed mutation_14_871_1379"><span class="code killed mutation_9_596_1626">         */</span></span></li><li><span class="code killed mutation_14_871_1379"><span class="code killed mutation_9_596_1626">        </span><span class="code killed mutation_15_1379_1619">trigger: function(eventName) {</span></span></li><li><span class="code killed mutation_15_1379_1619"><span class="code killed mutation_9_596_1626">            <span class="code killed mutation_26_1422_1451">var args = <span class="code killed mutation_30_1433_1450"><span class="code killed mutation_29_1433_1450">_.rest(<span class="code killed mutation_28_1440_1449">arguments</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_15_1379_1619"><span class="code killed mutation_9_596_1626"></li><li>            <span class="code killed mutation_40_1465_1499"><span class="code killed mutation_34_1465_1600"><span class="code killed mutation_33_1465_1600"><span class="code killed mutation_31_1465_1608"><span class="code killed mutation_27_1465_1609">_(<span class="code killed mutation_39_1467_1498">this.__eventRegistry[eventName]</span>)</span>.forEach(<span class="code killed mutation_32_1508_1599">function(callback) {</span></span></span></span></span></span></span></li><li><span class="code killed mutation_34_1465_1600"><span class="code killed mutation_33_1465_1600"><span class="code killed mutation_32_1508_1599"><span class="code killed mutation_31_1465_1608"><span class="code killed mutation_27_1465_1609"><span class="code killed mutation_15_1379_1619"><span class="code killed mutation_9_596_1626">                <span class="code killed mutation_38_1545_1584"><span class="code killed mutation_35_1545_1585">callback.fn.apply(<span class="code survived mutation_36_1563_1577">callback.scope</span>, <span class="code killed mutation_37_1579_1583">args</span>)</span>;</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_34_1465_1600"><span class="code killed mutation_33_1465_1600"><span class="code killed mutation_32_1508_1599"><span class="code killed mutation_31_1465_1608"><span class="code killed mutation_27_1465_1609"><span class="code killed mutation_15_1379_1619"><span class="code killed mutation_9_596_1626">            }</span>)</span></span>.value()</span>;</span></span></span></li><li><span class="code killed mutation_15_1379_1619"><span class="code killed mutation_9_596_1626">        }</span></span></li><li><span class="code killed mutation_9_596_1626">    };</span></li><li></li><li>    <span class="code killed mutation_10_1632_1650">return Observable;</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_11_61_67" class="killed">resources/xr/Observable.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_404_591" class="killed">resources/xr/Observable.js:19:5 Removed function Observable() { // Funky name to reduce the chance of conflicts // when this private property gets mixed to other classes. this.__eventRegistry = {}; } -&gt; KILLED</div><div id="mutation_13_559_585" class="killed">resources/xr/Observable.js:22:9 Removed this.__eventRegistry = {}; -&gt; KILLED</div><div id="mutation_9_596_1626" class="killed">resources/xr/Observable.js:24:5 Removed Observable.prototype = { /** * Registers handler for an event. * @param {String} eventName * @param {Function} fn Callback function. * @param {Object} [scope] Optional &#x60;this&#x60; value inside the callback function. */ on: function(eventName, fn, scope) { var eventHandlers = this.__eventRegistry[eventName]; if (!eventHandlers) { this.__eventRegistry[eventName] = eventHandlers = []; } eventHandlers.push({fn: fn, scope: scope}); }, /** * Calls all the registered handlers of an event, passing them all * the parameters after &#x60;eventName&#x60;. * @param {String} eventName * @param {*...} args */ trigger: function(eventName) { var args = _.rest(arguments); _(this.__eventRegistry[eventName]).forEach(function(callback) { callback.fn.apply(callback.scope, args); }).value(); } }; -&gt; KILLED</div><div id="mutation_14_871_1379" class="killed">resources/xr/Observable.js:31:9 Removed on: function(eventName, fn, scope) { var eventHandlers = this.__eventRegistry[eventName]; if (!eventHandlers) { this.__eventRegistry[eventName] = eventHandlers = []; } eventHandlers.push({fn: fn, scope: scope}); }, /** * Calls all the registered handlers of an event, passing them all * the parameters after &#x60;eventName&#x60;. * @param {String} eventName * @param {*...} args */  -&gt; KILLED</div><div id="mutation_16_920_972" class="killed">resources/xr/Observable.js:32:13 Removed var eventHandlers = this.__eventRegistry[eventName]; -&gt; KILLED</div><div id="mutation_17_985_1090" class="killed">resources/xr/Observable.js:33:13 Removed if (!eventHandlers) { this.__eventRegistry[eventName] = eventHandlers = []; } -&gt; KILLED</div><div id="mutation_19_989_990" class="killed">resources/xr/Observable.js:33:31 Removed ! -&gt; KILLED</div><div id="mutation_20_1023_1076" class="killed">resources/xr/Observable.js:34:17 Removed this.__eventRegistry[eventName] = eventHandlers = []; -&gt; KILLED</div><div id="mutation_18_1104_1147" class="killed">resources/xr/Observable.js:37:13 Removed eventHandlers.push({fn: fn, scope: scope}); -&gt; KILLED</div><div id="mutation_25_1132_1144" class="survived">resources/xr/Observable.js:37:41 Removed scope: scope -&gt; SURVIVED</div><div id="mutation_24_1124_1132" class="killed">resources/xr/Observable.js:37:33 Removed fn: fn,  -&gt; KILLED</div><div id="mutation_21_1123_1145" class="killed">resources/xr/Observable.js:37:32 Replaced {fn: fn, scope: scope} with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_1104_1146" class="killed">resources/xr/Observable.js:37:13 Replaced eventHandlers.push({fn: fn, scope: scope}) with {fn: fn, scope: scope} -&gt; KILLED</div><div id="mutation_23_1104_1146" class="killed">resources/xr/Observable.js:37:13 Replaced eventHandlers.push({fn: fn, scope: scope}) with eventHandlers -&gt; KILLED</div><div id="mutation_15_1379_1619" class="killed">resources/xr/Observable.js:46:9 Removed trigger: function(eventName) { var args = _.rest(arguments); _(this.__eventRegistry[eventName]).forEach(function(callback) { callback.fn.apply(callback.scope, args); }).value(); } -&gt; KILLED</div><div id="mutation_26_1422_1451" class="killed">resources/xr/Observable.js:47:13 Removed var args = _.rest(arguments); -&gt; KILLED</div><div id="mutation_28_1440_1449" class="killed">resources/xr/Observable.js:47:31 Replaced arguments with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_29_1433_1450" class="killed">resources/xr/Observable.js:47:24 Replaced _.rest(arguments) with arguments -&gt; KILLED</div><div id="mutation_30_1433_1450" class="killed">resources/xr/Observable.js:47:24 Replaced _.rest(arguments) with _ -&gt; KILLED</div><div id="mutation_27_1465_1609" class="killed">resources/xr/Observable.js:49:13 Removed _(this.__eventRegistry[eventName]).forEach(function(callback) { callback.fn.apply(callback.scope, args); }).value(); -&gt; KILLED</div><div id="mutation_40_1465_1499" class="killed">resources/xr/Observable.js:49:13 Replaced _(this.__eventRegistry[eventName]) with this.__eventRegistry[eventName] -&gt; KILLED</div><div id="mutation_31_1465_1608" class="killed">resources/xr/Observable.js:49:13 Replaced _(this.__eventRegistry[eventName]).forEach(function(callback) { callback.fn.apply(callback.scope, args); }).value() with _(this.__eventRegistry[eventName]).forEach(function(callback) { callback.fn.apply(callback.scope, args); }) -&gt; KILLED</div><div id="mutation_39_1467_1498" class="killed">resources/xr/Observable.js:49:15 Replaced this.__eventRegistry[eventName] with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_33_1465_1600" class="killed">resources/xr/Observable.js:49:13 Replaced _(this.__eventRegistry[eventName]).forEach(function(callback) { callback.fn.apply(callback.scope, args); }) with function(callback) { callback.fn.apply(callback.scope, args); } -&gt; KILLED</div><div id="mutation_34_1465_1600" class="killed">resources/xr/Observable.js:49:13 Replaced _(this.__eventRegistry[eventName]).forEach(function(callback) { callback.fn.apply(callback.scope, args); }) with _(this.__eventRegistry[eventName]) -&gt; KILLED</div><div id="mutation_32_1508_1599" class="killed">resources/xr/Observable.js:49:56 Replaced function(callback) { callback.fn.apply(callback.scope, args); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_35_1545_1585" class="killed">resources/xr/Observable.js:50:17 Removed callback.fn.apply(callback.scope, args); -&gt; KILLED</div><div id="mutation_36_1563_1577" class="survived">resources/xr/Observable.js:50:35 Replaced callback.scope with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_37_1579_1583" class="killed">resources/xr/Observable.js:50:51 Replaced args with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_38_1545_1584" class="killed">resources/xr/Observable.js:50:17 Replaced callback.fn.apply(callback.scope, args) with callback.fn -&gt; KILLED</div><div id="mutation_10_1632_1650" class="killed">resources/xr/Observable.js:55:5 Removed return Observable; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

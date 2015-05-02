@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":57,"ignored":9,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>57</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>9</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/jquery/index.html'">jquery</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/jquery/invertedStackTraceExpander.js.html'">invertedStackTraceExpander.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var formatInvertedStackTrace = require(<span class="code killed mutation_10_85_119">"xr/tree/formatInvertedStackTrace"</span>);</li><li>    var template = require(<span class="code killed mutation_12_149_162">"xr/template"</span>);</li><li></li><li>    /**</li><li>     * jQuery plugin for rendering the inverted stacktrace content on demand when it's expanded</li><li>     * for the first time.  On further clicks just expanding/collapsing it.</li><li>     *</li><li>     * @param {Object} options</li><li>     * @param {Function} options.getStackTraceById Function to retrieve stacktrace by query ID.</li><li>     * @param {Function} option.onClick Called each time user clicks to expand/collapse.</li><li>     */</li><li>    <span class="code killed mutation_9_581_1468">return function(options) {</span></li><li><span class="code killed mutation_9_581_1468">        <span class="code killed mutation_14_616_1163">return <span class="code killed mutation_19_623_1162">this.on(<span class="code killed mutation_16_631_638">"click"</span>, <span class="code killed mutation_17_640_672">".inverted-stack-trace-expander"</span>, <span class="code killed mutation_18_674_1161">function(evt) {</span></span></span></span></li><li><span class="code killed mutation_19_623_1162"><span class="code killed mutation_18_674_1161"><span class="code killed mutation_14_616_1163"><span class="code killed mutation_9_581_1468">            <span class="code killed mutation_20_702_738">var expander = <span class="code killed mutation_27_717_737">$(<span class="code killed mutation_26_719_736">evt.currentTarget</span>)</span>;</span></span></span></span></span></li><li><span class="code killed mutation_19_623_1162"><span class="code killed mutation_18_674_1161"><span class="code killed mutation_14_616_1163"><span class="code killed mutation_9_581_1468">            <span class="code killed mutation_21_751_820">var placeholder = <span class="code killed mutation_30_769_819"><span class="code killed mutation_29_769_819">expander.next(<span class="code killed mutation_28_783_818">".inverted-stack-trace-placeholder"</span>)</span></span>;</span></span></span></span></span></li><li><span class="code killed mutation_19_623_1162"><span class="code killed mutation_18_674_1161"><span class="code killed mutation_14_616_1163"><span class="code killed mutation_9_581_1468"></li><li>            // Render stacktrace if not yet rendered.</span></span></span></span></li><li><span class="code killed mutation_19_623_1162"><span class="code killed mutation_18_674_1161"><span class="code killed mutation_14_616_1163"><span class="code killed mutation_9_581_1468">            <span class="code killed mutation_22_888_991">if (<span class="code killed mutation_32_892_914">placeholder.children()</span>.length<span class="code killed mutation_31_921_926"> === </span><span class="code killed mutation_33_926_927">0</span>) {</span></span></span></span></span></li><li><span class="code killed mutation_22_888_991"><span class="code killed mutation_19_623_1162"><span class="code killed mutation_18_674_1161"><span class="code killed mutation_14_616_1163"><span class="code killed mutation_9_581_1468">                <span class="code killed mutation_36_947_976"><span class="code killed mutation_34_947_977">renderStackTrace(<span class="code killed mutation_35_964_975">placeholder</span>)</span>;</span></span></span></span></span></span></li><li><span class="code killed mutation_22_888_991"><span class="code killed mutation_19_623_1162"><span class="code killed mutation_18_674_1161"><span class="code killed mutation_14_616_1163"><span class="code killed mutation_9_581_1468">            }</span></span></span></span></span></li><li><span class="code killed mutation_19_623_1162"><span class="code killed mutation_18_674_1161"><span class="code killed mutation_14_616_1163"><span class="code killed mutation_9_581_1468"></li><li>            // Toggle expanded/collapsed state</span></span></span></span></li><li><span class="code killed mutation_19_623_1162"><span class="code killed mutation_18_674_1161"><span class="code killed mutation_14_616_1163"><span class="code killed mutation_9_581_1468">            <span class="code killed mutation_39_1052_1084"><span class="code killed mutation_38_1052_1084"><span class="code killed mutation_23_1052_1085">expander.toggleClass(<span class="code killed mutation_37_1073_1083">"expanded"</span>)</span></span>;</span></span></span></span></span></li><li><span class="code killed mutation_19_623_1162"><span class="code killed mutation_18_674_1161"><span class="code killed mutation_14_616_1163"><span class="code killed mutation_9_581_1468">            <span class="code killed mutation_40_1098_1118"><span class="code killed mutation_24_1098_1119">placeholder.toggle()</span>;</span></span></span></span></span></li><li><span class="code killed mutation_19_623_1162"><span class="code killed mutation_18_674_1161"><span class="code killed mutation_14_616_1163"><span class="code killed mutation_9_581_1468"></li><li>            <span class="code killed mutation_41_1133_1150"><span class="code killed mutation_25_1133_1151">options.onClick()</span>;</span></span></span></span></span></li><li><span class="code killed mutation_19_623_1162"><span class="code killed mutation_18_674_1161"><span class="code killed mutation_14_616_1163"><span class="code killed mutation_9_581_1468">        }</span>)</span>;</span></span></li><li><span class="code killed mutation_9_581_1468"></li><li>        <span class="code killed mutation_15_1173_1461">function renderStackTrace(placeholder) {</span></span></li><li><span class="code killed mutation_15_1173_1461"><span class="code killed mutation_9_581_1468">            <span class="code killed mutation_42_1226_1270">var id = <span class="code killed mutation_47_1235_1269"><span class="code killed mutation_46_1235_1269">placeholder.data(<span class="code killed mutation_45_1252_1268">"stack-trace-id"</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_15_1173_1461"><span class="code killed mutation_9_581_1468">            <span class="code killed mutation_43_1283_1356">var stackTrace = <span class="code killed mutation_49_1300_1355">formatInvertedStackTrace(<span class="code killed mutation_52_1325_1354"><span class="code killed mutation_51_1325_1354"><span class="code killed mutation_48_1325_1354">options.getStackTraceById(<span class="code killed mutation_50_1351_1353">id</span>)</span></span></span>)</span>;</span></span></span></li><li><span class="code killed mutation_15_1173_1461"><span class="code killed mutation_9_581_1468">            <span class="code killed mutation_55_1369_1450"><span class="code killed mutation_54_1369_1450"><span class="code killed mutation_44_1369_1451">placeholder.html(<span class="code killed mutation_58_1386_1449"><span class="code killed mutation_53_1386_1449">template.apply(<span class="code killed mutation_56_1401_1436">"templates/invertedStackTrace.html"</span>, <span class="code killed mutation_57_1438_1448">stackTrace</span>)</span></span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_15_1173_1461"><span class="code killed mutation_9_581_1468">        }</span></span></li><li><span class="code killed mutation_9_581_1468">    };</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_10_85_119" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:4:44 Replaced &quot;xr/tree/formatInvertedStackTrace&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_12_149_162" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:5:28 Replaced &quot;xr/template&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_9_581_1468" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:15:5 Removed return function(options) { return this.on(&quot;click&quot;, &quot;.inverted-stack-trace-expander&quot;, function(evt) { var expander = $(evt.currentTarget); var placeholder = expander.next(&quot;.inverted-stack-trace-placeholder&quot;); // Render stacktrace if not yet rendered. if (placeholder.children().length === 0) { renderStackTrace(placeholder); } // Toggle expanded/collapsed state expander.toggleClass(&quot;expanded&quot;); placeholder.toggle(); options.onClick(); }); function renderStackTrace(placeholder) { var id = placeholder.data(&quot;stack-trace-id&quot;); var stackTrace = formatInvertedStackTrace(options.getStackTraceById(id)); placeholder.html(template.apply(&quot;templates/invertedStackTrace.html&quot;, stackTrace)); } }; -&gt; KILLED</div><div id="mutation_17_640_672" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:16:33 Replaced &quot;.inverted-stack-trace-expander&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_18_674_1161" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:16:67 Replaced function(evt) { var expander = $(evt.currentTarget); var placeholder = expander.next(&quot;.inverted-stack-trace-placeholder&quot;); // Render stacktrace if not yet rendered. if (placeholder.children().length === 0) { renderStackTrace(placeholder); } // Toggle expanded/collapsed state expander.toggleClass(&quot;expanded&quot;); placeholder.toggle(); options.onClick(); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_19_623_1162" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:16:16 Replaced this.on(&quot;click&quot;, &quot;.inverted-stack-trace-expander&quot;, function(evt) { var expander = $(evt.currentTarget); var placeholder = expander.next(&quot;.inverted-stack-trace-placeholder&quot;); // Render stacktrace if not yet rendered. if (placeholder.children().length === 0) { renderStackTrace(placeholder); } // Toggle expanded/collapsed state expander.toggleClass(&quot;expanded&quot;); placeholder.toggle(); options.onClick(); }) with this -&gt; KILLED</div><div id="mutation_16_631_638" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:16:24 Replaced &quot;click&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_14_616_1163" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:16:9 Removed return this.on(&quot;click&quot;, &quot;.inverted-stack-trace-expander&quot;, function(evt) { var expander = $(evt.currentTarget); var placeholder = expander.next(&quot;.inverted-stack-trace-placeholder&quot;); // Render stacktrace if not yet rendered. if (placeholder.children().length === 0) { renderStackTrace(placeholder); } // Toggle expanded/collapsed state expander.toggleClass(&quot;expanded&quot;); placeholder.toggle(); options.onClick(); }); -&gt; KILLED</div><div id="mutation_27_717_737" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:17:28 Replaced $(evt.currentTarget) with evt.currentTarget -&gt; KILLED</div><div id="mutation_26_719_736" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:17:30 Replaced evt.currentTarget with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_702_738" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:17:13 Removed var expander = $(evt.currentTarget); -&gt; KILLED</div><div id="mutation_30_769_819" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:18:31 Replaced expander.next(&quot;.inverted-stack-trace-placeholder&quot;) with expander -&gt; KILLED</div><div id="mutation_28_783_818" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:18:45 Replaced &quot;.inverted-stack-trace-placeholder&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_29_769_819" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:18:31 Replaced expander.next(&quot;.inverted-stack-trace-placeholder&quot;) with &quot;.inverted-stack-trace-placeholder&quot; -&gt; KILLED</div><div id="mutation_21_751_820" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:18:13 Removed var placeholder = expander.next(&quot;.inverted-stack-trace-placeholder&quot;); -&gt; KILLED</div><div id="mutation_33_926_927" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:21:51 Replaced 0 with 1 -&gt; KILLED</div><div id="mutation_32_892_914" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:21:17 Replaced placeholder.children() with placeholder -&gt; KILLED</div><div id="mutation_31_921_926" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:21:46 Replaced  ===  with !== -&gt; KILLED</div><div id="mutation_22_888_991" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:21:13 Removed if (placeholder.children().length === 0) { renderStackTrace(placeholder); } -&gt; KILLED</div><div id="mutation_34_947_977" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:22:17 Removed renderStackTrace(placeholder); -&gt; KILLED</div><div id="mutation_35_964_975" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:22:34 Replaced placeholder with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_36_947_976" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:22:17 Replaced renderStackTrace(placeholder) with placeholder -&gt; KILLED</div><div id="mutation_23_1052_1085" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:26:13 Removed expander.toggleClass(&quot;expanded&quot;); -&gt; KILLED</div><div id="mutation_37_1073_1083" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:26:34 Replaced &quot;expanded&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_38_1052_1084" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:26:13 Replaced expander.toggleClass(&quot;expanded&quot;) with &quot;expanded&quot; -&gt; KILLED</div><div id="mutation_39_1052_1084" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:26:13 Replaced expander.toggleClass(&quot;expanded&quot;) with expander -&gt; KILLED</div><div id="mutation_40_1098_1118" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:27:13 Replaced placeholder.toggle() with placeholder -&gt; KILLED</div><div id="mutation_24_1098_1119" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:27:13 Removed placeholder.toggle(); -&gt; KILLED</div><div id="mutation_25_1133_1151" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:29:13 Removed options.onClick(); -&gt; KILLED</div><div id="mutation_41_1133_1150" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:29:13 Replaced options.onClick() with options -&gt; KILLED</div><div id="mutation_15_1173_1461" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:32:9 Removed function renderStackTrace(placeholder) { var id = placeholder.data(&quot;stack-trace-id&quot;); var stackTrace = formatInvertedStackTrace(options.getStackTraceById(id)); placeholder.html(template.apply(&quot;templates/invertedStackTrace.html&quot;, stackTrace)); } -&gt; KILLED</div><div id="mutation_42_1226_1270" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:33:13 Removed var id = placeholder.data(&quot;stack-trace-id&quot;); -&gt; KILLED</div><div id="mutation_47_1235_1269" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:33:22 Replaced placeholder.data(&quot;stack-trace-id&quot;) with placeholder -&gt; KILLED</div><div id="mutation_46_1235_1269" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:33:22 Replaced placeholder.data(&quot;stack-trace-id&quot;) with &quot;stack-trace-id&quot; -&gt; KILLED</div><div id="mutation_45_1252_1268" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:33:39 Replaced &quot;stack-trace-id&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_52_1325_1354" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:34:55 Replaced options.getStackTraceById(id) with options -&gt; KILLED</div><div id="mutation_48_1325_1354" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:34:55 Replaced options.getStackTraceById(id) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_49_1300_1355" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:34:30 Replaced formatInvertedStackTrace(options.getStackTraceById(id)) with options.getStackTraceById(id) -&gt; KILLED</div><div id="mutation_50_1351_1353" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:34:81 Replaced id with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_51_1325_1354" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:34:55 Replaced options.getStackTraceById(id) with id -&gt; KILLED</div><div id="mutation_43_1283_1356" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:34:13 Removed var stackTrace = formatInvertedStackTrace(options.getStackTraceById(id)); -&gt; KILLED</div><div id="mutation_44_1369_1451" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:35:13 Removed placeholder.html(template.apply(&quot;templates/invertedStackTrace.html&quot;, stackTrace)); -&gt; KILLED</div><div id="mutation_53_1386_1449" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:35:30 Replaced template.apply(&quot;templates/invertedStackTrace.html&quot;, stackTrace) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_54_1369_1450" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:35:13 Replaced placeholder.html(template.apply(&quot;templates/invertedStackTrace.html&quot;, stackTrace)) with template.apply(&quot;templates/invertedStackTrace.html&quot;, stackTrace) -&gt; KILLED</div><div id="mutation_55_1369_1450" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:35:13 Replaced placeholder.html(template.apply(&quot;templates/invertedStackTrace.html&quot;, stackTrace)) with placeholder -&gt; KILLED</div><div id="mutation_56_1401_1436" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:35:45 Replaced &quot;templates/invertedStackTrace.html&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_57_1438_1448" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:35:82 Replaced stackTrace with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_58_1386_1449" class="killed">resources/xr/jquery/invertedStackTraceExpander.js:35:30 Replaced template.apply(&quot;templates/invertedStackTrace.html&quot;, stackTrace) with template -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

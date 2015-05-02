@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":59,"ignored":7,"untested":0,"survived":50}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>59</strong> of which <strong>50</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>15.3%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/template.js.html'">template.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var doT = require(<span class="code killed mutation_12_64_73">"lib/doT"</span>);</li><li></li><li>    // Global template cache</li><li>    <span class="code survived mutation_8_110_125">var cache = {};</span></li><li></li><li>    <span class="code survived mutation_9_131_853">return {</span></li><li><span class="code survived mutation_9_131_853">        /**</span></li><li><span class="code survived mutation_9_131_853">         * When template not cached, loads it from file, parses and caches.</span></li><li><span class="code survived mutation_9_131_853">         * Then applies the parameters to template and returns the rendered template.</span></li><li><span class="code survived mutation_9_131_853">         * @param  {String} filename</span></li><li><span class="code survived mutation_9_131_853">         * @param  {Object} params</span></li><li><span class="code survived mutation_9_131_853">         * @return {String}</span></li><li><span class="code survived mutation_9_131_853">         */</span></li><li><span class="code survived mutation_9_131_853">        <span class="code survived mutation_14_434_846">apply: function apply(filename, params) {</span></span></li><li><span class="code survived mutation_14_434_846"><span class="code survived mutation_9_131_853">            <span class="code survived mutation_15_488_517">filename = <span class="code survived mutation_20_499_516">resolve(<span class="code survived mutation_19_507_515">filename</span>)</span>;</span></span></span></li><li><span class="code survived mutation_14_434_846"><span class="code survived mutation_9_131_853"></li><li>            <span class="code survived mutation_16_531_636">if (<span class="code survived mutation_21_535_536">!</span>cache[filename]) {</span></span></span></li><li><span class="code survived mutation_16_531_636"><span class="code survived mutation_14_434_846"><span class="code survived mutation_9_131_853">                <span class="code survived mutation_22_571_622">cache[filename] = <span class="code survived mutation_25_589_621"><span class="code survived mutation_24_589_621">doT.template(<span class="code survived mutation_27_602_620"><span class="code survived mutation_23_602_620">loadFile(<span class="code survived mutation_26_611_619">filename</span>)</span></span>)</span></span>;</span></span></span></span></li><li><span class="code survived mutation_16_531_636"><span class="code survived mutation_14_434_846"><span class="code survived mutation_9_131_853">            }</span></span></span></li><li><span class="code survived mutation_14_434_846"><span class="code survived mutation_9_131_853"></li><li>            // Make `it.include()` available inside the template</span></span></li><li><span class="code survived mutation_14_434_846"><span class="code survived mutation_9_131_853">            <span class="code survived mutation_17_715_791">if (<span class="code survived mutation_28_719_720">!</span>params.include) {</span></span></span></li><li><span class="code survived mutation_17_715_791"><span class="code survived mutation_14_434_846"><span class="code survived mutation_9_131_853">                <span class="code survived mutation_29_754_777">params.include = apply;</span></span></span></span></li><li><span class="code survived mutation_17_715_791"><span class="code survived mutation_14_434_846"><span class="code survived mutation_9_131_853">            }</span></span></span></li><li><span class="code survived mutation_14_434_846"><span class="code survived mutation_9_131_853"></li><li>            <span class="code survived mutation_18_805_836">return <span class="code survived mutation_32_812_835"><span class="code survived mutation_31_812_835">cache[filename](<span class="code survived mutation_30_828_834">params</span>)</span></span>;</span></span></span></li><li><span class="code survived mutation_14_434_846"><span class="code survived mutation_9_131_853">        }</span></span></li><li><span class="code survived mutation_9_131_853">    };</span></li><li></li><li>    // Given filename like "foo/bar" returns "templates/foo/bar.html"</li><li>    <span class="code survived mutation_10_929_1176">function resolve(filename) {</span></li><li><span class="code survived mutation_10_929_1176">        <span class="code survived mutation_33_966_1061">if (<span class="code survived mutation_36_970_971">!</span>/^templates\//.test(filename)) {</span></span></li><li><span class="code survived mutation_33_966_1061"><span class="code survived mutation_10_929_1176">            <span class="code survived mutation_37_1016_1051">filename = <span class="code survived mutation_39_1027_1039">"templates/"</span><span class="code survived mutation_38_1039_1042"> + </span>filename;</span></span></span></li><li><span class="code survived mutation_33_966_1061"><span class="code survived mutation_10_929_1176">        }</span></span></li><li><span class="code survived mutation_10_929_1176">        <span class="code survived mutation_34_1070_1145">if (<span class="code survived mutation_40_1074_1075">!</span>/\.html$/.test(filename)) {</span></span></li><li><span class="code survived mutation_34_1070_1145"><span class="code survived mutation_10_929_1176">            <span class="code survived mutation_41_1115_1135">filename += <span class="code survived mutation_42_1127_1134">".html"</span>;</span></span></span></li><li><span class="code survived mutation_34_1070_1145"><span class="code survived mutation_10_929_1176">        }</span></span></li><li><span class="code survived mutation_10_929_1176">        <span class="code survived mutation_35_1154_1170">return filename;</span></span></li><li><span class="code survived mutation_10_929_1176">    }</span></li><li></li><li>    <span class="code survived mutation_11_1182_1761">function loadFile(templateName) {</span></li><li><span class="code survived mutation_11_1182_1761">        // For testing purposes the karma-html2js plugin will make</span></li><li><span class="code survived mutation_11_1182_1761">        // all the template files available in global __html__ variable.</span></li><li><span class="code survived mutation_11_1182_1761">        <span class="code survived mutation_43_1364_1479">if (window.__html__<span class="code survived mutation_47_1383_1387"> && </span>window.__html__[templateName]) {</span></span></li><li><span class="code survived mutation_43_1364_1479"><span class="code survived mutation_11_1182_1761">            <span class="code survived mutation_48_1432_1469">return window.__html__[templateName];</span></span></span></li><li><span class="code survived mutation_43_1364_1479"><span class="code survived mutation_11_1182_1761">        }</span></span></li><li><span class="code survived mutation_11_1182_1761"></li><li>        <span class="code survived mutation_44_1489_1507">var result = null;</span></span></li><li><span class="code survived mutation_11_1182_1761">        <span class="code survived mutation_51_1516_1731"><span class="code killed mutation_50_1516_1731"><span class="code survived mutation_45_1516_1732">$.ajax(<span class="code survived mutation_49_1523_1730">{</span></span></span></span></span></li><li><span class="code survived mutation_51_1516_1731"><span class="code killed mutation_50_1516_1731"><span class="code survived mutation_49_1523_1730"><span class="code survived mutation_45_1516_1732"><span class="code survived mutation_11_1182_1761">            <span class="code survived mutation_52_1537_1562">type: <span class="code survived mutation_57_1543_1548">"GET"</span>,</span></span></span></span></span></span></li><li><span class="code survived mutation_52_1537_1562"><span class="code survived mutation_51_1516_1731"><span class="code killed mutation_50_1516_1731"><span class="code survived mutation_49_1523_1730"><span class="code survived mutation_45_1516_1732"><span class="code survived mutation_11_1182_1761">            </span><span class="code survived mutation_53_1562_1593">url: templateName,</span></span></span></span></span></span></li><li><span class="code survived mutation_53_1562_1593"><span class="code survived mutation_51_1516_1731"><span class="code killed mutation_50_1516_1731"><span class="code survived mutation_49_1523_1730"><span class="code survived mutation_45_1516_1732"><span class="code survived mutation_11_1182_1761">            </span><span class="code survived mutation_54_1593_1623">dataType: <span class="code survived mutation_58_1603_1609">"html"</span>,</span></span></span></span></span></span></li><li><span class="code survived mutation_54_1593_1623"><span class="code survived mutation_51_1516_1731"><span class="code killed mutation_50_1516_1731"><span class="code survived mutation_49_1523_1730"><span class="code survived mutation_45_1516_1732"><span class="code survived mutation_11_1182_1761">            </span><span class="code survived mutation_55_1623_1649">async: <span class="code survived mutation_59_1630_1635">false</span>,</span></span></span></span></span></span></li><li><span class="code survived mutation_55_1623_1649"><span class="code survived mutation_51_1516_1731"><span class="code killed mutation_50_1516_1731"><span class="code survived mutation_49_1523_1730"><span class="code survived mutation_45_1516_1732"><span class="code survived mutation_11_1182_1761">            </span><span class="code survived mutation_56_1649_1720">success: function (data) {</span></span></span></span></span></span></li><li><span class="code survived mutation_56_1649_1720"><span class="code survived mutation_51_1516_1731"><span class="code killed mutation_50_1516_1731"><span class="code survived mutation_49_1523_1730"><span class="code survived mutation_45_1516_1732"><span class="code survived mutation_11_1182_1761">                <span class="code survived mutation_60_1692_1706">result = data;</span></span></span></span></span></span></span></li><li><span class="code survived mutation_56_1649_1720"><span class="code survived mutation_51_1516_1731"><span class="code killed mutation_50_1516_1731"><span class="code survived mutation_49_1523_1730"><span class="code survived mutation_45_1516_1732"><span class="code survived mutation_11_1182_1761">            }</span></span></span></span></span></span></li><li><span class="code survived mutation_51_1516_1731"><span class="code killed mutation_50_1516_1731"><span class="code survived mutation_49_1523_1730"><span class="code survived mutation_45_1516_1732"><span class="code survived mutation_11_1182_1761">        }</span>)</span></span>;</span></span></li><li><span class="code survived mutation_11_1182_1761">        <span class="code survived mutation_46_1741_1755">return result;</span></span></li><li><span class="code survived mutation_11_1182_1761">    }</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_12_64_73" class="killed">resources/xr/template.js:4:23 Replaced &quot;lib/doT&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_110_125" class="survived">resources/xr/template.js:7:5 Removed var cache = {}; -&gt; SURVIVED</div><div id="mutation_9_131_853" class="survived">resources/xr/template.js:9:5 Removed return { /** * When template not cached, loads it from file, parses and caches. * Then applies the parameters to template and returns the rendered template. * @param {String} filename * @param {Object} params * @return {String} */ apply: function apply(filename, params) { filename = resolve(filename); if (!cache[filename]) { cache[filename] = doT.template(loadFile(filename)); } // Make &#x60;it.include()&#x60; available inside the template if (!params.include) { params.include = apply; } return cache[filename](params); } }; -&gt; SURVIVED</div><div id="mutation_14_434_846" class="survived">resources/xr/template.js:17:9 Removed apply: function apply(filename, params) { filename = resolve(filename); if (!cache[filename]) { cache[filename] = doT.template(loadFile(filename)); } // Make &#x60;it.include()&#x60; available inside the template if (!params.include) { params.include = apply; } return cache[filename](params); } -&gt; SURVIVED</div><div id="mutation_15_488_517" class="survived">resources/xr/template.js:18:13 Removed filename = resolve(filename); -&gt; SURVIVED</div><div id="mutation_19_507_515" class="survived">resources/xr/template.js:18:32 Replaced filename with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_20_499_516" class="survived">resources/xr/template.js:18:24 Replaced resolve(filename) with filename -&gt; SURVIVED</div><div id="mutation_16_531_636" class="survived">resources/xr/template.js:20:13 Removed if (!cache[filename]) { cache[filename] = doT.template(loadFile(filename)); } -&gt; SURVIVED</div><div id="mutation_21_535_536" class="survived">resources/xr/template.js:20:33 Removed ! -&gt; SURVIVED</div><div id="mutation_26_611_619" class="survived">resources/xr/template.js:21:57 Replaced filename with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_27_602_620" class="survived">resources/xr/template.js:21:48 Replaced loadFile(filename) with filename -&gt; SURVIVED</div><div id="mutation_25_589_621" class="survived">resources/xr/template.js:21:35 Replaced doT.template(loadFile(filename)) with doT -&gt; SURVIVED</div><div id="mutation_22_571_622" class="survived">resources/xr/template.js:21:17 Removed cache[filename] = doT.template(loadFile(filename)); -&gt; SURVIVED</div><div id="mutation_23_602_620" class="survived">resources/xr/template.js:21:48 Replaced loadFile(filename) with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_24_589_621" class="survived">resources/xr/template.js:21:35 Replaced doT.template(loadFile(filename)) with loadFile(filename) -&gt; SURVIVED</div><div id="mutation_17_715_791" class="survived">resources/xr/template.js:25:13 Removed if (!params.include) { params.include = apply; } -&gt; SURVIVED</div><div id="mutation_28_719_720" class="survived">resources/xr/template.js:25:32 Removed ! -&gt; SURVIVED</div><div id="mutation_29_754_777" class="survived">resources/xr/template.js:26:17 Removed params.include = apply; -&gt; SURVIVED</div><div id="mutation_18_805_836" class="survived">resources/xr/template.js:29:13 Removed return cache[filename](params); -&gt; SURVIVED</div><div id="mutation_30_828_834" class="survived">resources/xr/template.js:29:36 Replaced params with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_31_812_835" class="survived">resources/xr/template.js:29:20 Replaced cache[filename](params) with params -&gt; SURVIVED</div><div id="mutation_32_812_835" class="survived">resources/xr/template.js:29:20 Replaced cache[filename](params) with cache -&gt; SURVIVED</div><div id="mutation_10_929_1176" class="survived">resources/xr/template.js:34:5 Removed function resolve(filename) { if (!/^templates\//.test(filename)) { filename = &quot;templates/&quot; + filename; } if (!/\.html$/.test(filename)) { filename += &quot;.html&quot;; } return filename; } -&gt; SURVIVED</div><div id="mutation_33_966_1061" class="survived">resources/xr/template.js:35:9 Removed if (!/^templates\//.test(filename)) { filename = &quot;templates/&quot; + filename; } -&gt; SURVIVED</div><div id="mutation_36_970_971" class="survived">resources/xr/template.js:35:43 Removed ! -&gt; SURVIVED</div><div id="mutation_37_1016_1051" class="survived">resources/xr/template.js:36:13 Removed filename = &quot;templates/&quot; + filename; -&gt; SURVIVED</div><div id="mutation_38_1039_1042" class="survived">resources/xr/template.js:36:36 Replaced  +  with - -&gt; SURVIVED</div><div id="mutation_39_1027_1039" class="survived">resources/xr/template.js:36:24 Replaced &quot;templates/&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_34_1070_1145" class="survived">resources/xr/template.js:38:9 Removed if (!/\.html$/.test(filename)) { filename += &quot;.html&quot;; } -&gt; SURVIVED</div><div id="mutation_40_1074_1075" class="survived">resources/xr/template.js:38:38 Removed ! -&gt; SURVIVED</div><div id="mutation_42_1127_1134" class="survived">resources/xr/template.js:39:25 Replaced &quot;.html&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_41_1115_1135" class="survived">resources/xr/template.js:39:13 Removed filename += &quot;.html&quot;; -&gt; SURVIVED</div><div id="mutation_35_1154_1170" class="survived">resources/xr/template.js:41:9 Removed return filename; -&gt; SURVIVED</div><div id="mutation_11_1182_1761" class="survived">resources/xr/template.js:44:5 Removed function loadFile(templateName) { // For testing purposes the karma-html2js plugin will make // all the template files available in global __html__ variable. if (window.__html__ &amp;&amp; window.__html__[templateName]) { return window.__html__[templateName]; } var result = null; $.ajax({ type: &quot;GET&quot;, url: templateName, dataType: &quot;html&quot;, async: false, success: function (data) { result = data; } }); return result; } -&gt; SURVIVED</div><div id="mutation_43_1364_1479" class="survived">resources/xr/template.js:47:9 Removed if (window.__html__ &amp;&amp; window.__html__[templateName]) { return window.__html__[templateName]; } -&gt; SURVIVED</div><div id="mutation_47_1383_1387" class="survived">resources/xr/template.js:47:28 Replaced  &amp;&amp;  with || -&gt; SURVIVED</div><div id="mutation_48_1432_1469" class="survived">resources/xr/template.js:48:13 Removed return window.__html__[templateName]; -&gt; SURVIVED</div><div id="mutation_44_1489_1507" class="survived">resources/xr/template.js:51:9 Removed var result = null; -&gt; SURVIVED</div><div id="mutation_45_1516_1732" class="survived">resources/xr/template.js:52:9 Removed $.ajax({ type: &quot;GET&quot;, url: templateName, dataType: &quot;html&quot;, async: false, success: function (data) { result = data; } }); -&gt; SURVIVED</div><div id="mutation_51_1516_1731" class="survived">resources/xr/template.js:52:9 Replaced $.ajax({ type: &quot;GET&quot;, url: templateName, dataType: &quot;html&quot;, async: false, success: function (data) { result = data; } }) with $ -&gt; SURVIVED</div><div id="mutation_49_1523_1730" class="survived">resources/xr/template.js:52:16 Replaced { type: &quot;GET&quot;, url: templateName, dataType: &quot;html&quot;, async: false, success: function (data) { result = data; } } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_50_1516_1731" class="killed">resources/xr/template.js:52:9 Replaced $.ajax({ type: &quot;GET&quot;, url: templateName, dataType: &quot;html&quot;, async: false, success: function (data) { result = data; } }) with { type: &quot;GET&quot;, url: templateName, dataType: &quot;html&quot;, async: false, success: function (data) { result = data; } } -&gt; KILLED</div><div id="mutation_52_1537_1562" class="survived">resources/xr/template.js:53:13 Removed type: &quot;GET&quot;,  -&gt; SURVIVED</div><div id="mutation_57_1543_1548" class="survived">resources/xr/template.js:53:19 Replaced &quot;GET&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_53_1562_1593" class="survived">resources/xr/template.js:54:13 Removed url: templateName,  -&gt; SURVIVED</div><div id="mutation_54_1593_1623" class="survived">resources/xr/template.js:55:13 Removed dataType: &quot;html&quot;,  -&gt; SURVIVED</div><div id="mutation_58_1603_1609" class="survived">resources/xr/template.js:55:23 Replaced &quot;html&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_55_1623_1649" class="survived">resources/xr/template.js:56:13 Removed async: false,  -&gt; SURVIVED</div><div id="mutation_59_1630_1635" class="survived">resources/xr/template.js:56:20 Replaced false with true -&gt; SURVIVED</div><div id="mutation_56_1649_1720" class="survived">resources/xr/template.js:57:13 Removed success: function (data) { result = data; } -&gt; SURVIVED</div><div id="mutation_60_1692_1706" class="survived">resources/xr/template.js:58:17 Removed result = data; -&gt; SURVIVED</div><div id="mutation_46_1741_1755" class="survived">resources/xr/template.js:61:9 Removed return result; -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

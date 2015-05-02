@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":40,"ignored":11,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>40</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>11</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/index.html'">tree</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/formatInvertedStackTrace.js.html'">formatInvertedStackTrace.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_12_62_68">"xr/_"</span>);</li><li>    var isOrmQuery = require(<span class="code killed mutation_14_100_115">"xr/isOrmQuery"</span>);</li><li>    var TraceName = require(<span class="code killed mutation_16_146_165">"xr/tree/TraceName"</span>);</li><li></li><li>    /**</li><li>     * Strips ormQuery elements and formats stracktrace items so they're</li><li>     * suitable for the template.</li><li>     *</li><li>     * @param {Object[]} stackTrace</li><li>     * @return {Object[]}</li><li>     */</li><li>    <span class="code killed mutation_10_365_532">return function(stackTrace) {</span></li><li><span class="code killed mutation_10_365_532">        // Strip from stackTrace all ormQuery elements</span></li><li><span class="code killed mutation_10_365_532">        <span class="code killed mutation_18_458_525">return <span class="code killed mutation_30_465_478"><span class="code killed mutation_25_465_504"><span class="code killed mutation_24_465_504"><span class="code killed mutation_22_465_516"><span class="code killed mutation_21_465_516"><span class="code killed mutation_19_465_524">_(<span class="code killed mutation_29_467_477">stackTrace</span>)</span>.filter(<span class="code killed mutation_28_486_503"><span class="code killed mutation_27_486_503"><span class="code killed mutation_23_486_503">_.not(<span class="code killed mutation_26_492_502">isOrmQuery</span>)</span></span></span>)</span></span>.map(<span class="code killed mutation_20_509_515">format</span>)</span></span>.value()</span>;</span></span></li><li><span class="code killed mutation_10_365_532">    };</span></li><li></li><li>    <span class="code killed mutation_11_538_780">function format(el) {</span></li><li><span class="code killed mutation_11_538_780">        <span class="code killed mutation_31_568_605">var traceName = <span class="code killed mutation_35_584_604"><span class="code killed mutation_34_584_604">TraceName.fromIo(<span class="code killed mutation_33_601_603">el</span>)</span></span>;</span></span></li><li><span class="code killed mutation_11_538_780">        <span class="code killed mutation_32_614_774">return {</span></span></li><li><span class="code killed mutation_32_614_774"><span class="code killed mutation_11_538_780">            <span class="code killed mutation_36_635_678">fullName: <span class="code killed mutation_40_645_664">traceName.getFull()</span>,</span></span></span></li><li><span class="code killed mutation_36_635_678"><span class="code killed mutation_32_614_774"><span class="code killed mutation_11_538_780">            </span><span class="code killed mutation_37_678_723">shortName: <span class="code killed mutation_41_689_709">traceName.getShort()</span>,</span></span></span></li><li><span class="code killed mutation_37_678_723"><span class="code killed mutation_32_614_774"><span class="code killed mutation_11_538_780">            </span><span class="code killed mutation_38_723_750">file: el.file,</span></span></span></li><li><span class="code killed mutation_38_723_750"><span class="code killed mutation_32_614_774"><span class="code killed mutation_11_538_780">            </span><span class="code killed mutation_39_750_763">line: el.line</span></span></span></li><li><span class="code killed mutation_32_614_774"><span class="code killed mutation_11_538_780">        };</span></span></li><li><span class="code killed mutation_11_538_780">    }</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_12_62_68" class="killed">resources/xr/tree/formatInvertedStackTrace.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_14_100_115" class="killed">resources/xr/tree/formatInvertedStackTrace.js:5:30 Replaced &quot;xr/isOrmQuery&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_16_146_165" class="killed">resources/xr/tree/formatInvertedStackTrace.js:6:29 Replaced &quot;xr/tree/TraceName&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_10_365_532" class="killed">resources/xr/tree/formatInvertedStackTrace.js:15:5 Removed return function(stackTrace) { // Strip from stackTrace all ormQuery elements return _(stackTrace).filter(_.not(isOrmQuery)).map(format).value(); }; -&gt; KILLED</div><div id="mutation_27_486_503" class="killed">resources/xr/tree/formatInvertedStackTrace.js:17:37 Replaced _.not(isOrmQuery) with isOrmQuery -&gt; KILLED</div><div id="mutation_18_458_525" class="killed">resources/xr/tree/formatInvertedStackTrace.js:17:9 Removed return _(stackTrace).filter(_.not(isOrmQuery)).map(format).value(); -&gt; KILLED</div><div id="mutation_19_465_524" class="killed">resources/xr/tree/formatInvertedStackTrace.js:17:16 Replaced _(stackTrace).filter(_.not(isOrmQuery)).map(format).value() with _(stackTrace).filter(_.not(isOrmQuery)).map(format) -&gt; KILLED</div><div id="mutation_20_509_515" class="killed">resources/xr/tree/formatInvertedStackTrace.js:17:60 Replaced format with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_21_465_516" class="killed">resources/xr/tree/formatInvertedStackTrace.js:17:16 Replaced _(stackTrace).filter(_.not(isOrmQuery)).map(format) with format -&gt; KILLED</div><div id="mutation_22_465_516" class="killed">resources/xr/tree/formatInvertedStackTrace.js:17:16 Replaced _(stackTrace).filter(_.not(isOrmQuery)).map(format) with _(stackTrace).filter(_.not(isOrmQuery)) -&gt; KILLED</div><div id="mutation_23_486_503" class="killed">resources/xr/tree/formatInvertedStackTrace.js:17:37 Replaced _.not(isOrmQuery) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_24_465_504" class="killed">resources/xr/tree/formatInvertedStackTrace.js:17:16 Replaced _(stackTrace).filter(_.not(isOrmQuery)) with _.not(isOrmQuery) -&gt; KILLED</div><div id="mutation_25_465_504" class="killed">resources/xr/tree/formatInvertedStackTrace.js:17:16 Replaced _(stackTrace).filter(_.not(isOrmQuery)) with _(stackTrace) -&gt; KILLED</div><div id="mutation_26_492_502" class="killed">resources/xr/tree/formatInvertedStackTrace.js:17:43 Replaced isOrmQuery with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_30_465_478" class="killed">resources/xr/tree/formatInvertedStackTrace.js:17:16 Replaced _(stackTrace) with stackTrace -&gt; KILLED</div><div id="mutation_28_486_503" class="killed">resources/xr/tree/formatInvertedStackTrace.js:17:37 Replaced _.not(isOrmQuery) with _ -&gt; KILLED</div><div id="mutation_29_467_477" class="killed">resources/xr/tree/formatInvertedStackTrace.js:17:18 Replaced stackTrace with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_11_538_780" class="killed">resources/xr/tree/formatInvertedStackTrace.js:20:5 Removed function format(el) { var traceName = TraceName.fromIo(el); return { fullName: traceName.getFull(), shortName: traceName.getShort(), file: el.file, line: el.line }; } -&gt; KILLED</div><div id="mutation_33_601_603" class="killed">resources/xr/tree/formatInvertedStackTrace.js:21:42 Replaced el with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_34_584_604" class="killed">resources/xr/tree/formatInvertedStackTrace.js:21:25 Replaced TraceName.fromIo(el) with el -&gt; KILLED</div><div id="mutation_35_584_604" class="killed">resources/xr/tree/formatInvertedStackTrace.js:21:25 Replaced TraceName.fromIo(el) with TraceName -&gt; KILLED</div><div id="mutation_31_568_605" class="killed">resources/xr/tree/formatInvertedStackTrace.js:21:9 Removed var traceName = TraceName.fromIo(el); -&gt; KILLED</div><div id="mutation_32_614_774" class="killed">resources/xr/tree/formatInvertedStackTrace.js:22:9 Removed return { fullName: traceName.getFull(), shortName: traceName.getShort(), file: el.file, line: el.line }; -&gt; KILLED</div><div id="mutation_36_635_678" class="killed">resources/xr/tree/formatInvertedStackTrace.js:23:13 Removed fullName: traceName.getFull(),  -&gt; KILLED</div><div id="mutation_40_645_664" class="killed">resources/xr/tree/formatInvertedStackTrace.js:23:23 Replaced traceName.getFull() with traceName -&gt; KILLED</div><div id="mutation_37_678_723" class="killed">resources/xr/tree/formatInvertedStackTrace.js:24:13 Removed shortName: traceName.getShort(),  -&gt; KILLED</div><div id="mutation_41_689_709" class="killed">resources/xr/tree/formatInvertedStackTrace.js:24:24 Replaced traceName.getShort() with traceName -&gt; KILLED</div><div id="mutation_38_723_750" class="killed">resources/xr/tree/formatInvertedStackTrace.js:25:13 Removed file: el.file,  -&gt; KILLED</div><div id="mutation_39_750_763" class="killed">resources/xr/tree/formatInvertedStackTrace.js:26:13 Removed line: el.line -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

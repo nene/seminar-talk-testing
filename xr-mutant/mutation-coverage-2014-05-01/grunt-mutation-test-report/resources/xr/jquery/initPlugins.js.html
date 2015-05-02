@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":66,"ignored":35,"untested":0,"survived":31}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>66</strong> of which <strong>31</strong> survived,&nbsp;
+        <strong>35</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>53.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/jquery/index.html'">jquery</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/jquery/initPlugins.js.html'">initPlugins.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var collapseAllButton = require(<span class="code survived mutation_23_78_107">"xr/jquery/collapseAllButton"</span>);</li><li>    var collapsible = require(<span class="code survived mutation_25_140_163">"xr/jquery/collapsible"</span>);</li><li>    var hiddenItems = require(<span class="code survived mutation_27_196_219">"xr/jquery/hiddenItems"</span>);</li><li>    var ignoreButton = require(<span class="code survived mutation_29_253_277">"xr/jquery/ignoreButton"</span>);</li><li>    var invertedStackTraceExpander = require(<span class="code survived mutation_31_325_363">"xr/jquery/invertedStackTraceExpander"</span>);</li><li>    var ioTypeFilter = require(<span class="code survived mutation_33_397_421">"xr/jquery/ioTypeFilter"</span>);</li><li>    var packageBoundaries = require(<span class="code survived mutation_35_460_489">"xr/jquery/packageBoundaries"</span>);</li><li>    var persistentForm = require(<span class="code survived mutation_37_525_551">"xr/jquery/persistentForm"</span>);</li><li>    var queryBodyToggle = require(<span class="code survived mutation_39_588_615">"xr/jquery/queryBodyToggle"</span>);</li><li>    var searchForm = require(<span class="code survived mutation_41_647_669">"xr/jquery/searchForm"</span>);</li><li>    var sortableColumn = require(<span class="code survived mutation_43_705_731">"xr/jquery/sortableColumn"</span>);</li><li>    var sticky = require(<span class="code survived mutation_45_759_777">"xr/jquery/sticky"</span>);</li><li>    var tabs = require(<span class="code survived mutation_47_803_819">"xr/jquery/tabs"</span>);</li><li>    var tooltip = require(<span class="code survived mutation_49_848_867">"xr/jquery/tooltip"</span>);</li><li>    var treetable = require(<span class="code survived mutation_51_898_913">"lib/treetable"</span>);</li><li></li><li>    /**</li><li>     * Attaches all XRebel jQuery plugins to jQuery instance.</li><li>     * @param {jQuery} $</li><li>     */</li><li>    <span class="code survived mutation_22_1024_1691">return function($) {</span></li><li><span class="code survived mutation_22_1024_1691">        <span class="code survived mutation_53_1053_1096">$.fn.collapseAllButton = collapseAllButton;</span></span></li><li><span class="code survived mutation_22_1024_1691">        <span class="code survived mutation_54_1105_1136">$.fn.collapsible = collapsible;</span></span></li><li><span class="code survived mutation_22_1024_1691">        <span class="code survived mutation_55_1145_1176">$.fn.hiddenItems = hiddenItems;</span></span></li><li><span class="code survived mutation_22_1024_1691">        <span class="code survived mutation_56_1185_1218">$.fn.ignoreButton = ignoreButton;</span></span></li><li><span class="code survived mutation_22_1024_1691">        <span class="code survived mutation_57_1227_1288">$.fn.invertedStackTraceExpander = invertedStackTraceExpander;</span></span></li><li><span class="code survived mutation_22_1024_1691">        <span class="code survived mutation_58_1297_1330">$.fn.ioTypeFilter = ioTypeFilter;</span></span></li><li><span class="code survived mutation_22_1024_1691">        <span class="code survived mutation_59_1339_1382">$.fn.packageBoundaries = packageBoundaries;</span></span></li><li><span class="code survived mutation_22_1024_1691">        <span class="code survived mutation_60_1391_1428">$.fn.persistentForm = persistentForm;</span></span></li><li><span class="code survived mutation_22_1024_1691">        <span class="code survived mutation_61_1437_1476">$.fn.queryBodyToggle = queryBodyToggle;</span></span></li><li><span class="code survived mutation_22_1024_1691">        <span class="code survived mutation_62_1485_1514">$.fn.searchForm = searchForm;</span></span></li><li><span class="code survived mutation_22_1024_1691">        <span class="code survived mutation_63_1523_1560">$.fn.sortableColumn = sortableColumn;</span></span></li><li><span class="code survived mutation_22_1024_1691">        <span class="code survived mutation_64_1569_1590">$.fn.sticky = sticky;</span></span></li><li><span class="code survived mutation_22_1024_1691">        <span class="code survived mutation_65_1599_1616">$.fn.tabs = tabs;</span></span></li><li><span class="code survived mutation_22_1024_1691">        <span class="code survived mutation_66_1625_1648">$.fn.tooltip = tooltip;</span></span></li><li><span class="code survived mutation_22_1024_1691">        <span class="code survived mutation_67_1657_1684">$.fn.treetable = treetable;</span></span></li><li><span class="code survived mutation_22_1024_1691">    };</span></li><li>});</li><li></li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_23_78_107" class="survived">resources/xr/jquery/initPlugins.js:4:37 Replaced &quot;xr/jquery/collapseAllButton&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_25_140_163" class="survived">resources/xr/jquery/initPlugins.js:5:31 Replaced &quot;xr/jquery/collapsible&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_27_196_219" class="survived">resources/xr/jquery/initPlugins.js:6:31 Replaced &quot;xr/jquery/hiddenItems&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_29_253_277" class="survived">resources/xr/jquery/initPlugins.js:7:32 Replaced &quot;xr/jquery/ignoreButton&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_31_325_363" class="survived">resources/xr/jquery/initPlugins.js:8:46 Replaced &quot;xr/jquery/invertedStackTraceExpander&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_33_397_421" class="survived">resources/xr/jquery/initPlugins.js:9:32 Replaced &quot;xr/jquery/ioTypeFilter&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_35_460_489" class="survived">resources/xr/jquery/initPlugins.js:10:37 Replaced &quot;xr/jquery/packageBoundaries&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_37_525_551" class="survived">resources/xr/jquery/initPlugins.js:11:34 Replaced &quot;xr/jquery/persistentForm&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_39_588_615" class="survived">resources/xr/jquery/initPlugins.js:12:35 Replaced &quot;xr/jquery/queryBodyToggle&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_41_647_669" class="survived">resources/xr/jquery/initPlugins.js:13:30 Replaced &quot;xr/jquery/searchForm&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_43_705_731" class="survived">resources/xr/jquery/initPlugins.js:14:34 Replaced &quot;xr/jquery/sortableColumn&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_45_759_777" class="survived">resources/xr/jquery/initPlugins.js:15:26 Replaced &quot;xr/jquery/sticky&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_47_803_819" class="survived">resources/xr/jquery/initPlugins.js:16:24 Replaced &quot;xr/jquery/tabs&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_49_848_867" class="survived">resources/xr/jquery/initPlugins.js:17:27 Replaced &quot;xr/jquery/tooltip&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_51_898_913" class="survived">resources/xr/jquery/initPlugins.js:18:29 Replaced &quot;lib/treetable&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_22_1024_1691" class="survived">resources/xr/jquery/initPlugins.js:24:5 Removed return function($) { $.fn.collapseAllButton = collapseAllButton; $.fn.collapsible = collapsible; $.fn.hiddenItems = hiddenItems; $.fn.ignoreButton = ignoreButton; $.fn.invertedStackTraceExpander = invertedStackTraceExpander; $.fn.ioTypeFilter = ioTypeFilter; $.fn.packageBoundaries = packageBoundaries; $.fn.persistentForm = persistentForm; $.fn.queryBodyToggle = queryBodyToggle; $.fn.searchForm = searchForm; $.fn.sortableColumn = sortableColumn; $.fn.sticky = sticky; $.fn.tabs = tabs; $.fn.tooltip = tooltip; $.fn.treetable = treetable; }; -&gt; SURVIVED</div><div id="mutation_53_1053_1096" class="survived">resources/xr/jquery/initPlugins.js:25:9 Removed $.fn.collapseAllButton = collapseAllButton; -&gt; SURVIVED</div><div id="mutation_54_1105_1136" class="survived">resources/xr/jquery/initPlugins.js:26:9 Removed $.fn.collapsible = collapsible; -&gt; SURVIVED</div><div id="mutation_55_1145_1176" class="survived">resources/xr/jquery/initPlugins.js:27:9 Removed $.fn.hiddenItems = hiddenItems; -&gt; SURVIVED</div><div id="mutation_56_1185_1218" class="survived">resources/xr/jquery/initPlugins.js:28:9 Removed $.fn.ignoreButton = ignoreButton; -&gt; SURVIVED</div><div id="mutation_57_1227_1288" class="survived">resources/xr/jquery/initPlugins.js:29:9 Removed $.fn.invertedStackTraceExpander = invertedStackTraceExpander; -&gt; SURVIVED</div><div id="mutation_58_1297_1330" class="survived">resources/xr/jquery/initPlugins.js:30:9 Removed $.fn.ioTypeFilter = ioTypeFilter; -&gt; SURVIVED</div><div id="mutation_59_1339_1382" class="survived">resources/xr/jquery/initPlugins.js:31:9 Removed $.fn.packageBoundaries = packageBoundaries; -&gt; SURVIVED</div><div id="mutation_60_1391_1428" class="survived">resources/xr/jquery/initPlugins.js:32:9 Removed $.fn.persistentForm = persistentForm; -&gt; SURVIVED</div><div id="mutation_61_1437_1476" class="survived">resources/xr/jquery/initPlugins.js:33:9 Removed $.fn.queryBodyToggle = queryBodyToggle; -&gt; SURVIVED</div><div id="mutation_62_1485_1514" class="survived">resources/xr/jquery/initPlugins.js:34:9 Removed $.fn.searchForm = searchForm; -&gt; SURVIVED</div><div id="mutation_63_1523_1560" class="survived">resources/xr/jquery/initPlugins.js:35:9 Removed $.fn.sortableColumn = sortableColumn; -&gt; SURVIVED</div><div id="mutation_64_1569_1590" class="survived">resources/xr/jquery/initPlugins.js:36:9 Removed $.fn.sticky = sticky; -&gt; SURVIVED</div><div id="mutation_65_1599_1616" class="survived">resources/xr/jquery/initPlugins.js:37:9 Removed $.fn.tabs = tabs; -&gt; SURVIVED</div><div id="mutation_66_1625_1648" class="survived">resources/xr/jquery/initPlugins.js:38:9 Removed $.fn.tooltip = tooltip; -&gt; SURVIVED</div><div id="mutation_67_1657_1684" class="survived">resources/xr/jquery/initPlugins.js:39:9 Removed $.fn.treetable = treetable; -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":73,"ignored":14,"untested":0,"survived":4}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>73</strong> of which <strong>4</strong> survived,&nbsp;
+        <strong>14</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>94.5%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/jquery/index.html'">jquery</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/jquery/hiddenItems.js.html'">hiddenItems.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require){</li><li>    var _ = require(<span class="code killed mutation_11_61_67">"xr/_"</span>);</li><li>    var appSettings = require(<span class="code killed mutation_13_100_125">"xr/settings/appSettings"</span>);</li><li>    var analytics = require(<span class="code killed mutation_15_156_170">"xr/analytics"</span>);</li><li></li><li>    /**</li><li>     * jQuery plugin for ignored items show/hide toggle.</li><li>     *</li><li>     * This plugin can be called in two ways:</li><li>     *</li><li>     *     $(".foo").hiddenItems({module: "showIgnores.cpu"});</li><li>     *</li><li>     * Initializes the checkbox event handlers and initial state.</li><li>     *</li><li>     *     $(".foo").hiddenItems({ignoredCount: 73});</li><li>     *</li><li>     * Updates the ignored items count display.</li><li>     *</li><li>     * Note: This plugin must be used after the sticky header plugin -</li><li>     * otherwise it won't pick up the checkbox in sticky header.</li><li>     *</li><li>     * @param {Object} options Config options:</li><li>     *   @param {String} options.module For which module read/write</li><li>     *     the checked state in settings and report clicks to analytics.</li><li>     *   @param {Number} options.ignoredCount Value to set for the ignore button.</li><li>     * @param {Object} deps Dependencies</li><li>     *   @param {Object} deps.settings Settings module</li><li>     *   @param {Object} deps.analytics Analytics module</li><li>     */</li><li>    return function(options, deps) {</li><li>        deps = <span class="code killed mutation_27_1184_1189">_(<span class="code killed mutation_26_1186_1188">{}</span>)</span>.inject(<span class="code killed mutation_21_1197_1201">deps</span>, <span class="code survived mutation_22_1203_1285">{</span></li><li><span class="code survived mutation_22_1203_1285">            <span class="code survived mutation_24_1217_1255">appSettings: appSettings,</span></span></li><li><span class="code survived mutation_24_1217_1255"><span class="code survived mutation_22_1203_1285">            </span><span class="code survived mutation_25_1255_1275">analytics: analytics</span></span></li><li><span class="code survived mutation_22_1203_1285">        }</span>);</li><li></li><li>        <span class="code killed mutation_18_1297_1502">if (options.ignoredCount<span class="code killed mutation_28_1321_1326"> !== </span>undefined) {</span></li><li><span class="code killed mutation_18_1297_1502">            <span class="code killed mutation_35_1351_1376"><span class="code killed mutation_34_1351_1376"><span class="code killed mutation_32_1351_1403"><span class="code killed mutation_31_1351_1403"><span class="code killed mutation_29_1351_1404">this.find(<span class="code killed mutation_33_1361_1375">".stat-hidden"</span>)</span></span>.text(<span class="code killed mutation_30_1382_1402">options.ignoredCount</span>)</span></span>;</span></span></li><li><span class="code killed mutation_18_1297_1502">        }</span></li><li><span class="code killed mutation_18_1297_1502">        else {</span></li><li><span class="code killed mutation_18_1297_1502">            <span class="code killed mutation_38_1442_1491"><span class="code killed mutation_36_1442_1492">initCheckbox(<span class="code killed mutation_41_1455_1490"><span class="code killed mutation_40_1455_1490"><span class="code killed mutation_37_1455_1490">this.find(<span class="code killed mutation_39_1465_1489">".hidden-items-checkbox"</span>)</span></span></span>)</span>;</span></span></li><li><span class="code killed mutation_18_1297_1502">        }</span></li><li></li><li>        <span class="code killed mutation_19_1512_2051">function initCheckbox(checkbox) {</span></li><li><span class="code killed mutation_19_1512_2051">            <span class="code killed mutation_46_1558_1637"><span class="code killed mutation_42_1558_1638">checkbox.prop(<span class="code killed mutation_44_1572_1581">"checked"</span>, <span class="code killed mutation_49_1583_1636"><span class="code killed mutation_48_1583_1636"><span class="code killed mutation_45_1583_1636">deps.appSettings.get(<span class="code killed mutation_51_1604_1618"><span class="code killed mutation_47_1604_1635">"showIgnores."</span><span class="code killed mutation_50_1618_1621"> + </span>options.module</span>)</span></span></span>)</span>;</span></span></li><li><span class="code killed mutation_19_1512_2051"></li><li>            <span class="code killed mutation_54_1652_2040"><span class="code killed mutation_43_1652_2041">checkbox.on(<span class="code killed mutation_52_1664_1671">"click"</span>, <span class="code killed mutation_53_1673_2039">function(event){</span></span></span></span></li><li><span class="code killed mutation_54_1652_2040"><span class="code killed mutation_53_1673_2039"><span class="code killed mutation_43_1652_2041"><span class="code killed mutation_19_1512_2051">                <span class="code killed mutation_55_1706_1752">var checked = <span class="code killed mutation_63_1720_1735"><span class="code killed mutation_61_1720_1751"><span class="code killed mutation_60_1720_1751">$(<span class="code killed mutation_62_1722_1734">event.target</span>)</span>.prop(<span class="code killed mutation_59_1741_1750">"checked"</span>)</span></span>;</span></span></span></span></span></li><li><span class="code killed mutation_54_1652_2040"><span class="code killed mutation_53_1673_2039"><span class="code killed mutation_43_1652_2041"><span class="code killed mutation_19_1512_2051">                // Ensure the sticky header checkbox is kept in sync.</span></span></span></span></li><li><span class="code killed mutation_54_1652_2040"><span class="code killed mutation_53_1673_2039"><span class="code killed mutation_43_1652_2041"><span class="code killed mutation_19_1512_2051">                <span class="code killed mutation_66_1839_1872"><span class="code killed mutation_56_1839_1873">checkbox.prop(<span class="code killed mutation_64_1853_1862">"checked"</span>, <span class="code killed mutation_65_1864_1871">checked</span>)</span>;</span></span></span></span></span></li><li><span class="code killed mutation_54_1652_2040"><span class="code killed mutation_53_1673_2039"><span class="code killed mutation_43_1652_2041"><span class="code killed mutation_19_1512_2051"></li><li>                <span class="code killed mutation_69_1891_1953"><span class="code killed mutation_57_1891_1954">deps.appSettings.set(<span class="code killed mutation_71_1912_1926"><span class="code killed mutation_67_1912_1943">"showIgnores."</span><span class="code killed mutation_70_1926_1929"> + </span>options.module</span>, <span class="code killed mutation_68_1945_1952">checked</span>)</span>;</span></span></span></span></span></li><li><span class="code killed mutation_54_1652_2040"><span class="code killed mutation_53_1673_2039"><span class="code killed mutation_43_1652_2041"><span class="code killed mutation_19_1512_2051">                <span class="code killed mutation_74_1971_2024"><span class="code killed mutation_73_1971_2024"><span class="code killed mutation_58_1971_2025">deps.analytics.hiddenItemsToggleClick(<span class="code killed mutation_72_2009_2023">options.module</span>)</span></span>;</span></span></span></span></span></li><li><span class="code killed mutation_54_1652_2040"><span class="code killed mutation_53_1673_2039"><span class="code killed mutation_43_1652_2041"><span class="code killed mutation_19_1512_2051">            }</span>)</span>;</span></span></li><li><span class="code killed mutation_19_1512_2051">        }</span></li><li></li><li>        <span class="code survived mutation_20_2061_2073">return this;</span></li><li>    };</li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_11_61_67" class="killed">resources/xr/jquery/hiddenItems.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_13_100_125" class="killed">resources/xr/jquery/hiddenItems.js:5:31 Replaced &quot;xr/settings/appSettings&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_156_170" class="killed">resources/xr/jquery/hiddenItems.js:6:29 Replaced &quot;xr/analytics&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_21_1197_1201" class="killed">resources/xr/jquery/hiddenItems.js:33:29 Replaced deps with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_1203_1285" class="survived">resources/xr/jquery/hiddenItems.js:33:35 Replaced { appSettings: appSettings, analytics: analytics } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_26_1186_1188" class="killed">resources/xr/jquery/hiddenItems.js:33:18 Replaced {} with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_27_1184_1189" class="killed">resources/xr/jquery/hiddenItems.js:33:16 Replaced _({}) with {} -&gt; KILLED</div><div id="mutation_24_1217_1255" class="survived">resources/xr/jquery/hiddenItems.js:34:13 Removed appSettings: appSettings,  -&gt; SURVIVED</div><div id="mutation_25_1255_1275" class="survived">resources/xr/jquery/hiddenItems.js:35:13 Removed analytics: analytics -&gt; SURVIVED</div><div id="mutation_18_1297_1502" class="killed">resources/xr/jquery/hiddenItems.js:38:9 Removed if (options.ignoredCount !== undefined) { this.find(&quot;.stat-hidden&quot;).text(options.ignoredCount); } else { initCheckbox(this.find(&quot;.hidden-items-checkbox&quot;)); } -&gt; KILLED</div><div id="mutation_28_1321_1326" class="killed">resources/xr/jquery/hiddenItems.js:38:33 Replaced  !==  with === -&gt; KILLED</div><div id="mutation_29_1351_1404" class="killed">resources/xr/jquery/hiddenItems.js:39:13 Removed this.find(&quot;.stat-hidden&quot;).text(options.ignoredCount); -&gt; KILLED</div><div id="mutation_30_1382_1402" class="killed">resources/xr/jquery/hiddenItems.js:39:44 Replaced options.ignoredCount with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_35_1351_1376" class="killed">resources/xr/jquery/hiddenItems.js:39:13 Replaced this.find(&quot;.stat-hidden&quot;) with this -&gt; KILLED</div><div id="mutation_32_1351_1403" class="killed">resources/xr/jquery/hiddenItems.js:39:13 Replaced this.find(&quot;.stat-hidden&quot;).text(options.ignoredCount) with this.find(&quot;.stat-hidden&quot;) -&gt; KILLED</div><div id="mutation_33_1361_1375" class="killed">resources/xr/jquery/hiddenItems.js:39:23 Replaced &quot;.stat-hidden&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_34_1351_1376" class="killed">resources/xr/jquery/hiddenItems.js:39:13 Replaced this.find(&quot;.stat-hidden&quot;) with &quot;.stat-hidden&quot; -&gt; KILLED</div><div id="mutation_31_1351_1403" class="killed">resources/xr/jquery/hiddenItems.js:39:13 Replaced this.find(&quot;.stat-hidden&quot;).text(options.ignoredCount) with options.ignoredCount -&gt; KILLED</div><div id="mutation_36_1442_1492" class="killed">resources/xr/jquery/hiddenItems.js:42:13 Removed initCheckbox(this.find(&quot;.hidden-items-checkbox&quot;)); -&gt; KILLED</div><div id="mutation_37_1455_1490" class="killed">resources/xr/jquery/hiddenItems.js:42:26 Replaced this.find(&quot;.hidden-items-checkbox&quot;) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_38_1442_1491" class="killed">resources/xr/jquery/hiddenItems.js:42:13 Replaced initCheckbox(this.find(&quot;.hidden-items-checkbox&quot;)) with this.find(&quot;.hidden-items-checkbox&quot;) -&gt; KILLED</div><div id="mutation_39_1465_1489" class="killed">resources/xr/jquery/hiddenItems.js:42:36 Replaced &quot;.hidden-items-checkbox&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_40_1455_1490" class="killed">resources/xr/jquery/hiddenItems.js:42:26 Replaced this.find(&quot;.hidden-items-checkbox&quot;) with &quot;.hidden-items-checkbox&quot; -&gt; KILLED</div><div id="mutation_41_1455_1490" class="killed">resources/xr/jquery/hiddenItems.js:42:26 Replaced this.find(&quot;.hidden-items-checkbox&quot;) with this -&gt; KILLED</div><div id="mutation_19_1512_2051" class="killed">resources/xr/jquery/hiddenItems.js:45:9 Removed function initCheckbox(checkbox) { checkbox.prop(&quot;checked&quot;, deps.appSettings.get(&quot;showIgnores.&quot; + options.module)); checkbox.on(&quot;click&quot;, function(event){ var checked = $(event.target).prop(&quot;checked&quot;); // Ensure the sticky header checkbox is kept in sync. checkbox.prop(&quot;checked&quot;, checked); deps.appSettings.set(&quot;showIgnores.&quot; + options.module, checked); deps.analytics.hiddenItemsToggleClick(options.module); }); } -&gt; KILLED</div><div id="mutation_51_1604_1618" class="killed">resources/xr/jquery/hiddenItems.js:46:59 Replaced &quot;showIgnores.&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_42_1558_1638" class="killed">resources/xr/jquery/hiddenItems.js:46:13 Removed checkbox.prop(&quot;checked&quot;, deps.appSettings.get(&quot;showIgnores.&quot; + options.module)); -&gt; KILLED</div><div id="mutation_50_1618_1621" class="killed">resources/xr/jquery/hiddenItems.js:46:73 Replaced  +  with - -&gt; KILLED</div><div id="mutation_44_1572_1581" class="killed">resources/xr/jquery/hiddenItems.js:46:27 Replaced &quot;checked&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_45_1583_1636" class="killed">resources/xr/jquery/hiddenItems.js:46:38 Replaced deps.appSettings.get(&quot;showIgnores.&quot; + options.module) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_46_1558_1637" class="killed">resources/xr/jquery/hiddenItems.js:46:13 Replaced checkbox.prop(&quot;checked&quot;, deps.appSettings.get(&quot;showIgnores.&quot; + options.module)) with checkbox -&gt; KILLED</div><div id="mutation_47_1604_1635" class="killed">resources/xr/jquery/hiddenItems.js:46:59 Replaced &quot;showIgnores.&quot; + options.module with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_48_1583_1636" class="killed">resources/xr/jquery/hiddenItems.js:46:38 Replaced deps.appSettings.get(&quot;showIgnores.&quot; + options.module) with &quot;showIgnores.&quot; + options.module -&gt; KILLED</div><div id="mutation_49_1583_1636" class="killed">resources/xr/jquery/hiddenItems.js:46:38 Replaced deps.appSettings.get(&quot;showIgnores.&quot; + options.module) with deps.appSettings -&gt; KILLED</div><div id="mutation_43_1652_2041" class="killed">resources/xr/jquery/hiddenItems.js:48:13 Removed checkbox.on(&quot;click&quot;, function(event){ var checked = $(event.target).prop(&quot;checked&quot;); // Ensure the sticky header checkbox is kept in sync. checkbox.prop(&quot;checked&quot;, checked); deps.appSettings.set(&quot;showIgnores.&quot; + options.module, checked); deps.analytics.hiddenItemsToggleClick(options.module); }); -&gt; KILLED</div><div id="mutation_52_1664_1671" class="killed">resources/xr/jquery/hiddenItems.js:48:25 Replaced &quot;click&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_53_1673_2039" class="killed">resources/xr/jquery/hiddenItems.js:48:34 Replaced function(event){ var checked = $(event.target).prop(&quot;checked&quot;); // Ensure the sticky header checkbox is kept in sync. checkbox.prop(&quot;checked&quot;, checked); deps.appSettings.set(&quot;showIgnores.&quot; + options.module, checked); deps.analytics.hiddenItemsToggleClick(options.module); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_54_1652_2040" class="killed">resources/xr/jquery/hiddenItems.js:48:13 Replaced checkbox.on(&quot;click&quot;, function(event){ var checked = $(event.target).prop(&quot;checked&quot;); // Ensure the sticky header checkbox is kept in sync. checkbox.prop(&quot;checked&quot;, checked); deps.appSettings.set(&quot;showIgnores.&quot; + options.module, checked); deps.analytics.hiddenItemsToggleClick(options.module); }) with checkbox -&gt; KILLED</div><div id="mutation_62_1722_1734" class="killed">resources/xr/jquery/hiddenItems.js:49:33 Replaced event.target with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_55_1706_1752" class="killed">resources/xr/jquery/hiddenItems.js:49:17 Removed var checked = $(event.target).prop(&quot;checked&quot;); -&gt; KILLED</div><div id="mutation_63_1720_1735" class="killed">resources/xr/jquery/hiddenItems.js:49:31 Replaced $(event.target) with event.target -&gt; KILLED</div><div id="mutation_61_1720_1751" class="killed">resources/xr/jquery/hiddenItems.js:49:31 Replaced $(event.target).prop(&quot;checked&quot;) with $(event.target) -&gt; KILLED</div><div id="mutation_60_1720_1751" class="killed">resources/xr/jquery/hiddenItems.js:49:31 Replaced $(event.target).prop(&quot;checked&quot;) with &quot;checked&quot; -&gt; KILLED</div><div id="mutation_59_1741_1750" class="killed">resources/xr/jquery/hiddenItems.js:49:52 Replaced &quot;checked&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_56_1839_1873" class="killed">resources/xr/jquery/hiddenItems.js:51:17 Removed checkbox.prop(&quot;checked&quot;, checked); -&gt; KILLED</div><div id="mutation_64_1853_1862" class="killed">resources/xr/jquery/hiddenItems.js:51:31 Replaced &quot;checked&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_65_1864_1871" class="killed">resources/xr/jquery/hiddenItems.js:51:42 Replaced checked with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_66_1839_1872" class="killed">resources/xr/jquery/hiddenItems.js:51:17 Replaced checkbox.prop(&quot;checked&quot;, checked) with checkbox -&gt; KILLED</div><div id="mutation_67_1912_1943" class="killed">resources/xr/jquery/hiddenItems.js:53:38 Replaced &quot;showIgnores.&quot; + options.module with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_57_1891_1954" class="killed">resources/xr/jquery/hiddenItems.js:53:17 Removed deps.appSettings.set(&quot;showIgnores.&quot; + options.module, checked); -&gt; KILLED</div><div id="mutation_68_1945_1952" class="killed">resources/xr/jquery/hiddenItems.js:53:71 Replaced checked with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_69_1891_1953" class="killed">resources/xr/jquery/hiddenItems.js:53:17 Replaced deps.appSettings.set(&quot;showIgnores.&quot; + options.module, checked) with deps.appSettings -&gt; KILLED</div><div id="mutation_70_1926_1929" class="killed">resources/xr/jquery/hiddenItems.js:53:52 Replaced  +  with - -&gt; KILLED</div><div id="mutation_71_1912_1926" class="killed">resources/xr/jquery/hiddenItems.js:53:38 Replaced &quot;showIgnores.&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_73_1971_2024" class="killed">resources/xr/jquery/hiddenItems.js:54:17 Replaced deps.analytics.hiddenItemsToggleClick(options.module) with options.module -&gt; KILLED</div><div id="mutation_58_1971_2025" class="killed">resources/xr/jquery/hiddenItems.js:54:17 Removed deps.analytics.hiddenItemsToggleClick(options.module); -&gt; KILLED</div><div id="mutation_72_2009_2023" class="killed">resources/xr/jquery/hiddenItems.js:54:55 Replaced options.module with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_74_1971_2024" class="killed">resources/xr/jquery/hiddenItems.js:54:17 Replaced deps.analytics.hiddenItemsToggleClick(options.module) with deps.analytics -&gt; KILLED</div><div id="mutation_20_2061_2073" class="survived">resources/xr/jquery/hiddenItems.js:58:9 Removed return this; -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

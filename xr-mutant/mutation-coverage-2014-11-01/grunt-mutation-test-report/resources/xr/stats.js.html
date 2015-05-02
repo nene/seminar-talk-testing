@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":59,"ignored":7,"untested":0,"survived":51}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>59</strong> of which <strong>51</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>13.6%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/stats.js.html'">stats.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_12_62_68">"xr/_"</span>);</li><li></li><li>    <span class="code survived mutation_8_76_91">var stats = {};</span></li><li></li><li>    <span class="code survived mutation_9_97_511">return {</span></li><li><span class="code survived mutation_9_97_511">        <span class="code survived mutation_14_114_445">init: function(onComplete) {</span></span></li><li><span class="code survived mutation_14_114_445"><span class="code survived mutation_9_97_511">            <span class="code survived mutation_19_155_424"><span class="code survived mutation_16_155_425">$.ajax(<span class="code survived mutation_17_162_172">"../stats"</span>, <span class="code survived mutation_18_174_423">{</span></span></span></span></span></li><li><span class="code survived mutation_19_155_424"><span class="code survived mutation_18_174_423"><span class="code survived mutation_16_155_425"><span class="code survived mutation_14_114_445"><span class="code survived mutation_9_97_511">                <span class="code survived mutation_20_192_226">dataType: <span class="code survived mutation_23_202_208">"json"</span>,</span></span></span></span></span></span></li><li><span class="code survived mutation_20_192_226"><span class="code survived mutation_19_155_424"><span class="code survived mutation_18_174_423"><span class="code survived mutation_16_155_425"><span class="code survived mutation_14_114_445"><span class="code survived mutation_9_97_511">                </span><span class="code survived mutation_21_226_335">success: function(data) {</span></span></span></span></span></span></li><li><span class="code survived mutation_21_226_335"><span class="code survived mutation_19_155_424"><span class="code survived mutation_18_174_423"><span class="code survived mutation_16_155_425"><span class="code survived mutation_14_114_445"><span class="code survived mutation_9_97_511">                    <span class="code survived mutation_24_272_299">stats = <span class="code survived mutation_26_280_298">processStats(<span class="code survived mutation_25_293_297">data</span>)</span>;</span></span></span></span></span></span></span></li><li><span class="code survived mutation_21_226_335"><span class="code survived mutation_19_155_424"><span class="code survived mutation_18_174_423"><span class="code survived mutation_16_155_425"><span class="code survived mutation_14_114_445"><span class="code survived mutation_9_97_511">                },</span></span></span></span></span></span></li><li><span class="code survived mutation_21_226_335"><span class="code survived mutation_19_155_424"><span class="code survived mutation_18_174_423"><span class="code survived mutation_16_155_425"><span class="code survived mutation_14_114_445"><span class="code survived mutation_9_97_511">                </span><span class="code survived mutation_22_335_409">complete: function() {</span></span></span></span></span></span></li><li><span class="code survived mutation_22_335_409"><span class="code survived mutation_19_155_424"><span class="code survived mutation_18_174_423"><span class="code survived mutation_16_155_425"><span class="code survived mutation_14_114_445"><span class="code survived mutation_9_97_511">                    <span class="code survived mutation_27_378_391">onComplete();</span></span></span></span></span></span></span></li><li><span class="code survived mutation_22_335_409"><span class="code survived mutation_19_155_424"><span class="code survived mutation_18_174_423"><span class="code survived mutation_16_155_425"><span class="code survived mutation_14_114_445"><span class="code survived mutation_9_97_511">                }</span></span></span></span></span></span></li><li><span class="code survived mutation_19_155_424"><span class="code survived mutation_18_174_423"><span class="code survived mutation_16_155_425"><span class="code survived mutation_14_114_445"><span class="code survived mutation_9_97_511">            }</span>)</span>;</span></span></span></li><li><span class="code survived mutation_14_114_445"><span class="code survived mutation_9_97_511">        },</span></span></li><li><span class="code survived mutation_14_114_445"><span class="code survived mutation_9_97_511">        </span><span class="code survived mutation_15_445_504">getStats : function() {</span></span></li><li><span class="code survived mutation_15_445_504"><span class="code survived mutation_9_97_511">            <span class="code survived mutation_28_481_494">return stats;</span></span></span></li><li><span class="code survived mutation_15_445_504"><span class="code survived mutation_9_97_511">        }</span></span></li><li><span class="code survived mutation_9_97_511">    };</span></li><li></li><li></li><li>    <span class="code survived mutation_10_518_869">function processStats(data) {</span></li><li><span class="code survived mutation_10_518_869">        <span class="code survived mutation_29_556_863">return <span class="code survived mutation_32_563_862">_.transform(<span class="code survived mutation_30_575_579">data</span>, <span class="code survived mutation_31_581_861">function(result, val, fieldName){</span></span></span></span></li><li><span class="code survived mutation_32_563_862"><span class="code survived mutation_31_581_861"><span class="code survived mutation_29_556_863"><span class="code survived mutation_10_518_869">            <span class="code survived mutation_33_627_803">if (<span class="code survived mutation_36_631_656">isNumericField(<span class="code survived mutation_35_646_655">fieldName</span>)</span>) {</span></span></span></span></span></li><li><span class="code survived mutation_33_627_803"><span class="code survived mutation_32_563_862"><span class="code survived mutation_31_581_861"><span class="code survived mutation_29_556_863"><span class="code survived mutation_10_518_869">                <span class="code survived mutation_37_676_694">val = <span class="code survived mutation_39_682_693">Number(<span class="code survived mutation_38_689_692">val</span>)</span>;</span></span></span></span></span></span></li><li><span class="code survived mutation_33_627_803"><span class="code survived mutation_32_563_862"><span class="code survived mutation_31_581_861"><span class="code survived mutation_29_556_863"><span class="code survived mutation_10_518_869">            }</span></span></span></span></span></li><li><span class="code survived mutation_33_627_803"><span class="code survived mutation_32_563_862"><span class="code survived mutation_31_581_861"><span class="code survived mutation_29_556_863"><span class="code survived mutation_10_518_869">            else if (<span class="code survived mutation_42_730_748"><span class="code survived mutation_41_730_748">Array.isArray(<span class="code survived mutation_40_744_747">val</span>)</span></span>) {</span></span></span></span></span></li><li><span class="code survived mutation_33_627_803"><span class="code survived mutation_32_563_862"><span class="code survived mutation_31_581_861"><span class="code survived mutation_29_556_863"><span class="code survived mutation_10_518_869">                <span class="code survived mutation_43_768_789">val = <span class="code survived mutation_46_774_788"><span class="code survived mutation_45_774_788">val.join(<span class="code survived mutation_44_783_787">", "</span>)</span></span>;</span></span></span></span></span></span></li><li><span class="code survived mutation_33_627_803"><span class="code survived mutation_32_563_862"><span class="code survived mutation_31_581_861"><span class="code survived mutation_29_556_863"><span class="code survived mutation_10_518_869">            }</span></span></span></span></span></li><li><span class="code survived mutation_32_563_862"><span class="code survived mutation_31_581_861"><span class="code survived mutation_29_556_863"><span class="code survived mutation_10_518_869">            <span class="code survived mutation_34_816_851">result[<span class="code survived mutation_48_823_831">"stats."</span><span class="code survived mutation_47_831_834"> + </span>fieldName] = val;</span></span></span></span></span></li><li><span class="code survived mutation_32_563_862"><span class="code survived mutation_31_581_861"><span class="code survived mutation_29_556_863"><span class="code survived mutation_10_518_869">        }</span>)</span>;</span></span></li><li><span class="code survived mutation_10_518_869">    }</span></li><li></li><li>    <span class="code survived mutation_11_875_1002">function isNumericField(fieldName) {</span></li><li><span class="code survived mutation_11_875_1002">        <span class="code survived mutation_49_920_996">return (<span class="code survived mutation_54_928_953"><span class="code survived mutation_53_928_953">fieldName.indexOf(<span class="code survived mutation_52_946_952">"-avg"</span>)</span></span><span class="code survived mutation_51_953_957"> != </span><span class="code survived mutation_55_957_958">-</span>1<span class="code survived mutation_50_959_963"> || </span><span class="code survived mutation_59_963_988"><span class="code survived mutation_58_963_988">fieldName.indexOf(<span class="code survived mutation_57_981_987">"-max"</span>)</span></span><span class="code survived mutation_56_988_992"> != </span><span class="code survived mutation_60_992_993">-</span>1);</span></span></li><li><span class="code survived mutation_11_875_1002">    }</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_12_62_68" class="killed">resources/xr/stats.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_76_91" class="survived">resources/xr/stats.js:6:5 Removed var stats = {}; -&gt; SURVIVED</div><div id="mutation_9_97_511" class="survived">resources/xr/stats.js:8:5 Removed return { init: function(onComplete) { $.ajax(&quot;../stats&quot;, { dataType: &quot;json&quot;, success: function(data) { stats = processStats(data); }, complete: function() { onComplete(); } }); }, getStats : function() { return stats; } }; -&gt; SURVIVED</div><div id="mutation_14_114_445" class="survived">resources/xr/stats.js:9:9 Removed init: function(onComplete) { $.ajax(&quot;../stats&quot;, { dataType: &quot;json&quot;, success: function(data) { stats = processStats(data); }, complete: function() { onComplete(); } }); },  -&gt; SURVIVED</div><div id="mutation_16_155_425" class="survived">resources/xr/stats.js:10:13 Removed $.ajax(&quot;../stats&quot;, { dataType: &quot;json&quot;, success: function(data) { stats = processStats(data); }, complete: function() { onComplete(); } }); -&gt; SURVIVED</div><div id="mutation_17_162_172" class="survived">resources/xr/stats.js:10:20 Replaced &quot;../stats&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_18_174_423" class="survived">resources/xr/stats.js:10:32 Replaced { dataType: &quot;json&quot;, success: function(data) { stats = processStats(data); }, complete: function() { onComplete(); } } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_19_155_424" class="survived">resources/xr/stats.js:10:13 Replaced $.ajax(&quot;../stats&quot;, { dataType: &quot;json&quot;, success: function(data) { stats = processStats(data); }, complete: function() { onComplete(); } }) with $ -&gt; SURVIVED</div><div id="mutation_20_192_226" class="survived">resources/xr/stats.js:11:17 Removed dataType: &quot;json&quot;,  -&gt; SURVIVED</div><div id="mutation_23_202_208" class="survived">resources/xr/stats.js:11:27 Replaced &quot;json&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_21_226_335" class="survived">resources/xr/stats.js:12:17 Removed success: function(data) { stats = processStats(data); },  -&gt; SURVIVED</div><div id="mutation_26_280_298" class="survived">resources/xr/stats.js:13:29 Replaced processStats(data) with data -&gt; SURVIVED</div><div id="mutation_24_272_299" class="survived">resources/xr/stats.js:13:21 Removed stats = processStats(data); -&gt; SURVIVED</div><div id="mutation_25_293_297" class="survived">resources/xr/stats.js:13:42 Replaced data with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_22_335_409" class="survived">resources/xr/stats.js:15:17 Removed complete: function() { onComplete(); } -&gt; SURVIVED</div><div id="mutation_27_378_391" class="survived">resources/xr/stats.js:16:21 Removed onComplete(); -&gt; SURVIVED</div><div id="mutation_15_445_504" class="survived">resources/xr/stats.js:20:9 Removed getStats : function() { return stats; } -&gt; SURVIVED</div><div id="mutation_28_481_494" class="survived">resources/xr/stats.js:21:13 Removed return stats; -&gt; SURVIVED</div><div id="mutation_10_518_869" class="survived">resources/xr/stats.js:26:5 Removed function processStats(data) { return _.transform(data, function(result, val, fieldName){ if (isNumericField(fieldName)) { val = Number(val); } else if (Array.isArray(val)) { val = val.join(&quot;, &quot;); } result[&quot;stats.&quot; + fieldName] = val; }); } -&gt; SURVIVED</div><div id="mutation_29_556_863" class="survived">resources/xr/stats.js:27:9 Removed return _.transform(data, function(result, val, fieldName){ if (isNumericField(fieldName)) { val = Number(val); } else if (Array.isArray(val)) { val = val.join(&quot;, &quot;); } result[&quot;stats.&quot; + fieldName] = val; }); -&gt; SURVIVED</div><div id="mutation_30_575_579" class="survived">resources/xr/stats.js:27:28 Replaced data with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_31_581_861" class="survived">resources/xr/stats.js:27:34 Replaced function(result, val, fieldName){ if (isNumericField(fieldName)) { val = Number(val); } else if (Array.isArray(val)) { val = val.join(&quot;, &quot;); } result[&quot;stats.&quot; + fieldName] = val; } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_32_563_862" class="survived">resources/xr/stats.js:27:16 Replaced _.transform(data, function(result, val, fieldName){ if (isNumericField(fieldName)) { val = Number(val); } else if (Array.isArray(val)) { val = val.join(&quot;, &quot;); } result[&quot;stats.&quot; + fieldName] = val; }) with _ -&gt; SURVIVED</div><div id="mutation_36_631_656" class="survived">resources/xr/stats.js:28:17 Replaced isNumericField(fieldName) with fieldName -&gt; SURVIVED</div><div id="mutation_33_627_803" class="survived">resources/xr/stats.js:28:13 Removed if (isNumericField(fieldName)) { val = Number(val); } else if (Array.isArray(val)) { val = val.join(&quot;, &quot;); } -&gt; SURVIVED</div><div id="mutation_35_646_655" class="survived">resources/xr/stats.js:28:32 Replaced fieldName with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_38_689_692" class="survived">resources/xr/stats.js:29:30 Replaced val with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_39_682_693" class="survived">resources/xr/stats.js:29:23 Replaced Number(val) with val -&gt; SURVIVED</div><div id="mutation_37_676_694" class="survived">resources/xr/stats.js:29:17 Removed val = Number(val); -&gt; SURVIVED</div><div id="mutation_41_730_748" class="survived">resources/xr/stats.js:31:22 Replaced Array.isArray(val) with val -&gt; SURVIVED</div><div id="mutation_40_744_747" class="survived">resources/xr/stats.js:31:36 Replaced val with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_42_730_748" class="survived">resources/xr/stats.js:31:22 Replaced Array.isArray(val) with Array -&gt; SURVIVED</div><div id="mutation_46_774_788" class="survived">resources/xr/stats.js:32:23 Replaced val.join(&quot;, &quot;) with val -&gt; SURVIVED</div><div id="mutation_43_768_789" class="survived">resources/xr/stats.js:32:17 Removed val = val.join(&quot;, &quot;); -&gt; SURVIVED</div><div id="mutation_44_783_787" class="survived">resources/xr/stats.js:32:32 Replaced &quot;, &quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_45_774_788" class="survived">resources/xr/stats.js:32:23 Replaced val.join(&quot;, &quot;) with &quot;, &quot; -&gt; SURVIVED</div><div id="mutation_48_823_831" class="survived">resources/xr/stats.js:34:20 Replaced &quot;stats.&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_34_816_851" class="survived">resources/xr/stats.js:34:13 Removed result[&quot;stats.&quot; + fieldName] = val; -&gt; SURVIVED</div><div id="mutation_47_831_834" class="survived">resources/xr/stats.js:34:28 Replaced  +  with - -&gt; SURVIVED</div><div id="mutation_11_875_1002" class="survived">resources/xr/stats.js:38:5 Removed function isNumericField(fieldName) { return (fieldName.indexOf(&quot;-avg&quot;) != -1 || fieldName.indexOf(&quot;-max&quot;) != -1); } -&gt; SURVIVED</div><div id="mutation_60_992_993" class="survived">resources/xr/stats.js:39:83 Removed - -&gt; SURVIVED</div><div id="mutation_50_959_963" class="survived">resources/xr/stats.js:39:48 Replaced  ||  with &amp;&amp; -&gt; SURVIVED</div><div id="mutation_51_953_957" class="survived">resources/xr/stats.js:39:42 Replaced  !=  with == -&gt; SURVIVED</div><div id="mutation_52_946_952" class="survived">resources/xr/stats.js:39:35 Replaced &quot;-avg&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_53_928_953" class="survived">resources/xr/stats.js:39:17 Replaced fieldName.indexOf(&quot;-avg&quot;) with &quot;-avg&quot; -&gt; SURVIVED</div><div id="mutation_49_920_996" class="survived">resources/xr/stats.js:39:9 Removed return (fieldName.indexOf(&quot;-avg&quot;) != -1 || fieldName.indexOf(&quot;-max&quot;) != -1); -&gt; SURVIVED</div><div id="mutation_55_957_958" class="survived">resources/xr/stats.js:39:48 Removed - -&gt; SURVIVED</div><div id="mutation_56_988_992" class="survived">resources/xr/stats.js:39:77 Replaced  !=  with == -&gt; SURVIVED</div><div id="mutation_57_981_987" class="survived">resources/xr/stats.js:39:70 Replaced &quot;-max&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_58_963_988" class="survived">resources/xr/stats.js:39:52 Replaced fieldName.indexOf(&quot;-max&quot;) with &quot;-max&quot; -&gt; SURVIVED</div><div id="mutation_59_963_988" class="survived">resources/xr/stats.js:39:52 Replaced fieldName.indexOf(&quot;-max&quot;) with fieldName -&gt; SURVIVED</div><div id="mutation_54_928_953" class="survived">resources/xr/stats.js:39:17 Replaced fieldName.indexOf(&quot;-avg&quot;) with fieldName -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

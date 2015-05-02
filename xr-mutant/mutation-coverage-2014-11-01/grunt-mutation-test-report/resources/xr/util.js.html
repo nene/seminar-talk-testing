@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":34,"ignored":2,"untested":0,"survived":30}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>34</strong> of which <strong>30</strong> survived,&nbsp;
+        <strong>2</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>11.8%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/util.js.html'">util.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li><span class="code killed mutation_6_15_1143"><span class="code survived mutation_3_15_1144">define(<span class="code survived mutation_5_22_1142">function(){</span></span></span></li><li><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144"></li><li>    <span class="code survived mutation_7_39_1139">return {</span></span></span></span></li><li><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">        /**</span></span></span></span></li><li><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">         * Attempts to converts given value to array.</span></span></span></span></li><li><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">         *</span></span></span></span></li><li><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">         * - For null or undefined it returns emty array.</span></span></span></span></li><li><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">         * - For string it parses it as JSON (possibly returning an object).</span></span></span></span></li><li><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">         * - For object it returns array of its values,</span></span></span></span></li><li><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">         *   excluding null/undefined values by default,</span></span></span></span></li><li><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">         *   but keeping them when includeEmptyVals specified.</span></span></span></span></li><li><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">         *</span></span></span></span></li><li><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">         * @param {*} obj</span></span></span></span></li><li><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">         * @param {Boolean} includeEmptyVals</span></span></span></span></li><li><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">         * @return {Array|Object}</span></span></span></span></li><li><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">         */</span></span></span></span></li><li><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">        <span class="code survived mutation_8_572_1132">toArray : function(obj, includeEmptyVals) {</span></span></span></span></span></li><li><span class="code survived mutation_8_572_1132"><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">            <span class="code survived mutation_9_628_709">if (obj<span class="code survived mutation_15_635_640"> === </span>null<span class="code survived mutation_14_644_648"> || </span>obj<span class="code survived mutation_16_651_656"> === </span>undefined) {</span></span></span></span></span></span></li><li><span class="code survived mutation_9_628_709"><span class="code survived mutation_8_572_1132"><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">                <span class="code survived mutation_17_685_695">return [];</span></span></span></span></span></span></span></li><li><span class="code survived mutation_9_628_709"><span class="code survived mutation_8_572_1132"><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">            }</span></span></span></span></span></span></li><li><span class="code survived mutation_8_572_1132"><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">            <span class="code survived mutation_10_722_806">if (<span class="code killed mutation_19_726_727">t</span>ypeof obj<span class="code survived mutation_18_736_741"> === </span><span class="code survived mutation_20_741_749">"string"</span>) {</span></span></span></span></span></span></li><li><span class="code survived mutation_10_722_806"><span class="code survived mutation_8_572_1132"><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">                <span class="code survived mutation_21_769_792">return <span class="code survived mutation_24_776_791"><span class="code survived mutation_23_776_791">JSON.parse(<span class="code survived mutation_22_787_790">obj</span>)</span></span>;</span></span></span></span></span></span></span></li><li><span class="code survived mutation_10_722_806"><span class="code survived mutation_8_572_1132"><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">            }</span></span></span></span></span></span></li><li><span class="code survived mutation_8_572_1132"><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144"></li><li>            <span class="code survived mutation_11_820_833">var arr = [];</span></span></span></span></span></span></li><li><span class="code survived mutation_8_572_1132"><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">            <span class="code survived mutation_12_846_1098">for (var i in obj) {</span></span></span></span></span></span></li><li><span class="code survived mutation_12_846_1098"><span class="code survived mutation_8_572_1132"><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">                <span class="code survived mutation_25_883_1084">if (<span class="code survived mutation_28_887_908"><span class="code survived mutation_27_887_908">obj.hasOwnProperty(<span class="code survived mutation_26_906_907">i</span>)</span></span> ) {</span></span></span></span></span></span></span></li><li><span class="code survived mutation_25_883_1084"><span class="code survived mutation_12_846_1098"><span class="code survived mutation_8_572_1132"><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">                    <span class="code survived mutation_29_933_1066">if (includeEmptyVals<span class="code survived mutation_30_953_957"> || </span><span class="code survived mutation_31_957_958">!</span>(obj[i] === null || obj[i] === undefined)) {</span></span></span></span></span></span></span></span></li><li><span class="code survived mutation_29_933_1066"><span class="code survived mutation_25_883_1084"><span class="code survived mutation_12_846_1098"><span class="code survived mutation_8_572_1132"><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">                        <span class="code survived mutation_35_1027_1043"><span class="code survived mutation_34_1027_1043"><span class="code survived mutation_32_1027_1044">arr.push(<span class="code survived mutation_33_1036_1042">obj[i]</span>)</span></span>;</span></span></span></span></span></span></span></span></span></li><li><span class="code survived mutation_29_933_1066"><span class="code survived mutation_25_883_1084"><span class="code survived mutation_12_846_1098"><span class="code survived mutation_8_572_1132"><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">                    }</span></span></span></span></span></span></span></span></li><li><span class="code survived mutation_25_883_1084"><span class="code survived mutation_12_846_1098"><span class="code survived mutation_8_572_1132"><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">                }</span></span></span></span></span></span></span></li><li><span class="code survived mutation_12_846_1098"><span class="code survived mutation_8_572_1132"><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">            }</span></span></span></span></span></span></li><li><span class="code survived mutation_8_572_1132"><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">            <span class="code survived mutation_13_1111_1122">return arr;</span></span></span></span></span></span></li><li><span class="code survived mutation_8_572_1132"><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">        }</span></span></span></span></span></li><li><span class="code survived mutation_7_39_1139"><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144">    };</span></span></span></span></li><li><span class="code killed mutation_6_15_1143"><span class="code survived mutation_5_22_1142"><span class="code survived mutation_3_15_1144"></li><li>}</span>)</span>;</span></li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_3_15_1144" class="survived">resources/xr/util.js:3:1 Removed define(function(){ return { /** * Attempts to converts given value to array. * * - For null or undefined it returns emty array. * - For string it parses it as JSON (possibly returning an object). * - For object it returns array of its values, * excluding null/undefined values by default, * but keeping them when includeEmptyVals specified. * * @param {*} obj * @param {Boolean} includeEmptyVals * @return {Array|Object} */ toArray : function(obj, includeEmptyVals) { if (obj === null || obj === undefined) { return []; } if (typeof obj === &quot;string&quot;) { return JSON.parse(obj); } var arr = []; for (var i in obj) { if (obj.hasOwnProperty(i) ) { if (includeEmptyVals || !(obj[i] === null || obj[i] === undefined)) { arr.push(obj[i]); } } } return arr; } }; }); -&gt; SURVIVED</div><div id="mutation_6_15_1143" class="killed">resources/xr/util.js:3:1 Replaced define(function(){ return { /** * Attempts to converts given value to array. * * - For null or undefined it returns emty array. * - For string it parses it as JSON (possibly returning an object). * - For object it returns array of its values, * excluding null/undefined values by default, * but keeping them when includeEmptyVals specified. * * @param {*} obj * @param {Boolean} includeEmptyVals * @return {Array|Object} */ toArray : function(obj, includeEmptyVals) { if (obj === null || obj === undefined) { return []; } if (typeof obj === &quot;string&quot;) { return JSON.parse(obj); } var arr = []; for (var i in obj) { if (obj.hasOwnProperty(i) ) { if (includeEmptyVals || !(obj[i] === null || obj[i] === undefined)) { arr.push(obj[i]); } } } return arr; } }; }) with function(){ return { /** * Attempts to converts given value to array. * * - For null or undefined it returns emty array. * - For string it parses it as JSON (possibly returning an object). * - For object it returns array of its values, * excluding null/undefined values by default, * but keeping them when includeEmptyVals specified. * * @param {*} obj * @param {Boolean} includeEmptyVals * @return {Array|Object} */ toArray : function(obj, includeEmptyVals) { if (obj === null || obj === undefined) { return []; } if (typeof obj === &quot;string&quot;) { return JSON.parse(obj); } var arr = []; for (var i in obj) { if (obj.hasOwnProperty(i) ) { if (includeEmptyVals || !(obj[i] === null || obj[i] === undefined)) { arr.push(obj[i]); } } } return arr; } }; } -&gt; KILLED</div><div id="mutation_5_22_1142" class="survived">resources/xr/util.js:3:8 Replaced function(){ return { /** * Attempts to converts given value to array. * * - For null or undefined it returns emty array. * - For string it parses it as JSON (possibly returning an object). * - For object it returns array of its values, * excluding null/undefined values by default, * but keeping them when includeEmptyVals specified. * * @param {*} obj * @param {Boolean} includeEmptyVals * @return {Array|Object} */ toArray : function(obj, includeEmptyVals) { if (obj === null || obj === undefined) { return []; } if (typeof obj === &quot;string&quot;) { return JSON.parse(obj); } var arr = []; for (var i in obj) { if (obj.hasOwnProperty(i) ) { if (includeEmptyVals || !(obj[i] === null || obj[i] === undefined)) { arr.push(obj[i]); } } } return arr; } }; } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_7_39_1139" class="survived">resources/xr/util.js:5:5 Removed return { /** * Attempts to converts given value to array. * * - For null or undefined it returns emty array. * - For string it parses it as JSON (possibly returning an object). * - For object it returns array of its values, * excluding null/undefined values by default, * but keeping them when includeEmptyVals specified. * * @param {*} obj * @param {Boolean} includeEmptyVals * @return {Array|Object} */ toArray : function(obj, includeEmptyVals) { if (obj === null || obj === undefined) { return []; } if (typeof obj === &quot;string&quot;) { return JSON.parse(obj); } var arr = []; for (var i in obj) { if (obj.hasOwnProperty(i) ) { if (includeEmptyVals || !(obj[i] === null || obj[i] === undefined)) { arr.push(obj[i]); } } } return arr; } }; -&gt; SURVIVED</div><div id="mutation_8_572_1132" class="survived">resources/xr/util.js:19:9 Removed toArray : function(obj, includeEmptyVals) { if (obj === null || obj === undefined) { return []; } if (typeof obj === &quot;string&quot;) { return JSON.parse(obj); } var arr = []; for (var i in obj) { if (obj.hasOwnProperty(i) ) { if (includeEmptyVals || !(obj[i] === null || obj[i] === undefined)) { arr.push(obj[i]); } } } return arr; } -&gt; SURVIVED</div><div id="mutation_9_628_709" class="survived">resources/xr/util.js:20:13 Removed if (obj === null || obj === undefined) { return []; } -&gt; SURVIVED</div><div id="mutation_14_644_648" class="survived">resources/xr/util.js:20:29 Replaced  ||  with &amp;&amp; -&gt; SURVIVED</div><div id="mutation_15_635_640" class="survived">resources/xr/util.js:20:20 Replaced  ===  with !== -&gt; SURVIVED</div><div id="mutation_16_651_656" class="survived">resources/xr/util.js:20:36 Replaced  ===  with !== -&gt; SURVIVED</div><div id="mutation_17_685_695" class="survived">resources/xr/util.js:21:17 Removed return []; -&gt; SURVIVED</div><div id="mutation_10_722_806" class="survived">resources/xr/util.js:23:13 Removed if (typeof obj === &quot;string&quot;) { return JSON.parse(obj); } -&gt; SURVIVED</div><div id="mutation_20_741_749" class="survived">resources/xr/util.js:23:32 Replaced &quot;string&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_19_726_727" class="killed">resources/xr/util.js:23:27 Removed t -&gt; KILLED</div><div id="mutation_18_736_741" class="survived">resources/xr/util.js:23:27 Replaced  ===  with !== -&gt; SURVIVED</div><div id="mutation_21_769_792" class="survived">resources/xr/util.js:24:17 Removed return JSON.parse(obj); -&gt; SURVIVED</div><div id="mutation_22_787_790" class="survived">resources/xr/util.js:24:35 Replaced obj with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_23_776_791" class="survived">resources/xr/util.js:24:24 Replaced JSON.parse(obj) with obj -&gt; SURVIVED</div><div id="mutation_24_776_791" class="survived">resources/xr/util.js:24:24 Replaced JSON.parse(obj) with JSON -&gt; SURVIVED</div><div id="mutation_11_820_833" class="survived">resources/xr/util.js:27:13 Removed var arr = []; -&gt; SURVIVED</div><div id="mutation_12_846_1098" class="survived">resources/xr/util.js:28:13 Removed for (var i in obj) { if (obj.hasOwnProperty(i) ) { if (includeEmptyVals || !(obj[i] === null || obj[i] === undefined)) { arr.push(obj[i]); } } } -&gt; SURVIVED</div><div id="mutation_25_883_1084" class="survived">resources/xr/util.js:29:17 Removed if (obj.hasOwnProperty(i) ) { if (includeEmptyVals || !(obj[i] === null || obj[i] === undefined)) { arr.push(obj[i]); } } -&gt; SURVIVED</div><div id="mutation_26_906_907" class="survived">resources/xr/util.js:29:40 Replaced i with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_27_887_908" class="survived">resources/xr/util.js:29:21 Replaced obj.hasOwnProperty(i) with i -&gt; SURVIVED</div><div id="mutation_28_887_908" class="survived">resources/xr/util.js:29:21 Replaced obj.hasOwnProperty(i) with obj -&gt; SURVIVED</div><div id="mutation_29_933_1066" class="survived">resources/xr/util.js:30:21 Removed if (includeEmptyVals || !(obj[i] === null || obj[i] === undefined)) { arr.push(obj[i]); } -&gt; SURVIVED</div><div id="mutation_30_953_957" class="survived">resources/xr/util.js:30:41 Replaced  ||  with &amp;&amp; -&gt; SURVIVED</div><div id="mutation_31_957_958" class="survived">resources/xr/util.js:30:87 Removed ! -&gt; SURVIVED</div><div id="mutation_35_1027_1043" class="survived">resources/xr/util.js:31:25 Replaced arr.push(obj[i]) with arr -&gt; SURVIVED</div><div id="mutation_32_1027_1044" class="survived">resources/xr/util.js:31:25 Removed arr.push(obj[i]); -&gt; SURVIVED</div><div id="mutation_33_1036_1042" class="survived">resources/xr/util.js:31:34 Replaced obj[i] with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_34_1027_1043" class="survived">resources/xr/util.js:31:25 Replaced arr.push(obj[i]) with obj[i] -&gt; SURVIVED</div><div id="mutation_13_1111_1122" class="survived">resources/xr/util.js:35:13 Removed return arr; -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

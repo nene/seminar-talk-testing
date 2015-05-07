@@ -1,25 +1,25 @@
 # Unit Testing HTML & JavaScript
 
- *  ## JavaScript
+  * ## JavaScript
 
     Within ~1 year, XRebel code base has grown to 11,500 lines of JavaScript
     (altogether in 150 files). A nice steady progress.
 
     A little drop at the end: engineering-focused sprints.
 
- *  ## Unit tests
+  * ## Unit tests
 
     After the launch of 1.0 we started to write unit tests.
     Now more unit tests than actual code: 12,800 lines.
 
- *  ## Code coverage
+  * ## Code coverage
 
     Overall code coverage: 65%
 
     Some files aren't tested at all.
     Only ~107 files out of 150 have unit tests associated with them.
 
- *  ## Code coverage Example
+  * ## Code coverage Example
 
     As an example we have this sum() function for summing up numbers in array.
 

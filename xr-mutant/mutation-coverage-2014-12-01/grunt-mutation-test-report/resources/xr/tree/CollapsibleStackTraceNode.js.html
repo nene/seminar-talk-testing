@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":51,"ignored":11,"untested":0,"survived":4}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>51</strong> of which <strong>4</strong> survived,&nbsp;
+        <strong>11</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>92.2%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/index.html'">tree</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/CollapsibleStackTraceNode.js.html'">CollapsibleStackTraceNode.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_13_62_68">"xr/_"</span>);</li><li>    var lang = require(<span class="code killed mutation_15_94_103">"xr/lang"</span>);</li><li>    var StackTraceNode = require(<span class="code killed mutation_17_139_163">"xr/tree/StackTraceNode"</span>);</li><li></li><li>    /**</li><li>     * Represents a collapsible StackTraceNode.</li><li>     *</li><li>     * @constructor</li><li>     * @param {StrackTraceNode} stackTraceNode The original StackTraceNode</li><li>     *   to turn into collapsible variant.</li><li>     * @param {{collapsedCallsCount: Boolean}} cfg</li><li>     */</li><li>    <span class="code killed mutation_10_431_638">function CollapsibleStackTraceNode(stackTraceNode, cfg) {</span></li><li><span class="code killed mutation_10_431_638">        <span class="code killed mutation_24_497_571"><span class="code killed mutation_19_497_572">StackTraceNode.call(<span class="code killed mutation_21_517_521">this</span>, <span class="code killed mutation_22_523_540">stackTraceNode.el</span>, <span class="code killed mutation_25_542_570"><span class="code killed mutation_23_542_570">stackTraceNode.getChildren()</span></span>)</span>;</span></span></li><li><span class="code killed mutation_10_431_638">        <span class="code killed mutation_20_581_632">this.collapsedCallsCount = cfg.collapsedCallsCount;</span></span></li><li><span class="code killed mutation_10_431_638">    }</span></li><li>    <span class="code killed mutation_52_643_671"><span class="code killed mutation_28_643_1214"><span class="code killed mutation_11_643_1215">_(<span class="code killed mutation_51_645_670">CollapsibleStackTraceNode</span>)</span>.extendClass(<span class="code killed mutation_26_684_698">StackTraceNode</span>, <span class="code killed mutation_27_700_1213">{</span></span></span></li><li><span class="code killed mutation_28_643_1214"><span class="code killed mutation_27_700_1213"><span class="code killed mutation_11_643_1215">        <span class="code survived mutation_29_710_778">template: <span class="code survived mutation_32_720_767">"templates/tree/CollapsibleStackTraceNode.html"</span>,</span></span></span></span></li><li><span class="code survived mutation_29_710_778"><span class="code killed mutation_28_643_1214"><span class="code killed mutation_27_700_1213"><span class="code killed mutation_11_643_1215"></li><li>        </span><span class="code killed mutation_30_778_1090">getTemplateData: function() {</span></span></span></span></li><li><span class="code killed mutation_30_778_1090"><span class="code killed mutation_28_643_1214"><span class="code killed mutation_27_700_1213"><span class="code killed mutation_11_643_1215">            <span class="code killed mutation_33_820_883">var data = <span class="code killed mutation_39_831_882"><span class="code killed mutation_38_831_882">StackTraceNode.prototype.getTemplateData.call(<span class="code killed mutation_37_877_881">this</span>)</span></span>;</span></span></span></span></span></li><li><span class="code killed mutation_30_778_1090"><span class="code killed mutation_28_643_1214"><span class="code killed mutation_27_700_1213"><span class="code killed mutation_11_643_1215">            <span class="code killed mutation_34_896_980">data.collapsedCallsCount = <span class="code killed mutation_42_923_979"><span class="code killed mutation_41_923_979">this.formatCollapsedCallsCount(<span class="code killed mutation_40_954_978">this.collapsedCallsCount</span>)</span></span>;</span></span></span></span></span></li><li><span class="code killed mutation_30_778_1090"><span class="code killed mutation_28_643_1214"><span class="code killed mutation_27_700_1213"><span class="code killed mutation_11_643_1215">            <span class="code killed mutation_35_993_1044">data.showCallsCount = this.collapsedCallsCount<span class="code killed mutation_44_1039_1042"><span class="code killed mutation_43_1039_1042"> > </span></span><span class="code survived mutation_45_1042_1043">0</span>;</span></span></span></span></span></li><li><span class="code killed mutation_30_778_1090"><span class="code killed mutation_28_643_1214"><span class="code killed mutation_27_700_1213"><span class="code killed mutation_11_643_1215">            <span class="code killed mutation_36_1057_1069">return data;</span></span></span></span></span></li><li><span class="code killed mutation_30_778_1090"><span class="code killed mutation_28_643_1214"><span class="code killed mutation_27_700_1213"><span class="code killed mutation_11_643_1215">        },</span></span></span></span></li><li><span class="code killed mutation_30_778_1090"><span class="code killed mutation_28_643_1214"><span class="code killed mutation_27_700_1213"><span class="code killed mutation_11_643_1215"></li><li>        </span><span class="code killed mutation_31_1090_1207">formatCollapsedCallsCount: function(count) {</span></span></span></span></li><li><span class="code killed mutation_31_1090_1207"><span class="code killed mutation_28_643_1214"><span class="code killed mutation_27_700_1213"><span class="code killed mutation_11_643_1215">            <span class="code killed mutation_46_1147_1197">return <span class="code killed mutation_50_1154_1196">lang.pluralize(<span class="code survived mutation_47_1169_1177">"% call"</span>, <span class="code killed mutation_48_1179_1188">"% calls"</span>, <span class="code killed mutation_49_1190_1195">count</span>)</span>;</span></span></span></span></span></li><li><span class="code killed mutation_31_1090_1207"><span class="code killed mutation_28_643_1214"><span class="code killed mutation_27_700_1213"><span class="code killed mutation_11_643_1215">        }</span></span></span></span></li><li><span class="code killed mutation_28_643_1214"><span class="code killed mutation_27_700_1213"><span class="code killed mutation_11_643_1215">    }</span>)</span>;</span></li><li></li><li>    <span class="code killed mutation_12_1221_1254">return CollapsibleStackTraceNode;</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_13_62_68" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_94_103" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:5:24 Replaced &quot;xr/lang&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_139_163" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:6:34 Replaced &quot;xr/tree/StackTraceNode&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_10_431_638" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:16:5 Removed function CollapsibleStackTraceNode(stackTraceNode, cfg) { StackTraceNode.call(this, stackTraceNode.el, stackTraceNode.getChildren()); this.collapsedCallsCount = cfg.collapsedCallsCount; } -&gt; KILLED</div><div id="mutation_19_497_572" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:17:9 Removed StackTraceNode.call(this, stackTraceNode.el, stackTraceNode.getChildren()); -&gt; KILLED</div><div id="mutation_25_542_570" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:17:54 Replaced stackTraceNode.getChildren() with stackTraceNode -&gt; KILLED</div><div id="mutation_21_517_521" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:17:29 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_523_540" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:17:35 Replaced stackTraceNode.el with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_23_542_570" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:17:54 Replaced stackTraceNode.getChildren() with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_24_497_571" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:17:9 Replaced StackTraceNode.call(this, stackTraceNode.el, stackTraceNode.getChildren()) with StackTraceNode -&gt; KILLED</div><div id="mutation_20_581_632" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:18:9 Removed this.collapsedCallsCount = cfg.collapsedCallsCount; -&gt; KILLED</div><div id="mutation_52_643_671" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:20:5 Replaced _(CollapsibleStackTraceNode) with CollapsibleStackTraceNode -&gt; KILLED</div><div id="mutation_51_645_670" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:20:7 Replaced CollapsibleStackTraceNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_26_684_698" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:20:46 Replaced StackTraceNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_27_700_1213" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:20:62 Replaced { template: &quot;templates/tree/CollapsibleStackTraceNode.html&quot;, getTemplateData: function() { var data = StackTraceNode.prototype.getTemplateData.call(this); data.collapsedCallsCount = this.formatCollapsedCallsCount(this.collapsedCallsCount); data.showCallsCount = this.collapsedCallsCount &gt; 0; return data; }, formatCollapsedCallsCount: function(count) { return lang.pluralize(&quot;% call&quot;, &quot;% calls&quot;, count); } } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_28_643_1214" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:20:5 Replaced _(CollapsibleStackTraceNode).extendClass(StackTraceNode, { template: &quot;templates/tree/CollapsibleStackTraceNode.html&quot;, getTemplateData: function() { var data = StackTraceNode.prototype.getTemplateData.call(this); data.collapsedCallsCount = this.formatCollapsedCallsCount(this.collapsedCallsCount); data.showCallsCount = this.collapsedCallsCount &gt; 0; return data; }, formatCollapsedCallsCount: function(count) { return lang.pluralize(&quot;% call&quot;, &quot;% calls&quot;, count); } }) with _(CollapsibleStackTraceNode) -&gt; KILLED</div><div id="mutation_11_643_1215" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:20:5 Removed _(CollapsibleStackTraceNode).extendClass(StackTraceNode, { template: &quot;templates/tree/CollapsibleStackTraceNode.html&quot;, getTemplateData: function() { var data = StackTraceNode.prototype.getTemplateData.call(this); data.collapsedCallsCount = this.formatCollapsedCallsCount(this.collapsedCallsCount); data.showCallsCount = this.collapsedCallsCount &gt; 0; return data; }, formatCollapsedCallsCount: function(count) { return lang.pluralize(&quot;% call&quot;, &quot;% calls&quot;, count); } }); -&gt; KILLED</div><div id="mutation_32_720_767" class="survived">resources/xr/tree/CollapsibleStackTraceNode.js:21:19 Replaced &quot;templates/tree/CollapsibleStackTraceNode.html&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_29_710_778" class="survived">resources/xr/tree/CollapsibleStackTraceNode.js:21:9 Removed template: &quot;templates/tree/CollapsibleStackTraceNode.html&quot;,  -&gt; SURVIVED</div><div id="mutation_30_778_1090" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:23:9 Removed getTemplateData: function() { var data = StackTraceNode.prototype.getTemplateData.call(this); data.collapsedCallsCount = this.formatCollapsedCallsCount(this.collapsedCallsCount); data.showCallsCount = this.collapsedCallsCount &gt; 0; return data; },  -&gt; KILLED</div><div id="mutation_33_820_883" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:24:13 Removed var data = StackTraceNode.prototype.getTemplateData.call(this); -&gt; KILLED</div><div id="mutation_39_831_882" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:24:24 Replaced StackTraceNode.prototype.getTemplateData.call(this) with StackTraceNode.prototype.getTemplateData -&gt; KILLED</div><div id="mutation_38_831_882" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:24:24 Replaced StackTraceNode.prototype.getTemplateData.call(this) with this -&gt; KILLED</div><div id="mutation_37_877_881" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:24:70 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_41_923_979" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:25:40 Replaced this.formatCollapsedCallsCount(this.collapsedCallsCount) with this.collapsedCallsCount -&gt; KILLED</div><div id="mutation_34_896_980" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:25:13 Removed data.collapsedCallsCount = this.formatCollapsedCallsCount(this.collapsedCallsCount); -&gt; KILLED</div><div id="mutation_40_954_978" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:25:71 Replaced this.collapsedCallsCount with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_42_923_979" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:25:40 Replaced this.formatCollapsedCallsCount(this.collapsedCallsCount) with this -&gt; KILLED</div><div id="mutation_35_993_1044" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:26:13 Removed data.showCallsCount = this.collapsedCallsCount &gt; 0; -&gt; KILLED</div><div id="mutation_45_1042_1043" class="survived">resources/xr/tree/CollapsibleStackTraceNode.js:26:62 Replaced 0 with 1 -&gt; SURVIVED</div><div id="mutation_43_1039_1042" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:26:59 Replaced  &gt;  with &gt;= -&gt; KILLED</div><div id="mutation_44_1039_1042" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:26:59 Replaced  &gt;  with &lt;= -&gt; KILLED</div><div id="mutation_36_1057_1069" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:27:13 Removed return data; -&gt; KILLED</div><div id="mutation_31_1090_1207" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:30:9 Removed formatCollapsedCallsCount: function(count) { return lang.pluralize(&quot;% call&quot;, &quot;% calls&quot;, count); } -&gt; KILLED</div><div id="mutation_46_1147_1197" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:31:13 Removed return lang.pluralize(&quot;% call&quot;, &quot;% calls&quot;, count); -&gt; KILLED</div><div id="mutation_47_1169_1177" class="survived">resources/xr/tree/CollapsibleStackTraceNode.js:31:35 Replaced &quot;% call&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_48_1179_1188" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:31:45 Replaced &quot;% calls&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_49_1190_1195" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:31:56 Replaced count with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_50_1154_1196" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:31:20 Replaced lang.pluralize(&quot;% call&quot;, &quot;% calls&quot;, count) with lang -&gt; KILLED</div><div id="mutation_12_1221_1254" class="killed">resources/xr/tree/CollapsibleStackTraceNode.js:35:5 Removed return CollapsibleStackTraceNode; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

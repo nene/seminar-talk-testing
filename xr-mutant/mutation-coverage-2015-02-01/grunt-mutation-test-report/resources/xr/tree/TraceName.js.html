@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":45,"ignored":7,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>45</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/index.html'">tree</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/TraceName.js.html'">TraceName.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_12_62_68">"xr/_"</span>);</li><li></li><li>    /**</li><li>     * Utility for dealing with various parts of stack trace node name.</li><li>     *</li><li>     * Use this to construct TraceName object from raw CPU stackTrace element.</li><li>     *</li><li>     * @constructor</li><li>     * @param {Object} trace Trace name parts:</li><li>     * @param {String} trace.packageName</li><li>     * @param {String} trace.className</li><li>     * @param {String} trace.methodName</li><li>     */</li><li>    <span class="code killed mutation_8_444_603">function TraceName(trace) {</span></li><li><span class="code killed mutation_8_444_603">        // Just keep a reference to the provided object, avoiding extensive copying of name data.</span></li><li><span class="code killed mutation_8_444_603">        <span class="code killed mutation_14_578_597">this.trace = trace;</span></span></li><li><span class="code killed mutation_8_444_603">    }</span></li><li></li><li>    /**</li><li>     * Creates TraceName instance from object with 'class' and 'method' fields</li><li>     * like raw IO trace elements have.</li><li>     *</li><li>     * Use this to construct TraceName object from raw IO stackTrace element.</li><li>     *</li><li>     * @param  {Object} cfg</li><li>     * @param  {String} cfg.class</li><li>     * @param  {String} cfg.method</li><li>     * @return {TraceName}</li><li>     */</li><li>    <span class="code killed mutation_9_960_1232">TraceName.fromIo = function(cfg) {</span></li><li><span class="code killed mutation_9_960_1232">        <span class="code killed mutation_15_1003_1045">var classParts = <span class="code killed mutation_19_1020_1044"><span class="code killed mutation_18_1020_1044">cfg[<span class="code killed mutation_20_1024_1031">"class"</span>].split(<span class="code killed mutation_17_1039_1043">/\./</span>)</span></span>;</span></span></li><li><span class="code killed mutation_9_960_1232"></li><li>        <span class="code killed mutation_16_1055_1225">return new TraceName({</span></span></li><li><span class="code killed mutation_16_1055_1225"><span class="code killed mutation_9_960_1232">            <span class="code killed mutation_21_1090_1148">packageName: <span class="code killed mutation_29_1103_1124"><span class="code killed mutation_28_1103_1124"><span class="code killed mutation_26_1103_1134"><span class="code killed mutation_25_1103_1134">_.initial(<span class="code killed mutation_27_1113_1123">classParts</span>)</span></span>.join(<span class="code killed mutation_24_1130_1133">"."</span>)</span></span>,</span></span></span></li><li><span class="code killed mutation_21_1090_1148"><span class="code killed mutation_16_1055_1225"><span class="code killed mutation_9_960_1232">            </span><span class="code killed mutation_22_1148_1191">className: <span class="code killed mutation_32_1159_1177"><span class="code killed mutation_31_1159_1177">_.last(<span class="code killed mutation_30_1166_1176">classParts</span>)</span></span>,</span></span></span></li><li><span class="code killed mutation_22_1148_1191"><span class="code killed mutation_16_1055_1225"><span class="code killed mutation_9_960_1232">            </span><span class="code killed mutation_23_1191_1213">methodName: cfg.method</span></span></span></li><li><span class="code killed mutation_16_1055_1225"><span class="code killed mutation_9_960_1232">        });</span></span></li><li><span class="code killed mutation_9_960_1232">    };</span></li><li></li><li>    <span class="code killed mutation_10_1238_1870">TraceName.prototype = {</span></li><li><span class="code killed mutation_10_1238_1870">        /**</span></li><li><span class="code killed mutation_10_1238_1870">         * Returns full name, like "com.package.MyClass.doSomething".</span></li><li><span class="code killed mutation_10_1238_1870">         * @return {String}</span></li><li><span class="code killed mutation_10_1238_1870">         */</span></li><li><span class="code killed mutation_10_1238_1870">        <span class="code killed mutation_33_1392_1760">getFull: function() {</span></span></li><li><span class="code killed mutation_33_1392_1760"><span class="code killed mutation_10_1238_1870">            <span class="code killed mutation_35_1426_1613">if (this.trace.packageName) {</span></span></span></li><li><span class="code killed mutation_35_1426_1613"><span class="code killed mutation_33_1392_1760"><span class="code killed mutation_10_1238_1870">                <span class="code killed mutation_36_1472_1526">return this.trace.packageName<span class="code killed mutation_38_1501_1504"> + </span><span class="code killed mutation_39_1504_1507">"."</span><span class="code killed mutation_37_1507_1510"> + </span><span class="code killed mutation_40_1510_1525">this.getShort()</span>;</span></span></span></span></li><li><span class="code killed mutation_35_1426_1613"><span class="code killed mutation_33_1392_1760"><span class="code killed mutation_10_1238_1870">            }</span></span></span></li><li><span class="code killed mutation_35_1426_1613"><span class="code killed mutation_33_1392_1760"><span class="code killed mutation_10_1238_1870">            else {</span></span></span></li><li><span class="code killed mutation_35_1426_1613"><span class="code killed mutation_33_1392_1760"><span class="code killed mutation_10_1238_1870">                <span class="code killed mutation_41_1576_1599">return <span class="code killed mutation_42_1583_1598">this.getShort()</span>;</span></span></span></span></li><li><span class="code killed mutation_35_1426_1613"><span class="code killed mutation_33_1392_1760"><span class="code killed mutation_10_1238_1870">            }</span></span></span></li><li><span class="code killed mutation_33_1392_1760"><span class="code killed mutation_10_1238_1870">        },</span></span></li><li><span class="code killed mutation_33_1392_1760"><span class="code killed mutation_10_1238_1870"></li><li>        /**</span></span></li><li><span class="code killed mutation_33_1392_1760"><span class="code killed mutation_10_1238_1870">         * Returns name without package part, like "MyClass.doSomething".</span></span></li><li><span class="code killed mutation_33_1392_1760"><span class="code killed mutation_10_1238_1870">         * @return {String}</span></span></li><li><span class="code killed mutation_33_1392_1760"><span class="code killed mutation_10_1238_1870">         */</span></span></li><li><span class="code killed mutation_33_1392_1760"><span class="code killed mutation_10_1238_1870">        </span><span class="code killed mutation_34_1760_1863">getShort: function() {</span></span></li><li><span class="code killed mutation_34_1760_1863"><span class="code killed mutation_10_1238_1870">            <span class="code killed mutation_43_1795_1853">return this.trace.className<span class="code killed mutation_45_1822_1825"> + </span><span class="code killed mutation_46_1825_1828">"."</span><span class="code killed mutation_44_1828_1831"> + </span>this.trace.methodName;</span></span></span></li><li><span class="code killed mutation_34_1760_1863"><span class="code killed mutation_10_1238_1870">        }</span></span></li><li><span class="code killed mutation_10_1238_1870">    };</span></li><li></li><li>    <span class="code killed mutation_11_1876_1893">return TraceName;</span></li><li>});</li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_12_62_68" class="killed">resources/xr/tree/TraceName.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_444_603" class="killed">resources/xr/tree/TraceName.js:17:5 Removed function TraceName(trace) { // Just keep a reference to the provided object, avoiding extensive copying of name data. this.trace = trace; } -&gt; KILLED</div><div id="mutation_14_578_597" class="killed">resources/xr/tree/TraceName.js:19:9 Removed this.trace = trace; -&gt; KILLED</div><div id="mutation_9_960_1232" class="killed">resources/xr/tree/TraceName.js:33:5 Removed TraceName.fromIo = function(cfg) { var classParts = cfg[&quot;class&quot;].split(/\./); return new TraceName({ packageName: _.initial(classParts).join(&quot;.&quot;), className: _.last(classParts), methodName: cfg.method }); }; -&gt; KILLED</div><div id="mutation_15_1003_1045" class="killed">resources/xr/tree/TraceName.js:34:9 Removed var classParts = cfg[&quot;class&quot;].split(/\./); -&gt; KILLED</div><div id="mutation_17_1039_1043" class="killed">resources/xr/tree/TraceName.js:34:45 Replaced /\./ with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_18_1020_1044" class="killed">resources/xr/tree/TraceName.js:34:26 Replaced cfg[&quot;class&quot;].split(/\./) with /\./ -&gt; KILLED</div><div id="mutation_19_1020_1044" class="killed">resources/xr/tree/TraceName.js:34:26 Replaced cfg[&quot;class&quot;].split(/\./) with cfg[&quot;class&quot;] -&gt; KILLED</div><div id="mutation_20_1024_1031" class="killed">resources/xr/tree/TraceName.js:34:30 Replaced &quot;class&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_16_1055_1225" class="killed">resources/xr/tree/TraceName.js:36:9 Removed return new TraceName({ packageName: _.initial(classParts).join(&quot;.&quot;), className: _.last(classParts), methodName: cfg.method }); -&gt; KILLED</div><div id="mutation_29_1103_1124" class="killed">resources/xr/tree/TraceName.js:37:26 Replaced _.initial(classParts) with _ -&gt; KILLED</div><div id="mutation_28_1103_1124" class="killed">resources/xr/tree/TraceName.js:37:26 Replaced _.initial(classParts) with classParts -&gt; KILLED</div><div id="mutation_21_1090_1148" class="killed">resources/xr/tree/TraceName.js:37:13 Removed packageName: _.initial(classParts).join(&quot;.&quot;),  -&gt; KILLED</div><div id="mutation_27_1113_1123" class="killed">resources/xr/tree/TraceName.js:37:36 Replaced classParts with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_26_1103_1134" class="killed">resources/xr/tree/TraceName.js:37:26 Replaced _.initial(classParts).join(&quot;.&quot;) with _.initial(classParts) -&gt; KILLED</div><div id="mutation_24_1130_1133" class="killed">resources/xr/tree/TraceName.js:37:53 Replaced &quot;.&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_25_1103_1134" class="killed">resources/xr/tree/TraceName.js:37:26 Replaced _.initial(classParts).join(&quot;.&quot;) with &quot;.&quot; -&gt; KILLED</div><div id="mutation_30_1166_1176" class="killed">resources/xr/tree/TraceName.js:38:31 Replaced classParts with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_31_1159_1177" class="killed">resources/xr/tree/TraceName.js:38:24 Replaced _.last(classParts) with classParts -&gt; KILLED</div><div id="mutation_32_1159_1177" class="killed">resources/xr/tree/TraceName.js:38:24 Replaced _.last(classParts) with _ -&gt; KILLED</div><div id="mutation_22_1148_1191" class="killed">resources/xr/tree/TraceName.js:38:13 Removed className: _.last(classParts),  -&gt; KILLED</div><div id="mutation_23_1191_1213" class="killed">resources/xr/tree/TraceName.js:39:13 Removed methodName: cfg.method -&gt; KILLED</div><div id="mutation_10_1238_1870" class="killed">resources/xr/tree/TraceName.js:43:5 Removed TraceName.prototype = { /** * Returns full name, like &quot;com.package.MyClass.doSomething&quot;. * @return {String} */ getFull: function() { if (this.trace.packageName) { return this.trace.packageName + &quot;.&quot; + this.getShort(); } else { return this.getShort(); } }, /** * Returns name without package part, like &quot;MyClass.doSomething&quot;. * @return {String} */ getShort: function() { return this.trace.className + &quot;.&quot; + this.trace.methodName; } }; -&gt; KILLED</div><div id="mutation_33_1392_1760" class="killed">resources/xr/tree/TraceName.js:48:9 Removed getFull: function() { if (this.trace.packageName) { return this.trace.packageName + &quot;.&quot; + this.getShort(); } else { return this.getShort(); } }, /** * Returns name without package part, like &quot;MyClass.doSomething&quot;. * @return {String} */  -&gt; KILLED</div><div id="mutation_35_1426_1613" class="killed">resources/xr/tree/TraceName.js:49:13 Removed if (this.trace.packageName) { return this.trace.packageName + &quot;.&quot; + this.getShort(); } else { return this.getShort(); } -&gt; KILLED</div><div id="mutation_39_1504_1507" class="killed">resources/xr/tree/TraceName.js:50:49 Replaced &quot;.&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_40_1510_1525" class="killed">resources/xr/tree/TraceName.js:50:55 Replaced this.getShort() with this -&gt; KILLED</div><div id="mutation_36_1472_1526" class="killed">resources/xr/tree/TraceName.js:50:17 Removed return this.trace.packageName + &quot;.&quot; + this.getShort(); -&gt; KILLED</div><div id="mutation_37_1507_1510" class="killed">resources/xr/tree/TraceName.js:50:52 Replaced  +  with - -&gt; KILLED</div><div id="mutation_38_1501_1504" class="killed">resources/xr/tree/TraceName.js:50:46 Replaced  +  with - -&gt; KILLED</div><div id="mutation_41_1576_1599" class="killed">resources/xr/tree/TraceName.js:53:17 Removed return this.getShort(); -&gt; KILLED</div><div id="mutation_42_1583_1598" class="killed">resources/xr/tree/TraceName.js:53:24 Replaced this.getShort() with this -&gt; KILLED</div><div id="mutation_34_1760_1863" class="killed">resources/xr/tree/TraceName.js:61:9 Removed getShort: function() { return this.trace.className + &quot;.&quot; + this.trace.methodName; } -&gt; KILLED</div><div id="mutation_43_1795_1853" class="killed">resources/xr/tree/TraceName.js:62:13 Removed return this.trace.className + &quot;.&quot; + this.trace.methodName; -&gt; KILLED</div><div id="mutation_44_1828_1831" class="killed">resources/xr/tree/TraceName.js:62:46 Replaced  +  with - -&gt; KILLED</div><div id="mutation_45_1822_1825" class="killed">resources/xr/tree/TraceName.js:62:40 Replaced  +  with - -&gt; KILLED</div><div id="mutation_46_1825_1828" class="killed">resources/xr/tree/TraceName.js:62:43 Replaced &quot;.&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_11_1876_1893" class="killed">resources/xr/tree/TraceName.js:66:5 Removed return TraceName; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

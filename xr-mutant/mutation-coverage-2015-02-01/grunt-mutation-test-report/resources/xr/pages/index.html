@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#successRate {
+    padding: 2px;
+    border: none;
+}
+#files {
+    margin-left: 30px;
+}
+#files .perc {
+    width: 25%;
+    text-align: right;
+}
+.link {
+    cursor: pointer;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript"></script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>5073</strong> of which <strong>4872</strong> survived,&nbsp;
+        <strong>201</strong> ignored and <strong>0</strong> untested</p>
+    <span id="successRate" class="survived">Mutation success rate: <strong>4.0%</strong></span>
+</div>
+<h2></h2>
+<table id='files'><tr><td><span class="link survived" onclick="location.href='activate.js.html'">activate.js.html</span></td><td class="perc">8.9%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='cpu.js.html'">cpu.js.html</span></td><td class="perc">26.9%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='exceptions.js.html'">exceptions.js.html</span></td><td class="perc">7.0%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='feedback.js.html'">feedback.js.html</span></td><td class="perc">3.0%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='io.js.html'">io.js.html</span></td><td class="perc">5.6%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='register.js.html'">register.js.html</span></td><td class="perc">2.4%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='session.js.html'">session.js.html</span></td><td class="perc">1.4%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='settings.js.html'">settings.js.html</span></td><td class="perc">2.6%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='toolbar.js.html'">toolbar.js.html</span></td><td class="perc">7.4%</td></tr>
+</table>
+</body>
+</html>

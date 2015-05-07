@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":76,"ignored":15,"untested":0,"survived":4}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>76</strong> of which <strong>4</strong> survived,&nbsp;
+        <strong>15</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>94.7%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/IOTreeRenderer.js.html'">IOTreeRenderer.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_15_62_68">"xr/_"</span>);</li><li>    var template = require(<span class="code killed mutation_17_98_111">"xr/template"</span>);</li><li>    var doT = require(<span class="code killed mutation_19_136_145">"lib/doT"</span>);</li><li>    var CollapsibleStackTraceNode = require(<span class="code killed mutation_21_192_227">"xr/tree/CollapsibleStackTraceNode"</span>);</li><li>    var IOTreeLayout = require(<span class="code killed mutation_23_261_278">"xr/IOTreeLayout"</span>);</li><li></li><li>    /**</li><li>     * Builds HTML tree.</li><li>     * @constructor</li><li>     * @param {Object} treeState A map of tree node ID-s, defining whether</li><li>     * they're "collapsed" or "expanded".</li><li>     */</li><li>    <span class="code killed mutation_12_464_722">function IOTreeRenderer(treeState, templateImpl) {</span></li><li><span class="code killed mutation_12_464_722">        <span class="code survived mutation_25_523_550">this.treeState = treeState;</span></span></li><li><span class="code killed mutation_12_464_722">        <span class="code killed mutation_26_559_601">this.layout = new IOTreeLayout(treeState);</span></span></li><li><span class="code killed mutation_12_464_722"></li><li>        // Ad-hoc dependency injection</span></li><li><span class="code killed mutation_12_464_722">        <span class="code killed mutation_27_650_716">if (templateImpl) {</span></span></li><li><span class="code killed mutation_27_650_716"><span class="code killed mutation_12_464_722">            <span class="code killed mutation_28_682_706">template = templateImpl;</span></span></span></li><li><span class="code killed mutation_27_650_716"><span class="code killed mutation_12_464_722">        }</span></span></li><li><span class="code killed mutation_12_464_722">    }</span></li><li>    <span class="code killed mutation_13_727_1982">IOTreeRenderer.prototype = {</span></li><li><span class="code killed mutation_13_727_1982">        /**</span></li><li><span class="code killed mutation_13_727_1982">         * Renders tree node as HTML.</span></li><li><span class="code killed mutation_13_727_1982">         *</span></li><li><span class="code killed mutation_13_727_1982">         * @param {TreeNode} node</span></li><li><span class="code killed mutation_13_727_1982">         * @param {{skipChildren: Boolean}} opts An option to turn off rendering of child nodes.</span></li><li><span class="code killed mutation_13_727_1982">         * When skipChildren is true, only an empty placeholder div is left for child nodes.</span></li><li><span class="code killed mutation_13_727_1982">         * @return {String} HTML</span></li><li><span class="code killed mutation_13_727_1982">         */</span></li><li><span class="code killed mutation_13_727_1982">        <span class="code killed mutation_29_1094_1217">render: function(node, opts) {</span></span></li><li><span class="code killed mutation_29_1094_1217"><span class="code killed mutation_13_727_1982">            <span class="code killed mutation_32_1137_1196">return <span class="code killed mutation_35_1144_1195"><span class="code killed mutation_34_1144_1195">this.renderTemplate(<span class="code killed mutation_38_1164_1194"><span class="code killed mutation_33_1164_1194">this.layout.layout(<span class="code killed mutation_36_1183_1187">node</span>, <span class="code killed mutation_37_1189_1193">opts</span>)</span></span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_29_1094_1217"><span class="code killed mutation_13_727_1982">        },</span></span></li><li><span class="code killed mutation_29_1094_1217"><span class="code killed mutation_13_727_1982"></li><li>        </span><span class="code killed mutation_30_1217_1841">renderTemplate: function(data) {</span></span></li><li><span class="code killed mutation_30_1217_1841"><span class="code killed mutation_13_727_1982">            <span class="code killed mutation_39_1262_1343">data.children = <span class="code killed mutation_52_1278_1294"><span class="code killed mutation_50_1278_1325"><span class="code killed mutation_47_1278_1333"><span class="code survived mutation_46_1278_1342"><span class="code killed mutation_45_1278_1342">_(<span class="code killed mutation_51_1280_1293">data.children</span>)</span>.map(<span class="code killed mutation_48_1299_1318">this.renderTemplate</span>, <span class="code killed mutation_49_1320_1324">this</span>)</span>.value()</span>.join(<span class="code survived mutation_44_1339_1341">""</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_30_1217_1841"><span class="code killed mutation_13_727_1982"></li><li>            <span class="code killed mutation_40_1357_1445">if (data.classes) {</span></span></span></li><li><span class="code killed mutation_40_1357_1445"><span class="code killed mutation_30_1217_1841"><span class="code killed mutation_13_727_1982">                <span class="code killed mutation_53_1393_1431">data.classes = <span class="code killed mutation_56_1408_1430"><span class="code killed mutation_55_1408_1430">data.classes.join(<span class="code killed mutation_54_1426_1429">" "</span>)</span></span>;</span></span></span></span></li><li><span class="code killed mutation_40_1357_1445"><span class="code killed mutation_30_1217_1841"><span class="code killed mutation_13_727_1982">            }</span></span></span></li><li><span class="code killed mutation_30_1217_1841"><span class="code killed mutation_13_727_1982"></li><li>            <span class="code killed mutation_41_1459_1559">if (data.type<span class="code killed mutation_57_1472_1477"> === </span><span class="code killed mutation_58_1477_1483">"node"</span>) {</span></span></span></li><li><span class="code killed mutation_41_1459_1559"><span class="code killed mutation_30_1217_1841"><span class="code killed mutation_13_727_1982">                <span class="code killed mutation_59_1503_1545">data.node = <span class="code killed mutation_62_1515_1544"><span class="code killed mutation_61_1515_1544">this.applyTemplate(<span class="code killed mutation_60_1534_1543">data.node</span>)</span></span>;</span></span></span></span></li><li><span class="code killed mutation_41_1459_1559"><span class="code killed mutation_30_1217_1841"><span class="code killed mutation_13_727_1982">            }</span></span></span></li><li><span class="code killed mutation_30_1217_1841"><span class="code killed mutation_13_727_1982"></li><li>            <span class="code killed mutation_42_1573_1634">var templateFile = <span class="code killed mutation_65_1592_1615">"templates/treeStruct/"</span><span class="code killed mutation_64_1615_1616">+</span>data.type<span class="code killed mutation_63_1625_1626">+</span><span class="code killed mutation_66_1626_1633">".html"</span>;</span></span></span></li><li><span class="code killed mutation_30_1217_1841"><span class="code killed mutation_13_727_1982">            <span class="code killed mutation_43_1647_1689">return <span class="code killed mutation_69_1654_1688">template.apply(<span class="code killed mutation_67_1669_1681">templateFile</span>, <span class="code killed mutation_68_1683_1687">data</span>)</span>;</span></span></span></li><li><span class="code killed mutation_30_1217_1841"><span class="code killed mutation_13_727_1982">        },</span></span></li><li><span class="code killed mutation_30_1217_1841"><span class="code killed mutation_13_727_1982"></li><li>        /**</span></span></li><li><span class="code killed mutation_30_1217_1841"><span class="code killed mutation_13_727_1982">         * Renders tree node template.</span></span></li><li><span class="code killed mutation_30_1217_1841"><span class="code killed mutation_13_727_1982">         * @param  {TreeNode} node</span></span></li><li><span class="code killed mutation_30_1217_1841"><span class="code killed mutation_13_727_1982">         * @return {String} HTML</span></span></li><li><span class="code killed mutation_30_1217_1841"><span class="code killed mutation_13_727_1982">         */</span></span></li><li><span class="code killed mutation_30_1217_1841"><span class="code killed mutation_13_727_1982">        </span><span class="code killed mutation_31_1841_1975">applyTemplate: function(node) {</span></span></li><li><span class="code killed mutation_31_1841_1975"><span class="code killed mutation_13_727_1982">            <span class="code killed mutation_70_1885_1965">return <span class="code killed mutation_73_1892_1964">template.apply(<span class="code killed mutation_74_1907_1925"><span class="code killed mutation_71_1907_1925">node.getTemplate()</span></span>, <span class="code killed mutation_77_1927_1963"><span class="code killed mutation_76_1927_1963"><span class="code killed mutation_72_1927_1963">node.getTemplateData(<span class="code survived mutation_75_1948_1962">this.treeState</span>)</span></span></span>)</span>;</span></span></span></li><li><span class="code killed mutation_31_1841_1975"><span class="code killed mutation_13_727_1982">        }</span></span></li><li><span class="code killed mutation_13_727_1982">    };</span></li><li></li><li>    <span class="code killed mutation_14_1988_2010">return IOTreeRenderer;</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_15_62_68" class="killed">resources/xr/IOTreeRenderer.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_98_111" class="killed">resources/xr/IOTreeRenderer.js:5:28 Replaced &quot;xr/template&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_19_136_145" class="killed">resources/xr/IOTreeRenderer.js:6:23 Replaced &quot;lib/doT&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_21_192_227" class="killed">resources/xr/IOTreeRenderer.js:7:45 Replaced &quot;xr/tree/CollapsibleStackTraceNode&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_23_261_278" class="killed">resources/xr/IOTreeRenderer.js:8:32 Replaced &quot;xr/IOTreeLayout&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_12_464_722" class="killed">resources/xr/IOTreeRenderer.js:16:5 Removed function IOTreeRenderer(treeState, templateImpl) { this.treeState = treeState; this.layout = new IOTreeLayout(treeState); // Ad-hoc dependency injection if (templateImpl) { template = templateImpl; } } -&gt; KILLED</div><div id="mutation_25_523_550" class="survived">resources/xr/IOTreeRenderer.js:17:9 Removed this.treeState = treeState; -&gt; SURVIVED</div><div id="mutation_26_559_601" class="killed">resources/xr/IOTreeRenderer.js:18:9 Removed this.layout = new IOTreeLayout(treeState); -&gt; KILLED</div><div id="mutation_27_650_716" class="killed">resources/xr/IOTreeRenderer.js:21:9 Removed if (templateImpl) { template = templateImpl; } -&gt; KILLED</div><div id="mutation_28_682_706" class="killed">resources/xr/IOTreeRenderer.js:22:13 Removed template = templateImpl; -&gt; KILLED</div><div id="mutation_13_727_1982" class="killed">resources/xr/IOTreeRenderer.js:25:5 Removed IOTreeRenderer.prototype = { /** * Renders tree node as HTML. * * @param {TreeNode} node * @param {{skipChildren: Boolean}} opts An option to turn off rendering of child nodes. * When skipChildren is true, only an empty placeholder div is left for child nodes. * @return {String} HTML */ render: function(node, opts) { return this.renderTemplate(this.layout.layout(node, opts)); }, renderTemplate: function(data) { data.children = _(data.children).map(this.renderTemplate, this).value().join(&quot;&quot;); if (data.classes) { data.classes = data.classes.join(&quot; &quot;); } if (data.type === &quot;node&quot;) { data.node = this.applyTemplate(data.node); } var templateFile = &quot;templates/treeStruct/&quot;+data.type+&quot;.html&quot;; return template.apply(templateFile, data); }, /** * Renders tree node template. * @param {TreeNode} node * @return {String} HTML */ applyTemplate: function(node) { return template.apply(node.getTemplate(), node.getTemplateData(this.treeState)); } }; -&gt; KILLED</div><div id="mutation_29_1094_1217" class="killed">resources/xr/IOTreeRenderer.js:34:9 Removed render: function(node, opts) { return this.renderTemplate(this.layout.layout(node, opts)); },  -&gt; KILLED</div><div id="mutation_32_1137_1196" class="killed">resources/xr/IOTreeRenderer.js:35:13 Removed return this.renderTemplate(this.layout.layout(node, opts)); -&gt; KILLED</div><div id="mutation_33_1164_1194" class="killed">resources/xr/IOTreeRenderer.js:35:40 Replaced this.layout.layout(node, opts) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_34_1144_1195" class="killed">resources/xr/IOTreeRenderer.js:35:20 Replaced this.renderTemplate(this.layout.layout(node, opts)) with this.layout.layout(node, opts) -&gt; KILLED</div><div id="mutation_35_1144_1195" class="killed">resources/xr/IOTreeRenderer.js:35:20 Replaced this.renderTemplate(this.layout.layout(node, opts)) with this -&gt; KILLED</div><div id="mutation_36_1183_1187" class="killed">resources/xr/IOTreeRenderer.js:35:59 Replaced node with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_37_1189_1193" class="killed">resources/xr/IOTreeRenderer.js:35:65 Replaced opts with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_38_1164_1194" class="killed">resources/xr/IOTreeRenderer.js:35:40 Replaced this.layout.layout(node, opts) with this.layout -&gt; KILLED</div><div id="mutation_30_1217_1841" class="killed">resources/xr/IOTreeRenderer.js:38:9 Removed renderTemplate: function(data) { data.children = _(data.children).map(this.renderTemplate, this).value().join(&quot;&quot;); if (data.classes) { data.classes = data.classes.join(&quot; &quot;); } if (data.type === &quot;node&quot;) { data.node = this.applyTemplate(data.node); } var templateFile = &quot;templates/treeStruct/&quot;+data.type+&quot;.html&quot;; return template.apply(templateFile, data); }, /** * Renders tree node template. * @param {TreeNode} node * @return {String} HTML */  -&gt; KILLED</div><div id="mutation_51_1280_1293" class="killed">resources/xr/IOTreeRenderer.js:39:31 Replaced data.children with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_52_1278_1294" class="killed">resources/xr/IOTreeRenderer.js:39:29 Replaced _(data.children) with data.children -&gt; KILLED</div><div id="mutation_39_1262_1343" class="killed">resources/xr/IOTreeRenderer.js:39:13 Removed data.children = _(data.children).map(this.renderTemplate, this).value().join(&quot;&quot;); -&gt; KILLED</div><div id="mutation_50_1278_1325" class="killed">resources/xr/IOTreeRenderer.js:39:29 Replaced _(data.children).map(this.renderTemplate, this) with _(data.children) -&gt; KILLED</div><div id="mutation_49_1320_1324" class="killed">resources/xr/IOTreeRenderer.js:39:71 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_48_1299_1318" class="killed">resources/xr/IOTreeRenderer.js:39:50 Replaced this.renderTemplate with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_47_1278_1333" class="killed">resources/xr/IOTreeRenderer.js:39:29 Replaced _(data.children).map(this.renderTemplate, this).value() with _(data.children).map(this.renderTemplate, this) -&gt; KILLED</div><div id="mutation_44_1339_1341" class="survived">resources/xr/IOTreeRenderer.js:39:90 Replaced &quot;&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_45_1278_1342" class="killed">resources/xr/IOTreeRenderer.js:39:29 Replaced _(data.children).map(this.renderTemplate, this).value().join(&quot;&quot;) with &quot;&quot; -&gt; KILLED</div><div id="mutation_46_1278_1342" class="survived">resources/xr/IOTreeRenderer.js:39:29 Replaced _(data.children).map(this.renderTemplate, this).value().join(&quot;&quot;) with _(data.children).map(this.renderTemplate, this).value() -&gt; SURVIVED</div><div id="mutation_40_1357_1445" class="killed">resources/xr/IOTreeRenderer.js:41:13 Removed if (data.classes) { data.classes = data.classes.join(&quot; &quot;); } -&gt; KILLED</div><div id="mutation_53_1393_1431" class="killed">resources/xr/IOTreeRenderer.js:42:17 Removed data.classes = data.classes.join(&quot; &quot;); -&gt; KILLED</div><div id="mutation_54_1426_1429" class="killed">resources/xr/IOTreeRenderer.js:42:50 Replaced &quot; &quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_55_1408_1430" class="killed">resources/xr/IOTreeRenderer.js:42:32 Replaced data.classes.join(&quot; &quot;) with &quot; &quot; -&gt; KILLED</div><div id="mutation_56_1408_1430" class="killed">resources/xr/IOTreeRenderer.js:42:32 Replaced data.classes.join(&quot; &quot;) with data.classes -&gt; KILLED</div><div id="mutation_58_1477_1483" class="killed">resources/xr/IOTreeRenderer.js:45:31 Replaced &quot;node&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_57_1472_1477" class="killed">resources/xr/IOTreeRenderer.js:45:26 Replaced  ===  with !== -&gt; KILLED</div><div id="mutation_41_1459_1559" class="killed">resources/xr/IOTreeRenderer.js:45:13 Removed if (data.type === &quot;node&quot;) { data.node = this.applyTemplate(data.node); } -&gt; KILLED</div><div id="mutation_62_1515_1544" class="killed">resources/xr/IOTreeRenderer.js:46:29 Replaced this.applyTemplate(data.node) with this -&gt; KILLED</div><div id="mutation_59_1503_1545" class="killed">resources/xr/IOTreeRenderer.js:46:17 Removed data.node = this.applyTemplate(data.node); -&gt; KILLED</div><div id="mutation_60_1534_1543" class="killed">resources/xr/IOTreeRenderer.js:46:48 Replaced data.node with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_61_1515_1544" class="killed">resources/xr/IOTreeRenderer.js:46:29 Replaced this.applyTemplate(data.node) with data.node -&gt; KILLED</div><div id="mutation_42_1573_1634" class="killed">resources/xr/IOTreeRenderer.js:49:13 Removed var templateFile = &quot;templates/treeStruct/&quot;+data.type+&quot;.html&quot;; -&gt; KILLED</div><div id="mutation_63_1625_1626" class="killed">resources/xr/IOTreeRenderer.js:49:65 Replaced + with - -&gt; KILLED</div><div id="mutation_64_1615_1616" class="killed">resources/xr/IOTreeRenderer.js:49:55 Replaced + with - -&gt; KILLED</div><div id="mutation_65_1592_1615" class="killed">resources/xr/IOTreeRenderer.js:49:32 Replaced &quot;templates/treeStruct/&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_66_1626_1633" class="killed">resources/xr/IOTreeRenderer.js:49:66 Replaced &quot;.html&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_68_1683_1687" class="killed">resources/xr/IOTreeRenderer.js:50:49 Replaced data with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_43_1647_1689" class="killed">resources/xr/IOTreeRenderer.js:50:13 Removed return template.apply(templateFile, data); -&gt; KILLED</div><div id="mutation_69_1654_1688" class="killed">resources/xr/IOTreeRenderer.js:50:20 Replaced template.apply(templateFile, data) with template -&gt; KILLED</div><div id="mutation_67_1669_1681" class="killed">resources/xr/IOTreeRenderer.js:50:35 Replaced templateFile with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_31_1841_1975" class="killed">resources/xr/IOTreeRenderer.js:58:9 Removed applyTemplate: function(node) { return template.apply(node.getTemplate(), node.getTemplateData(this.treeState)); } -&gt; KILLED</div><div id="mutation_70_1885_1965" class="killed">resources/xr/IOTreeRenderer.js:59:13 Removed return template.apply(node.getTemplate(), node.getTemplateData(this.treeState)); -&gt; KILLED</div><div id="mutation_71_1907_1925" class="killed">resources/xr/IOTreeRenderer.js:59:35 Replaced node.getTemplate() with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_72_1927_1963" class="killed">resources/xr/IOTreeRenderer.js:59:55 Replaced node.getTemplateData(this.treeState) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_73_1892_1964" class="killed">resources/xr/IOTreeRenderer.js:59:20 Replaced template.apply(node.getTemplate(), node.getTemplateData(this.treeState)) with template -&gt; KILLED</div><div id="mutation_74_1907_1925" class="killed">resources/xr/IOTreeRenderer.js:59:35 Replaced node.getTemplate() with node -&gt; KILLED</div><div id="mutation_75_1948_1962" class="survived">resources/xr/IOTreeRenderer.js:59:76 Replaced this.treeState with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_76_1927_1963" class="killed">resources/xr/IOTreeRenderer.js:59:55 Replaced node.getTemplateData(this.treeState) with this.treeState -&gt; KILLED</div><div id="mutation_77_1927_1963" class="killed">resources/xr/IOTreeRenderer.js:59:55 Replaced node.getTemplateData(this.treeState) with node -&gt; KILLED</div><div id="mutation_14_1988_2010" class="killed">resources/xr/IOTreeRenderer.js:63:5 Removed return IOTreeRenderer; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

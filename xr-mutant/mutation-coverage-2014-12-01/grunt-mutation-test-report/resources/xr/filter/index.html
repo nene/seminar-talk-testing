@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#successRate {
+    padding: 2px;
+    border: none;
+}
+#files {
+    margin-left: 30px;
+}
+#files .perc {
+    width: 25%;
+    text-align: right;
+}
+.link {
+    cursor: pointer;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript"></script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>301</strong> of which <strong>47</strong> survived,&nbsp;
+        <strong>58</strong> ignored and <strong>0</strong> untested</p>
+    <span id="successRate" class="killed">Mutation success rate: <strong>84.4%</strong></span>
+</div>
+<h2></h2>
+<table id='files'><tr><td><span class="link killed" onclick="location.href='IOTypeFilter.js.html'">IOTypeFilter.js.html</span></td><td class="perc">100.0%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='IgnoreListFilter.js.html'">IgnoreListFilter.js.html</span></td><td class="perc">100.0%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='IgnoreListFilterApplier.js.html'">IgnoreListFilterApplier.js.html</span></td><td class="perc">93.2%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='SearchFilter.js.html'">SearchFilter.js.html</span></td><td class="perc">96.8%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='StackTraceFilter.js.html'">StackTraceFilter.js.html</span></td><td class="perc">76.9%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='requestsFilter.js.html'">requestsFilter.js.html</span></td><td class="perc">27.3%</td></tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":60,"ignored":9,"untested":0,"survived":14}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>60</strong> of which <strong>14</strong> survived,&nbsp;
+        <strong>9</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>76.7%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/index.html'">tree</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/StackTraceNode.js.html'">StackTraceNode.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_12_62_68">"xr/_"</span>);</li><li>    var TreeNode = require(<span class="code killed mutation_14_98_116">"xr/tree/TreeNode"</span>);</li><li></li><li>    <span class="code killed mutation_9_124_370">function StackTraceNode(stackEl, children) {</span></li><li><span class="code killed mutation_9_124_370">        <span class="code survived mutation_23_177_206"><span class="code survived mutation_16_177_207">TreeNode.call(<span class="code killed mutation_21_191_195">this</span>, <span class="code survived mutation_22_197_205">children</span>)</span>;</span></span></li><li><span class="code killed mutation_9_124_370"></li><li>        <span class="code killed mutation_17_217_242">this.type = <span class="code killed mutation_24_229_241">"stackTrace"</span>;</span></span></li><li><span class="code killed mutation_9_124_370"></li><li>        <span class="code killed mutation_18_252_270">this.el = stackEl;</span></span></li><li><span class="code killed mutation_9_124_370"></li><li>        <span class="code killed mutation_19_280_333">this.title = this.el[<span class="code killed mutation_27_301_308">"class"</span>]<span class="code killed mutation_26_309_312"> + </span><span class="code killed mutation_28_312_315">"."</span><span class="code killed mutation_25_315_318"> + </span>this.el.method;</span></span></li><li><span class="code killed mutation_9_124_370"></li><li>        <span class="code killed mutation_20_343_364">this.id = stackEl.id;</span></span></li><li><span class="code killed mutation_9_124_370">    }</span></li><li>    <span class="code killed mutation_61_375_392"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_10_375_1126">_(<span class="code killed mutation_60_377_391">StackTraceNode</span>)</span>.extendClass(<span class="code killed mutation_29_405_413">TreeNode</span>, <span class="code killed mutation_30_415_1124">{</span></span></span></li><li><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126">        <span class="code survived mutation_32_425_482">template: <span class="code survived mutation_37_435_471">"templates/tree/StackTraceNode.html"</span>,</span></span></span></span></li><li><span class="code survived mutation_32_425_482"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126"></li><li>        </span><span class="code survived mutation_33_482_714">getTemplateData: function() {</span></span></span></span></li><li><span class="code survived mutation_33_482_714"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126">            <span class="code survived mutation_38_524_693">return {</span></span></span></span></span></li><li><span class="code survived mutation_38_524_693"><span class="code survived mutation_33_482_714"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126">                <span class="code survived mutation_39_549_601">summaryLine: <span class="code survived mutation_42_562_583">this.getSummaryLine()</span>,</span></span></span></span></span></span></li><li><span class="code survived mutation_39_549_601"><span class="code survived mutation_38_524_693"><span class="code survived mutation_33_482_714"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126">                </span><span class="code survived mutation_40_601_641">count: <span class="code survived mutation_43_608_623">this.getCount()</span>,</span></span></span></span></span></span></li><li><span class="code survived mutation_40_601_641"><span class="code survived mutation_38_524_693"><span class="code survived mutation_33_482_714"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126">                </span><span class="code survived mutation_41_641_678">duration: <span class="code survived mutation_44_651_678">this.getFormattedDuration()</span></span></span></span></span></span></span></li><li><span class="code survived mutation_38_524_693"><span class="code survived mutation_33_482_714"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126">            };</span></span></span></span></span></li><li><span class="code survived mutation_33_482_714"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126">        },</span></span></span></span></li><li><span class="code survived mutation_33_482_714"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126"></li><li>        </span><span class="code killed mutation_34_714_914">getSummaryLine: function() {</span></span></span></span></li><li><span class="code killed mutation_34_714_914"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126">            <span class="code killed mutation_45_755_824">return <span class="code killed mutation_48_762_787">this.getSimpleClassName()</span><span class="code killed mutation_47_787_790"> + </span><span class="code killed mutation_49_790_793">"."</span><span class="code killed mutation_46_793_796"> + </span><span class="code killed mutation_50_796_823">this.getEscapedMethodName()</span>;</span></span></span></span></span></li><li><span class="code killed mutation_34_714_914"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126">        },</span></span></span></span></li><li><span class="code killed mutation_34_714_914"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126"></li><li>        // Tranforms class name like "java.lang.List" to just "List"</span></span></span></span></li><li><span class="code killed mutation_34_714_914"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126">        </span><span class="code killed mutation_35_914_1025">getSimpleClassName: function() {</span></span></span></span></li><li><span class="code killed mutation_35_914_1025"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126">            <span class="code killed mutation_51_959_1004">return <span class="code killed mutation_54_966_1003">this.el[<span class="code killed mutation_55_974_981">"class"</span>].replace(<span class="code killed mutation_52_991_998">/^.*\./</span>, <span class="code killed mutation_53_1000_1002">""</span>)</span>;</span></span></span></span></span></li><li><span class="code killed mutation_35_914_1025"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126">        },</span></span></span></span></li><li><span class="code killed mutation_35_914_1025"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126"></li><li>        </span><span class="code killed mutation_36_1025_1118">getEscapedMethodName: function() {</span></span></span></span></li><li><span class="code killed mutation_36_1025_1118"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126">            <span class="code killed mutation_56_1072_1108">return <span class="code killed mutation_59_1079_1107"><span class="code survived mutation_58_1079_1107">_.escapeHTML(<span class="code killed mutation_57_1092_1106">this.el.method</span>)</span></span>;</span></span></span></span></span></li><li><span class="code killed mutation_36_1025_1118"><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126">        }</span></span></span></span></li><li><span class="code killed mutation_31_375_1125"><span class="code killed mutation_30_415_1124"><span class="code killed mutation_10_375_1126">    }</span>)</span>;</span></li><li></li><li>    <span class="code killed mutation_11_1132_1154">return StackTraceNode;</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_12_62_68" class="killed">resources/xr/tree/StackTraceNode.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_14_98_116" class="killed">resources/xr/tree/StackTraceNode.js:5:28 Replaced &quot;xr/tree/TreeNode&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_9_124_370" class="killed">resources/xr/tree/StackTraceNode.js:7:5 Removed function StackTraceNode(stackEl, children) { TreeNode.call(this, children); this.type = &quot;stackTrace&quot;; this.el = stackEl; this.title = this.el[&quot;class&quot;] + &quot;.&quot; + this.el.method; this.id = stackEl.id; } -&gt; KILLED</div><div id="mutation_16_177_207" class="survived">resources/xr/tree/StackTraceNode.js:8:9 Removed TreeNode.call(this, children); -&gt; SURVIVED</div><div id="mutation_23_177_206" class="survived">resources/xr/tree/StackTraceNode.js:8:9 Replaced TreeNode.call(this, children) with TreeNode -&gt; SURVIVED</div><div id="mutation_22_197_205" class="survived">resources/xr/tree/StackTraceNode.js:8:29 Replaced children with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_21_191_195" class="killed">resources/xr/tree/StackTraceNode.js:8:23 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_217_242" class="killed">resources/xr/tree/StackTraceNode.js:10:9 Removed this.type = &quot;stackTrace&quot;; -&gt; KILLED</div><div id="mutation_24_229_241" class="killed">resources/xr/tree/StackTraceNode.js:10:21 Replaced &quot;stackTrace&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_18_252_270" class="killed">resources/xr/tree/StackTraceNode.js:12:9 Removed this.el = stackEl; -&gt; KILLED</div><div id="mutation_19_280_333" class="killed">resources/xr/tree/StackTraceNode.js:14:9 Removed this.title = this.el[&quot;class&quot;] + &quot;.&quot; + this.el.method; -&gt; KILLED</div><div id="mutation_25_315_318" class="killed">resources/xr/tree/StackTraceNode.js:14:44 Replaced  +  with - -&gt; KILLED</div><div id="mutation_26_309_312" class="killed">resources/xr/tree/StackTraceNode.js:14:38 Replaced  +  with - -&gt; KILLED</div><div id="mutation_27_301_308" class="killed">resources/xr/tree/StackTraceNode.js:14:30 Replaced &quot;class&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_28_312_315" class="killed">resources/xr/tree/StackTraceNode.js:14:41 Replaced &quot;.&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_343_364" class="killed">resources/xr/tree/StackTraceNode.js:16:9 Removed this.id = stackEl.id; -&gt; KILLED</div><div id="mutation_60_377_391" class="killed">resources/xr/tree/StackTraceNode.js:18:7 Replaced StackTraceNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_61_375_392" class="killed">resources/xr/tree/StackTraceNode.js:18:5 Replaced _(StackTraceNode) with StackTraceNode -&gt; KILLED</div><div id="mutation_29_405_413" class="killed">resources/xr/tree/StackTraceNode.js:18:35 Replaced TreeNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_30_415_1124" class="killed">resources/xr/tree/StackTraceNode.js:18:45 Replaced { template: &quot;templates/tree/StackTraceNode.html&quot;, getTemplateData: function() { return { summaryLine: this.getSummaryLine(), count: this.getCount(), duration: this.getFormattedDuration() }; }, getSummaryLine: function() { return this.getSimpleClassName() + &quot;.&quot; + this.getEscapedMethodName(); }, // Tranforms class name like &quot;java.lang.List&quot; to just &quot;List&quot; getSimpleClassName: function() { return this.el[&quot;class&quot;].replace(/^.*\./, &quot;&quot;); }, getEscapedMethodName: function() { return _.escapeHTML(this.el.method); } } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_31_375_1125" class="killed">resources/xr/tree/StackTraceNode.js:18:5 Replaced _(StackTraceNode).extendClass(TreeNode, { template: &quot;templates/tree/StackTraceNode.html&quot;, getTemplateData: function() { return { summaryLine: this.getSummaryLine(), count: this.getCount(), duration: this.getFormattedDuration() }; }, getSummaryLine: function() { return this.getSimpleClassName() + &quot;.&quot; + this.getEscapedMethodName(); }, // Tranforms class name like &quot;java.lang.List&quot; to just &quot;List&quot; getSimpleClassName: function() { return this.el[&quot;class&quot;].replace(/^.*\./, &quot;&quot;); }, getEscapedMethodName: function() { return _.escapeHTML(this.el.method); } }) with _(StackTraceNode) -&gt; KILLED</div><div id="mutation_10_375_1126" class="killed">resources/xr/tree/StackTraceNode.js:18:5 Removed _(StackTraceNode).extendClass(TreeNode, { template: &quot;templates/tree/StackTraceNode.html&quot;, getTemplateData: function() { return { summaryLine: this.getSummaryLine(), count: this.getCount(), duration: this.getFormattedDuration() }; }, getSummaryLine: function() { return this.getSimpleClassName() + &quot;.&quot; + this.getEscapedMethodName(); }, // Tranforms class name like &quot;java.lang.List&quot; to just &quot;List&quot; getSimpleClassName: function() { return this.el[&quot;class&quot;].replace(/^.*\./, &quot;&quot;); }, getEscapedMethodName: function() { return _.escapeHTML(this.el.method); } }); -&gt; KILLED</div><div id="mutation_37_435_471" class="survived">resources/xr/tree/StackTraceNode.js:19:19 Replaced &quot;templates/tree/StackTraceNode.html&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_32_425_482" class="survived">resources/xr/tree/StackTraceNode.js:19:9 Removed template: &quot;templates/tree/StackTraceNode.html&quot;,  -&gt; SURVIVED</div><div id="mutation_33_482_714" class="survived">resources/xr/tree/StackTraceNode.js:21:9 Removed getTemplateData: function() { return { summaryLine: this.getSummaryLine(), count: this.getCount(), duration: this.getFormattedDuration() }; },  -&gt; SURVIVED</div><div id="mutation_38_524_693" class="survived">resources/xr/tree/StackTraceNode.js:22:13 Removed return { summaryLine: this.getSummaryLine(), count: this.getCount(), duration: this.getFormattedDuration() }; -&gt; SURVIVED</div><div id="mutation_39_549_601" class="survived">resources/xr/tree/StackTraceNode.js:23:17 Removed summaryLine: this.getSummaryLine(),  -&gt; SURVIVED</div><div id="mutation_42_562_583" class="survived">resources/xr/tree/StackTraceNode.js:23:30 Replaced this.getSummaryLine() with this -&gt; SURVIVED</div><div id="mutation_43_608_623" class="survived">resources/xr/tree/StackTraceNode.js:24:24 Replaced this.getCount() with this -&gt; SURVIVED</div><div id="mutation_40_601_641" class="survived">resources/xr/tree/StackTraceNode.js:24:17 Removed count: this.getCount(),  -&gt; SURVIVED</div><div id="mutation_41_641_678" class="survived">resources/xr/tree/StackTraceNode.js:25:17 Removed duration: this.getFormattedDuration() -&gt; SURVIVED</div><div id="mutation_44_651_678" class="survived">resources/xr/tree/StackTraceNode.js:25:27 Replaced this.getFormattedDuration() with this -&gt; SURVIVED</div><div id="mutation_34_714_914" class="killed">resources/xr/tree/StackTraceNode.js:29:9 Removed getSummaryLine: function() { return this.getSimpleClassName() + &quot;.&quot; + this.getEscapedMethodName(); }, // Tranforms class name like &quot;java.lang.List&quot; to just &quot;List&quot;  -&gt; KILLED</div><div id="mutation_47_787_790" class="killed">resources/xr/tree/StackTraceNode.js:30:45 Replaced  +  with - -&gt; KILLED</div><div id="mutation_45_755_824" class="killed">resources/xr/tree/StackTraceNode.js:30:13 Removed return this.getSimpleClassName() + &quot;.&quot; + this.getEscapedMethodName(); -&gt; KILLED</div><div id="mutation_46_793_796" class="killed">resources/xr/tree/StackTraceNode.js:30:51 Replaced  +  with - -&gt; KILLED</div><div id="mutation_50_796_823" class="killed">resources/xr/tree/StackTraceNode.js:30:54 Replaced this.getEscapedMethodName() with this -&gt; KILLED</div><div id="mutation_48_762_787" class="killed">resources/xr/tree/StackTraceNode.js:30:20 Replaced this.getSimpleClassName() with this -&gt; KILLED</div><div id="mutation_49_790_793" class="killed">resources/xr/tree/StackTraceNode.js:30:48 Replaced &quot;.&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_35_914_1025" class="killed">resources/xr/tree/StackTraceNode.js:34:9 Removed getSimpleClassName: function() { return this.el[&quot;class&quot;].replace(/^.*\./, &quot;&quot;); },  -&gt; KILLED</div><div id="mutation_52_991_998" class="killed">resources/xr/tree/StackTraceNode.js:35:45 Replaced /^.*\./ with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_53_1000_1002" class="killed">resources/xr/tree/StackTraceNode.js:35:54 Replaced &quot;&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_54_966_1003" class="killed">resources/xr/tree/StackTraceNode.js:35:20 Replaced this.el[&quot;class&quot;].replace(/^.*\./, &quot;&quot;) with this.el[&quot;class&quot;] -&gt; KILLED</div><div id="mutation_55_974_981" class="killed">resources/xr/tree/StackTraceNode.js:35:28 Replaced &quot;class&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_51_959_1004" class="killed">resources/xr/tree/StackTraceNode.js:35:13 Removed return this.el[&quot;class&quot;].replace(/^.*\./, &quot;&quot;); -&gt; KILLED</div><div id="mutation_36_1025_1118" class="killed">resources/xr/tree/StackTraceNode.js:38:9 Removed getEscapedMethodName: function() { return _.escapeHTML(this.el.method); } -&gt; KILLED</div><div id="mutation_57_1092_1106" class="killed">resources/xr/tree/StackTraceNode.js:39:33 Replaced this.el.method with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_58_1079_1107" class="survived">resources/xr/tree/StackTraceNode.js:39:20 Replaced _.escapeHTML(this.el.method) with this.el.method -&gt; SURVIVED</div><div id="mutation_59_1079_1107" class="killed">resources/xr/tree/StackTraceNode.js:39:20 Replaced _.escapeHTML(this.el.method) with _ -&gt; KILLED</div><div id="mutation_56_1072_1108" class="killed">resources/xr/tree/StackTraceNode.js:39:13 Removed return _.escapeHTML(this.el.method); -&gt; KILLED</div><div id="mutation_11_1132_1154" class="killed">resources/xr/tree/StackTraceNode.js:43:5 Removed return StackTraceNode; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

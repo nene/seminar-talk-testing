@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#successRate {
+    padding: 2px;
+    border: none;
+}
+#files {
+    margin-left: 30px;
+}
+#files .perc {
+    width: 25%;
+    text-align: right;
+}
+.link {
+    cursor: pointer;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript"></script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>703</strong> of which <strong>233</strong> survived,&nbsp;
+        <strong>100</strong> ignored and <strong>0</strong> untested</p>
+    <span id="successRate" class="survived">Mutation success rate: <strong>66.9%</strong></span>
+</div>
+<h2></h2>
+<table id='files'><tr><td><span class="link killed" onclick="location.href='CollapsibleStackTraceNode.js.html'">CollapsibleStackTraceNode.js.html</span></td><td class="perc">92.2%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='GroupedStackTraceNode.js.html'">GroupedStackTraceNode.js.html</span></td><td class="perc">55.6%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='HttpQueryNode.js.html'">HttpQueryNode.js.html</span></td><td class="perc">72.6%</td></tr>
+<tr><td><span class="link killed" onclick="location.href='OrmNode.js.html'">OrmNode.js.html</span></td><td class="perc">94.1%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='QueryGroupNode.js.html'">QueryGroupNode.js.html</span></td><td class="perc">76.2%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='RequestGroupNode.js.html'">RequestGroupNode.js.html</span></td><td class="perc">68.6%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='RequestNode.js.html'">RequestNode.js.html</span></td><td class="perc">48.8%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='RootNode.js.html'">RootNode.js.html</span></td><td class="perc">60.0%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='StackTraceNode.js.html'">StackTraceNode.js.html</span></td><td class="perc">76.7%</td></tr>
+<tr><td><span class="link survived" onclick="location.href='TreeNode.js.html'">TreeNode.js.html</span></td><td class="perc">18.1%</td></tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":33,"ignored":7,"untested":0,"survived":24}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>33</strong> of which <strong>24</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>27.3%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/filter/index.html'">filter</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/filter/requestsFilter.js.html'">requestsFilter.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_9_62_68">"xr/_"</span>);</li><li></li><li>    <span class="code survived mutation_8_76_798">return {</span></li><li><span class="code survived mutation_8_76_798">        /**</span></li><li><span class="code survived mutation_8_76_798">         * Helper for filtering requests by the queries they contain.</span></li><li><span class="code survived mutation_8_76_798">         * @param {Object[]} requests</span></li><li><span class="code survived mutation_8_76_798">         * @param {Function} predicate Gets passed a query object.</span></li><li><span class="code survived mutation_8_76_798">         * @param {Object} [scope]</span></li><li><span class="code survived mutation_8_76_798">         * @return {Object[]}</span></li><li><span class="code survived mutation_8_76_798">         */</span></li><li><span class="code survived mutation_8_76_798">        <span class="code survived mutation_11_357_791">byQuery: function(requests, predicate, scope) {</span></span></li><li><span class="code survived mutation_11_357_791"><span class="code survived mutation_8_76_798">            <span class="code survived mutation_12_417_433">var result = [];</span></span></span></li><li><span class="code survived mutation_11_357_791"><span class="code survived mutation_8_76_798"></li><li>            <span class="code survived mutation_17_447_752"><span class="code killed mutation_16_447_752"><span class="code survived mutation_13_447_753">requests.forEach(<span class="code survived mutation_15_464_751">function(req) {</span></span></span></span></span></span></li><li><span class="code survived mutation_17_447_752"><span class="code killed mutation_16_447_752"><span class="code survived mutation_15_464_751"><span class="code survived mutation_13_447_753"><span class="code survived mutation_11_357_791"><span class="code survived mutation_8_76_798">                <span class="code survived mutation_18_496_547">var queries = <span class="code survived mutation_22_510_546">req.queries.filter(<span class="code survived mutation_20_529_538">predicate</span>, <span class="code survived mutation_21_540_545">scope</span>)</span>;</span></span></span></span></span></span></span></li><li><span class="code survived mutation_17_447_752"><span class="code killed mutation_16_447_752"><span class="code survived mutation_15_464_751"><span class="code survived mutation_13_447_753"><span class="code survived mutation_11_357_791"><span class="code survived mutation_8_76_798">                <span class="code survived mutation_19_564_737">if (queries.length<span class="code survived mutation_24_582_585"><span class="code survived mutation_23_582_585"> > </span></span><span class="code survived mutation_25_585_586">0</span>) {</span></span></span></span></span></span></span></li><li><span class="code survived mutation_19_564_737"><span class="code survived mutation_17_447_752"><span class="code killed mutation_16_447_752"><span class="code survived mutation_15_464_751"><span class="code survived mutation_13_447_753"><span class="code survived mutation_11_357_791"><span class="code survived mutation_8_76_798">                    <span class="code survived mutation_26_610_636">var copy = <span class="code survived mutation_31_621_627"><span class="code survived mutation_29_621_635">_(<span class="code survived mutation_30_623_626">req</span>)</span>.clone()</span>;</span></span></span></span></span></span></span></span></li><li><span class="code survived mutation_19_564_737"><span class="code survived mutation_17_447_752"><span class="code killed mutation_16_447_752"><span class="code survived mutation_15_464_751"><span class="code survived mutation_13_447_753"><span class="code survived mutation_11_357_791"><span class="code survived mutation_8_76_798">                    <span class="code survived mutation_27_657_680">copy.queries = queries;</span></span></span></span></span></span></span></span></li><li><span class="code survived mutation_19_564_737"><span class="code survived mutation_17_447_752"><span class="code killed mutation_16_447_752"><span class="code survived mutation_15_464_751"><span class="code survived mutation_13_447_753"><span class="code survived mutation_11_357_791"><span class="code survived mutation_8_76_798">                    <span class="code survived mutation_34_701_718"><span class="code survived mutation_33_701_718"><span class="code survived mutation_28_701_719">result.push(<span class="code survived mutation_32_713_717">copy</span>)</span></span>;</span></span></span></span></span></span></span></span></li><li><span class="code survived mutation_19_564_737"><span class="code survived mutation_17_447_752"><span class="code killed mutation_16_447_752"><span class="code survived mutation_15_464_751"><span class="code survived mutation_13_447_753"><span class="code survived mutation_11_357_791"><span class="code survived mutation_8_76_798">                }</span></span></span></span></span></span></span></li><li><span class="code survived mutation_17_447_752"><span class="code killed mutation_16_447_752"><span class="code survived mutation_15_464_751"><span class="code survived mutation_13_447_753"><span class="code survived mutation_11_357_791"><span class="code survived mutation_8_76_798">            }</span>)</span></span>;</span></span></span></li><li><span class="code survived mutation_11_357_791"><span class="code survived mutation_8_76_798"></li><li>            <span class="code survived mutation_14_767_781">return result;</span></span></span></li><li><span class="code survived mutation_11_357_791"><span class="code survived mutation_8_76_798">        }</span></span></li><li><span class="code survived mutation_8_76_798">    };</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_9_62_68" class="killed">resources/xr/filter/requestsFilter.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_76_798" class="survived">resources/xr/filter/requestsFilter.js:6:5 Removed return { /** * Helper for filtering requests by the queries they contain. * @param {Object[]} requests * @param {Function} predicate Gets passed a query object. * @param {Object} [scope] * @return {Object[]} */ byQuery: function(requests, predicate, scope) { var result = []; requests.forEach(function(req) { var queries = req.queries.filter(predicate, scope); if (queries.length &gt; 0) { var copy = _(req).clone(); copy.queries = queries; result.push(copy); } }); return result; } }; -&gt; SURVIVED</div><div id="mutation_11_357_791" class="survived">resources/xr/filter/requestsFilter.js:14:9 Removed byQuery: function(requests, predicate, scope) { var result = []; requests.forEach(function(req) { var queries = req.queries.filter(predicate, scope); if (queries.length &gt; 0) { var copy = _(req).clone(); copy.queries = queries; result.push(copy); } }); return result; } -&gt; SURVIVED</div><div id="mutation_12_417_433" class="survived">resources/xr/filter/requestsFilter.js:15:13 Removed var result = []; -&gt; SURVIVED</div><div id="mutation_13_447_753" class="survived">resources/xr/filter/requestsFilter.js:17:13 Removed requests.forEach(function(req) { var queries = req.queries.filter(predicate, scope); if (queries.length &gt; 0) { var copy = _(req).clone(); copy.queries = queries; result.push(copy); } }); -&gt; SURVIVED</div><div id="mutation_15_464_751" class="survived">resources/xr/filter/requestsFilter.js:17:30 Replaced function(req) { var queries = req.queries.filter(predicate, scope); if (queries.length &gt; 0) { var copy = _(req).clone(); copy.queries = queries; result.push(copy); } } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_16_447_752" class="killed">resources/xr/filter/requestsFilter.js:17:13 Replaced requests.forEach(function(req) { var queries = req.queries.filter(predicate, scope); if (queries.length &gt; 0) { var copy = _(req).clone(); copy.queries = queries; result.push(copy); } }) with function(req) { var queries = req.queries.filter(predicate, scope); if (queries.length &gt; 0) { var copy = _(req).clone(); copy.queries = queries; result.push(copy); } } -&gt; KILLED</div><div id="mutation_17_447_752" class="survived">resources/xr/filter/requestsFilter.js:17:13 Replaced requests.forEach(function(req) { var queries = req.queries.filter(predicate, scope); if (queries.length &gt; 0) { var copy = _(req).clone(); copy.queries = queries; result.push(copy); } }) with requests -&gt; SURVIVED</div><div id="mutation_22_510_546" class="survived">resources/xr/filter/requestsFilter.js:18:31 Replaced req.queries.filter(predicate, scope) with req.queries -&gt; SURVIVED</div><div id="mutation_18_496_547" class="survived">resources/xr/filter/requestsFilter.js:18:17 Removed var queries = req.queries.filter(predicate, scope); -&gt; SURVIVED</div><div id="mutation_21_540_545" class="survived">resources/xr/filter/requestsFilter.js:18:61 Replaced scope with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_20_529_538" class="survived">resources/xr/filter/requestsFilter.js:18:50 Replaced predicate with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_19_564_737" class="survived">resources/xr/filter/requestsFilter.js:19:17 Removed if (queries.length &gt; 0) { var copy = _(req).clone(); copy.queries = queries; result.push(copy); } -&gt; SURVIVED</div><div id="mutation_23_582_585" class="survived">resources/xr/filter/requestsFilter.js:19:35 Replaced  &gt;  with &gt;= -&gt; SURVIVED</div><div id="mutation_24_582_585" class="survived">resources/xr/filter/requestsFilter.js:19:35 Replaced  &gt;  with &lt;= -&gt; SURVIVED</div><div id="mutation_25_585_586" class="survived">resources/xr/filter/requestsFilter.js:19:38 Replaced 0 with 1 -&gt; SURVIVED</div><div id="mutation_26_610_636" class="survived">resources/xr/filter/requestsFilter.js:20:21 Removed var copy = _(req).clone(); -&gt; SURVIVED</div><div id="mutation_29_621_635" class="survived">resources/xr/filter/requestsFilter.js:20:32 Replaced _(req).clone() with _(req) -&gt; SURVIVED</div><div id="mutation_30_623_626" class="survived">resources/xr/filter/requestsFilter.js:20:34 Replaced req with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_31_621_627" class="survived">resources/xr/filter/requestsFilter.js:20:32 Replaced _(req) with req -&gt; SURVIVED</div><div id="mutation_27_657_680" class="survived">resources/xr/filter/requestsFilter.js:21:21 Removed copy.queries = queries; -&gt; SURVIVED</div><div id="mutation_33_701_718" class="survived">resources/xr/filter/requestsFilter.js:22:21 Replaced result.push(copy) with copy -&gt; SURVIVED</div><div id="mutation_34_701_718" class="survived">resources/xr/filter/requestsFilter.js:22:21 Replaced result.push(copy) with result -&gt; SURVIVED</div><div id="mutation_32_713_717" class="survived">resources/xr/filter/requestsFilter.js:22:33 Replaced copy with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_28_701_719" class="survived">resources/xr/filter/requestsFilter.js:22:21 Removed result.push(copy); -&gt; SURVIVED</div><div id="mutation_14_767_781" class="survived">resources/xr/filter/requestsFilter.js:26:13 Removed return result; -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

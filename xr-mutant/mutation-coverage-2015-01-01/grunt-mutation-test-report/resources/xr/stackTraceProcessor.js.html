@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":46,"ignored":11,"untested":0,"survived":31}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>46</strong> of which <strong>31</strong> survived,&nbsp;
+        <strong>11</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>32.6%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/stackTraceProcessor.js.html'">stackTraceProcessor.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function (require) {</li><li>    var _ = require(<span class="code killed mutation_13_63_69">"xr/_"</span>);</li><li>    var IOTreeBuilder = require(<span class="code killed mutation_15_104_122">"xr/IOTreeBuilder"</span>);</li><li>    var RootNode = require(<span class="code killed mutation_17_152_170">"xr/tree/RootNode"</span>);</li><li></li><li>    <span class="code survived mutation_10_178_199">var stackCounter = <span class="code survived mutation_19_197_198">0</span>;</span></li><li>    <span class="code survived mutation_11_204_238">var builder = new IOTreeBuilder();</span></li><li></li><li>    <span class="code survived mutation_12_244_1108">return {</span></li><li><span class="code survived mutation_12_244_1108">        /**</span></li><li><span class="code survived mutation_12_244_1108">         * Generates id's for stack trace elements.</span></li><li><span class="code survived mutation_12_244_1108">         * Assigns the same ID for every common stack trace element among the queries.</span></li><li><span class="code survived mutation_12_244_1108">         * Uses IOTreeBuilder internally.</span></li><li><span class="code survived mutation_12_244_1108">         * @param {Object[]} queries</span></li><li><span class="code survived mutation_12_244_1108">         */</span></li><li><span class="code survived mutation_12_244_1108">        <span class="code survived mutation_20_503_1101">generateIds: function (queries) {</span></span></li><li><span class="code survived mutation_20_503_1101"><span class="code survived mutation_12_244_1108">            //When first query's first stackTrace has ID, skip re-generating</span></span></li><li><span class="code survived mutation_20_503_1101"><span class="code survived mutation_12_244_1108">            <span class="code survived mutation_21_626_761">if (queries.length<span class="code survived mutation_26_644_649"> === </span><span class="code survived mutation_27_649_650">0</span><span class="code survived mutation_25_650_654"> || </span>queries[<span class="code survived mutation_29_662_663">0</span>].stackTrace.length<span class="code survived mutation_28_682_687"> === </span><span class="code survived mutation_30_687_688">0</span><span class="code survived mutation_24_688_693">  || </span>queries[<span class="code survived mutation_31_701_702">0</span>].stackTrace[<span class="code survived mutation_32_715_716">0</span>].id) {</span></span></span></li><li><span class="code survived mutation_21_626_761"><span class="code survived mutation_20_503_1101"><span class="code survived mutation_12_244_1108">                <span class="code survived mutation_33_740_747">return;</span></span></span></span></li><li><span class="code survived mutation_21_626_761"><span class="code survived mutation_20_503_1101"><span class="code survived mutation_12_244_1108">            }</span></span></span></li><li><span class="code survived mutation_20_503_1101"><span class="code survived mutation_12_244_1108"></li><li>            <span class="code survived mutation_22_775_801">var root = new RootNode();</span></span></span></li><li><span class="code survived mutation_20_503_1101"><span class="code survived mutation_12_244_1108">            <span class="code survived mutation_46_814_824"><span class="code survived mutation_36_814_1090"><span class="code killed mutation_35_814_1090"><span class="code survived mutation_23_814_1091">_(<span class="code survived mutation_45_816_823">queries</span>)</span>.forEach(<span class="code survived mutation_34_833_1089">function (query) {</span></span></span></span></span></span></li><li><span class="code survived mutation_36_814_1090"><span class="code killed mutation_35_814_1090"><span class="code survived mutation_34_833_1089"><span class="code survived mutation_23_814_1091"><span class="code survived mutation_20_503_1101"><span class="code survived mutation_12_244_1108">                <span class="code survived mutation_41_868_1074"><span class="code survived mutation_37_868_1075">builder.createStackTraceNodes(<span class="code survived mutation_38_898_902">root</span>, <span class="code survived mutation_39_904_920">query.stackTrace</span>, <span class="code survived mutation_40_922_1073">function(stackElement, node){</span></span></span></span></span></span></span></span></span></li><li><span class="code survived mutation_41_868_1074"><span class="code survived mutation_40_922_1073"><span class="code survived mutation_37_868_1075"><span class="code survived mutation_36_814_1090"><span class="code killed mutation_35_814_1090"><span class="code survived mutation_34_833_1089"><span class="code survived mutation_23_814_1091"><span class="code survived mutation_20_503_1101"><span class="code survived mutation_12_244_1108">                    <span class="code survived mutation_42_972_1008">node.id = node.id<span class="code survived mutation_44_989_993"> || </span>stackCounter<span class="code survived mutation_undefined_1005_1007">++</span>;</span></span></span></span></span></span></span></span></span></span></li><li><span class="code survived mutation_41_868_1074"><span class="code survived mutation_40_922_1073"><span class="code survived mutation_37_868_1075"><span class="code survived mutation_36_814_1090"><span class="code killed mutation_35_814_1090"><span class="code survived mutation_34_833_1089"><span class="code survived mutation_23_814_1091"><span class="code survived mutation_20_503_1101"><span class="code survived mutation_12_244_1108">                    <span class="code survived mutation_43_1029_1055">stackElement.id = node.id;</span></span></span></span></span></span></span></span></span></span></li><li><span class="code survived mutation_41_868_1074"><span class="code survived mutation_40_922_1073"><span class="code survived mutation_37_868_1075"><span class="code survived mutation_36_814_1090"><span class="code killed mutation_35_814_1090"><span class="code survived mutation_34_833_1089"><span class="code survived mutation_23_814_1091"><span class="code survived mutation_20_503_1101"><span class="code survived mutation_12_244_1108">                }</span>)</span>;</span></span></span></span></span></span></span></li><li><span class="code survived mutation_36_814_1090"><span class="code killed mutation_35_814_1090"><span class="code survived mutation_34_833_1089"><span class="code survived mutation_23_814_1091"><span class="code survived mutation_20_503_1101"><span class="code survived mutation_12_244_1108">            }</span>)</span></span>;</span></span></span></li><li><span class="code survived mutation_20_503_1101"><span class="code survived mutation_12_244_1108">        }</span></span></li><li><span class="code survived mutation_12_244_1108">    };</span></li><li></li><li>});</li><li></li><li></li><li></li><li></li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_13_63_69" class="killed">resources/xr/stackTraceProcessor.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_104_122" class="killed">resources/xr/stackTraceProcessor.js:5:33 Replaced &quot;xr/IOTreeBuilder&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_152_170" class="killed">resources/xr/stackTraceProcessor.js:6:28 Replaced &quot;xr/tree/RootNode&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_10_178_199" class="survived">resources/xr/stackTraceProcessor.js:8:5 Removed var stackCounter = 0; -&gt; SURVIVED</div><div id="mutation_19_197_198" class="survived">resources/xr/stackTraceProcessor.js:8:24 Replaced 0 with 1 -&gt; SURVIVED</div><div id="mutation_11_204_238" class="survived">resources/xr/stackTraceProcessor.js:9:5 Removed var builder = new IOTreeBuilder(); -&gt; SURVIVED</div><div id="mutation_12_244_1108" class="survived">resources/xr/stackTraceProcessor.js:11:5 Removed return { /** * Generates id&#x27;s for stack trace elements. * Assigns the same ID for every common stack trace element among the queries. * Uses IOTreeBuilder internally. * @param {Object[]} queries */ generateIds: function (queries) { //When first query&#x27;s first stackTrace has ID, skip re-generating if (queries.length === 0 || queries[0].stackTrace.length === 0 || queries[0].stackTrace[0].id) { return; } var root = new RootNode(); _(queries).forEach(function (query) { builder.createStackTraceNodes(root, query.stackTrace, function(stackElement, node){ node.id = node.id || stackCounter++; stackElement.id = node.id; }); }); } }; -&gt; SURVIVED</div><div id="mutation_20_503_1101" class="survived">resources/xr/stackTraceProcessor.js:18:9 Removed generateIds: function (queries) { //When first query&#x27;s first stackTrace has ID, skip re-generating if (queries.length === 0 || queries[0].stackTrace.length === 0 || queries[0].stackTrace[0].id) { return; } var root = new RootNode(); _(queries).forEach(function (query) { builder.createStackTraceNodes(root, query.stackTrace, function(stackElement, node){ node.id = node.id || stackCounter++; stackElement.id = node.id; }); }); } -&gt; SURVIVED</div><div id="mutation_21_626_761" class="survived">resources/xr/stackTraceProcessor.js:20:13 Removed if (queries.length === 0 || queries[0].stackTrace.length === 0 || queries[0].stackTrace[0].id) { return; } -&gt; SURVIVED</div><div id="mutation_32_715_716" class="survived">resources/xr/stackTraceProcessor.js:20:102 Replaced 0 with 1 -&gt; SURVIVED</div><div id="mutation_31_701_702" class="survived">resources/xr/stackTraceProcessor.js:20:88 Replaced 0 with 1 -&gt; SURVIVED</div><div id="mutation_24_688_693" class="survived">resources/xr/stackTraceProcessor.js:20:75 Replaced  ||  with &amp;&amp; -&gt; SURVIVED</div><div id="mutation_25_650_654" class="survived">resources/xr/stackTraceProcessor.js:20:37 Replaced  ||  with &amp;&amp; -&gt; SURVIVED</div><div id="mutation_26_644_649" class="survived">resources/xr/stackTraceProcessor.js:20:31 Replaced  ===  with !== -&gt; SURVIVED</div><div id="mutation_27_649_650" class="survived">resources/xr/stackTraceProcessor.js:20:36 Replaced 0 with 1 -&gt; SURVIVED</div><div id="mutation_28_682_687" class="survived">resources/xr/stackTraceProcessor.js:20:69 Replaced  ===  with !== -&gt; SURVIVED</div><div id="mutation_29_662_663" class="survived">resources/xr/stackTraceProcessor.js:20:49 Replaced 0 with 1 -&gt; SURVIVED</div><div id="mutation_30_687_688" class="survived">resources/xr/stackTraceProcessor.js:20:74 Replaced 0 with 1 -&gt; SURVIVED</div><div id="mutation_33_740_747" class="survived">resources/xr/stackTraceProcessor.js:21:17 Removed return; -&gt; SURVIVED</div><div id="mutation_22_775_801" class="survived">resources/xr/stackTraceProcessor.js:24:13 Removed var root = new RootNode(); -&gt; SURVIVED</div><div id="mutation_23_814_1091" class="survived">resources/xr/stackTraceProcessor.js:25:13 Removed _(queries).forEach(function (query) { builder.createStackTraceNodes(root, query.stackTrace, function(stackElement, node){ node.id = node.id || stackCounter++; stackElement.id = node.id; }); }); -&gt; SURVIVED</div><div id="mutation_34_833_1089" class="survived">resources/xr/stackTraceProcessor.js:25:32 Replaced function (query) { builder.createStackTraceNodes(root, query.stackTrace, function(stackElement, node){ node.id = node.id || stackCounter++; stackElement.id = node.id; }); } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_35_814_1090" class="killed">resources/xr/stackTraceProcessor.js:25:13 Replaced _(queries).forEach(function (query) { builder.createStackTraceNodes(root, query.stackTrace, function(stackElement, node){ node.id = node.id || stackCounter++; stackElement.id = node.id; }); }) with function (query) { builder.createStackTraceNodes(root, query.stackTrace, function(stackElement, node){ node.id = node.id || stackCounter++; stackElement.id = node.id; }); } -&gt; KILLED</div><div id="mutation_36_814_1090" class="survived">resources/xr/stackTraceProcessor.js:25:13 Replaced _(queries).forEach(function (query) { builder.createStackTraceNodes(root, query.stackTrace, function(stackElement, node){ node.id = node.id || stackCounter++; stackElement.id = node.id; }); }) with _(queries) -&gt; SURVIVED</div><div id="mutation_45_816_823" class="survived">resources/xr/stackTraceProcessor.js:25:15 Replaced queries with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_46_814_824" class="survived">resources/xr/stackTraceProcessor.js:25:13 Replaced _(queries) with queries -&gt; SURVIVED</div><div id="mutation_38_898_902" class="survived">resources/xr/stackTraceProcessor.js:26:47 Replaced root with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_40_922_1073" class="survived">resources/xr/stackTraceProcessor.js:26:71 Replaced function(stackElement, node){ node.id = node.id || stackCounter++; stackElement.id = node.id; } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_41_868_1074" class="survived">resources/xr/stackTraceProcessor.js:26:17 Replaced builder.createStackTraceNodes(root, query.stackTrace, function(stackElement, node){ node.id = node.id || stackCounter++; stackElement.id = node.id; }) with builder -&gt; SURVIVED</div><div id="mutation_37_868_1075" class="survived">resources/xr/stackTraceProcessor.js:26:17 Removed builder.createStackTraceNodes(root, query.stackTrace, function(stackElement, node){ node.id = node.id || stackCounter++; stackElement.id = node.id; }); -&gt; SURVIVED</div><div id="mutation_39_904_920" class="survived">resources/xr/stackTraceProcessor.js:26:53 Replaced query.stackTrace with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_42_972_1008" class="survived">resources/xr/stackTraceProcessor.js:27:21 Removed node.id = node.id || stackCounter++; -&gt; SURVIVED</div><div id="mutation_44_989_993" class="survived">resources/xr/stackTraceProcessor.js:27:38 Replaced  ||  with &amp;&amp; -&gt; SURVIVED</div><div id="mutation_undefined_1005_1007" class="survived">resources/xr/stackTraceProcessor.js:27:54 Replaced ++ with -- -&gt; SURVIVED</div><div id="mutation_43_1029_1055" class="survived">resources/xr/stackTraceProcessor.js:28:21 Removed stackElement.id = node.id; -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

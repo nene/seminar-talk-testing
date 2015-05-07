@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":43,"ignored":9,"untested":0,"survived":28}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>43</strong> of which <strong>28</strong> survived,&nbsp;
+        <strong>9</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>34.9%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/index.html'">tree</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/GroupedStackTraceNode.js.html'">GroupedStackTraceNode.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_12_62_68">"xr/_"</span>);</li><li>    var StackTraceNode = require(<span class="code killed mutation_14_104_128">"xr/tree/StackTraceNode"</span>);</li><li></li><li>    <span class="code killed mutation_9_136_309">function GroupedStackTraceNode(stackTraceNode, cfg) {</span></li><li><span class="code killed mutation_9_136_309">        <span class="code survived mutation_21_198_272"><span class="code survived mutation_16_198_273">StackTraceNode.call(<span class="code survived mutation_18_218_222">this</span>, <span class="code survived mutation_19_224_241">stackTraceNode.el</span>, <span class="code survived mutation_22_243_271"><span class="code survived mutation_20_243_271">stackTraceNode.getChildren()</span></span>)</span>;</span></span></li><li><span class="code killed mutation_9_136_309"></li><li>        <span class="code survived mutation_27_283_290"><span class="code survived mutation_25_283_302"><span class="code survived mutation_24_283_302"><span class="code survived mutation_17_283_303">_(<span class="code survived mutation_26_285_289">this</span>)</span>.assign(<span class="code survived mutation_23_298_301">cfg</span>)</span></span>;</span></span></li><li><span class="code killed mutation_9_136_309">    }</span></li><li></li><li>    <span class="code killed mutation_44_315_339"><span class="code survived mutation_30_315_681"><span class="code survived mutation_10_315_682">_(<span class="code killed mutation_43_317_338">GroupedStackTraceNode</span>)</span>.extendClass(<span class="code killed mutation_28_352_366">StackTraceNode</span>, <span class="code survived mutation_29_368_680">{</span></span></span></li><li><span class="code survived mutation_30_315_681"><span class="code survived mutation_29_368_680"><span class="code survived mutation_10_315_682">        <span class="code survived mutation_31_378_441">template: <span class="code survived mutation_33_388_431">"templates/tree/GroupedStackTraceNode.html"</span>,</span></span></span></span></li><li><span class="code survived mutation_31_378_441"><span class="code survived mutation_30_315_681"><span class="code survived mutation_29_368_680"><span class="code survived mutation_10_315_682">        </span><span class="code survived mutation_32_441_674">getTemplateData: function(treeState) {</span></span></span></span></li><li><span class="code survived mutation_32_441_674"><span class="code survived mutation_30_315_681"><span class="code survived mutation_29_368_680"><span class="code survived mutation_10_315_682">            <span class="code survived mutation_34_492_566">var data = <span class="code survived mutation_38_503_565">StackTraceNode.prototype.getTemplateData.call(<span class="code survived mutation_36_549_553">this</span>, <span class="code survived mutation_37_555_564">treeState</span>)</span>;</span></span></span></span></span></li><li><span class="code survived mutation_32_441_674"><span class="code survived mutation_30_315_681"><span class="code survived mutation_29_368_680"><span class="code survived mutation_10_315_682"></li><li>            <span class="code survived mutation_35_580_664">return <span class="code survived mutation_41_587_663">_.assign(<span class="code survived mutation_39_596_600">data</span>, <span class="code survived mutation_40_602_662">{</span></span></span></span></span></span></span></li><li><span class="code survived mutation_41_587_663"><span class="code survived mutation_40_602_662"><span class="code survived mutation_35_580_664"><span class="code survived mutation_32_441_674"><span class="code survived mutation_30_315_681"><span class="code survived mutation_29_368_680"><span class="code survived mutation_10_315_682">                <span class="code survived mutation_42_620_648">leftOffset : this.leftOffset</span></span></span></span></span></span></span></span></li><li><span class="code survived mutation_41_587_663"><span class="code survived mutation_40_602_662"><span class="code survived mutation_35_580_664"><span class="code survived mutation_32_441_674"><span class="code survived mutation_30_315_681"><span class="code survived mutation_29_368_680"><span class="code survived mutation_10_315_682">            }</span>)</span>;</span></span></span></span></span></li><li><span class="code survived mutation_32_441_674"><span class="code survived mutation_30_315_681"><span class="code survived mutation_29_368_680"><span class="code survived mutation_10_315_682">        }</span></span></span></span></li><li><span class="code survived mutation_30_315_681"><span class="code survived mutation_29_368_680"><span class="code survived mutation_10_315_682">    }</span>)</span>;</span></li><li></li><li>    <span class="code survived mutation_11_688_717">return GroupedStackTraceNode;</span></li><li></li><li>});</li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_12_62_68" class="killed">resources/xr/tree/GroupedStackTraceNode.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_14_104_128" class="killed">resources/xr/tree/GroupedStackTraceNode.js:5:34 Replaced &quot;xr/tree/StackTraceNode&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_9_136_309" class="killed">resources/xr/tree/GroupedStackTraceNode.js:7:5 Removed function GroupedStackTraceNode(stackTraceNode, cfg) { StackTraceNode.call(this, stackTraceNode.el, stackTraceNode.getChildren()); _(this).assign(cfg); } -&gt; KILLED</div><div id="mutation_16_198_273" class="survived">resources/xr/tree/GroupedStackTraceNode.js:8:9 Removed StackTraceNode.call(this, stackTraceNode.el, stackTraceNode.getChildren()); -&gt; SURVIVED</div><div id="mutation_22_243_271" class="survived">resources/xr/tree/GroupedStackTraceNode.js:8:54 Replaced stackTraceNode.getChildren() with stackTraceNode -&gt; SURVIVED</div><div id="mutation_18_218_222" class="survived">resources/xr/tree/GroupedStackTraceNode.js:8:29 Replaced this with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_19_224_241" class="survived">resources/xr/tree/GroupedStackTraceNode.js:8:35 Replaced stackTraceNode.el with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_20_243_271" class="survived">resources/xr/tree/GroupedStackTraceNode.js:8:54 Replaced stackTraceNode.getChildren() with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_21_198_272" class="survived">resources/xr/tree/GroupedStackTraceNode.js:8:9 Replaced StackTraceNode.call(this, stackTraceNode.el, stackTraceNode.getChildren()) with StackTraceNode -&gt; SURVIVED</div><div id="mutation_17_283_303" class="survived">resources/xr/tree/GroupedStackTraceNode.js:10:9 Removed _(this).assign(cfg); -&gt; SURVIVED</div><div id="mutation_23_298_301" class="survived">resources/xr/tree/GroupedStackTraceNode.js:10:24 Replaced cfg with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_24_283_302" class="survived">resources/xr/tree/GroupedStackTraceNode.js:10:9 Replaced _(this).assign(cfg) with cfg -&gt; SURVIVED</div><div id="mutation_25_283_302" class="survived">resources/xr/tree/GroupedStackTraceNode.js:10:9 Replaced _(this).assign(cfg) with _(this) -&gt; SURVIVED</div><div id="mutation_26_285_289" class="survived">resources/xr/tree/GroupedStackTraceNode.js:10:11 Replaced this with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_27_283_290" class="survived">resources/xr/tree/GroupedStackTraceNode.js:10:9 Replaced _(this) with this -&gt; SURVIVED</div><div id="mutation_44_315_339" class="killed">resources/xr/tree/GroupedStackTraceNode.js:13:5 Replaced _(GroupedStackTraceNode) with GroupedStackTraceNode -&gt; KILLED</div><div id="mutation_43_317_338" class="killed">resources/xr/tree/GroupedStackTraceNode.js:13:7 Replaced GroupedStackTraceNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_10_315_682" class="survived">resources/xr/tree/GroupedStackTraceNode.js:13:5 Removed _(GroupedStackTraceNode).extendClass(StackTraceNode, { template: &quot;templates/tree/GroupedStackTraceNode.html&quot;, getTemplateData: function(treeState) { var data = StackTraceNode.prototype.getTemplateData.call(this, treeState); return _.assign(data, { leftOffset : this.leftOffset }); } }); -&gt; SURVIVED</div><div id="mutation_29_368_680" class="survived">resources/xr/tree/GroupedStackTraceNode.js:13:58 Replaced { template: &quot;templates/tree/GroupedStackTraceNode.html&quot;, getTemplateData: function(treeState) { var data = StackTraceNode.prototype.getTemplateData.call(this, treeState); return _.assign(data, { leftOffset : this.leftOffset }); } } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_30_315_681" class="survived">resources/xr/tree/GroupedStackTraceNode.js:13:5 Replaced _(GroupedStackTraceNode).extendClass(StackTraceNode, { template: &quot;templates/tree/GroupedStackTraceNode.html&quot;, getTemplateData: function(treeState) { var data = StackTraceNode.prototype.getTemplateData.call(this, treeState); return _.assign(data, { leftOffset : this.leftOffset }); } }) with _(GroupedStackTraceNode) -&gt; SURVIVED</div><div id="mutation_28_352_366" class="killed">resources/xr/tree/GroupedStackTraceNode.js:13:42 Replaced StackTraceNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_31_378_441" class="survived">resources/xr/tree/GroupedStackTraceNode.js:14:9 Removed template: &quot;templates/tree/GroupedStackTraceNode.html&quot;,  -&gt; SURVIVED</div><div id="mutation_33_388_431" class="survived">resources/xr/tree/GroupedStackTraceNode.js:14:19 Replaced &quot;templates/tree/GroupedStackTraceNode.html&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_32_441_674" class="survived">resources/xr/tree/GroupedStackTraceNode.js:15:9 Removed getTemplateData: function(treeState) { var data = StackTraceNode.prototype.getTemplateData.call(this, treeState); return _.assign(data, { leftOffset : this.leftOffset }); } -&gt; SURVIVED</div><div id="mutation_34_492_566" class="survived">resources/xr/tree/GroupedStackTraceNode.js:16:13 Removed var data = StackTraceNode.prototype.getTemplateData.call(this, treeState); -&gt; SURVIVED</div><div id="mutation_36_549_553" class="survived">resources/xr/tree/GroupedStackTraceNode.js:16:70 Replaced this with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_37_555_564" class="survived">resources/xr/tree/GroupedStackTraceNode.js:16:76 Replaced treeState with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_38_503_565" class="survived">resources/xr/tree/GroupedStackTraceNode.js:16:24 Replaced StackTraceNode.prototype.getTemplateData.call(this, treeState) with StackTraceNode.prototype.getTemplateData -&gt; SURVIVED</div><div id="mutation_35_580_664" class="survived">resources/xr/tree/GroupedStackTraceNode.js:18:13 Removed return _.assign(data, { leftOffset : this.leftOffset }); -&gt; SURVIVED</div><div id="mutation_40_602_662" class="survived">resources/xr/tree/GroupedStackTraceNode.js:18:35 Replaced { leftOffset : this.leftOffset } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_41_587_663" class="survived">resources/xr/tree/GroupedStackTraceNode.js:18:20 Replaced _.assign(data, { leftOffset : this.leftOffset }) with _ -&gt; SURVIVED</div><div id="mutation_39_596_600" class="survived">resources/xr/tree/GroupedStackTraceNode.js:18:29 Replaced data with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_42_620_648" class="survived">resources/xr/tree/GroupedStackTraceNode.js:19:17 Removed leftOffset : this.leftOffset -&gt; SURVIVED</div><div id="mutation_11_688_717" class="survived">resources/xr/tree/GroupedStackTraceNode.js:24:5 Removed return GroupedStackTraceNode; -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

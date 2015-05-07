@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":17,"ignored":7,"untested":0,"survived":10}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>17</strong> of which <strong>10</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>41.2%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/ioCallsTreeFactory.js.html'">ioCallsTreeFactory.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var IOTree = require(<span class="code survived mutation_9_67_78">"xr/IOTree"</span>);</li><li></li><li>    <span class="code survived mutation_8_86_680">return {</span></li><li><span class="code survived mutation_8_86_680">        /**</span></li><li><span class="code survived mutation_8_86_680">         * Builds IO Calls Tree.</span></li><li><span class="code survived mutation_8_86_680">         * @param {Object} cfg</span></li><li><span class="code survived mutation_8_86_680">         *   @param {jQuery} cfg.container Container element.</span></li><li><span class="code survived mutation_8_86_680">         *   @param {Object[]} cfg.requests The requests data.</span></li><li><span class="code survived mutation_8_86_680">         *   @param {Object} cfg.treeState Expanded/collapsed state of tree nodes.</span></li><li><span class="code survived mutation_8_86_680">         *   @param {Object} cfg.sortConfig Sorting configuration.</span></li><li><span class="code survived mutation_8_86_680">         */</span></li><li><span class="code survived mutation_8_86_680">        <span class="code survived mutation_11_466_673">create: function(cfg) {</span></span></li><li><span class="code survived mutation_11_466_673"><span class="code survived mutation_8_86_680">            <span class="code survived mutation_12_502_663">return <span class="code survived mutation_15_509_662"><span class="code survived mutation_14_509_662">IOTree.create(<span class="code survived mutation_13_523_661">{</span></span></span></span></span></span></li><li><span class="code survived mutation_15_509_662"><span class="code survived mutation_14_509_662"><span class="code survived mutation_13_523_661"><span class="code survived mutation_12_502_663"><span class="code survived mutation_11_466_673"><span class="code survived mutation_8_86_680">                <span class="code survived mutation_16_541_583">container: cfg.container,</span></span></span></span></span></span></span></li><li><span class="code survived mutation_16_541_583"><span class="code survived mutation_15_509_662"><span class="code survived mutation_14_509_662"><span class="code survived mutation_13_523_661"><span class="code survived mutation_12_502_663"><span class="code survived mutation_11_466_673"><span class="code survived mutation_8_86_680">                </span><span class="code survived mutation_17_583_623">requests: cfg.requests,</span></span></span></span></span></span></span></li><li><span class="code survived mutation_17_583_623"><span class="code survived mutation_15_509_662"><span class="code survived mutation_14_509_662"><span class="code survived mutation_13_523_661"><span class="code survived mutation_12_502_663"><span class="code survived mutation_11_466_673"><span class="code survived mutation_8_86_680">                </span><span class="code survived mutation_18_623_647">treeState: cfg.treeState</span></span></span></span></span></span></span></li><li><span class="code survived mutation_15_509_662"><span class="code survived mutation_14_509_662"><span class="code survived mutation_13_523_661"><span class="code survived mutation_12_502_663"><span class="code survived mutation_11_466_673"><span class="code survived mutation_8_86_680">            }</span>)</span></span>;</span></span></span></li><li><span class="code survived mutation_11_466_673"><span class="code survived mutation_8_86_680">        }</span></span></li><li><span class="code survived mutation_8_86_680">    };</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_9_67_78" class="survived">resources/xr/ioCallsTreeFactory.js:4:26 Replaced &quot;xr/IOTree&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_8_86_680" class="survived">resources/xr/ioCallsTreeFactory.js:6:5 Removed return { /** * Builds IO Calls Tree. * @param {Object} cfg * @param {jQuery} cfg.container Container element. * @param {Object[]} cfg.requests The requests data. * @param {Object} cfg.treeState Expanded/collapsed state of tree nodes. * @param {Object} cfg.sortConfig Sorting configuration. */ create: function(cfg) { return IOTree.create({ container: cfg.container, requests: cfg.requests, treeState: cfg.treeState }); } }; -&gt; SURVIVED</div><div id="mutation_11_466_673" class="survived">resources/xr/ioCallsTreeFactory.js:15:9 Removed create: function(cfg) { return IOTree.create({ container: cfg.container, requests: cfg.requests, treeState: cfg.treeState }); } -&gt; SURVIVED</div><div id="mutation_12_502_663" class="survived">resources/xr/ioCallsTreeFactory.js:16:13 Removed return IOTree.create({ container: cfg.container, requests: cfg.requests, treeState: cfg.treeState }); -&gt; SURVIVED</div><div id="mutation_13_523_661" class="survived">resources/xr/ioCallsTreeFactory.js:16:34 Replaced { container: cfg.container, requests: cfg.requests, treeState: cfg.treeState } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_14_509_662" class="survived">resources/xr/ioCallsTreeFactory.js:16:20 Replaced IOTree.create({ container: cfg.container, requests: cfg.requests, treeState: cfg.treeState }) with { container: cfg.container, requests: cfg.requests, treeState: cfg.treeState } -&gt; SURVIVED</div><div id="mutation_15_509_662" class="survived">resources/xr/ioCallsTreeFactory.js:16:20 Replaced IOTree.create({ container: cfg.container, requests: cfg.requests, treeState: cfg.treeState }) with IOTree -&gt; SURVIVED</div><div id="mutation_16_541_583" class="survived">resources/xr/ioCallsTreeFactory.js:17:17 Removed container: cfg.container,  -&gt; SURVIVED</div><div id="mutation_17_583_623" class="survived">resources/xr/ioCallsTreeFactory.js:18:17 Removed requests: cfg.requests,  -&gt; SURVIVED</div><div id="mutation_18_623_647" class="survived">resources/xr/ioCallsTreeFactory.js:19:17 Removed treeState: cfg.treeState -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

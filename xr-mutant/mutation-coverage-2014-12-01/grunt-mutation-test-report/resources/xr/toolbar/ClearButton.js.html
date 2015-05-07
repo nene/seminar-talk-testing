@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":11,"ignored":2,"untested":0,"survived":7}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>11</strong> of which <strong>7</strong> survived,&nbsp;
+        <strong>2</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>36.4%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/toolbar/index.html'">toolbar</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/toolbar/ClearButton.js.html'">ClearButton.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li><span class="code killed mutation_6_15_352"><span class="code survived mutation_3_15_353">define(<span class="code survived mutation_5_22_351">function(require){</span></span></span></li><li><span class="code killed mutation_6_15_352"><span class="code survived mutation_5_22_351"><span class="code survived mutation_3_15_353"></li><li>    /**</span></span></span></li><li><span class="code killed mutation_6_15_352"><span class="code survived mutation_5_22_351"><span class="code survived mutation_3_15_353">     * The clear button on toolbar.</span></span></span></li><li><span class="code killed mutation_6_15_352"><span class="code survived mutation_5_22_351"><span class="code survived mutation_3_15_353">     *</span></span></span></li><li><span class="code killed mutation_6_15_352"><span class="code survived mutation_5_22_351"><span class="code survived mutation_3_15_353">     * @constructor</span></span></span></li><li><span class="code killed mutation_6_15_352"><span class="code survived mutation_5_22_351"><span class="code survived mutation_3_15_353">     * @param {jQuery} el HTML element of the actual button.</span></span></span></li><li><span class="code killed mutation_6_15_352"><span class="code survived mutation_5_22_351"><span class="code survived mutation_3_15_353">     * @param {Function} onClick Called when button is clicked.</span></span></span></li><li><span class="code killed mutation_6_15_352"><span class="code survived mutation_5_22_351"><span class="code survived mutation_3_15_353">     */</span></span></span></li><li><span class="code killed mutation_6_15_352"><span class="code survived mutation_5_22_351"><span class="code survived mutation_3_15_353">    <span class="code killed mutation_7_250_324">function ClearButton(el, onClick) {</span></span></span></span></li><li><span class="code killed mutation_7_250_324"><span class="code killed mutation_6_15_352"><span class="code survived mutation_5_22_351"><span class="code survived mutation_3_15_353">        <span class="code survived mutation_12_294_317"><span class="code survived mutation_9_294_318">el.on(<span class="code survived mutation_10_300_307">'click'</span>, <span class="code survived mutation_11_309_316">onClick</span>)</span>;</span></span></span></span></span></li><li><span class="code killed mutation_7_250_324"><span class="code killed mutation_6_15_352"><span class="code survived mutation_5_22_351"><span class="code survived mutation_3_15_353">    }</span></span></span></span></li><li><span class="code killed mutation_6_15_352"><span class="code survived mutation_5_22_351"><span class="code survived mutation_3_15_353"></li><li>    <span class="code survived mutation_8_330_349">return ClearButton;</span></span></span></span></li><li><span class="code killed mutation_6_15_352"><span class="code survived mutation_5_22_351"><span class="code survived mutation_3_15_353">}</span>)</span>;</span></li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_3_15_353" class="survived">resources/xr/toolbar/ClearButton.js:3:1 Removed define(function(require){ /** * The clear button on toolbar. * * @constructor * @param {jQuery} el HTML element of the actual button. * @param {Function} onClick Called when button is clicked. */ function ClearButton(el, onClick) { el.on(&#x27;click&#x27;, onClick); } return ClearButton; }); -&gt; SURVIVED</div><div id="mutation_5_22_351" class="survived">resources/xr/toolbar/ClearButton.js:3:8 Replaced function(require){ /** * The clear button on toolbar. * * @constructor * @param {jQuery} el HTML element of the actual button. * @param {Function} onClick Called when button is clicked. */ function ClearButton(el, onClick) { el.on(&#x27;click&#x27;, onClick); } return ClearButton; } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_6_15_352" class="killed">resources/xr/toolbar/ClearButton.js:3:1 Replaced define(function(require){ /** * The clear button on toolbar. * * @constructor * @param {jQuery} el HTML element of the actual button. * @param {Function} onClick Called when button is clicked. */ function ClearButton(el, onClick) { el.on(&#x27;click&#x27;, onClick); } return ClearButton; }) with function(require){ /** * The clear button on toolbar. * * @constructor * @param {jQuery} el HTML element of the actual button. * @param {Function} onClick Called when button is clicked. */ function ClearButton(el, onClick) { el.on(&#x27;click&#x27;, onClick); } return ClearButton; } -&gt; KILLED</div><div id="mutation_7_250_324" class="killed">resources/xr/toolbar/ClearButton.js:12:5 Removed function ClearButton(el, onClick) { el.on(&#x27;click&#x27;, onClick); } -&gt; KILLED</div><div id="mutation_9_294_318" class="survived">resources/xr/toolbar/ClearButton.js:13:9 Removed el.on(&#x27;click&#x27;, onClick); -&gt; SURVIVED</div><div id="mutation_10_300_307" class="survived">resources/xr/toolbar/ClearButton.js:13:15 Replaced &#x27;click&#x27; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_11_309_316" class="survived">resources/xr/toolbar/ClearButton.js:13:24 Replaced onClick with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_12_294_317" class="survived">resources/xr/toolbar/ClearButton.js:13:9 Replaced el.on(&#x27;click&#x27;, onClick) with el -&gt; SURVIVED</div><div id="mutation_8_330_349" class="survived">resources/xr/toolbar/ClearButton.js:16:5 Removed return ClearButton; -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

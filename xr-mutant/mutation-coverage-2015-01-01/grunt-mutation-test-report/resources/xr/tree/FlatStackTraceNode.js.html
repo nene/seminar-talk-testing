@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":47,"ignored":11,"untested":0,"survived":3}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>47</strong> of which <strong>3</strong> survived,&nbsp;
+        <strong>11</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>93.6%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/index.html'">tree</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/FlatStackTraceNode.js.html'">FlatStackTraceNode.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_13_62_68">"xr/_"</span>);</li><li>    var lang = require(<span class="code killed mutation_15_94_103">"xr/lang"</span>);</li><li>    var StackTraceNode = require(<span class="code killed mutation_17_139_163">"xr/tree/StackTraceNode"</span>);</li><li></li><li>    /**</li><li>     * A StackTraceNode with an additional list of the flattened/collapsed nodes.</li><li>     * @constructor</li><li>     * @param {Object} stackEl  raw stackTrace object</li><li>     * @param {TreeNode[]} children</li><li>     */</li><li>    <span class="code killed mutation_10_379_558">function FlatStackTraceNode(stackEl, children) {</span></li><li><span class="code killed mutation_10_379_558">        <span class="code killed mutation_25_436_480"><span class="code killed mutation_19_436_481">StackTraceNode.call(<span class="code killed mutation_22_456_460">this</span>, <span class="code killed mutation_23_462_469">stackEl</span>, <span class="code killed mutation_24_471_479">children</span>)</span>;</span></span></li><li><span class="code killed mutation_10_379_558"></li><li>        <span class="code killed mutation_20_491_520">this.type = <span class="code killed mutation_26_503_519">"flatStackTrace"</span>;</span></span></li><li><span class="code killed mutation_10_379_558">        <span class="code killed mutation_21_529_552">this.flatChildren = [];</span></span></li><li><span class="code killed mutation_10_379_558">    }</span></li><li>    <span class="code killed mutation_48_563_584"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_11_563_1354">_(<span class="code killed mutation_47_565_583">FlatStackTraceNode</span>)</span>.extendClass(<span class="code killed mutation_27_597_611">StackTraceNode</span>, <span class="code killed mutation_28_613_1352">{</span></span></span></li><li><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354">        <span class="code survived mutation_30_623_684">template: <span class="code survived mutation_34_633_673">"templates/tree/FlatStackTraceNode.html"</span>,</span></span></span></span></li><li><span class="code survived mutation_30_623_684"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354"></li><li>        </span><span class="code killed mutation_31_684_1044">getTemplateData: function() {</span></span></span></span></li><li><span class="code killed mutation_31_684_1044"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354">            <span class="code killed mutation_35_726_789">var data = <span class="code killed mutation_40_737_788"><span class="code killed mutation_39_737_788">StackTraceNode.prototype.getTemplateData.call(<span class="code killed mutation_38_783_787">this</span>)</span></span>;</span></span></span></span></span></li><li><span class="code killed mutation_31_684_1044"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354"></li><li>            <span class="code killed mutation_36_803_890">data.flatChildrenCount = <span class="code killed mutation_44_828_889">lang.pluralize(<span class="code survived mutation_41_843_851">"% call"</span>, <span class="code killed mutation_42_853_862">"% calls"</span>, <span class="code killed mutation_43_864_888">this.flatChildren.length</span>)</span>;</span></span></span></span></span></li><li><span class="code killed mutation_31_684_1044"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354"></li><li>            <span class="code killed mutation_37_904_916">return data;</span></span></span></span></span></li><li><span class="code killed mutation_31_684_1044"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354">        },</span></span></span></span></li><li><span class="code killed mutation_31_684_1044"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354"></li><li>        /**</span></span></span></span></li><li><span class="code killed mutation_31_684_1044"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354">         * Returns array of flattened child nodes.</span></span></span></span></li><li><span class="code killed mutation_31_684_1044"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354">         * @return {TreeNode[]}</span></span></span></span></li><li><span class="code killed mutation_31_684_1044"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354">         */</span></span></span></span></li><li><span class="code killed mutation_31_684_1044"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354">        </span><span class="code killed mutation_32_1044_1249">getFlatChildren: function() {</span></span></span></span></li><li><span class="code killed mutation_32_1044_1249"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354">            <span class="code killed mutation_45_1086_1111">return this.flatChildren;</span></span></span></span></span></li><li><span class="code killed mutation_32_1044_1249"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354">        },</span></span></span></span></li><li><span class="code killed mutation_32_1044_1249"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354"></li><li>        /**</span></span></span></span></li><li><span class="code killed mutation_32_1044_1249"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354">         * Sets the flattened child nodes array.</span></span></span></span></li><li><span class="code killed mutation_32_1044_1249"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354">         * @param {TreeNode[]} flatChildren</span></span></span></span></li><li><span class="code killed mutation_32_1044_1249"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354">         */</span></span></span></span></li><li><span class="code killed mutation_32_1044_1249"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354">        </span><span class="code killed mutation_33_1249_1346">setFlatChildren: function(flatChildren) {</span></span></span></span></li><li><span class="code killed mutation_33_1249_1346"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354">            <span class="code killed mutation_46_1303_1336">this.flatChildren = flatChildren;</span></span></span></span></span></li><li><span class="code killed mutation_33_1249_1346"><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354">        }</span></span></span></span></li><li><span class="code killed mutation_29_563_1353"><span class="code killed mutation_28_613_1352"><span class="code killed mutation_11_563_1354">    }</span>)</span>;</span></li><li></li><li>    <span class="code killed mutation_12_1360_1386">return FlatStackTraceNode;</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_13_62_68" class="killed">resources/xr/tree/FlatStackTraceNode.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_94_103" class="killed">resources/xr/tree/FlatStackTraceNode.js:5:24 Replaced &quot;xr/lang&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_139_163" class="killed">resources/xr/tree/FlatStackTraceNode.js:6:34 Replaced &quot;xr/tree/StackTraceNode&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_10_379_558" class="killed">resources/xr/tree/FlatStackTraceNode.js:14:5 Removed function FlatStackTraceNode(stackEl, children) { StackTraceNode.call(this, stackEl, children); this.type = &quot;flatStackTrace&quot;; this.flatChildren = []; } -&gt; KILLED</div><div id="mutation_19_436_481" class="killed">resources/xr/tree/FlatStackTraceNode.js:15:9 Removed StackTraceNode.call(this, stackEl, children); -&gt; KILLED</div><div id="mutation_22_456_460" class="killed">resources/xr/tree/FlatStackTraceNode.js:15:29 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_23_462_469" class="killed">resources/xr/tree/FlatStackTraceNode.js:15:35 Replaced stackEl with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_24_471_479" class="killed">resources/xr/tree/FlatStackTraceNode.js:15:44 Replaced children with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_25_436_480" class="killed">resources/xr/tree/FlatStackTraceNode.js:15:9 Replaced StackTraceNode.call(this, stackEl, children) with StackTraceNode -&gt; KILLED</div><div id="mutation_20_491_520" class="killed">resources/xr/tree/FlatStackTraceNode.js:17:9 Removed this.type = &quot;flatStackTrace&quot;; -&gt; KILLED</div><div id="mutation_26_503_519" class="killed">resources/xr/tree/FlatStackTraceNode.js:17:21 Replaced &quot;flatStackTrace&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_21_529_552" class="killed">resources/xr/tree/FlatStackTraceNode.js:18:9 Removed this.flatChildren = []; -&gt; KILLED</div><div id="mutation_47_565_583" class="killed">resources/xr/tree/FlatStackTraceNode.js:20:7 Replaced FlatStackTraceNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_48_563_584" class="killed">resources/xr/tree/FlatStackTraceNode.js:20:5 Replaced _(FlatStackTraceNode) with FlatStackTraceNode -&gt; KILLED</div><div id="mutation_27_597_611" class="killed">resources/xr/tree/FlatStackTraceNode.js:20:39 Replaced StackTraceNode with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_28_613_1352" class="killed">resources/xr/tree/FlatStackTraceNode.js:20:55 Replaced { template: &quot;templates/tree/FlatStackTraceNode.html&quot;, getTemplateData: function() { var data = StackTraceNode.prototype.getTemplateData.call(this); data.flatChildrenCount = lang.pluralize(&quot;% call&quot;, &quot;% calls&quot;, this.flatChildren.length); return data; }, /** * Returns array of flattened child nodes. * @return {TreeNode[]} */ getFlatChildren: function() { return this.flatChildren; }, /** * Sets the flattened child nodes array. * @param {TreeNode[]} flatChildren */ setFlatChildren: function(flatChildren) { this.flatChildren = flatChildren; } } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_29_563_1353" class="killed">resources/xr/tree/FlatStackTraceNode.js:20:5 Replaced _(FlatStackTraceNode).extendClass(StackTraceNode, { template: &quot;templates/tree/FlatStackTraceNode.html&quot;, getTemplateData: function() { var data = StackTraceNode.prototype.getTemplateData.call(this); data.flatChildrenCount = lang.pluralize(&quot;% call&quot;, &quot;% calls&quot;, this.flatChildren.length); return data; }, /** * Returns array of flattened child nodes. * @return {TreeNode[]} */ getFlatChildren: function() { return this.flatChildren; }, /** * Sets the flattened child nodes array. * @param {TreeNode[]} flatChildren */ setFlatChildren: function(flatChildren) { this.flatChildren = flatChildren; } }) with _(FlatStackTraceNode) -&gt; KILLED</div><div id="mutation_11_563_1354" class="killed">resources/xr/tree/FlatStackTraceNode.js:20:5 Removed _(FlatStackTraceNode).extendClass(StackTraceNode, { template: &quot;templates/tree/FlatStackTraceNode.html&quot;, getTemplateData: function() { var data = StackTraceNode.prototype.getTemplateData.call(this); data.flatChildrenCount = lang.pluralize(&quot;% call&quot;, &quot;% calls&quot;, this.flatChildren.length); return data; }, /** * Returns array of flattened child nodes. * @return {TreeNode[]} */ getFlatChildren: function() { return this.flatChildren; }, /** * Sets the flattened child nodes array. * @param {TreeNode[]} flatChildren */ setFlatChildren: function(flatChildren) { this.flatChildren = flatChildren; } }); -&gt; KILLED</div><div id="mutation_30_623_684" class="survived">resources/xr/tree/FlatStackTraceNode.js:21:9 Removed template: &quot;templates/tree/FlatStackTraceNode.html&quot;,  -&gt; SURVIVED</div><div id="mutation_34_633_673" class="survived">resources/xr/tree/FlatStackTraceNode.js:21:19 Replaced &quot;templates/tree/FlatStackTraceNode.html&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_31_684_1044" class="killed">resources/xr/tree/FlatStackTraceNode.js:23:9 Removed getTemplateData: function() { var data = StackTraceNode.prototype.getTemplateData.call(this); data.flatChildrenCount = lang.pluralize(&quot;% call&quot;, &quot;% calls&quot;, this.flatChildren.length); return data; }, /** * Returns array of flattened child nodes. * @return {TreeNode[]} */  -&gt; KILLED</div><div id="mutation_40_737_788" class="killed">resources/xr/tree/FlatStackTraceNode.js:24:24 Replaced StackTraceNode.prototype.getTemplateData.call(this) with StackTraceNode.prototype.getTemplateData -&gt; KILLED</div><div id="mutation_38_783_787" class="killed">resources/xr/tree/FlatStackTraceNode.js:24:70 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_39_737_788" class="killed">resources/xr/tree/FlatStackTraceNode.js:24:24 Replaced StackTraceNode.prototype.getTemplateData.call(this) with this -&gt; KILLED</div><div id="mutation_35_726_789" class="killed">resources/xr/tree/FlatStackTraceNode.js:24:13 Removed var data = StackTraceNode.prototype.getTemplateData.call(this); -&gt; KILLED</div><div id="mutation_41_843_851" class="survived">resources/xr/tree/FlatStackTraceNode.js:26:53 Replaced &quot;% call&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_36_803_890" class="killed">resources/xr/tree/FlatStackTraceNode.js:26:13 Removed data.flatChildrenCount = lang.pluralize(&quot;% call&quot;, &quot;% calls&quot;, this.flatChildren.length); -&gt; KILLED</div><div id="mutation_43_864_888" class="killed">resources/xr/tree/FlatStackTraceNode.js:26:74 Replaced this.flatChildren.length with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_44_828_889" class="killed">resources/xr/tree/FlatStackTraceNode.js:26:38 Replaced lang.pluralize(&quot;% call&quot;, &quot;% calls&quot;, this.flatChildren.length) with lang -&gt; KILLED</div><div id="mutation_42_853_862" class="killed">resources/xr/tree/FlatStackTraceNode.js:26:63 Replaced &quot;% calls&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_37_904_916" class="killed">resources/xr/tree/FlatStackTraceNode.js:28:13 Removed return data; -&gt; KILLED</div><div id="mutation_32_1044_1249" class="killed">resources/xr/tree/FlatStackTraceNode.js:35:9 Removed getFlatChildren: function() { return this.flatChildren; }, /** * Sets the flattened child nodes array. * @param {TreeNode[]} flatChildren */  -&gt; KILLED</div><div id="mutation_45_1086_1111" class="killed">resources/xr/tree/FlatStackTraceNode.js:36:13 Removed return this.flatChildren; -&gt; KILLED</div><div id="mutation_33_1249_1346" class="killed">resources/xr/tree/FlatStackTraceNode.js:43:9 Removed setFlatChildren: function(flatChildren) { this.flatChildren = flatChildren; } -&gt; KILLED</div><div id="mutation_46_1303_1336" class="killed">resources/xr/tree/FlatStackTraceNode.js:44:13 Removed this.flatChildren = flatChildren; -&gt; KILLED</div><div id="mutation_12_1360_1386" class="killed">resources/xr/tree/FlatStackTraceNode.js:48:5 Removed return FlatStackTraceNode; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

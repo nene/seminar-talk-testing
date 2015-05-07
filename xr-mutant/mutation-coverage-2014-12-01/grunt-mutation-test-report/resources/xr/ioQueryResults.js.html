@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":30,"ignored":7,"untested":0,"survived":22}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>30</strong> of which <strong>22</strong> survived,&nbsp;
+        <strong>7</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>26.7%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/ioQueryResults.js.html'">ioQueryResults.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var lang = require(<span class="code killed mutation_9_65_74">"xr/lang"</span>);</li><li></li><li>    <span class="code survived mutation_8_82_714">return {</span></li><li><span class="code survived mutation_8_82_714">        /**</span></li><li><span class="code survived mutation_8_82_714">         * Formats query results count string according to query type.</span></li><li><span class="code survived mutation_8_82_714">         * @param  {String} queryType</span></li><li><span class="code survived mutation_8_82_714">         * @param  {Number} count</span></li><li><span class="code survived mutation_8_82_714">         * @return {String}</span></li><li><span class="code survived mutation_8_82_714">         */</span></li><li><span class="code survived mutation_8_82_714">        <span class="code survived mutation_11_294_707">format: function(queryType, count) {</span></span></li><li><span class="code survived mutation_11_294_707"><span class="code survived mutation_8_82_714">            <span class="code survived mutation_12_343_697">if (queryType<span class="code survived mutation_13_356_361"> === </span><span class="code survived mutation_14_361_370">'mongodb'</span>) {</span></span></span></li><li><span class="code survived mutation_12_343_697"><span class="code survived mutation_11_294_707"><span class="code survived mutation_8_82_714">                <span class="code survived mutation_15_390_445">return <span class="code survived mutation_19_397_444">lang.pluralizeOrEmpty(<span class="code survived mutation_16_419_426">'% doc'</span>, <span class="code survived mutation_17_428_436">'% docs'</span>, <span class="code survived mutation_18_438_443">count</span>)</span>;</span></span></span></span></li><li><span class="code survived mutation_12_343_697"><span class="code survived mutation_11_294_707"><span class="code survived mutation_8_82_714">            }</span></span></span></li><li><span class="code survived mutation_12_343_697"><span class="code survived mutation_11_294_707"><span class="code survived mutation_8_82_714">            else if (queryType<span class="code survived mutation_20_490_495"> === </span><span class="code survived mutation_21_495_502">'redis'</span>) {</span></span></span></li><li><span class="code survived mutation_12_343_697"><span class="code survived mutation_11_294_707"><span class="code survived mutation_8_82_714">                <span class="code survived mutation_22_522_578">return <span class="code survived mutation_26_529_577">lang.pluralizeOrEmpty(<span class="code survived mutation_23_551_559">'% obj.'</span>, <span class="code survived mutation_24_561_569">'% obj.'</span>, <span class="code survived mutation_25_571_576">count</span>)</span>;</span></span></span></span></li><li><span class="code survived mutation_12_343_697"><span class="code survived mutation_11_294_707"><span class="code survived mutation_8_82_714">            }</span></span></span></li><li><span class="code survived mutation_12_343_697"><span class="code survived mutation_11_294_707"><span class="code survived mutation_8_82_714">            else {</span></span></span></li><li><span class="code survived mutation_12_343_697"><span class="code survived mutation_11_294_707"><span class="code survived mutation_8_82_714">                <span class="code survived mutation_27_628_683">return <span class="code survived mutation_31_635_682">lang.pluralizeOrEmpty(<span class="code survived mutation_28_657_664">'% row'</span>, <span class="code survived mutation_29_666_674">'% rows'</span>, <span class="code survived mutation_30_676_681">count</span>)</span>;</span></span></span></span></li><li><span class="code survived mutation_12_343_697"><span class="code survived mutation_11_294_707"><span class="code survived mutation_8_82_714">            }</span></span></span></li><li><span class="code survived mutation_11_294_707"><span class="code survived mutation_8_82_714">        }</span></span></li><li><span class="code survived mutation_8_82_714">    };</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_9_65_74" class="killed">resources/xr/ioQueryResults.js:4:24 Replaced &quot;xr/lang&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_8_82_714" class="survived">resources/xr/ioQueryResults.js:6:5 Removed return { /** * Formats query results count string according to query type. * @param {String} queryType * @param {Number} count * @return {String} */ format: function(queryType, count) { if (queryType === &#x27;mongodb&#x27;) { return lang.pluralizeOrEmpty(&#x27;% doc&#x27;, &#x27;% docs&#x27;, count); } else if (queryType === &#x27;redis&#x27;) { return lang.pluralizeOrEmpty(&#x27;% obj.&#x27;, &#x27;% obj.&#x27;, count); } else { return lang.pluralizeOrEmpty(&#x27;% row&#x27;, &#x27;% rows&#x27;, count); } } }; -&gt; SURVIVED</div><div id="mutation_11_294_707" class="survived">resources/xr/ioQueryResults.js:13:9 Removed format: function(queryType, count) { if (queryType === &#x27;mongodb&#x27;) { return lang.pluralizeOrEmpty(&#x27;% doc&#x27;, &#x27;% docs&#x27;, count); } else if (queryType === &#x27;redis&#x27;) { return lang.pluralizeOrEmpty(&#x27;% obj.&#x27;, &#x27;% obj.&#x27;, count); } else { return lang.pluralizeOrEmpty(&#x27;% row&#x27;, &#x27;% rows&#x27;, count); } } -&gt; SURVIVED</div><div id="mutation_12_343_697" class="survived">resources/xr/ioQueryResults.js:14:13 Removed if (queryType === &#x27;mongodb&#x27;) { return lang.pluralizeOrEmpty(&#x27;% doc&#x27;, &#x27;% docs&#x27;, count); } else if (queryType === &#x27;redis&#x27;) { return lang.pluralizeOrEmpty(&#x27;% obj.&#x27;, &#x27;% obj.&#x27;, count); } else { return lang.pluralizeOrEmpty(&#x27;% row&#x27;, &#x27;% rows&#x27;, count); } -&gt; SURVIVED</div><div id="mutation_13_356_361" class="survived">resources/xr/ioQueryResults.js:14:26 Replaced  ===  with !== -&gt; SURVIVED</div><div id="mutation_14_361_370" class="survived">resources/xr/ioQueryResults.js:14:31 Replaced &#x27;mongodb&#x27; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_16_419_426" class="survived">resources/xr/ioQueryResults.js:15:46 Replaced &#x27;% doc&#x27; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_17_428_436" class="survived">resources/xr/ioQueryResults.js:15:55 Replaced &#x27;% docs&#x27; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_18_438_443" class="survived">resources/xr/ioQueryResults.js:15:65 Replaced count with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_19_397_444" class="survived">resources/xr/ioQueryResults.js:15:24 Replaced lang.pluralizeOrEmpty(&#x27;% doc&#x27;, &#x27;% docs&#x27;, count) with lang -&gt; SURVIVED</div><div id="mutation_15_390_445" class="survived">resources/xr/ioQueryResults.js:15:17 Removed return lang.pluralizeOrEmpty(&#x27;% doc&#x27;, &#x27;% docs&#x27;, count); -&gt; SURVIVED</div><div id="mutation_20_490_495" class="survived">resources/xr/ioQueryResults.js:17:31 Replaced  ===  with !== -&gt; SURVIVED</div><div id="mutation_21_495_502" class="survived">resources/xr/ioQueryResults.js:17:36 Replaced &#x27;redis&#x27; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_22_522_578" class="survived">resources/xr/ioQueryResults.js:18:17 Removed return lang.pluralizeOrEmpty(&#x27;% obj.&#x27;, &#x27;% obj.&#x27;, count); -&gt; SURVIVED</div><div id="mutation_23_551_559" class="survived">resources/xr/ioQueryResults.js:18:46 Replaced &#x27;% obj.&#x27; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_24_561_569" class="survived">resources/xr/ioQueryResults.js:18:56 Replaced &#x27;% obj.&#x27; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_25_571_576" class="survived">resources/xr/ioQueryResults.js:18:66 Replaced count with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_26_529_577" class="survived">resources/xr/ioQueryResults.js:18:24 Replaced lang.pluralizeOrEmpty(&#x27;% obj.&#x27;, &#x27;% obj.&#x27;, count) with lang -&gt; SURVIVED</div><div id="mutation_27_628_683" class="survived">resources/xr/ioQueryResults.js:21:17 Removed return lang.pluralizeOrEmpty(&#x27;% row&#x27;, &#x27;% rows&#x27;, count); -&gt; SURVIVED</div><div id="mutation_28_657_664" class="survived">resources/xr/ioQueryResults.js:21:46 Replaced &#x27;% row&#x27; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_29_666_674" class="survived">resources/xr/ioQueryResults.js:21:55 Replaced &#x27;% rows&#x27; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_30_676_681" class="survived">resources/xr/ioQueryResults.js:21:65 Replaced count with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_31_635_682" class="survived">resources/xr/ioQueryResults.js:21:24 Replaced lang.pluralizeOrEmpty(&#x27;% row&#x27;, &#x27;% rows&#x27;, count) with lang -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

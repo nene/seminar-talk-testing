@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":27,"ignored":13,"untested":0,"survived":10}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>27</strong> of which <strong>10</strong> survived,&nbsp;
+        <strong>13</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>63.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/ioNodeFactory.js.html'">ioNodeFactory.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var QueryNode = require(<span class="code killed mutation_12_70_89">"xr/tree/QueryNode"</span>);</li><li>    var MongoQueryNode = require(<span class="code killed mutation_14_125_149">"xr/tree/MongoQueryNode"</span>);</li><li>    var HttpQueryNode = require(<span class="code killed mutation_16_184_207">"xr/tree/HttpQueryNode"</span>);</li><li>    var OrmNode = require(<span class="code killed mutation_18_236_253">"xr/tree/OrmNode"</span>);</li><li></li><li>    <span class="code survived mutation_11_261_901">return {</span></li><li><span class="code survived mutation_11_261_901">        /**</span></li><li><span class="code survived mutation_11_261_901">         * Creates suitable type of Query node based on Query object type.</span></li><li><span class="code survived mutation_11_261_901">         * @param  {Object} query Raw query object</span></li><li><span class="code survived mutation_11_261_901">         * @param  {Object} [cfg] Config options for QueryNode constructor.</span></li><li><span class="code survived mutation_11_261_901">         * @return {QueryNode}</span></li><li><span class="code survived mutation_11_261_901">         */</span></li><li><span class="code survived mutation_11_261_901">        <span class="code survived mutation_20_535_894">createQueryNode: function(query, cfg) {</span></span></li><li><span class="code survived mutation_20_535_894"><span class="code survived mutation_11_261_901">            <span class="code survived mutation_21_587_884">if (query.type<span class="code survived mutation_22_601_606"> === </span><span class="code survived mutation_23_606_612">"http"</span>) {</span></span></span></li><li><span class="code survived mutation_21_587_884"><span class="code survived mutation_20_535_894"><span class="code survived mutation_11_261_901">                <span class="code survived mutation_24_632_669">return new HttpQueryNode(query, cfg);</span></span></span></span></li><li><span class="code survived mutation_21_587_884"><span class="code survived mutation_20_535_894"><span class="code survived mutation_11_261_901">            }</span></span></span></li><li><span class="code survived mutation_21_587_884"><span class="code survived mutation_20_535_894"><span class="code survived mutation_11_261_901">            else if (query.type<span class="code survived mutation_25_715_720"> === </span><span class="code survived mutation_26_720_729">"mongodb"</span>) {</span></span></span></li><li><span class="code survived mutation_21_587_884"><span class="code survived mutation_20_535_894"><span class="code survived mutation_11_261_901">                <span class="code survived mutation_27_749_787">return new MongoQueryNode(query, cfg);</span></span></span></span></li><li><span class="code survived mutation_21_587_884"><span class="code survived mutation_20_535_894"><span class="code survived mutation_11_261_901">            }</span></span></span></li><li><span class="code survived mutation_21_587_884"><span class="code survived mutation_20_535_894"><span class="code survived mutation_11_261_901">            else {</span></span></span></li><li><span class="code survived mutation_21_587_884"><span class="code survived mutation_20_535_894"><span class="code survived mutation_11_261_901">                <span class="code survived mutation_28_837_870">return new QueryNode(query, cfg);</span></span></span></span></li><li><span class="code survived mutation_21_587_884"><span class="code survived mutation_20_535_894"><span class="code survived mutation_11_261_901">            }</span></span></span></li><li><span class="code survived mutation_20_535_894"><span class="code survived mutation_11_261_901">        }</span></span></li><li><span class="code survived mutation_11_261_901">    };</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_12_70_89" class="killed">resources/xr/ioNodeFactory.js:4:29 Replaced &quot;xr/tree/QueryNode&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_14_125_149" class="killed">resources/xr/ioNodeFactory.js:5:34 Replaced &quot;xr/tree/MongoQueryNode&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_16_184_207" class="killed">resources/xr/ioNodeFactory.js:6:33 Replaced &quot;xr/tree/HttpQueryNode&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_18_236_253" class="killed">resources/xr/ioNodeFactory.js:7:27 Replaced &quot;xr/tree/OrmNode&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_11_261_901" class="survived">resources/xr/ioNodeFactory.js:9:5 Removed return { /** * Creates suitable type of Query node based on Query object type. * @param {Object} query Raw query object * @param {Object} [cfg] Config options for QueryNode constructor. * @return {QueryNode} */ createQueryNode: function(query, cfg) { if (query.type === &quot;http&quot;) { return new HttpQueryNode(query, cfg); } else if (query.type === &quot;mongodb&quot;) { return new MongoQueryNode(query, cfg); } else { return new QueryNode(query, cfg); } } }; -&gt; SURVIVED</div><div id="mutation_20_535_894" class="survived">resources/xr/ioNodeFactory.js:16:9 Removed createQueryNode: function(query, cfg) { if (query.type === &quot;http&quot;) { return new HttpQueryNode(query, cfg); } else if (query.type === &quot;mongodb&quot;) { return new MongoQueryNode(query, cfg); } else { return new QueryNode(query, cfg); } } -&gt; SURVIVED</div><div id="mutation_21_587_884" class="survived">resources/xr/ioNodeFactory.js:17:13 Removed if (query.type === &quot;http&quot;) { return new HttpQueryNode(query, cfg); } else if (query.type === &quot;mongodb&quot;) { return new MongoQueryNode(query, cfg); } else { return new QueryNode(query, cfg); } -&gt; SURVIVED</div><div id="mutation_22_601_606" class="survived">resources/xr/ioNodeFactory.js:17:27 Replaced  ===  with !== -&gt; SURVIVED</div><div id="mutation_23_606_612" class="survived">resources/xr/ioNodeFactory.js:17:32 Replaced &quot;http&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_24_632_669" class="survived">resources/xr/ioNodeFactory.js:18:17 Removed return new HttpQueryNode(query, cfg); -&gt; SURVIVED</div><div id="mutation_25_715_720" class="survived">resources/xr/ioNodeFactory.js:20:32 Replaced  ===  with !== -&gt; SURVIVED</div><div id="mutation_26_720_729" class="survived">resources/xr/ioNodeFactory.js:20:37 Replaced &quot;mongodb&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_27_749_787" class="survived">resources/xr/ioNodeFactory.js:21:17 Removed return new MongoQueryNode(query, cfg); -&gt; SURVIVED</div><div id="mutation_28_837_870" class="survived">resources/xr/ioNodeFactory.js:24:17 Removed return new QueryNode(query, cfg); -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

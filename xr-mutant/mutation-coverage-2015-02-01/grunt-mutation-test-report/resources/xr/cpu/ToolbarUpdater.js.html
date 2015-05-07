@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":42,"ignored":11,"untested":0,"survived":2}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>42</strong> of which <strong>2</strong> survived,&nbsp;
+        <strong>11</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>95.2%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/cpu/index.html'">cpu</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/cpu/ToolbarUpdater.js.html'">ToolbarUpdater.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_13_62_68">"xr/_"</span>);</li><li>    var toolbar = require(<span class="code killed mutation_15_97_115">"xr/toolbar/index"</span>);</li><li>    var duration = require(<span class="code killed mutation_17_145_161">"xr/io/duration"</span>);</li><li></li><li>    /**</li><li>     * Updates CPU toolbar button with total duration.</li><li>     *</li><li>     * @constructor</li><li>     * @param {Object} deps Dependencies for testing:</li><li>     * @param {Object} deps.toolbar</li><li>     */</li><li>    <span class="code killed mutation_10_357_481">function ToolbarUpdater(deps) {</span></li><li><span class="code killed mutation_10_357_481">        <span class="code survived mutation_19_397_420">this.toolbar = toolbar;</span></span></li><li><span class="code killed mutation_10_357_481">        <span class="code killed mutation_20_429_444">this.total = <span class="code survived mutation_22_442_443">0</span>;</span></span></li><li><span class="code killed mutation_10_357_481"></li><li>        <span class="code killed mutation_27_454_461"><span class="code killed mutation_25_454_474"><span class="code killed mutation_24_454_474"><span class="code killed mutation_21_454_475">_(<span class="code killed mutation_26_456_460">this</span>)</span>.assign(<span class="code killed mutation_23_469_473">deps</span>)</span></span>;</span></span></li><li><span class="code killed mutation_10_357_481">    }</span></li><li>    <span class="code killed mutation_11_486_832">ToolbarUpdater.prototype = {</span></li><li><span class="code killed mutation_11_486_832">        /**</span></li><li><span class="code killed mutation_11_486_832">         * Adds additional requests data.</span></li><li><span class="code killed mutation_11_486_832">         * @param {Object[]} requests</span></li><li><span class="code killed mutation_11_486_832">         */</span></li><li><span class="code killed mutation_11_486_832">        <span class="code killed mutation_28_627_825">addRequests: function(requests) {</span></span></li><li><span class="code killed mutation_28_627_825"><span class="code killed mutation_11_486_832">            <span class="code killed mutation_29_673_738">this.total += <span class="code killed mutation_37_687_698"><span class="code killed mutation_35_687_721"><span class="code killed mutation_34_687_721"><span class="code killed mutation_32_687_731"><span class="code killed mutation_31_687_737">_(<span class="code killed mutation_36_689_697">requests</span>)</span>.pluck(<span class="code killed mutation_33_705_720">"executionTime"</span>)</span></span>.compact()</span>.sum()</span>;</span></span></span></li><li><span class="code killed mutation_28_627_825"><span class="code killed mutation_11_486_832"></li><li>            <span class="code killed mutation_40_752_814"><span class="code killed mutation_30_752_815">this.toolbar.cpu.setText(<span class="code killed mutation_38_777_784">"lower"</span>, <span class="code killed mutation_43_786_813"><span class="code killed mutation_42_786_813"><span class="code killed mutation_39_786_813">duration.format(<span class="code killed mutation_41_802_812">this.total</span>)</span></span></span>)</span>;</span></span></span></li><li><span class="code killed mutation_28_627_825"><span class="code killed mutation_11_486_832">        }</span></span></li><li><span class="code killed mutation_11_486_832">    };</span></li><li></li><li>    <span class="code killed mutation_12_838_860">return ToolbarUpdater;</span></li><li>});</li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_13_62_68" class="killed">resources/xr/cpu/ToolbarUpdater.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_15_97_115" class="killed">resources/xr/cpu/ToolbarUpdater.js:5:27 Replaced &quot;xr/toolbar/index&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_17_145_161" class="killed">resources/xr/cpu/ToolbarUpdater.js:6:28 Replaced &quot;xr/io/duration&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_10_357_481" class="killed">resources/xr/cpu/ToolbarUpdater.js:15:5 Removed function ToolbarUpdater(deps) { this.toolbar = toolbar; this.total = 0; _(this).assign(deps); } -&gt; KILLED</div><div id="mutation_19_397_420" class="survived">resources/xr/cpu/ToolbarUpdater.js:16:9 Removed this.toolbar = toolbar; -&gt; SURVIVED</div><div id="mutation_20_429_444" class="killed">resources/xr/cpu/ToolbarUpdater.js:17:9 Removed this.total = 0; -&gt; KILLED</div><div id="mutation_22_442_443" class="survived">resources/xr/cpu/ToolbarUpdater.js:17:22 Replaced 0 with 1 -&gt; SURVIVED</div><div id="mutation_26_456_460" class="killed">resources/xr/cpu/ToolbarUpdater.js:19:11 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_27_454_461" class="killed">resources/xr/cpu/ToolbarUpdater.js:19:9 Replaced _(this) with this -&gt; KILLED</div><div id="mutation_23_469_473" class="killed">resources/xr/cpu/ToolbarUpdater.js:19:24 Replaced deps with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_24_454_474" class="killed">resources/xr/cpu/ToolbarUpdater.js:19:9 Replaced _(this).assign(deps) with deps -&gt; KILLED</div><div id="mutation_25_454_474" class="killed">resources/xr/cpu/ToolbarUpdater.js:19:9 Replaced _(this).assign(deps) with _(this) -&gt; KILLED</div><div id="mutation_21_454_475" class="killed">resources/xr/cpu/ToolbarUpdater.js:19:9 Removed _(this).assign(deps); -&gt; KILLED</div><div id="mutation_11_486_832" class="killed">resources/xr/cpu/ToolbarUpdater.js:21:5 Removed ToolbarUpdater.prototype = { /** * Adds additional requests data. * @param {Object[]} requests */ addRequests: function(requests) { this.total += _(requests).pluck(&quot;executionTime&quot;).compact().sum(); this.toolbar.cpu.setText(&quot;lower&quot;, duration.format(this.total)); } }; -&gt; KILLED</div><div id="mutation_28_627_825" class="killed">resources/xr/cpu/ToolbarUpdater.js:26:9 Removed addRequests: function(requests) { this.total += _(requests).pluck(&quot;executionTime&quot;).compact().sum(); this.toolbar.cpu.setText(&quot;lower&quot;, duration.format(this.total)); } -&gt; KILLED</div><div id="mutation_36_689_697" class="killed">resources/xr/cpu/ToolbarUpdater.js:27:29 Replaced requests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_31_687_737" class="killed">resources/xr/cpu/ToolbarUpdater.js:27:27 Replaced _(requests).pluck(&quot;executionTime&quot;).compact().sum() with _(requests).pluck(&quot;executionTime&quot;).compact() -&gt; KILLED</div><div id="mutation_32_687_731" class="killed">resources/xr/cpu/ToolbarUpdater.js:27:27 Replaced _(requests).pluck(&quot;executionTime&quot;).compact() with _(requests).pluck(&quot;executionTime&quot;) -&gt; KILLED</div><div id="mutation_33_705_720" class="killed">resources/xr/cpu/ToolbarUpdater.js:27:45 Replaced &quot;executionTime&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_34_687_721" class="killed">resources/xr/cpu/ToolbarUpdater.js:27:27 Replaced _(requests).pluck(&quot;executionTime&quot;) with &quot;executionTime&quot; -&gt; KILLED</div><div id="mutation_35_687_721" class="killed">resources/xr/cpu/ToolbarUpdater.js:27:27 Replaced _(requests).pluck(&quot;executionTime&quot;) with _(requests) -&gt; KILLED</div><div id="mutation_29_673_738" class="killed">resources/xr/cpu/ToolbarUpdater.js:27:13 Removed this.total += _(requests).pluck(&quot;executionTime&quot;).compact().sum(); -&gt; KILLED</div><div id="mutation_37_687_698" class="killed">resources/xr/cpu/ToolbarUpdater.js:27:27 Replaced _(requests) with requests -&gt; KILLED</div><div id="mutation_30_752_815" class="killed">resources/xr/cpu/ToolbarUpdater.js:29:13 Removed this.toolbar.cpu.setText(&quot;lower&quot;, duration.format(this.total)); -&gt; KILLED</div><div id="mutation_43_786_813" class="killed">resources/xr/cpu/ToolbarUpdater.js:29:47 Replaced duration.format(this.total) with duration -&gt; KILLED</div><div id="mutation_38_777_784" class="killed">resources/xr/cpu/ToolbarUpdater.js:29:38 Replaced &quot;lower&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_39_786_813" class="killed">resources/xr/cpu/ToolbarUpdater.js:29:47 Replaced duration.format(this.total) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_40_752_814" class="killed">resources/xr/cpu/ToolbarUpdater.js:29:13 Replaced this.toolbar.cpu.setText(&quot;lower&quot;, duration.format(this.total)) with this.toolbar.cpu -&gt; KILLED</div><div id="mutation_41_802_812" class="killed">resources/xr/cpu/ToolbarUpdater.js:29:63 Replaced this.total with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_42_786_813" class="killed">resources/xr/cpu/ToolbarUpdater.js:29:47 Replaced duration.format(this.total) with this.total -&gt; KILLED</div><div id="mutation_12_838_860" class="killed">resources/xr/cpu/ToolbarUpdater.js:33:5 Removed return ToolbarUpdater; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

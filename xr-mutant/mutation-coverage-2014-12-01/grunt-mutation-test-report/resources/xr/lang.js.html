@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":23,"ignored":2,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>23</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>2</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/lang.js.html'">lang.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>/**</li><li> * Simple language functions helpers</li><li> */</li><li>defin<span class="code killed mutation_6_65_1213"><span class="code killed mutation_3_65_1214">e(funct<span class="code killed mutation_5_72_1212">ion(require) {</span></span></span></li><li><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214"></li><li>    return <span class="code killed mutation_7_99_1207">{</span></span></span></span></li><li><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">        /**</span></span></span></span></li><li><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">         * Pluralizing. If there is need for more complex behavior,</span></span></span></span></li><li><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">         * try the pluralize or inflection npm package.</span></span></span></span></li><li><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">         *</span></span></span></span></li><li><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">         * @param  {String} sigular Singular form</span></span></span></span></li><li><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">         * @param  {String} plural  Plural form</span></span></span></span></li><li><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">         * @param  {Number} num     Number to check against</span></span></span></span></li><li><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">         * @return {String}</span></span></span></span></li><li><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">         */</span></span></span></span></li><li><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">        pluralize : funct<span class="code killed mutation_8_471_969">ion (singular, plural, num) {</span></span></span></span></span></li><li><span class="code killed mutation_8_471_969"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">            var text = (num ==<span class="code killed mutation_10_531_574">= 1) ? singular<span class="code killed mutation_12_546_551"> : pl</span><span class="code killed mutation_13_551_552">u</span>ral;</span></span></span></span></span></span></li><li><span class="code killed mutation_10_531_574"><span class="code killed mutation_8_471_969"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">            retur</span>n text.replace<span class="code killed mutation_11_588_619">(/%/g, <span class="code killed mutation_16_595_618">num);</span></span></span></span></span></span></span></li><li><span class="code killed mutation_16_595_618"><span class="code killed mutation_11_588_619"><span class="code killed mutation_8_471_969"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">       <span class="code killed mutation_14_608_612"> },</span></span></span></span></span></span></span></li><li></span><span class="code killed mutation_11_588_619"><span class="code killed mutation_8_471_969"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214"></li><li> <span class="code killed mutation_15_614_617">   </span> </span> </span>  /**</span></span></span></span></span></li><li><span class="code killed mutation_8_471_969"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">         * Similar to pluralize(), but returns an empty string when num is falsy (including 0)</span></span></span></span></span></li><li><span class="code killed mutation_8_471_969"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214"></li><li>         * @param  {String} sigular Singular form</span></span></span></span></span></li><li><span class="code killed mutation_8_471_969"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">         * @param  {String} plural  Plural form</span></span></span></span></span></li><li><span class="code killed mutation_8_471_969"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">         * @param  {Number} num     Number to check against</span></span></span></span></span></li><li><span class="code killed mutation_8_471_969"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">         *</span></span></span></span></span></li><li><span class="code killed mutation_8_471_969"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">         * @return {String}</span></span></span></span></span></li><li><span class="code killed mutation_8_471_969"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">         */</span></span></span></span></span></li><li><span class="code killed mutation_8_471_969"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">        pluralizeOrEmpty: function (sin</span><span class="code killed mutation_9_969_1197">gular, plural, num) {</span></span></span></span></span></li><li><span class="code killed mutation_9_969_1197"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">            if (num) {</span></span></span></span></span></li><li><span class="code killed mutation_9_969_1197"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">                retur<span class="code killed mutation_17_1035_1186">n this.pluralize(singular, p<span class="code killed mutation_18_1063_1108">lural, <span class="code killed mutation_22_1070_1107">num);</span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_22_1070_1107"><span class="code killed mutation_18_1063_1108"><span class="code killed mutation_17_1035_1186"><span class="code killed mutation_9_969_1197"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">         <span class="code killed mutation_19_1085_1093">   }</span></span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_22_1070_1107"><span class="code killed mutation_19_1085_1093"><span class="code killed mutation_18_1063_1108"><span class="code killed mutation_17_1035_1186"><span class="code killed mutation_9_969_1197"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">   </span>  <span class="code killed mutation_20_1095_1101">      </span> e<span class="code killed mutation_21_1103_1106">lse</span> </span>{</span></span></span></span></span></span></span></li><li><span class="code killed mutation_17_1035_1186"><span class="code killed mutation_9_969_1197"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">                return "";</span></span></span></span></span></span></li><li><span class="code killed mutation_17_1035_1186"><span class="code killed mutation_9_969_1197"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">            }</span></span></span></span></span></span></li><li><span class="code killed mutation_17_1035_1186"><span class="code killed mutation_9_969_1197"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">        }</span></span></span></span></span></span></li><li><span class="code killed mutation_17_1035_1186"><span class="code killed mutation_9_969_1197"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214"></li><li><span class="code killed mutation_23_1161_1171">    };</span></span></span></span></span></span></span></li><li><span class="code killed mutation_24_1168_1170"><span class="code killed mutation_23_1161_1171"><span class="code killed mutation_17_1035_1186"><span class="code killed mutation_9_969_1197"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214"></li><li>}</span>)</span>;</span></span></span></span></span></span></li><li><span class="code killed mutation_17_1035_1186"><span class="code killed mutation_9_969_1197"><span class="code killed mutation_7_99_1207"><span class="code killed mutation_6_65_1213"><span class="code killed mutation_5_72_1212"><span class="code killed mutation_3_65_1214">undefinedundefined</span>undefined</span>undefined</span>undefined</span>undefined</span>undefined</span></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_3_65_1214" class="killed">resources/xr/lang.js:6:1 Removed define(function(require) { return { /** * Pluralizing. If there is need for more complex behavior, * try the pluralize or inflection npm package. * * @param {String} sigular Singular form * @param {String} plural Plural form * @param {Number} num Number to check against * @return {String} */ pluralize : function (singular, plural, num) { var text = (num === 1) ? singular : plural; return text.replace(/%/g, num); }, /** * Similar to pluralize(), but returns an empty string when num is falsy (including 0) * @param {String} sigular Singular form * @param {String} plural Plural form * @param {Number} num Number to check against * * @return {String} */ pluralizeOrEmpty: function (singular, plural, num) { if (num) { return this.pluralize(singular, plural, num); } else { return &quot;&quot;; } } }; }); -&gt; KILLED</div><div id="mutation_6_65_1213" class="killed">resources/xr/lang.js:6:1 Replaced define(function(require) { return { /** * Pluralizing. If there is need for more complex behavior, * try the pluralize or inflection npm package. * * @param {String} sigular Singular form * @param {String} plural Plural form * @param {Number} num Number to check against * @return {String} */ pluralize : function (singular, plural, num) { var text = (num === 1) ? singular : plural; return text.replace(/%/g, num); }, /** * Similar to pluralize(), but returns an empty string when num is falsy (including 0) * @param {String} sigular Singular form * @param {String} plural Plural form * @param {Number} num Number to check against * * @return {String} */ pluralizeOrEmpty: function (singular, plural, num) { if (num) { return this.pluralize(singular, plural, num); } else { return &quot;&quot;; } } }; }) with function(require) { return { /** * Pluralizing. If there is need for more complex behavior, * try the pluralize or inflection npm package. * * @param {String} sigular Singular form * @param {String} plural Plural form * @param {Number} num Number to check against * @return {String} */ pluralize : function (singular, plural, num) { var text = (num === 1) ? singular : plural; return text.replace(/%/g, num); }, /** * Similar to pluralize(), but returns an empty string when num is falsy (including 0) * @param {String} sigular Singular form * @param {String} plural Plural form * @param {Number} num Number to check against * * @return {String} */ pluralizeOrEmpty: function (singular, plural, num) { if (num) { return this.pluralize(singular, plural, num); } else { return &quot;&quot;; } } }; } -&gt; KILLED</div><div id="mutation_5_72_1212" class="killed">resources/xr/lang.js:6:8 Replaced function(require) { return { /** * Pluralizing. If there is need for more complex behavior, * try the pluralize or inflection npm package. * * @param {String} sigular Singular form * @param {String} plural Plural form * @param {Number} num Number to check against * @return {String} */ pluralize : function (singular, plural, num) { var text = (num === 1) ? singular : plural; return text.replace(/%/g, num); }, /** * Similar to pluralize(), but returns an empty string when num is falsy (including 0) * @param {String} sigular Singular form * @param {String} plural Plural form * @param {Number} num Number to check against * * @return {String} */ pluralizeOrEmpty: function (singular, plural, num) { if (num) { return this.pluralize(singular, plural, num); } else { return &quot;&quot;; } } }; } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_7_99_1207" class="killed">resources/xr/lang.js:8:5 Removed return { /** * Pluralizing. If there is need for more complex behavior, * try the pluralize or inflection npm package. * * @param {String} sigular Singular form * @param {String} plural Plural form * @param {Number} num Number to check against * @return {String} */ pluralize : function (singular, plural, num) { var text = (num === 1) ? singular : plural; return text.replace(/%/g, num); }, /** * Similar to pluralize(), but returns an empty string when num is falsy (including 0) * @param {String} sigular Singular form * @param {String} plural Plural form * @param {Number} num Number to check against * * @return {String} */ pluralizeOrEmpty: function (singular, plural, num) { if (num) { return this.pluralize(singular, plural, num); } else { return &quot;&quot;; } } }; -&gt; KILLED</div><div id="mutation_8_471_969" class="killed">resources/xr/lang.js:18:9 Removed pluralize : function (singular, plural, num) { var text = (num === 1) ? singular : plural; return text.replace(/%/g, num); }, /** * Similar to pluralize(), but returns an empty string when num is falsy (including 0) * @param {String} sigular Singular form * @param {String} plural Plural form * @param {Number} num Number to check against * * @return {String} */  -&gt; KILLED</div><div id="mutation_10_531_574" class="killed">resources/xr/lang.js:19:13 Removed var text = (num === 1) ? singular : plural; -&gt; KILLED</div><div id="mutation_12_546_551" class="killed">resources/xr/lang.js:19:28 Replaced  ===  with !== -&gt; KILLED</div><div id="mutation_13_551_552" class="killed">resources/xr/lang.js:19:33 Replaced 1 with 2 -&gt; KILLED</div><div id="mutation_16_595_618" class="killed">resources/xr/lang.js:20:20 Replaced text.replace(/%/g, num) with text -&gt; KILLED</div><div id="mutation_14_608_612" class="killed">resources/xr/lang.js:20:33 Replaced /%/g with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_11_588_619" class="killed">resources/xr/lang.js:20:13 Removed return text.replace(/%/g, num); -&gt; KILLED</div><div id="mutation_15_614_617" class="killed">resources/xr/lang.js:20:39 Replaced num with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_9_969_1197" class="killed">resources/xr/lang.js:32:9 Removed pluralizeOrEmpty: function (singular, plural, num) { if (num) { return this.pluralize(singular, plural, num); } else { return &quot;&quot;; } } -&gt; KILLED</div><div id="mutation_17_1035_1186" class="killed">resources/xr/lang.js:33:13 Removed if (num) { return this.pluralize(singular, plural, num); } else { return &quot;&quot;; } -&gt; KILLED</div><div id="mutation_18_1063_1108" class="killed">resources/xr/lang.js:34:17 Removed return this.pluralize(singular, plural, num); -&gt; KILLED</div><div id="mutation_19_1085_1093" class="killed">resources/xr/lang.js:34:39 Replaced singular with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_1095_1101" class="killed">resources/xr/lang.js:34:49 Replaced plural with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_21_1103_1106" class="killed">resources/xr/lang.js:34:57 Replaced num with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_22_1070_1107" class="killed">resources/xr/lang.js:34:24 Replaced this.pluralize(singular, plural, num) with this -&gt; KILLED</div><div id="mutation_23_1161_1171" class="killed">resources/xr/lang.js:37:17 Removed return &quot;&quot;; -&gt; KILLED</div><div id="mutation_24_1168_1170" class="killed">resources/xr/lang.js:37:24 Replaced &quot;&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

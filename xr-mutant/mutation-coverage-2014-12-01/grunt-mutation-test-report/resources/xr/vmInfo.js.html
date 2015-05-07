@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":43,"ignored":9,"untested":0,"survived":29}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>43</strong> of which <strong>29</strong> survived,&nbsp;
+        <strong>9</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="survived">Mutation success rate: <strong>32.6%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/vmInfo.js.html'">vmInfo.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require){</li><li>    var _ = require(<span class="code killed mutation_12_61_67">"xr/_"</span>);</li><li>    var logger = require(<span class="code killed mutation_14_95_106">"xr/logger"</span>);</li><li></li><li>    <span class="code killed mutation_21_114_140"><span class="code killed mutation_20_114_140"><span class="code survived mutation_18_114_159"><span class="code survived mutation_17_114_159"><span class="code survived mutation_9_114_160">logger.getLogger(<span class="code survived mutation_19_131_139">"vminfo"</span>)</span></span>.log(<span class="code survived mutation_16_145_158">"load vminfo"</span>)</span></span>;</span></li><li></li><li>    <span class="code killed mutation_10_166_1035">var vmInfo = {</span></li><li><span class="code killed mutation_10_166_1035"></li><li>        //describe the fields that are to be found once data is loaded. Enables strong typing checks.</span></li><li><span class="code killed mutation_10_166_1035">        <span class="code survived mutation_22_292_714">info: {</span></span></li><li><span class="code survived mutation_22_292_714"><span class="code killed mutation_10_166_1035">            <span class="code survived mutation_24_312_344">jvmName: undefined,</span></span></span></li><li><span class="code survived mutation_24_312_344"><span class="code survived mutation_22_292_714"><span class="code killed mutation_10_166_1035">            </span><span class="code survived mutation_25_344_378">jvmVendor: undefined,</span></span></span></li><li><span class="code survived mutation_25_344_378"><span class="code survived mutation_22_292_714"><span class="code killed mutation_10_166_1035">            </span><span class="code survived mutation_26_378_413">jvmVersion: undefined,</span></span></span></li><li><span class="code survived mutation_26_378_413"><span class="code survived mutation_22_292_714"><span class="code killed mutation_10_166_1035">            </span><span class="code survived mutation_27_413_446">userName: undefined,</span></span></span></li><li><span class="code survived mutation_27_413_446"><span class="code survived mutation_22_292_714"><span class="code killed mutation_10_166_1035">            </span><span class="code survived mutation_28_446_477">xrImpl: undefined,</span></span></span></li><li><span class="code survived mutation_28_446_477"><span class="code survived mutation_22_292_714"><span class="code killed mutation_10_166_1035">            </span><span class="code survived mutation_29_477_514">xrLatestImpl: undefined,</span></span></span></li><li><span class="code survived mutation_29_477_514"><span class="code survived mutation_22_292_714"><span class="code killed mutation_10_166_1035">            </span><span class="code survived mutation_30_514_551">xrLatestSpec: undefined,</span></span></span></li><li><span class="code survived mutation_30_514_551"><span class="code survived mutation_22_292_714"><span class="code killed mutation_10_166_1035">            </span><span class="code survived mutation_31_551_591">xrLatestVersion: undefined,</span></span></span></li><li><span class="code survived mutation_31_551_591"><span class="code survived mutation_22_292_714"><span class="code killed mutation_10_166_1035">            </span><span class="code survived mutation_32_591_642">xrLatestVersionDownloadUrl: undefined,</span></span></span></li><li><span class="code survived mutation_32_591_642"><span class="code survived mutation_22_292_714"><span class="code killed mutation_10_166_1035">            </span><span class="code survived mutation_33_642_673">xrSpec: undefined,</span></span></span></li><li><span class="code survived mutation_33_642_673"><span class="code survived mutation_22_292_714"><span class="code killed mutation_10_166_1035">            </span><span class="code survived mutation_34_673_693">xrVersion: undefined</span></span></span></li><li><span class="code survived mutation_22_292_714"><span class="code killed mutation_10_166_1035">        },</span></span></li><li><span class="code survived mutation_22_292_714"><span class="code killed mutation_10_166_1035"></li><li>        </span><span class="code survived mutation_23_714_1028">init: function(onComplete) {</span></span></li><li><span class="code survived mutation_23_714_1028"><span class="code killed mutation_10_166_1035">            <span class="code survived mutation_38_755_1017"><span class="code survived mutation_35_755_1018">$.ajax(<span class="code survived mutation_36_762_771">"../info"</span>, <span class="code survived mutation_37_773_1016">{</span></span></span></span></span></li><li><span class="code survived mutation_38_755_1017"><span class="code survived mutation_37_773_1016"><span class="code survived mutation_35_755_1018"><span class="code survived mutation_23_714_1028"><span class="code killed mutation_10_166_1035">                <span class="code survived mutation_39_791_825">dataType: <span class="code survived mutation_42_801_807">"json"</span>,</span></span></span></span></span></span></li><li><span class="code survived mutation_39_791_825"><span class="code survived mutation_38_755_1017"><span class="code survived mutation_37_773_1016"><span class="code survived mutation_35_755_1018"><span class="code survived mutation_23_714_1028"><span class="code killed mutation_10_166_1035">                </span><span class="code survived mutation_40_825_927">success: function (data) {</span></span></span></span></span></span></li><li><span class="code survived mutation_40_825_927"><span class="code survived mutation_38_755_1017"><span class="code survived mutation_37_773_1016"><span class="code survived mutation_35_755_1018"><span class="code survived mutation_23_714_1028"><span class="code killed mutation_10_166_1035">                    <span class="code survived mutation_43_872_891">vmInfo.info = data;</span></span></span></span></span></span></span></li><li><span class="code survived mutation_40_825_927"><span class="code survived mutation_38_755_1017"><span class="code survived mutation_37_773_1016"><span class="code survived mutation_35_755_1018"><span class="code survived mutation_23_714_1028"><span class="code killed mutation_10_166_1035">                },</span></span></span></span></span></span></li><li><span class="code survived mutation_40_825_927"><span class="code survived mutation_38_755_1017"><span class="code survived mutation_37_773_1016"><span class="code survived mutation_35_755_1018"><span class="code survived mutation_23_714_1028"><span class="code killed mutation_10_166_1035">                </span><span class="code survived mutation_41_927_1002">complete: function () {</span></span></span></span></span></span></li><li><span class="code survived mutation_41_927_1002"><span class="code survived mutation_38_755_1017"><span class="code survived mutation_37_773_1016"><span class="code survived mutation_35_755_1018"><span class="code survived mutation_23_714_1028"><span class="code killed mutation_10_166_1035">                    <span class="code survived mutation_44_971_984">onComplete();</span></span></span></span></span></span></span></li><li><span class="code survived mutation_41_927_1002"><span class="code survived mutation_38_755_1017"><span class="code survived mutation_37_773_1016"><span class="code survived mutation_35_755_1018"><span class="code survived mutation_23_714_1028"><span class="code killed mutation_10_166_1035">                }</span></span></span></span></span></span></li><li><span class="code survived mutation_38_755_1017"><span class="code survived mutation_37_773_1016"><span class="code survived mutation_35_755_1018"><span class="code survived mutation_23_714_1028"><span class="code killed mutation_10_166_1035">            }</span>)</span>;</span></span></span></li><li><span class="code survived mutation_23_714_1028"><span class="code killed mutation_10_166_1035">        }</span></span></li><li><span class="code killed mutation_10_166_1035">    };</span></li><li></li><li></li><li></li><li>    <span class="code survived mutation_11_1043_1057">return vmInfo;</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_12_61_67" class="killed">resources/xr/vmInfo.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_14_95_106" class="killed">resources/xr/vmInfo.js:5:26 Replaced &quot;xr/logger&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_19_131_139" class="survived">resources/xr/vmInfo.js:7:22 Replaced &quot;vminfo&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_9_114_160" class="survived">resources/xr/vmInfo.js:7:5 Removed logger.getLogger(&quot;vminfo&quot;).log(&quot;load vminfo&quot;); -&gt; SURVIVED</div><div id="mutation_16_145_158" class="survived">resources/xr/vmInfo.js:7:36 Replaced &quot;load vminfo&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_17_114_159" class="survived">resources/xr/vmInfo.js:7:5 Replaced logger.getLogger(&quot;vminfo&quot;).log(&quot;load vminfo&quot;) with &quot;load vminfo&quot; -&gt; SURVIVED</div><div id="mutation_18_114_159" class="survived">resources/xr/vmInfo.js:7:5 Replaced logger.getLogger(&quot;vminfo&quot;).log(&quot;load vminfo&quot;) with logger.getLogger(&quot;vminfo&quot;) -&gt; SURVIVED</div><div id="mutation_21_114_140" class="killed">resources/xr/vmInfo.js:7:5 Replaced logger.getLogger(&quot;vminfo&quot;) with logger -&gt; KILLED</div><div id="mutation_20_114_140" class="killed">resources/xr/vmInfo.js:7:5 Replaced logger.getLogger(&quot;vminfo&quot;) with &quot;vminfo&quot; -&gt; KILLED</div><div id="mutation_10_166_1035" class="killed">resources/xr/vmInfo.js:9:5 Removed var vmInfo = { //describe the fields that are to be found once data is loaded. Enables strong typing checks. info: { jvmName: undefined, jvmVendor: undefined, jvmVersion: undefined, userName: undefined, xrImpl: undefined, xrLatestImpl: undefined, xrLatestSpec: undefined, xrLatestVersion: undefined, xrLatestVersionDownloadUrl: undefined, xrSpec: undefined, xrVersion: undefined }, init: function(onComplete) { $.ajax(&quot;../info&quot;, { dataType: &quot;json&quot;, success: function (data) { vmInfo.info = data; }, complete: function () { onComplete(); } }); } }; -&gt; KILLED</div><div id="mutation_22_292_714" class="survived">resources/xr/vmInfo.js:12:9 Removed info: { jvmName: undefined, jvmVendor: undefined, jvmVersion: undefined, userName: undefined, xrImpl: undefined, xrLatestImpl: undefined, xrLatestSpec: undefined, xrLatestVersion: undefined, xrLatestVersionDownloadUrl: undefined, xrSpec: undefined, xrVersion: undefined },  -&gt; SURVIVED</div><div id="mutation_24_312_344" class="survived">resources/xr/vmInfo.js:13:13 Removed jvmName: undefined,  -&gt; SURVIVED</div><div id="mutation_25_344_378" class="survived">resources/xr/vmInfo.js:14:13 Removed jvmVendor: undefined,  -&gt; SURVIVED</div><div id="mutation_26_378_413" class="survived">resources/xr/vmInfo.js:15:13 Removed jvmVersion: undefined,  -&gt; SURVIVED</div><div id="mutation_27_413_446" class="survived">resources/xr/vmInfo.js:16:13 Removed userName: undefined,  -&gt; SURVIVED</div><div id="mutation_28_446_477" class="survived">resources/xr/vmInfo.js:17:13 Removed xrImpl: undefined,  -&gt; SURVIVED</div><div id="mutation_29_477_514" class="survived">resources/xr/vmInfo.js:18:13 Removed xrLatestImpl: undefined,  -&gt; SURVIVED</div><div id="mutation_30_514_551" class="survived">resources/xr/vmInfo.js:19:13 Removed xrLatestSpec: undefined,  -&gt; SURVIVED</div><div id="mutation_31_551_591" class="survived">resources/xr/vmInfo.js:20:13 Removed xrLatestVersion: undefined,  -&gt; SURVIVED</div><div id="mutation_32_591_642" class="survived">resources/xr/vmInfo.js:21:13 Removed xrLatestVersionDownloadUrl: undefined,  -&gt; SURVIVED</div><div id="mutation_33_642_673" class="survived">resources/xr/vmInfo.js:22:13 Removed xrSpec: undefined,  -&gt; SURVIVED</div><div id="mutation_34_673_693" class="survived">resources/xr/vmInfo.js:23:13 Removed xrVersion: undefined -&gt; SURVIVED</div><div id="mutation_23_714_1028" class="survived">resources/xr/vmInfo.js:26:9 Removed init: function(onComplete) { $.ajax(&quot;../info&quot;, { dataType: &quot;json&quot;, success: function (data) { vmInfo.info = data; }, complete: function () { onComplete(); } }); } -&gt; SURVIVED</div><div id="mutation_36_762_771" class="survived">resources/xr/vmInfo.js:27:20 Replaced &quot;../info&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_35_755_1018" class="survived">resources/xr/vmInfo.js:27:13 Removed $.ajax(&quot;../info&quot;, { dataType: &quot;json&quot;, success: function (data) { vmInfo.info = data; }, complete: function () { onComplete(); } }); -&gt; SURVIVED</div><div id="mutation_38_755_1017" class="survived">resources/xr/vmInfo.js:27:13 Replaced $.ajax(&quot;../info&quot;, { dataType: &quot;json&quot;, success: function (data) { vmInfo.info = data; }, complete: function () { onComplete(); } }) with $ -&gt; SURVIVED</div><div id="mutation_37_773_1016" class="survived">resources/xr/vmInfo.js:27:31 Replaced { dataType: &quot;json&quot;, success: function (data) { vmInfo.info = data; }, complete: function () { onComplete(); } } with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_39_791_825" class="survived">resources/xr/vmInfo.js:28:17 Removed dataType: &quot;json&quot;,  -&gt; SURVIVED</div><div id="mutation_42_801_807" class="survived">resources/xr/vmInfo.js:28:27 Replaced &quot;json&quot; with &quot;MUTATION!&quot; -&gt; SURVIVED</div><div id="mutation_40_825_927" class="survived">resources/xr/vmInfo.js:29:17 Removed success: function (data) { vmInfo.info = data; },  -&gt; SURVIVED</div><div id="mutation_43_872_891" class="survived">resources/xr/vmInfo.js:30:21 Removed vmInfo.info = data; -&gt; SURVIVED</div><div id="mutation_41_927_1002" class="survived">resources/xr/vmInfo.js:32:17 Removed complete: function () { onComplete(); } -&gt; SURVIVED</div><div id="mutation_44_971_984" class="survived">resources/xr/vmInfo.js:33:21 Removed onComplete(); -&gt; SURVIVED</div><div id="mutation_11_1043_1057" class="survived">resources/xr/vmInfo.js:41:5 Removed return vmInfo; -&gt; SURVIVED</div></div>
+<div id='popup'></div>
+</body>
+</html>

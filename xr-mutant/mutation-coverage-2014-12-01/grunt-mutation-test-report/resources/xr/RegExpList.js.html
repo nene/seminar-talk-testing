@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":33,"ignored":2,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>33</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>2</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/RegExpList.js.html'">RegExpList.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li><span class="code killed mutation_6_15_1074"><span class="code killed mutation_3_15_1075">define(<span class="code killed mutation_5_22_1073">function(require) {</span></span></span></li><li><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">    /**</span></span></span></li><li><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">     * Optimizes matching strings to a list of regex patterns</span></span></span></li><li><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">     * by utilizing a cache system for previously matched strings.</span></span></span></li><li><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">     * @constructor</span></span></span></li><li><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">     * @param {RegExp[]} list</span></span></span></li><li><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">     */</span></span></span></li><li><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">    <span class="code killed mutation_7_241_326">function RegExpList (list) {</span></span></span></span></li><li><span class="code killed mutation_7_241_326"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">        <span class="code killed mutation_10_278_295">this.list = list;</span></span></span></span></span></li><li><span class="code killed mutation_7_241_326"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">        <span class="code killed mutation_11_304_320">this.cache = {};</span></span></span></span></span></li><li><span class="code killed mutation_7_241_326"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">    }</span></span></span></span></li><li><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075"></li><li>    <span class="code killed mutation_8_332_1047">RegExpList.prototype = {</span></span></span></span></li><li><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">        /**</span></span></span></span></li><li><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">         * Check if any list element matches the string</span></span></span></span></li><li><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">         * @param  {String}  string</span></span></span></span></li><li><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">         * @return {Boolean}</span></span></span></span></li><li><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">         */</span></span></span></span></li><li><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">        <span class="code killed mutation_12_510_784">matches: function (string) {</span></span></span></span></span></li><li><span class="code killed mutation_12_510_784"><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">            <span class="code killed mutation_14_551_649">if ( this.cache[string]<span class="code killed mutation_17_574_579"> !== </span>undefined ) {</span></span></span></span></span></span></li><li><span class="code killed mutation_14_551_649"><span class="code killed mutation_12_510_784"><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">                <span class="code killed mutation_18_609_635">return this.cache[string];</span></span></span></span></span></span></span></li><li><span class="code killed mutation_14_551_649"><span class="code killed mutation_12_510_784"><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">            }</span></span></span></span></span></span></li><li><span class="code killed mutation_12_510_784"><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075"></li><li>            <span class="code killed mutation_15_663_736">if ( <span class="code killed mutation_21_668_689"><span class="code killed mutation_20_668_689">this.isInList(<span class="code killed mutation_19_682_688">string</span>)</span></span> ) {</span></span></span></span></span></span></li><li><span class="code killed mutation_15_663_736"><span class="code killed mutation_12_510_784"><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">                <span class="code killed mutation_22_710_722">return <span class="code killed mutation_23_717_721">true</span>;</span></span></span></span></span></span></span></li><li><span class="code killed mutation_15_663_736"><span class="code killed mutation_12_510_784"><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">            }</span></span></span></span></span></span></li><li><span class="code killed mutation_12_510_784"><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075"></li><li>            <span class="code killed mutation_16_750_763">return <span class="code killed mutation_24_757_762">false</span>;</span></span></span></span></span></span></li><li><span class="code killed mutation_12_510_784"><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">        },</span></span></span></span></span></li><li><span class="code killed mutation_12_510_784"><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075"></li><li>        </span><span class="code killed mutation_13_784_1040">isInList: function (string) {</span></span></span></span></span></li><li><span class="code killed mutation_13_784_1040"><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">            <span class="code killed mutation_25_826_929">var isMatch = <span class="code killed mutation_30_840_928"><span class="code killed mutation_29_840_928">this.list.some(<span class="code killed mutation_28_855_927">function(rule) {</span></span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_30_840_928"><span class="code killed mutation_29_840_928"><span class="code killed mutation_28_855_927"><span class="code killed mutation_25_826_929"><span class="code killed mutation_13_784_1040"><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">                <span class="code killed mutation_31_888_913">return <span class="code killed mutation_34_895_912"><span class="code killed mutation_33_895_912">rule.test(<span class="code killed mutation_32_905_911">string</span>)</span></span>;</span></span></span></span></span></span></span></span></span></span></li><li><span class="code killed mutation_30_840_928"><span class="code killed mutation_29_840_928"><span class="code killed mutation_28_855_927"><span class="code killed mutation_25_826_929"><span class="code killed mutation_13_784_1040"><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">            }</span>)</span></span>;</span></span></span></span></span></span></li><li><span class="code killed mutation_13_784_1040"><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075"></li><li>            // Save to cache</span></span></span></span></span></li><li><span class="code killed mutation_13_784_1040"><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">            <span class="code killed mutation_26_972_1001">this.cache[string] = isMatch;</span></span></span></span></span></span></li><li><span class="code killed mutation_13_784_1040"><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075"></li><li>            <span class="code killed mutation_27_1015_1030">return isMatch;</span></span></span></span></span></span></li><li><span class="code killed mutation_13_784_1040"><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">        }</span></span></span></span></span></li><li><span class="code killed mutation_8_332_1047"><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">    };</span></span></span></span></li><li><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075"></li><li>    <span class="code killed mutation_9_1053_1071">return RegExpList;</span></span></span></span></li><li><span class="code killed mutation_6_15_1074"><span class="code killed mutation_5_22_1073"><span class="code killed mutation_3_15_1075">}</span>)</span>;</span></li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_3_15_1075" class="killed">resources/xr/RegExpList.js:3:1 Removed define(function(require) { /** * Optimizes matching strings to a list of regex patterns * by utilizing a cache system for previously matched strings. * @constructor * @param {RegExp[]} list */ function RegExpList (list) { this.list = list; this.cache = {}; } RegExpList.prototype = { /** * Check if any list element matches the string * @param {String} string * @return {Boolean} */ matches: function (string) { if ( this.cache[string] !== undefined ) { return this.cache[string]; } if ( this.isInList(string) ) { return true; } return false; }, isInList: function (string) { var isMatch = this.list.some(function(rule) { return rule.test(string); }); // Save to cache this.cache[string] = isMatch; return isMatch; } }; return RegExpList; }); -&gt; KILLED</div><div id="mutation_5_22_1073" class="killed">resources/xr/RegExpList.js:3:8 Replaced function(require) { /** * Optimizes matching strings to a list of regex patterns * by utilizing a cache system for previously matched strings. * @constructor * @param {RegExp[]} list */ function RegExpList (list) { this.list = list; this.cache = {}; } RegExpList.prototype = { /** * Check if any list element matches the string * @param {String} string * @return {Boolean} */ matches: function (string) { if ( this.cache[string] !== undefined ) { return this.cache[string]; } if ( this.isInList(string) ) { return true; } return false; }, isInList: function (string) { var isMatch = this.list.some(function(rule) { return rule.test(string); }); // Save to cache this.cache[string] = isMatch; return isMatch; } }; return RegExpList; } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_6_15_1074" class="killed">resources/xr/RegExpList.js:3:1 Replaced define(function(require) { /** * Optimizes matching strings to a list of regex patterns * by utilizing a cache system for previously matched strings. * @constructor * @param {RegExp[]} list */ function RegExpList (list) { this.list = list; this.cache = {}; } RegExpList.prototype = { /** * Check if any list element matches the string * @param {String} string * @return {Boolean} */ matches: function (string) { if ( this.cache[string] !== undefined ) { return this.cache[string]; } if ( this.isInList(string) ) { return true; } return false; }, isInList: function (string) { var isMatch = this.list.some(function(rule) { return rule.test(string); }); // Save to cache this.cache[string] = isMatch; return isMatch; } }; return RegExpList; }) with function(require) { /** * Optimizes matching strings to a list of regex patterns * by utilizing a cache system for previously matched strings. * @constructor * @param {RegExp[]} list */ function RegExpList (list) { this.list = list; this.cache = {}; } RegExpList.prototype = { /** * Check if any list element matches the string * @param {String} string * @return {Boolean} */ matches: function (string) { if ( this.cache[string] !== undefined ) { return this.cache[string]; } if ( this.isInList(string) ) { return true; } return false; }, isInList: function (string) { var isMatch = this.list.some(function(rule) { return rule.test(string); }); // Save to cache this.cache[string] = isMatch; return isMatch; } }; return RegExpList; } -&gt; KILLED</div><div id="mutation_7_241_326" class="killed">resources/xr/RegExpList.js:10:5 Removed function RegExpList (list) { this.list = list; this.cache = {}; } -&gt; KILLED</div><div id="mutation_10_278_295" class="killed">resources/xr/RegExpList.js:11:9 Removed this.list = list; -&gt; KILLED</div><div id="mutation_11_304_320" class="killed">resources/xr/RegExpList.js:12:9 Removed this.cache = {}; -&gt; KILLED</div><div id="mutation_8_332_1047" class="killed">resources/xr/RegExpList.js:15:5 Removed RegExpList.prototype = { /** * Check if any list element matches the string * @param {String} string * @return {Boolean} */ matches: function (string) { if ( this.cache[string] !== undefined ) { return this.cache[string]; } if ( this.isInList(string) ) { return true; } return false; }, isInList: function (string) { var isMatch = this.list.some(function(rule) { return rule.test(string); }); // Save to cache this.cache[string] = isMatch; return isMatch; } }; -&gt; KILLED</div><div id="mutation_12_510_784" class="killed">resources/xr/RegExpList.js:21:9 Removed matches: function (string) { if ( this.cache[string] !== undefined ) { return this.cache[string]; } if ( this.isInList(string) ) { return true; } return false; },  -&gt; KILLED</div><div id="mutation_14_551_649" class="killed">resources/xr/RegExpList.js:22:13 Removed if ( this.cache[string] !== undefined ) { return this.cache[string]; } -&gt; KILLED</div><div id="mutation_17_574_579" class="killed">resources/xr/RegExpList.js:22:36 Replaced  !==  with === -&gt; KILLED</div><div id="mutation_18_609_635" class="killed">resources/xr/RegExpList.js:23:17 Removed return this.cache[string]; -&gt; KILLED</div><div id="mutation_15_663_736" class="killed">resources/xr/RegExpList.js:26:13 Removed if ( this.isInList(string) ) { return true; } -&gt; KILLED</div><div id="mutation_19_682_688" class="killed">resources/xr/RegExpList.js:26:32 Replaced string with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_668_689" class="killed">resources/xr/RegExpList.js:26:18 Replaced this.isInList(string) with string -&gt; KILLED</div><div id="mutation_21_668_689" class="killed">resources/xr/RegExpList.js:26:18 Replaced this.isInList(string) with this -&gt; KILLED</div><div id="mutation_22_710_722" class="killed">resources/xr/RegExpList.js:27:17 Removed return true; -&gt; KILLED</div><div id="mutation_23_717_721" class="killed">resources/xr/RegExpList.js:27:24 Replaced true with false -&gt; KILLED</div><div id="mutation_16_750_763" class="killed">resources/xr/RegExpList.js:30:13 Removed return false; -&gt; KILLED</div><div id="mutation_24_757_762" class="killed">resources/xr/RegExpList.js:30:20 Replaced false with true -&gt; KILLED</div><div id="mutation_13_784_1040" class="killed">resources/xr/RegExpList.js:33:9 Removed isInList: function (string) { var isMatch = this.list.some(function(rule) { return rule.test(string); }); // Save to cache this.cache[string] = isMatch; return isMatch; } -&gt; KILLED</div><div id="mutation_25_826_929" class="killed">resources/xr/RegExpList.js:34:13 Removed var isMatch = this.list.some(function(rule) { return rule.test(string); }); -&gt; KILLED</div><div id="mutation_28_855_927" class="killed">resources/xr/RegExpList.js:34:42 Replaced function(rule) { return rule.test(string); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_29_840_928" class="killed">resources/xr/RegExpList.js:34:27 Replaced this.list.some(function(rule) { return rule.test(string); }) with function(rule) { return rule.test(string); } -&gt; KILLED</div><div id="mutation_30_840_928" class="killed">resources/xr/RegExpList.js:34:27 Replaced this.list.some(function(rule) { return rule.test(string); }) with this.list -&gt; KILLED</div><div id="mutation_33_895_912" class="killed">resources/xr/RegExpList.js:35:24 Replaced rule.test(string) with string -&gt; KILLED</div><div id="mutation_32_905_911" class="killed">resources/xr/RegExpList.js:35:34 Replaced string with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_34_895_912" class="killed">resources/xr/RegExpList.js:35:24 Replaced rule.test(string) with rule -&gt; KILLED</div><div id="mutation_31_888_913" class="killed">resources/xr/RegExpList.js:35:17 Removed return rule.test(string); -&gt; KILLED</div><div id="mutation_26_972_1001" class="killed">resources/xr/RegExpList.js:39:13 Removed this.cache[string] = isMatch; -&gt; KILLED</div><div id="mutation_27_1015_1030" class="killed">resources/xr/RegExpList.js:41:13 Removed return isMatch; -&gt; KILLED</div><div id="mutation_9_1053_1071" class="killed">resources/xr/RegExpList.js:45:5 Removed return RegExpList; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

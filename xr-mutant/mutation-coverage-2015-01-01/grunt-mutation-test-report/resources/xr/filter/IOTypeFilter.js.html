@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":31,"ignored":9,"untested":0,"survived":0}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>31</strong> of which <strong>0</strong> survived,&nbsp;
+        <strong>9</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>100.0%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/filter/index.html'">filter</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/filter/IOTypeFilter.js.html'">IOTypeFilter.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var requestsFilter = require(<span class="code killed mutation_12_75_101">"xr/filter/requestsFilter"</span>);</li><li>    var ioTypes = require(<span class="code killed mutation_14_130_142">"xr/ioTypes"</span>);</li><li></li><li>    /**</li><li>     * Filters requests by IO type.</li><li>     *</li><li>     * @constructor</li><li>     * @param {String} ioCategory One of: all, sql, noSql, http</li><li>     */</li><li>    <span class="code killed mutation_9_293_372">function IOTypeFilter(ioCategory) {</span></li><li><span class="code killed mutation_9_293_372">        <span class="code killed mutation_16_337_366">this.ioCategory = ioCategory;</span></span></li><li><span class="code killed mutation_9_293_372">    }</span></li><li>    <span class="code killed mutation_10_377_932">IOTypeFilter.prototype = {</span></li><li><span class="code killed mutation_10_377_932">        /**</span></li><li><span class="code killed mutation_10_377_932">         * Filters requests by IO type.</span></li><li><span class="code killed mutation_10_377_932">         * @param {Object[]} requests</span></li><li><span class="code killed mutation_10_377_932">         * @param {String} ioCategory One of: all, sql, noSql, http</span></li><li><span class="code killed mutation_10_377_932">         * @return {Object[]}</span></li><li><span class="code killed mutation_10_377_932">         */</span></li><li><span class="code killed mutation_10_377_932">        <span class="code killed mutation_17_612_925">filter: function(requests) {</span></span></li><li><span class="code killed mutation_17_612_925"><span class="code killed mutation_10_377_932">            <span class="code killed mutation_18_653_752">if (<span class="code killed mutation_21_657_658">!</span>this.ioCategory<span class="code killed mutation_20_673_677"> || </span>this.ioCategory<span class="code killed mutation_22_692_697"> === </span><span class="code killed mutation_23_697_702">"all"</span>) {</span></span></span></li><li><span class="code killed mutation_18_653_752"><span class="code killed mutation_17_612_925"><span class="code killed mutation_10_377_932">                <span class="code killed mutation_24_722_738">return requests;</span></span></span></span></li><li><span class="code killed mutation_18_653_752"><span class="code killed mutation_17_612_925"><span class="code killed mutation_10_377_932">            }</span></span></span></li><li><span class="code killed mutation_17_612_925"><span class="code killed mutation_10_377_932">            <span class="code killed mutation_19_765_915">return <span class="code killed mutation_28_772_914">requestsFilter.byQuery(<span class="code killed mutation_25_795_803">requests</span>, <span class="code killed mutation_26_805_907">function(query) {</span></span></span></span></span></li><li><span class="code killed mutation_28_772_914"><span class="code killed mutation_26_805_907"><span class="code killed mutation_19_765_915"><span class="code killed mutation_17_612_925"><span class="code killed mutation_10_377_932">               <span class="code killed mutation_29_838_893">return <span class="code killed mutation_32_845_892">ioTypes.inCategory(<span class="code killed mutation_30_864_874">query.type</span>, <span class="code killed mutation_31_876_891">this.ioCategory</span>)</span>;</span></span></span></span></span></span></li><li><span class="code killed mutation_28_772_914"><span class="code killed mutation_26_805_907"><span class="code killed mutation_19_765_915"><span class="code killed mutation_17_612_925"><span class="code killed mutation_10_377_932">            }</span>, <span class="code killed mutation_27_909_913">this</span>)</span>;</span></span></span></li><li><span class="code killed mutation_17_612_925"><span class="code killed mutation_10_377_932">        }</span></span></li><li><span class="code killed mutation_10_377_932">    };</span></li><li></li><li>    <span class="code killed mutation_11_938_958">return IOTypeFilter;</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_12_75_101" class="killed">resources/xr/filter/IOTypeFilter.js:4:34 Replaced &quot;xr/filter/requestsFilter&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_14_130_142" class="killed">resources/xr/filter/IOTypeFilter.js:5:27 Replaced &quot;xr/ioTypes&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_9_293_372" class="killed">resources/xr/filter/IOTypeFilter.js:13:5 Removed function IOTypeFilter(ioCategory) { this.ioCategory = ioCategory; } -&gt; KILLED</div><div id="mutation_16_337_366" class="killed">resources/xr/filter/IOTypeFilter.js:14:9 Removed this.ioCategory = ioCategory; -&gt; KILLED</div><div id="mutation_10_377_932" class="killed">resources/xr/filter/IOTypeFilter.js:16:5 Removed IOTypeFilter.prototype = { /** * Filters requests by IO type. * @param {Object[]} requests * @param {String} ioCategory One of: all, sql, noSql, http * @return {Object[]} */ filter: function(requests) { if (!this.ioCategory || this.ioCategory === &quot;all&quot;) { return requests; } return requestsFilter.byQuery(requests, function(query) { return ioTypes.inCategory(query.type, this.ioCategory); }, this); } }; -&gt; KILLED</div><div id="mutation_17_612_925" class="killed">resources/xr/filter/IOTypeFilter.js:23:9 Removed filter: function(requests) { if (!this.ioCategory || this.ioCategory === &quot;all&quot;) { return requests; } return requestsFilter.byQuery(requests, function(query) { return ioTypes.inCategory(query.type, this.ioCategory); }, this); } -&gt; KILLED</div><div id="mutation_23_697_702" class="killed">resources/xr/filter/IOTypeFilter.js:24:57 Replaced &quot;all&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_18_653_752" class="killed">resources/xr/filter/IOTypeFilter.js:24:13 Removed if (!this.ioCategory || this.ioCategory === &quot;all&quot;) { return requests; } -&gt; KILLED</div><div id="mutation_22_692_697" class="killed">resources/xr/filter/IOTypeFilter.js:24:52 Replaced  ===  with !== -&gt; KILLED</div><div id="mutation_20_673_677" class="killed">resources/xr/filter/IOTypeFilter.js:24:33 Replaced  ||  with &amp;&amp; -&gt; KILLED</div><div id="mutation_21_657_658" class="killed">resources/xr/filter/IOTypeFilter.js:24:33 Removed ! -&gt; KILLED</div><div id="mutation_24_722_738" class="killed">resources/xr/filter/IOTypeFilter.js:25:17 Removed return requests; -&gt; KILLED</div><div id="mutation_19_765_915" class="killed">resources/xr/filter/IOTypeFilter.js:27:13 Removed return requestsFilter.byQuery(requests, function(query) { return ioTypes.inCategory(query.type, this.ioCategory); }, this); -&gt; KILLED</div><div id="mutation_25_795_803" class="killed">resources/xr/filter/IOTypeFilter.js:27:43 Replaced requests with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_26_805_907" class="killed">resources/xr/filter/IOTypeFilter.js:27:53 Replaced function(query) { return ioTypes.inCategory(query.type, this.ioCategory); } with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_28_772_914" class="killed">resources/xr/filter/IOTypeFilter.js:27:20 Replaced requestsFilter.byQuery(requests, function(query) { return ioTypes.inCategory(query.type, this.ioCategory); }, this) with requestsFilter -&gt; KILLED</div><div id="mutation_31_876_891" class="killed">resources/xr/filter/IOTypeFilter.js:28:54 Replaced this.ioCategory with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_32_845_892" class="killed">resources/xr/filter/IOTypeFilter.js:28:23 Replaced ioTypes.inCategory(query.type, this.ioCategory) with ioTypes -&gt; KILLED</div><div id="mutation_29_838_893" class="killed">resources/xr/filter/IOTypeFilter.js:28:16 Removed return ioTypes.inCategory(query.type, this.ioCategory); -&gt; KILLED</div><div id="mutation_30_864_874" class="killed">resources/xr/filter/IOTypeFilter.js:28:42 Replaced query.type with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_27_909_913" class="killed">resources/xr/filter/IOTypeFilter.js:29:16 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_11_938_958" class="killed">resources/xr/filter/IOTypeFilter.js:33:5 Removed return IOTypeFilter; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>

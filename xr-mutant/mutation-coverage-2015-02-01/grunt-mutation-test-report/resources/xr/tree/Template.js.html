@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" mutationStats='{"all":67,"ignored":9,"untested":0,"survived":1}'/>
+    <title></title>
+    <style type="text/css">html, body {
+    margin: 0;
+    padding: 0;
+}
+h3 {
+    margin-left: 40px;
+}
+h3 .link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#source {
+    font-family: courier, 'Lucida Sans Typewriter', monospace;
+    white-space: pre;
+}
+#header {
+    background-color: #fff5a0;
+    padding: 10px;
+}
+#popup {
+    position: absolute;
+    border: solid 1px black;
+    padding: 3px;
+    display: none;
+}
+#popup.show {
+    display: block;
+}
+#coverage {
+    padding: 2px;
+    border: none;
+}
+.killed, .survived {
+    border: solid 1px white;
+}
+.killed{background-color: #bfb}
+.survived{background-color: #f66}
+.neutral{background-color: #fff5a0}
+</style>
+    <script type="application/javascript">function onLoad() {
+    Array.prototype.forEach.call(document.getElementsByClassName('code'), function(element) {
+        element.addEventListener('mouseover', debounce(onMouseOver, 200), false);
+        element.addEventListener('mouseout', debounce(onMouseOut, 200), false);
+    });
+}
+
+function onMouseOver(event) {
+    var popup = document.getElementById('popup');
+    addMutations(popup, event.target);
+    setPopupPosition(popup, event);
+    popup.classList.add("show");
+}
+
+function onMouseOut() {
+    document.getElementById('popup').classList.remove('show');
+}
+
+function addMutations(popup, target) {
+    var mutationEl;
+
+    Array.prototype.forEach.call(target.classList, function(_class) {
+        if (_class.indexOf('mutation_') > -1) {
+            mutationEl = document.getElementById(_class);
+            if (Array.prototype.indexOf.call(mutationEl.classList, 'killed') > -1) {
+                popup.classList.add('killed');
+                popup.classList.remove('survived');
+            } else {
+                popup.classList.add('survived');
+                popup.classList.remove('killed');
+            }
+            popup.classList.add(mutationEl.classList);
+            popup.innerHTML = mutationEl.innerHTML;
+        }
+    });
+}
+
+function setPopupPosition(popup, event) {
+    var top = event.clientY + document.body.scrollTop,
+        left = event.clientX;
+
+    popup.setAttribute('style', 'top:' + top + 'px;left:' + left + 'px;');
+}
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+//
+// (copied from http://davidwalsh.name)
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+</script>
+</head>
+<body onload="onLoad();">
+<div id="header">
+    <h1>Mutation Test </h1>
+    <p>Number of Mutations: <strong>67</strong> of which <strong>1</strong> survived,&nbsp;
+        <strong>9</strong> ignored and <strong>0</strong> untested</p>
+    <span id="coverage" class="killed">Mutation success rate: <strong>98.5%</strong></span>
+</div>
+<h3><span class="link " onclick="location.href='../../resources/index.html'">resources</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/index.html'">xr</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/index.html'">tree</span> &gt;&gt; <span class="link " onclick="location.href='../../resources/xr/tree/Template.js.html'">Template.js.html</span></h3>
+<div id='source'><ol><li>"use strict";</li><li></li><li>define(function(require) {</li><li>    var _ = require(<span class="code killed mutation_12_62_68">"xr/_"</span>);</li><li>    var template = require(<span class="code killed mutation_14_98_111">"xr/template"</span>);</li><li></li><li>    /**</li><li>     * Builds HTML tree from tree layout data structure.</li><li>     * @constructor</li><li>     * @param {Object} treeState</li><li>     * @param {Object} [deps] Dependencies to pass in mock template module.</li><li>     */</li><li>    <span class="code killed mutation_9_321_463">function Template(treeState, deps) {</span></li><li><span class="code killed mutation_9_321_463">        <span class="code killed mutation_16_366_393">this.treeState = treeState;</span></span></li><li><span class="code killed mutation_9_321_463">        <span class="code survived mutation_17_402_427">this.template = template;</span></span></li><li><span class="code killed mutation_9_321_463">        <span class="code killed mutation_23_436_443"><span class="code killed mutation_21_436_456"><span class="code killed mutation_20_436_456"><span class="code killed mutation_18_436_457">_(<span class="code killed mutation_22_438_442">this</span>)</span>.assign(<span class="code killed mutation_19_451_455">deps</span>)</span></span>;</span></span></li><li><span class="code killed mutation_9_321_463">    }</span></li><li></li><li>    <span class="code killed mutation_10_469_1582">Template.prototype = {</span></li><li><span class="code killed mutation_10_469_1582">        /**</span></li><li><span class="code killed mutation_10_469_1582">         * Turns the tree layout data structure into HTML.</span></li><li><span class="code killed mutation_10_469_1582">         *</span></li><li><span class="code killed mutation_10_469_1582">         * @param {Object} data Layout data structure.</span></li><li><span class="code killed mutation_10_469_1582">         * @return {String} HTML</span></li><li><span class="code killed mutation_10_469_1582">         */</span></li><li><span class="code killed mutation_10_469_1582">        <span class="code killed mutation_24_682_1179">render: function(data) {</span></span></li><li><span class="code killed mutation_24_682_1179"><span class="code killed mutation_10_469_1582">            <span class="code killed mutation_27_719_821">if (data.children) {</span></span></span></li><li><span class="code killed mutation_27_719_821"><span class="code killed mutation_24_682_1179"><span class="code killed mutation_10_469_1582">                <span class="code killed mutation_32_756_807">data.children = <span class="code killed mutation_35_772_806"><span class="code killed mutation_34_772_806">this.renderChildren(<span class="code killed mutation_33_792_805">data.children</span>)</span></span>;</span></span></span></span></li><li><span class="code killed mutation_27_719_821"><span class="code killed mutation_24_682_1179"><span class="code killed mutation_10_469_1582">            }</span></span></span></li><li><span class="code killed mutation_24_682_1179"><span class="code killed mutation_10_469_1582"></li><li>            <span class="code killed mutation_28_835_923">if (data.classes) {</span></span></span></li><li><span class="code killed mutation_28_835_923"><span class="code killed mutation_24_682_1179"><span class="code killed mutation_10_469_1582">                <span class="code killed mutation_36_871_909">data.classes = <span class="code killed mutation_39_886_908"><span class="code killed mutation_38_886_908">data.classes.join(<span class="code killed mutation_37_904_907">" "</span>)</span></span>;</span></span></span></span></li><li><span class="code killed mutation_28_835_923"><span class="code killed mutation_24_682_1179"><span class="code killed mutation_10_469_1582">            }</span></span></span></li><li><span class="code killed mutation_24_682_1179"><span class="code killed mutation_10_469_1582"></li><li>            <span class="code killed mutation_29_937_1023">if (data.node) {</span></span></span></li><li><span class="code killed mutation_29_937_1023"><span class="code killed mutation_24_682_1179"><span class="code killed mutation_10_469_1582">                <span class="code killed mutation_40_970_1009">data.node = <span class="code killed mutation_43_982_1008"><span class="code killed mutation_42_982_1008">this.renderNode(<span class="code killed mutation_41_998_1007">data.node</span>)</span></span>;</span></span></span></span></li><li><span class="code killed mutation_29_937_1023"><span class="code killed mutation_24_682_1179"><span class="code killed mutation_10_469_1582">            }</span></span></span></li><li><span class="code killed mutation_24_682_1179"><span class="code killed mutation_10_469_1582"></li><li>            <span class="code killed mutation_30_1037_1098">var templateFile = <span class="code killed mutation_46_1056_1079">"templates/treeStruct/"</span><span class="code killed mutation_45_1079_1080">+</span>data.type<span class="code killed mutation_44_1089_1090">+</span><span class="code killed mutation_47_1090_1097">".html"</span>;</span></span></span></li><li><span class="code killed mutation_24_682_1179"><span class="code killed mutation_10_469_1582">            <span class="code killed mutation_31_1111_1158">return <span class="code killed mutation_50_1118_1157">this.template.apply(<span class="code killed mutation_48_1138_1150">templateFile</span>, <span class="code killed mutation_49_1152_1156">data</span>)</span>;</span></span></span></li><li><span class="code killed mutation_24_682_1179"><span class="code killed mutation_10_469_1582">        },</span></span></li><li><span class="code killed mutation_24_682_1179"><span class="code killed mutation_10_469_1582"></li><li>        </span><span class="code killed mutation_25_1179_1439">renderChildren: function(children) {</span></span></li><li><span class="code killed mutation_25_1179_1439"><span class="code killed mutation_10_469_1582">            <span class="code killed mutation_51_1228_1287">return <span class="code killed mutation_60_1235_1246"><span class="code killed mutation_58_1235_1269"><span class="code killed mutation_55_1235_1277"><span class="code killed mutation_54_1235_1286"><span class="code killed mutation_53_1235_1286">_(<span class="code killed mutation_59_1237_1245">children</span>)</span>.map(<span class="code killed mutation_56_1251_1262">this.render</span>, <span class="code killed mutation_57_1264_1268">this</span>)</span>.value()</span>.join(<span class="code killed mutation_52_1283_1285">""</span>)</span></span>;</span></span></span></li><li><span class="code killed mutation_25_1179_1439"><span class="code killed mutation_10_469_1582">        },</span></span></li><li><span class="code killed mutation_25_1179_1439"><span class="code killed mutation_10_469_1582"></li><li>        /**</span></span></li><li><span class="code killed mutation_25_1179_1439"><span class="code killed mutation_10_469_1582">         * Renders tree node template.</span></span></li><li><span class="code killed mutation_25_1179_1439"><span class="code killed mutation_10_469_1582">         * @param  {TreeNode} node</span></span></li><li><span class="code killed mutation_25_1179_1439"><span class="code killed mutation_10_469_1582">         * @return {String} HTML</span></span></li><li><span class="code killed mutation_25_1179_1439"><span class="code killed mutation_10_469_1582">         */</span></span></li><li><span class="code killed mutation_25_1179_1439"><span class="code killed mutation_10_469_1582">        </span><span class="code killed mutation_26_1439_1575">renderNode: function(node) {</span></span></li><li><span class="code killed mutation_26_1439_1575"><span class="code killed mutation_10_469_1582">            <span class="code killed mutation_61_1480_1565">return <span class="code killed mutation_64_1487_1564">this.template.apply(<span class="code killed mutation_65_1507_1525"><span class="code killed mutation_62_1507_1525">node.getTemplate()</span></span>, <span class="code killed mutation_68_1527_1563"><span class="code killed mutation_67_1527_1563"><span class="code killed mutation_63_1527_1563">node.getTemplateData(<span class="code killed mutation_66_1548_1562">this.treeState</span>)</span></span></span>)</span>;</span></span></span></li><li><span class="code killed mutation_26_1439_1575"><span class="code killed mutation_10_469_1582">        }</span></span></li><li><span class="code killed mutation_10_469_1582">    };</span></li><li></li><li>    <span class="code killed mutation_11_1588_1604">return Template;</span></li><li></li><li>});</li><li></li></ol></div>
+<h2>Mutations</h2>
+<div id='mutations'><div id="mutation_12_62_68" class="killed">resources/xr/tree/Template.js:4:21 Replaced &quot;xr/_&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_14_98_111" class="killed">resources/xr/tree/Template.js:5:28 Replaced &quot;xr/template&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_9_321_463" class="killed">resources/xr/tree/Template.js:13:5 Removed function Template(treeState, deps) { this.treeState = treeState; this.template = template; _(this).assign(deps); } -&gt; KILLED</div><div id="mutation_16_366_393" class="killed">resources/xr/tree/Template.js:14:9 Removed this.treeState = treeState; -&gt; KILLED</div><div id="mutation_17_402_427" class="survived">resources/xr/tree/Template.js:15:9 Removed this.template = template; -&gt; SURVIVED</div><div id="mutation_19_451_455" class="killed">resources/xr/tree/Template.js:16:24 Replaced deps with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_20_436_456" class="killed">resources/xr/tree/Template.js:16:9 Replaced _(this).assign(deps) with deps -&gt; KILLED</div><div id="mutation_21_436_456" class="killed">resources/xr/tree/Template.js:16:9 Replaced _(this).assign(deps) with _(this) -&gt; KILLED</div><div id="mutation_22_438_442" class="killed">resources/xr/tree/Template.js:16:11 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_23_436_443" class="killed">resources/xr/tree/Template.js:16:9 Replaced _(this) with this -&gt; KILLED</div><div id="mutation_18_436_457" class="killed">resources/xr/tree/Template.js:16:9 Removed _(this).assign(deps); -&gt; KILLED</div><div id="mutation_10_469_1582" class="killed">resources/xr/tree/Template.js:19:5 Removed Template.prototype = { /** * Turns the tree layout data structure into HTML. * * @param {Object} data Layout data structure. * @return {String} HTML */ render: function(data) { if (data.children) { data.children = this.renderChildren(data.children); } if (data.classes) { data.classes = data.classes.join(&quot; &quot;); } if (data.node) { data.node = this.renderNode(data.node); } var templateFile = &quot;templates/treeStruct/&quot;+data.type+&quot;.html&quot;; return this.template.apply(templateFile, data); }, renderChildren: function(children) { return _(children).map(this.render, this).value().join(&quot;&quot;); }, /** * Renders tree node template. * @param {TreeNode} node * @return {String} HTML */ renderNode: function(node) { return this.template.apply(node.getTemplate(), node.getTemplateData(this.treeState)); } }; -&gt; KILLED</div><div id="mutation_24_682_1179" class="killed">resources/xr/tree/Template.js:26:9 Removed render: function(data) { if (data.children) { data.children = this.renderChildren(data.children); } if (data.classes) { data.classes = data.classes.join(&quot; &quot;); } if (data.node) { data.node = this.renderNode(data.node); } var templateFile = &quot;templates/treeStruct/&quot;+data.type+&quot;.html&quot;; return this.template.apply(templateFile, data); },  -&gt; KILLED</div><div id="mutation_27_719_821" class="killed">resources/xr/tree/Template.js:27:13 Removed if (data.children) { data.children = this.renderChildren(data.children); } -&gt; KILLED</div><div id="mutation_32_756_807" class="killed">resources/xr/tree/Template.js:28:17 Removed data.children = this.renderChildren(data.children); -&gt; KILLED</div><div id="mutation_33_792_805" class="killed">resources/xr/tree/Template.js:28:53 Replaced data.children with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_34_772_806" class="killed">resources/xr/tree/Template.js:28:33 Replaced this.renderChildren(data.children) with data.children -&gt; KILLED</div><div id="mutation_35_772_806" class="killed">resources/xr/tree/Template.js:28:33 Replaced this.renderChildren(data.children) with this -&gt; KILLED</div><div id="mutation_28_835_923" class="killed">resources/xr/tree/Template.js:31:13 Removed if (data.classes) { data.classes = data.classes.join(&quot; &quot;); } -&gt; KILLED</div><div id="mutation_39_886_908" class="killed">resources/xr/tree/Template.js:32:32 Replaced data.classes.join(&quot; &quot;) with data.classes -&gt; KILLED</div><div id="mutation_36_871_909" class="killed">resources/xr/tree/Template.js:32:17 Removed data.classes = data.classes.join(&quot; &quot;); -&gt; KILLED</div><div id="mutation_37_904_907" class="killed">resources/xr/tree/Template.js:32:50 Replaced &quot; &quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_38_886_908" class="killed">resources/xr/tree/Template.js:32:32 Replaced data.classes.join(&quot; &quot;) with &quot; &quot; -&gt; KILLED</div><div id="mutation_29_937_1023" class="killed">resources/xr/tree/Template.js:35:13 Removed if (data.node) { data.node = this.renderNode(data.node); } -&gt; KILLED</div><div id="mutation_43_982_1008" class="killed">resources/xr/tree/Template.js:36:29 Replaced this.renderNode(data.node) with this -&gt; KILLED</div><div id="mutation_40_970_1009" class="killed">resources/xr/tree/Template.js:36:17 Removed data.node = this.renderNode(data.node); -&gt; KILLED</div><div id="mutation_42_982_1008" class="killed">resources/xr/tree/Template.js:36:29 Replaced this.renderNode(data.node) with data.node -&gt; KILLED</div><div id="mutation_41_998_1007" class="killed">resources/xr/tree/Template.js:36:45 Replaced data.node with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_44_1089_1090" class="killed">resources/xr/tree/Template.js:39:65 Replaced + with - -&gt; KILLED</div><div id="mutation_45_1079_1080" class="killed">resources/xr/tree/Template.js:39:55 Replaced + with - -&gt; KILLED</div><div id="mutation_46_1056_1079" class="killed">resources/xr/tree/Template.js:39:32 Replaced &quot;templates/treeStruct/&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_47_1090_1097" class="killed">resources/xr/tree/Template.js:39:66 Replaced &quot;.html&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_30_1037_1098" class="killed">resources/xr/tree/Template.js:39:13 Removed var templateFile = &quot;templates/treeStruct/&quot;+data.type+&quot;.html&quot;; -&gt; KILLED</div><div id="mutation_31_1111_1158" class="killed">resources/xr/tree/Template.js:40:13 Removed return this.template.apply(templateFile, data); -&gt; KILLED</div><div id="mutation_48_1138_1150" class="killed">resources/xr/tree/Template.js:40:40 Replaced templateFile with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_49_1152_1156" class="killed">resources/xr/tree/Template.js:40:54 Replaced data with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_50_1118_1157" class="killed">resources/xr/tree/Template.js:40:20 Replaced this.template.apply(templateFile, data) with this.template -&gt; KILLED</div><div id="mutation_25_1179_1439" class="killed">resources/xr/tree/Template.js:43:9 Removed renderChildren: function(children) { return _(children).map(this.render, this).value().join(&quot;&quot;); }, /** * Renders tree node template. * @param {TreeNode} node * @return {String} HTML */  -&gt; KILLED</div><div id="mutation_59_1237_1245" class="killed">resources/xr/tree/Template.js:44:22 Replaced children with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_60_1235_1246" class="killed">resources/xr/tree/Template.js:44:20 Replaced _(children) with children -&gt; KILLED</div><div id="mutation_51_1228_1287" class="killed">resources/xr/tree/Template.js:44:13 Removed return _(children).map(this.render, this).value().join(&quot;&quot;); -&gt; KILLED</div><div id="mutation_52_1283_1285" class="killed">resources/xr/tree/Template.js:44:68 Replaced &quot;&quot; with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_53_1235_1286" class="killed">resources/xr/tree/Template.js:44:20 Replaced _(children).map(this.render, this).value().join(&quot;&quot;) with &quot;&quot; -&gt; KILLED</div><div id="mutation_54_1235_1286" class="killed">resources/xr/tree/Template.js:44:20 Replaced _(children).map(this.render, this).value().join(&quot;&quot;) with _(children).map(this.render, this).value() -&gt; KILLED</div><div id="mutation_55_1235_1277" class="killed">resources/xr/tree/Template.js:44:20 Replaced _(children).map(this.render, this).value() with _(children).map(this.render, this) -&gt; KILLED</div><div id="mutation_56_1251_1262" class="killed">resources/xr/tree/Template.js:44:36 Replaced this.render with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_57_1264_1268" class="killed">resources/xr/tree/Template.js:44:49 Replaced this with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_58_1235_1269" class="killed">resources/xr/tree/Template.js:44:20 Replaced _(children).map(this.render, this) with _(children) -&gt; KILLED</div><div id="mutation_26_1439_1575" class="killed">resources/xr/tree/Template.js:52:9 Removed renderNode: function(node) { return this.template.apply(node.getTemplate(), node.getTemplateData(this.treeState)); } -&gt; KILLED</div><div id="mutation_61_1480_1565" class="killed">resources/xr/tree/Template.js:53:13 Removed return this.template.apply(node.getTemplate(), node.getTemplateData(this.treeState)); -&gt; KILLED</div><div id="mutation_62_1507_1525" class="killed">resources/xr/tree/Template.js:53:40 Replaced node.getTemplate() with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_63_1527_1563" class="killed">resources/xr/tree/Template.js:53:60 Replaced node.getTemplateData(this.treeState) with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_64_1487_1564" class="killed">resources/xr/tree/Template.js:53:20 Replaced this.template.apply(node.getTemplate(), node.getTemplateData(this.treeState)) with this.template -&gt; KILLED</div><div id="mutation_65_1507_1525" class="killed">resources/xr/tree/Template.js:53:40 Replaced node.getTemplate() with node -&gt; KILLED</div><div id="mutation_66_1548_1562" class="killed">resources/xr/tree/Template.js:53:81 Replaced this.treeState with &quot;MUTATION!&quot; -&gt; KILLED</div><div id="mutation_67_1527_1563" class="killed">resources/xr/tree/Template.js:53:60 Replaced node.getTemplateData(this.treeState) with this.treeState -&gt; KILLED</div><div id="mutation_68_1527_1563" class="killed">resources/xr/tree/Template.js:53:60 Replaced node.getTemplateData(this.treeState) with node -&gt; KILLED</div><div id="mutation_11_1588_1604" class="killed">resources/xr/tree/Template.js:57:5 Removed return Template; -&gt; KILLED</div></div>
+<div id='popup'></div>
+</body>
+</html>
